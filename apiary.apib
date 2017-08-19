@@ -30,7 +30,7 @@ FORMAT: 1A
                 ]
             }
 
-## Store Collection [/canteens/id]
+## Store Collection [/canteens/id/stores]
 
 ### Retrieve all Stores belonging to a Canteen [GET]
 
@@ -87,9 +87,9 @@ FORMAT: 1A
                 ],
             }
 
-## Review Collection [/stores/reviews/{id}]
+## Review Collection [/stores/{id}/reviews]
 
-### Retrieve a Store [GET]
+### Retrieve all reviews of a Store [GET]
 
 + Request JSON
 
@@ -109,3 +109,33 @@ FORMAT: 1A
                     "stars": 4
                 ]
             }
+
+# Group Users
+
+## User [/user/{id}]
+
+### Retrieve a User [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "name": "John Connor",
+                "latest_appointment": {
+                    "status": "upcoming",
+                    "canteen_id": 1,
+                    "start_time": "140920171300",
+                    "end_time": "140920171400"
+                }
+            }
+
+# Group Appointment 
+
