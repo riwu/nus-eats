@@ -1,80 +1,74 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
 
-# Nuseats
+# nuseats
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+# Group Canteens
 
-## Questions Collection [/questions]
+## All Canteens [/canteens]
 
-### List All Questions [GET]
+### Retrieve all Canteens [GET]
 
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
++ Request JSON
 
     + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
 
-            Location: /questions/2
++ Response 200 (application/json)
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "canteens": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                        "id": 1,
+                        "name": "Techno Edge",
+                        "description": "Not worth it.",
+                        "stores": [
+                            {
+                                "id": 1,
+                                "name": "Ah Huat's Chicken Rice",
+                                "stars": 3.5,
+                                "image": {
+                                    "type": "image/png;base64",
+                                    "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
+                                }
+                            }
+                        ]
                     }
+                ]
+            }
+
+# Group Stores
+
+## Store [/stores/{id}]
+
+### Retrieve a Store [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+        
+            {
+                "name": "Ah Huat's Chicken Rice",
+                "stars": 3.5,
+                "images": [
+                    {
+                        "type": "image/png;base64",
+                        "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
+                    }
+                ],
+                "reviews": [
+                    "name": "James Cameron",
+                    "review": "This store is awesome!",
+                    "stars": 4
                 ]
             }
