@@ -30,7 +30,7 @@ FORMAT: 1A
                 ]
             }
 
-## Store Collection [/canteens/id/stores]
+## Store Collection [/canteens/{id}/stores]
 
 ### Retrieve all Stores belonging to a Canteen [GET]
 
@@ -52,8 +52,11 @@ FORMAT: 1A
                         "name": "Ah Huat's Chicken Rice",
                         "stars": 3.5,
                         "image": {
-                            "user_id": 1,
-                            "url": "/image.png"
+                            "id": 1,
+                            "url": "/images/image.jpeg",
+                            "mimetype": "image/jpeg",
+                            "likes": 42,
+                            "user_id": 5
                         }
                     }
                 ]
@@ -81,8 +84,11 @@ FORMAT: 1A
                 "stars": 3.5,
                 "images": [
                     {
-                        "user_id": 1,
-                        "url": "/image.png"
+                        "id": 1,
+                        "url": "/images/image.jpeg",
+                        "mimetype": "image/jpeg",
+                        "likes": 42,
+                        "user_id": 5
                     }
                 ],
             }
@@ -104,9 +110,10 @@ FORMAT: 1A
 
             {
                 "reviews": [
-                    "user_id": 1,
-                    "review": "This store is awesome!",
-                    "stars": 4
+                    "id": 1,
+                    "review": "This store is food-king good!",
+                    "stars": 4,
+                    "user_id": 3
                 ]
             }
 
@@ -128,14 +135,201 @@ FORMAT: 1A
     + Body
 
             {
-                "name": "John Connor",
-                "latest_appointment": {
-                    "status": "upcoming",
-                    "canteen_id": 1,
-                    "start_time": "140920171300",
-                    "end_time": "140920171400"
+                "name": "John Connor"
+            }
+
+## Appointment Collection [/user/{id}/appointments]
+
+### Retrieve all appointments of a User [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": [
+                    {
+                        "id": 1,
+                        "status": "upcoming",
+                        "attendance": 4,
+                        "canteen_id": 1,
+                        "start_time": "140920171300",
+                        "end_time": "140920171400"
+                    }
+                ]
+            }
+
+## Review Collection [/user/{id}/reviews]
+
+### Retrieve all reviews by a User [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "reviews": [
+                    {
+                        "id": 1,
+                        "review": "This store is food-king good!",
+                        "stars": 5, 
+                        "user_id": 7
+                    }
+                ]
+            }
+
+## Image Collection [/user/{id}/images]
+
+### Retrieve all images uploaded by a User [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "images": [
+                    {
+                        "id": 1,
+                        "url": "/images/image.jpeg",
+                        "mimetype": "image/jpeg",
+                        "likes": 42,
+                        "user_id": 5
+                    }
+                ]
+            }
+
+## Friend Collection [/user/{id}/friends]
+
+### Retrieve all friends of a User [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "friends": [
+                    {
+                        "id": 55,
+                        "name": "John Connor"
+                    }
+                ]
+            }
+
+# Group Image
+
+## Image Collection [/images]
+
+### Create an Image [POST]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+    
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "image": {
+                    "url": "/images/image.jpeg",
+                    "mimetype": "image/jpeg",
+                    "likes": 0,
+                    "user_id": 5
                 }
             }
 
-# Group Appointment 
 
+## Image [/images/{id}]
+
+### Retrieve an Image [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "image": {
+                    "url": "/images/image.jpeg",
+                    "mimetype": "image/jpeg",
+                    "likes": 42,
+                    "user_id": 5
+                }
+            }
+
+### Update an Image [PATCH]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+    
+    + Body
+
+            {
+                "image": {
+                    "likes": 43
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "image": {
+                    "url": "/images/image.jpeg",
+                    "mimetype": "image/jpeg",
+                    "likes": 43,
+                    "user_id": 5
+                }
+            }
+
+### Delete an Image [DELETE]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+
++ Response 200 (application/json)
