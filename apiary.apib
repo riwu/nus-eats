@@ -248,7 +248,7 @@ FORMAT: 1A
 
 # Group Images
 
-## Image Upload [/images/upload]
+## Image Upload [/images]
 
 ### Create an Image [POST]
 
@@ -257,7 +257,7 @@ FORMAT: 1A
     + Headers
     
             Authorization: Bearer <jwt>
-            Accept: application/json
+            Accept: multipart/form-data
     
 + Response 201 (application/json)
 
@@ -274,29 +274,6 @@ FORMAT: 1A
             }
 
 ## Image [/images/{id}]
-
-### Retrieve an Image [GET]
-
-+ Request JSON
-
-    + Headers
-    
-            Authorization: Bearer <jwt>
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "image": {
-                    "id": 1,
-                    "url": "/images/image.jpeg",
-                    "mimetype": "image/jpeg",
-                    "liked_users": [3, 4, 45, 47, 52],
-                    "user_id": 5
-                }
-            }
 
 ### Like an Image [PATCH]
 
@@ -334,7 +311,7 @@ FORMAT: 1A
 
 # Group Appointments
 
-## Appointment Upload [/appointments/upload]
+## Appointment Upload [/appointments]
 
 ### Create an Appointment [POST]
 
@@ -374,31 +351,6 @@ FORMAT: 1A
 
 ## Appointment [/appointments/{id}]
 
-### Retrieve an Appointment [GET]
-
-+ Request JSON
-
-    + Headers
-    
-            Authorization: Bearer <jwt>
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "appointment": {
-                    "id": 1,
-                    "status": "upcoming",
-                    "attendees": [1, 7, 33, 57],
-                    "canteen_id": 1,
-                    "user_id": 1,
-                    "start_time": "140920171300",
-                    "end_time": "140920171400"
-                }
-            }
-
 ### Join an Appointment [PATCH]
 
 + Request JSON
@@ -437,7 +389,7 @@ FORMAT: 1A
 
 # Group Reviews
 
-## Review Upload [/reviews/upload]
+## Review Upload [/reviews]
 
 ### Create a Review [POST]
 
@@ -471,29 +423,6 @@ FORMAT: 1A
             }
 
 ## Review [/reviews/{id}]
-
-### Retrieve a Review [GET]
-
-+ Request JSON
-
-    + Headers
-    
-            Authorization: Bearer <jwt>
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "review": {
-                    "id": 1,
-                    "review": "This store is food-king good!",
-                    "stars": 4,
-                    "user_id": 5,
-                    "store_id": 3
-                }
-            }
 
 ### Edit a Review [PATCH]
 
