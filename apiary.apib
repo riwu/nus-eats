@@ -55,7 +55,7 @@ FORMAT: 1A
                             "id": 1,
                             "url": "/images/image.jpeg",
                             "mimetype": "image/jpeg",
-                            "likes": 42,
+                            "liked_users": [3, 4, 45, 47, 52],
                             "user_id": 5
                         }
                     }
@@ -80,6 +80,7 @@ FORMAT: 1A
     + Body
         
             {
+                "id": 1,
                 "name": "Ah Huat's Chicken Rice",
                 "stars": 3.5,
                 "images": [
@@ -87,7 +88,7 @@ FORMAT: 1A
                         "id": 1,
                         "url": "/images/image.jpeg",
                         "mimetype": "image/jpeg",
-                        "likes": 42,
+                        "liked_users": [3, 4, 45, 47, 52],
                         "user_id": 5
                     }
                 ],
@@ -113,7 +114,8 @@ FORMAT: 1A
                     "id": 1,
                     "review": "This store is food-king good!",
                     "stars": 4,
-                    "user_id": 3
+                    "user_id": 5,
+                    "store_id": 3
                 ]
             }
 
@@ -158,8 +160,9 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "status": "upcoming",
-                        "attendance": 4,
+                        "attendees": [1, 7, 33, 57],
                         "canteen_id": 1,
+                        "user_id": 1,
                         "start_time": "140920171300",
                         "end_time": "140920171400"
                     }
@@ -213,7 +216,7 @@ FORMAT: 1A
                         "id": 1,
                         "url": "/images/image.jpeg",
                         "mimetype": "image/jpeg",
-                        "likes": 42,
+                        "liked_users": [3, 4, 45, 47, 52],
                         "user_id": 5
                     }
                 ]
@@ -243,9 +246,9 @@ FORMAT: 1A
                 ]
             }
 
-# Group Image
+# Group Images
 
-## Image Collection [/images]
+## Image Upload [/images/upload]
 
 ### Create an Image [POST]
 
@@ -262,13 +265,13 @@ FORMAT: 1A
 
             {
                 "image": {
+                    "id": 1,
                     "url": "/images/image.jpeg",
                     "mimetype": "image/jpeg",
-                    "likes": 0,
+                    "liked_users": [],
                     "user_id": 5
                 }
             }
-
 
 ## Image [/images/{id}]
 
@@ -287,14 +290,15 @@ FORMAT: 1A
 
             {
                 "image": {
+                    "id": 1,
                     "url": "/images/image.jpeg",
                     "mimetype": "image/jpeg",
-                    "likes": 42,
+                    "liked_users": [3, 4, 45, 47, 52],
                     "user_id": 5
                 }
             }
 
-### Update an Image [PATCH]
+### Like an Image [PATCH]
 
 + Request JSON
 
@@ -302,14 +306,6 @@ FORMAT: 1A
     
             Authorization: Bearer <jwt>
             Accept: application/json
-    
-    + Body
-
-            {
-                "image": {
-                    "likes": 43
-                }
-            }
 
 + Response 200 (application/json)
 
@@ -317,9 +313,10 @@ FORMAT: 1A
 
             {
                 "image": {
+                    "id": 1,
                     "url": "/images/image.jpeg",
                     "mimetype": "image/jpeg",
-                    "likes": 43,
+                    "liked_users": [3, 4, 45, 47, 52, 33],
                     "user_id": 5
                 }
             }
@@ -331,5 +328,213 @@ FORMAT: 1A
     + Headers
     
             Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+# Group Appointments
+
+## Appointment Upload [/appointments/upload]
+
+### Create an Appointment [POST]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+    
+    + Body 
+
+            {
+                "appointment": {
+                    "status": "upcoming",
+                    "canteen_id": 1,
+                    "start_time": "140920171300",
+                    "end_time": "140920171400"
+                }
+            }
+    
++ Response 201 (application/json)
+
+    + Body
+
+            {
+                "appointment": {
+                    "id": 1,
+                    "status": "upcoming",
+                    "attendees": [1],
+                    "canteen_id": 1,
+                    "user_id": 1,
+                    "start_time": "140920171300",
+                    "end_time": "140920171400"
+                }
+            }
+
+## Appointment [/appointments/{id}]
+
+### Retrieve an Appointment [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointment": {
+                    "id": 1,
+                    "status": "upcoming",
+                    "attendees": [1, 7, 33, 57],
+                    "canteen_id": 1,
+                    "user_id": 1,
+                    "start_time": "140920171300",
+                    "end_time": "140920171400"
+                }
+            }
+
+### Join an Appointment [PATCH]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointment": {
+                    "id": 1,
+                    "status": "upcoming",
+                    "attendees": [1, 7, 33, 57, 67],
+                    "canteen_id": 1,
+                    "user_id": 1,
+                    "start_time": "140920171300",
+                    "end_time": "140920171400"
+                }
+            }
+
+### Delete an Appointment [DELETE]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+# Group Reviews
+
+## Review Upload [/reviews/upload]
+
+### Create a Review [POST]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+    
+    + Body 
+
+            {
+                "review": {
+                    "review": "This store is food-king good!",
+                    "stars": 4,
+                    "store_id": 3
+                }
+            }
+    
++ Response 201 (application/json)
+
+            {
+                "review": {
+                    "id": 1,
+                    "review": "This store is food-king good!",
+                    "stars": 4,
+                    "user_id": 5,
+                    "store_id": 3
+                }
+            }
+
+## Review [/reviews/{id}]
+
+### Retrieve a Review [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "review": {
+                    "id": 1,
+                    "review": "This store is food-king good!",
+                    "stars": 4,
+                    "user_id": 5,
+                    "store_id": 3
+                }
+            }
+
+### Edit a Review [PATCH]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
+    + Body
+
+            {
+                "review": {
+                    "id": 1,
+                    "review": "This store became terrible!",
+                    "stars": 2
+                }
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "review": {
+                    "id": 1,
+                    "review": "This store became terrible!",
+                    "stars": 2,
+                    "user_id": 5,
+                    "store_id": 3
+                }
+            }
+
+### Delete a Review [DELETE]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
 
 + Response 200 (application/json)
