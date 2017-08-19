@@ -4,7 +4,7 @@ FORMAT: 1A
 
 # Group Canteens
 
-## All Canteens [/canteens]
+## Canteens Collection [/canteens]
 
 ### Retrieve all Canteens [GET]
 
@@ -24,18 +24,37 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "Techno Edge",
-                        "description": "Not worth it.",
-                        "stores": [
-                            {
-                                "id": 1,
-                                "name": "Ah Huat's Chicken Rice",
-                                "stars": 3.5,
-                                "image": {
-                                    "type": "image/png;base64",
-                                    "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
-                                }
-                            }
-                        ]
+                        "latitude": 51.503362,
+                        "longtitude": -0.1276250,
+                    }
+                ]
+            }
+
+## Stores Collection [/canteens/id]
+
+### Retrieve all Stores belonging to a Canteen [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "stores": [
+                    {
+                        "id": 1,
+                        "name": "Ah Huat's Chicken Rice",
+                        "stars": 3.5,
+                        "image": {
+                            "user_id": 1,
+                            "url": "/image.png"
+                        }
                     }
                 ]
             }
@@ -62,12 +81,30 @@ FORMAT: 1A
                 "stars": 3.5,
                 "images": [
                     {
-                        "type": "image/png;base64",
-                        "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
+                        "user_id": 1,
+                        "url": "/image.png"
                     }
                 ],
+            }
+
+## Review Collection [/stores/reviews/{id}]
+
+### Retrieve a Store [GET]
+
++ Request JSON
+
+    + Headers
+    
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
                 "reviews": [
-                    "name": "James Cameron",
+                    "user_id": 1,
                     "review": "This store is awesome!",
                     "stars": 4
                 ]
