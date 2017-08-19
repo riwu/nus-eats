@@ -1,5 +1,7 @@
 FORMAT: 1A
 
+# nuseats
+
 # Group Canteens
 
 ## All Canteens [/canteens]
@@ -10,33 +12,33 @@ FORMAT: 1A
 
     + Headers
     
-        Authorization: Bearer <jwt>
-        Accept: application/json
+            Authorization: Bearer <jwt>
+            Accept: application/json
 
 + Response 200 (application/json)
 
     + Body
 
-        {
-            "canteens": [
-                {
-                    "id": 1,
-                    "name": "Techno Edge",
-                    "description": "Not worth it.",
-                    "stores": [
-                        {
-                            "id": 1,
-                            "name": "Ah Huat's Chicken Rice",
-                            "stars": 3.5,
-                            "image": {
-                                "type": "image/png;base64",
-                                "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
+            {
+                "canteens": [
+                    {
+                        "id": 1,
+                        "name": "Techno Edge",
+                        "description": "Not worth it.",
+                        "stores": [
+                            {
+                                "id": 1,
+                                "name": "Ah Huat's Chicken Rice",
+                                "stars": 3.5,
+                                "image": {
+                                    "type": "image/png;base64",
+                                    "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
+                                }
                             }
-                        }
-                    ]
-                }
-            ]
-        }
+                        ]
+                    }
+                ]
+            }
 
 # Group Stores
 
@@ -48,25 +50,25 @@ FORMAT: 1A
 
     + Headers
     
-        Authorization: Bearer <jwt>
-        Accept: application/json
+            Authorization: Bearer <jwt>
+            Accept: application/json
 
 + Response 200 (application/json)
 
     + Body
         
-        {
-            "name": "Ah Huat's Chicken Rice",
-            "stars": 3.5,
-            "images": [
-                {
-                    "type": "image/png;base64",
-                    "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
-                }
-            ],
-            "reviews": [
-                "name": "James Cameron",
-                "review": "This store is awesome!",
-                "stars": 4
-            ]
-        }
+            {
+                "name": "Ah Huat's Chicken Rice",
+                "stars": 3.5,
+                "images": [
+                    {
+                        "type": "image/png;base64",
+                        "data": "iBORw0KGgoAAaANSuhEUgAAAqAAAA"
+                    }
+                ],
+                "reviews": [
+                    "name": "James Cameron",
+                    "review": "This store is awesome!",
+                    "stars": 4
+                ]
+            }
