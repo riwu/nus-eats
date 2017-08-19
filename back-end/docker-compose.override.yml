@@ -11,6 +11,7 @@ services:
       - postgres
     environment:
       - NODE_ENV=development
+    command: sh -c "yarn && yarn start"
 
   postgres:
     image: postgres:9.6.4
