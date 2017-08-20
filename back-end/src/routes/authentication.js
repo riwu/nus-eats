@@ -51,6 +51,9 @@ router.post('/login', (req, res, next) => {
           facebookToken: accessToken.access_token
         });
       });
+    })
+    .catch(() => {
+      res.status(401).json({errors: ['Invalid access token.']});
     });
 });
 
