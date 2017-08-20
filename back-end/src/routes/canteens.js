@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   const canteens = await Canteen.findAll();
-  res.json(canteens);
+  res.json({canteens});
 });
 
 module.exports = router;
