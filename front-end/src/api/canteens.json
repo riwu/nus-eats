@@ -2,12 +2,14 @@
   {
     "id": 1,
     "name": "Techno Edge",
+    "description": "Canteen at biz/com",
     "latitude": 51.503362,
     "longtitude": -0.1276250
   },
   {
     "id": 2,
     "name": "The Deck",
+    "description": "Canteen at deck",
     "latitude": 51.503362,
     "longtitude": -0.1276250
   }

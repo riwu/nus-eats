@@ -1,13 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Canteens from '../components/Canteens';
+import CanteenPanel from '../components/CanteenPanel';
+import Stall from '../components/Stall';
 
 const CanteensContainer = ({ canteens, stalls }) => {
   if (!canteens.length) {
     return null;
   }
   return (
-    <Canteens canteens={canteens} stalls={stalls} />
+    <div>
+      {canteens.map(canteen => (
+        <CanteenPanel
+          header={(
+            <div>
+              <h3>{canteen.name}</h3>
+              <div>{canteen.description}</div>
+            </div>
+          )}
+          key={canteen.id}
+        >
+          {stalls.filter(stall => stall.canteenID === canteen.id)
+                 .map(stall => (
+                   <Stall title={stall.name} key={stall.id}>
+                     {stall.description}
+                   </Stall>
+                 ))}
+        </CanteenPanel>
+      ))}
+    </div>
   );
 };
 
