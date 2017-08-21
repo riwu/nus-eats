@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Chicken Stall",
+    "description": "A stall that sells chicken",
+    "canteenID": 1
+  },
+  {
+    "id": 2,
+    "name": "Fish Stall",
+    "description": "A stall that sells fishes",
+    "canteenID": 2
+  }
+]

@@ -1,10 +1,15 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import MainApp from './components/App';
+import thunk from 'redux-thunk';
+import MainApp from './containers/App';
 import reducer from './reducers';
+import { getAllCanteens, getAllStalls } from './actions';
 
-const store = createStore(reducer);
+const middleware = [thunk];
+const store = createStore(reducer, applyMiddleware(...middleware));
+store.dispatch(getAllCanteens());
+store.dispatch(getAllStalls());
 
 function App() {
   return (
