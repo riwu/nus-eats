@@ -7,6 +7,18 @@
   },
   {
     "id": 2,
+    "name": "Duck Stall",
+    "description": "A stall that sells ducks",
+    "canteenID": 1
+  },
+  {
+    "id": 3,
+    "name": "Beef Stall",
+    "description": "A stall that sells beefs",
+    "canteenID": 1
+  },
+  {
+    "id": 4,
     "name": "Fish Stall",
     "description": "A stall that sells fishes",
     "canteenID": 2

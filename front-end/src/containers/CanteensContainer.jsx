@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CanteenPanel from '../components/CanteenPanel';
-import Stall from '../components/Stall';
+import CanteenHeader from '../components/CanteenHeader';
+import StallsContainer from './StallsContainer';
 
-const CanteensContainer = ({ canteens, stalls }) => {
+const CanteensContainer = ({ canteens }) => {
   if (!canteens.length) {
     return null;
   }
@@ -11,20 +12,10 @@ const CanteensContainer = ({ canteens, stalls }) => {
     <div>
       {canteens.map(canteen => (
         <CanteenPanel
-          header={(
-            <div>
-              <h3>{canteen.name}</h3>
-              <div>{canteen.description}</div>
-            </div>
-          )}
+          header={<CanteenHeader title={canteen.name} >{canteen.description}</CanteenHeader>}
           key={canteen.id}
         >
-          {stalls.filter(stall => stall.canteenID === canteen.id)
-                 .map(stall => (
-                   <Stall title={stall.name} key={stall.id}>
-                     {stall.description}
-                   </Stall>
-                 ))}
+          <StallsContainer canteenID={canteen.id} />
         </CanteenPanel>
       ))}
     </div>
@@ -33,7 +24,6 @@ const CanteensContainer = ({ canteens, stalls }) => {
 
 const mapStateToProps = state => ({
   canteens: state.canteens,
-  stalls: state.stalls,
 });
 
 export default connect(
