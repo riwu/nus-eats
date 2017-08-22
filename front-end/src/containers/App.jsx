@@ -1,11 +1,13 @@
 import React from 'react';
 import CanteensContainer from './CanteensContainer';
 import DetailedStallContainer from './DetailedStallContainer';
-import FilterContainer from './FilterContainer';
+import FilterButtonContainer from './FilterButtonContainer';
+import FilterPanelContainer from './FilterPanelContainer';
 
 const App = () => (
   <div>
-    <FilterContainer />
+    <FilterButtonContainer />
+    <FilterPanelContainer />
     <CanteensContainer />
     <DetailedStallContainer />
   </div>

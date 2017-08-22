@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import Filter from '../components/Filter';
+import FilterPanel from '../components/FilterPanel';
 import { toggleFilter } from '../actions';
 
 const mapStateToProps = state => ({
   isFilterExpanded: state.isFilterExpanded,
 });
 
-export default connect(mapStateToProps, { toggleFilter })(Filter);
+export default connect(mapStateToProps)(FilterPanel);
