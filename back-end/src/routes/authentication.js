@@ -36,9 +36,13 @@ router.post('/login', (req, res, next) => {
   Promise
     .all([accessTokenPromise, profilePromise])
     .then(([accessToken, profile]) => {
+      const user = {
+        ...profile,
+        facebookAccessToken: accessToken.access_token
+      };
+
       const payload = {
-        user: profile,
-        accessToken: accessToken.access_token
+        user
       };
 
       const options = {
