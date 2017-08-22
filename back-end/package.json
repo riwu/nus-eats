@@ -15,15 +15,13 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "fb": "^2.0.0",
-    "jade": "~1.11.0",
     "jsonwebtoken": "^7.4.3",
     "morgan": "~1.8.1",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.0",
     "pg": "^7.1.2",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.5.0",
-    "serve-favicon": "~2.4.2"
+    "sequelize": "^4.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
