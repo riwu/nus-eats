@@ -21,7 +21,8 @@
     "passport-jwt": "^3.0.0",
     "pg": "^7.1.2",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.5.0"
+    "sequelize": "^4.5.0",
+    "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
