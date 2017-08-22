@@ -2,14 +2,14 @@ const Sequelize = require('sequelize');
 const sequelize = require('../database');
 const Canteen = require('./canteen');
 
-const Store = sequelize.define('stores', {
+const Stall = sequelize.define('stalls', {
   name: {
     type: Sequelize.STRING,
     allowNull: false
   }
 });
 
-Store.belongsTo(Canteen);
-Canteen.hasMany(Store, {onDelete: 'CASCADE'});
+Stall.belongsTo(Canteen);
+Canteen.hasMany(Stall, {onDelete: 'CASCADE'});
 
-module.exports = Store;
+module.exports = Stall;
