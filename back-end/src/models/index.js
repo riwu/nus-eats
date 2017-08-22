@@ -1,7 +1,7 @@
 const Canteen = require('./canteen');
-const Store = require('./store');
+const Stall = require('./stall');
 
 module.exports = {
   Canteen,
-  Store
+  Stall
 };

@@ -30,9 +30,9 @@ FORMAT: 1A
                 ]
             }
 
-## Store Collection [/canteens/{id}/stores]
+## Stall Collection [/canteens/{id}/stalls]
 
-### Retrieve all Stores belonging to a Canteen [GET]
+### Retrieve all Stalls belonging to a Canteen [GET]
 
 + Request JSON
 
@@ -46,7 +46,7 @@ FORMAT: 1A
     + Body
 
             {
-                "stores": [
+                "stalls": [
                     {
                         "id": 1,
                         "name": "Ah Huat's Chicken Rice",
@@ -64,9 +64,9 @@ FORMAT: 1A
 
 # Group Stores
 
-## Store [/stores/{id}]
+## Stall [/stalls/{id}]
 
-### Retrieve a Store [GET]
+### Retrieve a Stall [GET]
 
 + Request JSON
 
@@ -94,9 +94,9 @@ FORMAT: 1A
                 ],
             }
 
-## Review Collection [/stores/{id}/reviews]
+## Review Collection [/stalls/{id}/reviews]
 
-### Retrieve all reviews of a Store [GET]
+### Retrieve all reviews of a Stall [GET]
 
 + Request JSON
 
@@ -115,7 +115,7 @@ FORMAT: 1A
                     "review": "This store is food-king good!",
                     "stars": 4,
                     "user_id": 5,
-                    "store_id": 3
+                    "stall_id": 3
                 ]
             }
 
