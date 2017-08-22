@@ -1,9 +1,9 @@
 import React from 'react';
-import { Panel } from 'react-bootstrap';
+import { Panel, Checkbox } from 'react-bootstrap';
 
-const FilterPanel = ({ isFilterExpanded }) => (
+const FilterPanel = ({ isFilterExpanded, muslimOnly, toggleMuslimOnly }) => (
   <Panel collapsible expanded={isFilterExpanded}>
-    Filter
+    <Checkbox checked={muslimOnly} onClick={toggleMuslimOnly}>Muslim only</Checkbox>
   </Panel>
 );
 

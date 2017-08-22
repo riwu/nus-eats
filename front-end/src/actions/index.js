@@ -31,3 +31,7 @@ export const closeStoreView = () => ({
 export const toggleFilter = () => ({
   type: types.TOGGLE_FILTER,
 });
+
+export const toggleMuslimOnly = () => ({
+  type: types.TOGGLE_MUSLIM_ONLY,
+});
