@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Stall from '../components/Stall';
+import StallContainer from './StallContainer';
 
 const style = {
   display: 'flex',
 };
 
-const stalls = ({ stalls, canteenID }) => (
+const stallsContainer = ({ stalls, canteenID }) => (
   <div style={style}>
     {stalls.filter(stall => stall.canteenID === canteenID)
            .map(stall => (
-             <Stall title={stall.name} key={stall.id}>
-               {stall.description}
-             </Stall>
+             <StallContainer stall={stall} key={stall.id} />
            ))}
   </div>
 );
@@ -23,4 +21,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-  )(stalls);
+)(stallsContainer);

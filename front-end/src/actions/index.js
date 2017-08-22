@@ -18,3 +18,12 @@ export const getAllStalls = () => (dispatch) => {
     });
   });
 };
+
+export const openStoreView = dispatch => stall => dispatch({
+  type: types.OPEN_STALL_VIEW,
+  stall,
+});
+
+export const closeStoreView = () => ({
+  type: types.CLOSE_STALL_VIEW,
+});
