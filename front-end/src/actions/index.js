@@ -27,3 +27,7 @@ export const openStoreView = dispatch => stall => dispatch({
 export const closeStoreView = () => ({
   type: types.CLOSE_STALL_VIEW,
 });
+
+export const toggleFilter = () => ({
+  type: types.TOGGLE_FILTER,
+});
