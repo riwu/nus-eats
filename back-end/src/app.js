@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+
+var injectJwtStrategy = require('./security/jwt');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -25,11 +28,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Setup security stuff
+injectJwtStrategy(passport);
+app.use(passport.initialize());
+
+const authenticateMiddleware = passport.authenticate('jwt', {session: false});
 app.use('/', index);
 app.use('/users', users);
-app.use('/canteens', canteens);
 app.use('/authentication', authentication);
-app.use('/stores', stores);
+app.use('/canteens', authenticateMiddleware, canteens);
+app.use('/stores', authenticateMiddleware, stores);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
