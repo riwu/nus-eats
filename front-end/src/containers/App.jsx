@@ -3,6 +3,7 @@ import CanteensContainer from './CanteensContainer';
 import DetailedStallContainer from './DetailedStallContainer';
 import FilterButtonContainer from './FilterButtonContainer';
 import FilterPanelContainer from './FilterPanelContainer';
+import FacebookSDKContainer from './FacebookSDKContainer';
 
 const App = () => (
   <div>
@@ -10,6 +11,7 @@ const App = () => (
     <FilterPanelContainer />
     <CanteensContainer />
     <DetailedStallContainer />
+    <FacebookSDKContainer />
   </div>
 );
 

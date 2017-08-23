@@ -35,3 +35,7 @@ export const toggleFilter = () => ({
 export const toggleMuslimOnly = () => ({
   type: types.TOGGLE_MUSLIM_ONLY,
 });
+
+export const setFbReady = () => ({
+  type: types.SET_FB_READY,
+});

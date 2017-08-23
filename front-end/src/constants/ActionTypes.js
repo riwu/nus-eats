@@ -4,3 +4,4 @@ export const OPEN_STALL_VIEW = 'OPEN_STALL_VIEW';
 export const CLOSE_STALL_VIEW = 'CLOSE_STALL_VIEW';
 export const TOGGLE_FILTER = 'TOGGLE_FILTER';
 export const TOGGLE_MUSLIM_ONLY = 'TOGGLE_MUSLIM_ONLY';
+export const SET_FB_READY = 'SET_FB_READY';
