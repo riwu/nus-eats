@@ -4,9 +4,11 @@ import DetailedStallContainer from './DetailedStallContainer';
 import FilterButtonContainer from './FilterButtonContainer';
 import FilterPanelContainer from './FilterPanelContainer';
 import FacebookSDKContainer from './FacebookSDKContainer';
+import NavBar from './NavBar';
 
 const App = () => (
   <div>
+    <NavBar />
     <FilterButtonContainer />
     <FilterPanelContainer />
     <CanteensContainer />
