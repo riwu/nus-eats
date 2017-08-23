@@ -6,13 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var db = require('./database/db');
 
 var injectJwtStrategy = require('./security/jwt');
 
-var index = require('./routes/index');
-var canteens = require('./routes/canteens');
 var authentication = require('./routes/authentication');
-var stalls = require('./routes/stalls');
+var canteens = require('./routes/canteens')(db);
+var stalls = require('./routes/stalls')(db);
 
 var app = express();
 
@@ -26,8 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 injectJwtStrategy(passport);
 app.use(passport.initialize());
 
-const authenticateMiddleware = passport.authenticate('jwt', {session: false});
-app.use('/', index);
+const authenticateMiddleware = passport.authenticate('jwt', { session: false });
 app.use('/authentication', authentication);
 app.use('/canteens', authenticateMiddleware, canteens);
 app.use('/stalls', authenticateMiddleware, stalls);

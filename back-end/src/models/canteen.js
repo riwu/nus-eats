@@ -1,19 +1,24 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../database');
+module.exports = (sequelize, DataTypes) => {
+  const Canteen = sequelize.define('Canteen', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    latitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    longitude: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    }
+  }, {
+    underscored: true
+  });
 
-const Canteen = sequelize.define('canteens', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  latitude: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
-  longitude: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  }
-});
+  Canteen.assoicate = (models) => {
+    Canteen.hasMany(models.Stall, { onDelete: 'CASCADE' } );
+  };
 
-module.exports = Canteen;
+  return Canteen;
+}

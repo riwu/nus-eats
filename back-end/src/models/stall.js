@@ -1,15 +1,16 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../database');
-const Canteen = require('./canteen');
+module.exports = (sequelize, DataTypes) => {
+  const Stall = sequelize.define('Stall', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    underscored: true
+  });
 
-const Stall = sequelize.define('stalls', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-});
+  Stall.associate = (models) => {
+    Stall.belongsTo(models.Canteen, { onDelete: 'CASCADE' } );
+  };
 
-Stall.belongsTo(Canteen);
-Canteen.hasMany(Stall, {onDelete: 'CASCADE'});
-
-module.exports = Stall;
+  return Stall;
+}

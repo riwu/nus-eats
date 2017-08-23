@@ -1,17 +1,22 @@
 const express = require('express');
-const { Canteen, Store } = require('../models');
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
-  const canteens = await Canteen.findAll();
-  res.json({canteens});
-});
-
-router.get('/:canteenId/stores', async (req, res, next) => {
-  const stores = await Store.findAll({
-    where: {canteenId: req.params.canteenId}
+module.exports = (db) => {
+  router.get('/', async (req, res, next) => {
+    const canteens = await db['Canteen'].findAll();
+    res.json({canteens});
   });
-  res.json({stores});
-});
+  
+  router.get('/hello', async (req, res, next) => {
+    res.send('Hello');
+  });
+  
+  router.get('/:canteenId/stores', async (req, res, next) => {
+    const stalls = await db['Stall'].findAll({
+      where: {canteenId: req.params.canteenId}
+    });
+    res.json({stalls});
+  });
 
-module.exports = router;
+  return router;
+}
