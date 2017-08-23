@@ -18,3 +18,20 @@ export const getAllStalls = () => (dispatch) => {
     });
   });
 };
+
+export const openStoreView = dispatch => stall => dispatch({
+  type: types.OPEN_STALL_VIEW,
+  stall,
+});
+
+export const closeStoreView = () => ({
+  type: types.CLOSE_STALL_VIEW,
+});
+
+export const toggleFilter = () => ({
+  type: types.TOGGLE_FILTER,
+});
+
+export const toggleMuslimOnly = () => ({
+  type: types.TOGGLE_MUSLIM_ONLY,
+});
