@@ -6,10 +6,11 @@ const style = {
   margin: '10px',
 };
 
-const Stall = ({ stall, openStoreView }) => (
+const Stall = ({ stall, openStoreView, ratingComponent }) => (
   <div style={style} onClick={() => openStoreView(stall)}>
     <h3>{stall.name}</h3>
     <div>{stall.description}</div>
+    {ratingComponent}
   </div>
 );
 
