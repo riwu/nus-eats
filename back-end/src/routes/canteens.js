@@ -16,7 +16,16 @@ module.exports = (db) => {
       where: { canteen_id: req.params.canteenId },
       order: [
         ['name', 'ASC']
-      ]
+      ],
+      attributes: {
+        include: [[ db.sequelize.fn('AVG', db.sequelize.col('Ratings.value')), 'average_rating' ]]
+      },
+      include: [{
+        model: db['Rating'],
+        as: 'Ratings',
+        attributes: []
+      }],   
+      group: ['Stall.id']
     });
     res.json({stalls});
   });

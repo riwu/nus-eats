@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Stall.associate = (models) => {
     Stall.belongsTo(models.Canteen, { onDelete: 'CASCADE' } );
+    Stall.hasMany(models.Rating, { onDelete: 'CASCADE' })
   };
 
   return Stall;

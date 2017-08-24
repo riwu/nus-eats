@@ -10,7 +10,7 @@ const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.POSTGRES_
     idle: 10000
   }
 });
-const db        = {};
+const db = {};
 
 const models_dir = path.join(__dirname, '..', 'models');
 
@@ -33,6 +33,6 @@ if (db[modelName].associate) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.sequelize.sync( {force: true} );
+// db.sequelize.sync();
 
 module.exports = db;

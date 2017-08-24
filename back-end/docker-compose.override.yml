@@ -15,21 +15,10 @@ services:
 
   postgres:
     image: postgres:9.6.4
-    ports:
-      - "5432:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
     env_file:
       - .env
-
-  pgadmin:
-    image: fenglc/pgadmin4
-    depends_on:
-      - postgres
-    links:
-      - postgres
-    ports:
-      - "5050:5050"
 
 volumes:
   postgres:
