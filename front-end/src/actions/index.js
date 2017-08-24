@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 import api from '../api';
 
 export const getAllCanteens = () => (dispatch) => {
-  api.getAllCanteens((canteens) => {
+  api.getAllCanteens().then((canteens) => {
     dispatch({
       type: types.RECEIVE_CANTEENS,
       canteens,
@@ -11,7 +11,7 @@ export const getAllCanteens = () => (dispatch) => {
 };
 
 export const getAllStalls = () => (dispatch) => {
-  api.getAllStalls((stalls) => {
+  api.getAllStalls().then((stalls) => {
     dispatch({
       type: types.RECEIVE_STALLS,
       stalls,
@@ -35,3 +35,33 @@ export const toggleFilter = () => ({
 export const toggleMuslimOnly = () => ({
   type: types.TOGGLE_MUSLIM_ONLY,
 });
+
+export const setFbReady = () => ({
+  type: types.SET_FB_READY,
+});
+
+export const login = () => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    window.FB.login((response) => {
+      if (response.status === 'connected') {
+        const accessToken = window.FB.getAccessToken();
+        api.login(accessToken).then(({token, facebookToken}) => {
+          dispatch({
+            apiToken: token,
+            facebookToken,
+            type: types.RECEIVE_ACCESS_TOKENS,
+          });
+
+          window.FB.api('me', {access_token: facebookToken}, (user) => {
+            dispatch({
+              user,
+              type: types.RECEIVE_CURRENT_USER,
+            });
+          });
+        });
+      } else {
+        reject();
+      }
+    }, {scope: 'public_profile,user_friends,email'});
+  });
+};
