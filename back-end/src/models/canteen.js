@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Canteen.assoicate = (models) => {
-    Canteen.hasMany(models.Stall, { onDelete: 'CASCADE' } );
+    Canteen.hasMany(models.Stall, { as: 'stalls', onDelete: 'CASCADE' } );
   };
 
   return Canteen;

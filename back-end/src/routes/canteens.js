@@ -18,11 +18,11 @@ module.exports = (db) => {
         ['name', 'ASC']
       ],
       attributes: {
-        include: [[ db.sequelize.fn('AVG', db.sequelize.col('Ratings.value')), 'average_rating' ]]
+        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'average_rating' ]]
       },
       include: [{
         model: db['Rating'],
-        as: 'Ratings',
+        as: 'ratings',
         attributes: []
       }],   
       group: ['Stall.id']

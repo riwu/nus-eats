@@ -33,6 +33,6 @@ if (db[modelName].associate) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// db.sequelize.sync();
+db.sequelize.sync();
 
 module.exports = db;
