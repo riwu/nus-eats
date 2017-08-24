@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 import api from '../api';
 
 export const getAllCanteens = () => (dispatch) => {
-  api.getAllCanteens((canteens) => {
+  api.getAllCanteens().then((canteens) => {
     dispatch({
       type: types.RECEIVE_CANTEENS,
       canteens,
@@ -11,7 +11,7 @@ export const getAllCanteens = () => (dispatch) => {
 };
 
 export const getAllStalls = () => (dispatch) => {
-  api.getAllStalls((stalls) => {
+  api.getAllStalls().then((stalls) => {
     dispatch({
       type: types.RECEIVE_STALLS,
       stalls,
@@ -45,7 +45,7 @@ export const login = () => (dispatch) => {
     window.FB.login((response) => {
       if (response.status === 'connected') {
         const accessToken = window.FB.getAccessToken();
-        api.login(accessToken, ({token, facebookToken}) => {
+        api.login(accessToken).then(({token, facebookToken}) => {
           dispatch({
             apiToken: token,
             facebookToken,
