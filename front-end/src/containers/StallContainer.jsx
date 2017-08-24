@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Stall from '../components/Stall';
-import { openStoreView } from '../actions';
+import { toggleStoreView } from '../actions';
 import RatingContainer from './RatingContainer';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  openStoreView: openStoreView(dispatch),
+  toggleStoreView: toggleStoreView(dispatch)(ownProps.stall),
   stall: ownProps.stall,
   ratingComponent: <RatingContainer rating={ownProps.stall.rating} useAvgRating />,
 });

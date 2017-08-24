@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DetailedStall from '../components/DetailedStall';
-import { closeStoreView } from '../actions';
+import { toggleStoreView } from '../actions';
 import RatingContainer from './RatingContainer';
 
 const mapStateToProps = state => ({
@@ -11,7 +11,18 @@ const mapStateToProps = state => ({
                  : null,
 });
 
+const mapDispatchToProps = dispatch => ({
+  toggleStoreView: toggleStoreView(dispatch),
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...ownProps,
+  ...stateProps,
+  toggleStoreView: dispatchProps.toggleStoreView(stateProps.stall),
+});
+
 export default connect(
   mapStateToProps,
-  { closeStoreView },
+  mapDispatchToProps,
+  mergeProps,
 )(DetailedStall);

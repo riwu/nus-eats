@@ -1,16 +1,8 @@
-import { OPEN_STALL_VIEW, CLOSE_STALL_VIEW } from '../constants/ActionTypes';
+import { TOGGLE_STALL_VIEW } from '../constants/ActionTypes';
 
-const initialState = null;
-
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case OPEN_STALL_VIEW:
-      return action.stall;
-    case CLOSE_STALL_VIEW:
-      return null;
-    default:
-      return state;
-  }
+function reducer(state = null, action) {
+  if (action.type !== TOGGLE_STALL_VIEW) return state;
+  return state === null ? action.stall : null;
 }
 
 export default reducer;
