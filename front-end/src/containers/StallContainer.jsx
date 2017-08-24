@@ -7,7 +7,7 @@ import RatingContainer from './RatingContainer';
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openStoreView: openStoreView(dispatch),
   stall: ownProps.stall,
-  ratingComponent: <RatingContainer rating={ownProps.stall.rating} readonly />,
+  ratingComponent: <RatingContainer rating={ownProps.stall.rating} useAvgRating />,
 });
 
 export default connect(null, mapDispatchToProps)(Stall);

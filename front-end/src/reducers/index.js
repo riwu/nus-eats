@@ -7,6 +7,7 @@ import toggleMuslimOnly from './toggle_muslim_only';
 import isFbReady from './is_fb_ready';
 import accessTokens from './access_tokens';
 import currentUser from './current_user';
+import userRatings from './user_ratings';
 
 const reducer = combineReducers({
   canteens,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   toggleMuslimOnly,
   isFbReady,
   accessTokens,
-  currentUser
+  currentUser,
+  userRatings,
 });
 
 export default reducer;
