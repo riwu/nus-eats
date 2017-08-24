@@ -4,6 +4,7 @@ const style = {
   border: '1px solid #ddd',
   padding: '10px',
   margin: '10px',
+  cursor: 'pointer',
 };
 
 const Stall = ({ stall, openStoreView, ratingComponent }) => (

@@ -40,28 +40,32 @@ export const setFbReady = () => ({
   type: types.SET_FB_READY,
 });
 
-export const login = () => (dispatch) => {
-  return new Promise((resolve, reject) => {
-    window.FB.login((response) => {
-      if (response.status === 'connected') {
-        const accessToken = window.FB.getAccessToken();
-        api.login(accessToken).then(({token, facebookToken}) => {
-          dispatch({
-            apiToken: token,
-            facebookToken,
-            type: types.RECEIVE_ACCESS_TOKENS,
-          });
+export const login = () => dispatch => new Promise((resolve, reject) => {
+  window.FB.login((response) => {
+    if (response.status === 'connected') {
+      const accessToken = window.FB.getAccessToken();
+      api.login(accessToken).then(({ token, facebookToken }) => {
+        dispatch({
+          apiToken: token,
+          facebookToken,
+          type: types.RECEIVE_ACCESS_TOKENS,
+        });
 
-          window.FB.api('me', {access_token: facebookToken}, (user) => {
-            dispatch({
-              user,
-              type: types.RECEIVE_CURRENT_USER,
-            });
+        window.FB.api('me', { access_token: facebookToken }, (user) => {
+          dispatch({
+            user,
+            type: types.RECEIVE_CURRENT_USER,
           });
         });
-      } else {
-        reject();
-      }
-    }, {scope: 'public_profile,user_friends,email'});
-  });
-};
+      });
+    } else {
+      reject();
+    }
+  }, { scope: 'public_profile,user_friends,email' });
+});
+
+export const changeRating = (stallID, rating) => ({
+  type: types.CHANGE_RATING,
+  stallID,
+  rating,
+});

@@ -1,9 +1,14 @@
 import { connect } from 'react-redux';
 import Rating from '../components/Rating';
+import { changeRating } from '../actions';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  rating: ownProps.rating,
-  readonly: ownProps.readonly,
-});
+const mapStateToProps = (state, ownProps) => {
+  const stall = state.openedStall;
+  return {
+    rating: ownProps.useAvgRating ? ownProps.rating : state.userRatings[stall.id],
+    readonly: ownProps.useAvgRating,
+    stallID: stall ? stall.id : null,
+  };
+};
 
-export default connect(null, mapDispatchToProps)(Rating);
+export default connect(mapStateToProps, { changeRating })(Rating);
