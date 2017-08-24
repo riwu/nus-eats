@@ -69,3 +69,13 @@ export const changeRating = (stallID, rating) => ({
   stallID,
   rating,
 });
+
+export const toggleMeetingWindow = (dispatch, canteenID) => () => dispatch({
+  type: types.TOGGLE_MEETING_WINDOW,
+  canteenID,
+});
+
+export const toggleCanteenPanel = dispatch => canteenID => dispatch({
+  type: types.TOGGLE_CANTEEN_PANEL,
+  canteenID,
+});

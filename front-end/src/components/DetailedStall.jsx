@@ -9,9 +9,9 @@ const DetailedStall = ({ stall, closeStoreView, ratingComponent }) => (
     </Modal.Header>
     <Modal.Body>
       {stall ? stall.description : null}
-      {stall && <FacebookCommentsContainer href={`${window.location.origin}/stalls/${stall.id}`} />}
       <div>Your rating:</div>
       {ratingComponent}
+      {stall && <FacebookCommentsContainer href={`${window.location.origin}/stalls/${stall.id}`} />}
     </Modal.Body>
     <Modal.Footer>
       <Button onClick={closeStoreView}>Close</Button>

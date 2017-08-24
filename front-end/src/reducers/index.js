@@ -8,6 +8,8 @@ import isFbReady from './is_fb_ready';
 import accessTokens from './access_tokens';
 import currentUser from './current_user';
 import userRatings from './user_ratings';
+import meeting from './meeting';
+import expandedCanteenPanels from './expanded_canteen_panels';
 
 const reducer = combineReducers({
   canteens,
@@ -19,6 +21,8 @@ const reducer = combineReducers({
   accessTokens,
   currentUser,
   userRatings,
+  meeting,
+  expandedCanteenPanels,
 });
 
 export default reducer;
