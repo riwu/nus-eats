@@ -29,8 +29,8 @@ app.use(passport.initialize());
 
 const authenticateMiddleware = passport.authenticate('jwt', { session: false });
 app.use('/authentication', authentication);
-app.use('/canteens', authenticateMiddleware, canteens);
-app.use('/stalls', authenticateMiddleware, stalls);
+app.use('/canteens', canteens);
+app.use('/stalls', stalls);
 app.use('/users', authenticateMiddleware, users);
 
 // catch 404 and forward to error handler
