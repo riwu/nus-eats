@@ -12,10 +12,12 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen }) => (
         <Modal.Title>{canteen ? canteen.name : null}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        Existing meeting
         Time
 
       </Modal.Body>
       <Modal.Footer>
+        <Button bsStyle="primary">Create</Button>
         <Button onClick={toggleMeetingWindow}>Close</Button>
       </Modal.Footer>
     </Modal>

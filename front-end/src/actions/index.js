@@ -19,7 +19,7 @@ export const getAllStalls = () => (dispatch) => {
   });
 };
 
-export const toggleStoreView = dispatch => stall => () => dispatch({
+export const toggleStallView = stall => ({
   type: types.TOGGLE_STALL_VIEW,
   stall,
 });
@@ -66,12 +66,12 @@ export const changeRating = (stallID, rating) => ({
   rating,
 });
 
-export const toggleMeetingWindow = (dispatch, canteenID) => () => dispatch({
+export const toggleMeetingWindow = canteenID => () => ({
   type: types.TOGGLE_MEETING_WINDOW,
   canteenID,
 });
 
-export const toggleCanteenPanel = dispatch => canteenID => dispatch({
+export const toggleCanteenPanel = canteenID => ({
   type: types.TOGGLE_CANTEEN_PANEL,
   canteenID,
 });

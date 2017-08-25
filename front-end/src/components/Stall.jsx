@@ -7,8 +7,8 @@ const style = {
   cursor: 'pointer',
 };
 
-const Stall = ({ stall, toggleStoreView, ratingComponent }) => (
-  <div style={style} onClick={toggleStoreView}>
+const Stall = ({ stall, toggleStallView, ratingComponent }) => (
+  <div style={style} onClick={() => toggleStallView(stall)}>
     <h3>{stall.name}</h3>
     <div>{stall.description}</div>
     {ratingComponent}
