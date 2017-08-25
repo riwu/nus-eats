@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     longitude: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    crowd_id: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     underscored: true
