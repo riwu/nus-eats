@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     longitude: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    crowd_id: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     underscored: true
@@ -18,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Canteen.assoicate = (models) => {
     Canteen.hasMany(models.Stall, { as: 'stalls', onDelete: 'CASCADE' } );
+    Canteen.hasMany(models.Appointment, { as: 'appointments', onDelete: 'CASCADE' } );
   };
 
   return Canteen;

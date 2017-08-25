@@ -13,6 +13,7 @@ var injectJwtStrategy = require('./security/jwt');
 var authentication = require('./routes/authentication');
 var canteens = require('./routes/canteens')(db);
 var stalls = require('./routes/stalls')(db);
+var users = require('./routes/users')(db);
 
 var app = express();
 
@@ -30,6 +31,7 @@ const authenticateMiddleware = passport.authenticate('jwt', { session: false });
 app.use('/authentication', authentication);
 app.use('/canteens', authenticateMiddleware, canteens);
 app.use('/stalls', authenticateMiddleware, stalls);
+app.use('/users', authenticateMiddleware, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
