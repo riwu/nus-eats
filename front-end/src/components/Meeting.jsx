@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Glyphicon, Modal } from 'react-bootstrap';
 
-const Meeting = ({ toggleMeetingWindow, canteen, isOpen }) => (
+const Meeting = ({ toggleMeetingWindow, canteen, isOpen, DatePickerComponent }) => (
   <div>
     <Button onClick={toggleMeetingWindow}>
       <Glyphicon glyph="plus" />
@@ -12,9 +12,7 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen }) => (
         <Modal.Title>{canteen ? canteen.name : null}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Existing meeting
-        Time
-
+        <DatePickerComponent />
       </Modal.Body>
       <Modal.Footer>
         <Button bsStyle="primary">Create</Button>
