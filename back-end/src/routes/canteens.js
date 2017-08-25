@@ -32,7 +32,7 @@ module.exports = (db) => {
       });
       delete canteen.crowd_id;
       return canteen;
-    })
+    });
 
     res.json({canteens});
   });
