@@ -6,12 +6,8 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Config from '../constants/Config';
 
-const style = {
-  display: 'flex',
-};
-
 const MeetingDate = ({ date, time, cancelMeeting, updateMeeting, meetingID }) => (
-  <div style={style}>
+  <div>
     <DayPickerInput
       value={date.format('DD/MM/YYYY')}
       onDayChange={newDate => updateMeeting({ id: meetingID, newDate })}
