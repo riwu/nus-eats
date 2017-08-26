@@ -89,3 +89,8 @@ export const changeMeetingTime = time => ({
 export const createMeeting = () => ({
   type: types.CREATE_MEETING,
 });
+
+export const cancelMeeting = id => ({
+  type: types.CANCEL_MEETING,
+  id,
+});
