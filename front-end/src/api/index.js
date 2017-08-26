@@ -17,12 +17,26 @@ const makeHeaders = (headers = {}) => {
   });
 };
 
+const processResponse = (response) => {
+  if (response.ok) {
+    return response.json();
+  } else {
+    return response
+      .json()
+      .then((body) => {
+        return Promise.reject({
+          body,
+          status: response.status
+        });
+      });
+  }
+};
+
 const get = (path, headers) => {
-  // TODO Make sure fetch is available
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
   return fetch(`${baseUrl}${path}`, {
     headers: makeHeaders(headers)
-  }).then((resp) => resp.json());
+  }).then(processResponse);
 };
 
 const post = (path, payload, headers) => {
@@ -31,10 +45,8 @@ const post = (path, payload, headers) => {
     method: 'POST',
     headers: makeHeaders(headers),
     body: JSON.stringify(payload)
-  }).then((resp) => resp.json());
+  }).then(processResponse);
 };
-
-window.get = get;
 
 export default {
   setStore: (s) => store = s,
