@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import history from './store/history';
 
-import { getAllCanteens, getAllStalls } from './actions';
+import { getAllCanteens, getAllStalls, getMeetings } from './actions';
 import store from './store';
 
 import MainPage from './containers/MainPage';
@@ -13,6 +13,7 @@ import Feed from './containers/Feed';
 
 store.dispatch(getAllCanteens());
 store.dispatch(getAllStalls());
+store.dispatch(getMeetings());
 
 function App() {
   return (

@@ -1,5 +1,12 @@
-import { TOGGLE_MEETING_WINDOW, CHANGE_MEETING_DATE, CHANGE_MEETING_TIME,
-  CREATE_MEETING, CANCEL_MEETING, UPDATE_MEETING, RECEIVE_MEETINGS } from '../constants/ActionTypes';
+import {
+  TOGGLE_MEETING_WINDOW,
+  CHANGE_MEETING_DATE,
+  CHANGE_MEETING_TIME,
+  CREATE_MEETING,
+  CANCEL_MEETING,
+  UPDATE_MEETING,
+  RECEIVE_MEETINGS
+} from '../constants/ActionTypes';
 
 const initialState = {
   canteenID: null,
@@ -12,7 +19,10 @@ function reducer(state = initialState, action) {
     case RECEIVE_MEETINGS:
       return {
         ...state,
-        meetings: action.meetings,
+        meetings: [
+          ...state.meetings,
+          ...action.meetings
+        ]
       };
     case TOGGLE_MEETING_WINDOW:
       return {
@@ -32,11 +42,12 @@ function reducer(state = initialState, action) {
     case CREATE_MEETING: {
       const meetings = [...state.meetings];
       meetings.push({
-        id: meetings.length,
+        id: meetings.length + 1,
         canteenID: state.canteenID,
         date: state.date,
         time: state.time,
         isActive: true,
+        attendees: [],
       });
       return {
         ...state,

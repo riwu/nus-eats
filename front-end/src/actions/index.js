@@ -1,5 +1,6 @@
 import * as types from '../constants/ActionTypes';
 import api from '../api';
+import fb from '../fb';
 
 export const getAllCanteens = () => (dispatch) => {
   api.getAllCanteens().then((canteens) => {
@@ -19,6 +20,15 @@ export const getAllStalls = () => (dispatch) => {
   });
 };
 
+export const getMeetings = () => (dispatch) => {
+  api.getMeetings().then((meetings) => {
+    dispatch({
+      type: types.RECEIVE_MEETINGS,
+      meetings
+    });
+  });
+};
+
 export const toggleStallView = id => ({
   type: types.TOGGLE_STALL_VIEW,
   id,
@@ -34,13 +44,6 @@ export const toggleMuslimOnly = () => ({
 
 export const setFbReady = () => ({
   type: types.SET_FB_READY,
-});
-
-const getMeetings = (dispatch, user) => api.getAllMeetings(user).then((meetings) => {
-  dispatch({
-    type: types.RECEIVE_MEETINGS,
-    meetings,
-  });
 });
 
 export const login = () => dispatch => new Promise((resolve, reject) => {
@@ -113,3 +116,13 @@ export const updateMeeting = ({ id, newDate, newTime }) => ({
   newDate,
   newTime,
 });
+
+export const getFacebookUser = (userId) => (dispatch) => {
+  fb.api(userId)
+    .then((user) => {
+      dispatch({
+        type: types.RECEIVE_FACEBOOK_USER,
+        user
+      });
+    });
+};

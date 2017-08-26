@@ -1,3 +1,6 @@
+import { appointments } from './appointments.json';
+import timeoutPromise from '../util/timeout_promise';
+
 let store;
 
 const makeHeaders = (headers = {}) => {
@@ -53,5 +56,5 @@ export default {
     [stall.id]: stall,
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
-  getAllMeetings: id => get(`/users/${id}/appointments`).then(({ appointments }) => appointments),
+  getMeetings: () => timeoutPromise(100).then(() => appointments),
 };
