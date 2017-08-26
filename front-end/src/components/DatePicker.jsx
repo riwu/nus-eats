@@ -6,11 +6,21 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 
-const DatePicker = () => (
-  <div>
-    <DayPicker />
-    <TimePicker showSecond={false} use12Hours defaultValue={moment()} />
-  </div>
-);
-
+const DatePicker = ({ changeMeetingDate, changeMeetingTime }) => {
+  const now = moment();
+  changeMeetingDate(now);
+  changeMeetingTime(now);
+  return (
+    <div>
+      <DayPicker onDayClick={date => changeMeetingDate(moment(date))} />
+      <TimePicker
+        showSecond={false}
+        use12Hours
+        open
+        defaultValue={now}
+        onChange={time => changeMeetingTime(time)}
+      />
+    </div>
+  );
+};
 export default DatePicker;

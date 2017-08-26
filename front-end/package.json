@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "moment": "^2.18.1",
     "rc-time-picker": "^2.4.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",

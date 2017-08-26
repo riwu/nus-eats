@@ -1,4 +1,11 @@
 import { connect } from 'react-redux';
 import DatePicker from '../components/DatePicker';
+import { changeMeetingDate, changeMeetingTime } from '../actions';
 
-export default connect()(DatePicker);
+const mapStateToProps = (state, ownProps) => ({
+  enteredModal: state.meeting.modalEntered,
+});
+
+
+export default connect(mapStateToProps,
+  { changeMeetingDate, changeMeetingTime })(DatePicker);

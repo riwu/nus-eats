@@ -75,3 +75,17 @@ export const toggleCanteenPanel = canteenID => ({
   type: types.TOGGLE_CANTEEN_PANEL,
   canteenID,
 });
+
+export const changeMeetingDate = date => ({
+  type: types.CHANGE_MEETING_DATE,
+  date,
+});
+
+export const changeMeetingTime = time => ({
+  type: types.CHANGE_MEETING_TIME,
+  time,
+});
+
+export const createMeeting = () => ({
+  type: types.CREATE_MEETING,
+});
