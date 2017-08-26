@@ -10,15 +10,19 @@ const style = {
   display: 'flex',
 };
 
-const MeetingDate = ({ date, time, cancelMeeting, meetingID }) => (
+const MeetingDate = ({ date, time, cancelMeeting, updateMeeting, meetingID }) => (
   <div style={style}>
-    <DayPickerInput value={date.format('DD/MM/YYYY')} />
+    <DayPickerInput
+      value={date.format('DD/MM/YYYY')}
+      onDayChange={newDate => updateMeeting({ id: meetingID, newDate })}
+    />
     <TimePicker
       showSecond={false}
       use12Hours
       defaultValue={time}
       disabledMinutes={() => Config.MINUTES_TO_HIDE}
       hideDisabledOptions
+      onChange={newTime => updateMeeting({ id: meetingID, newTime })}
     />
     <Button onClick={() => cancelMeeting(meetingID)}>Cancel</Button>
   </div>

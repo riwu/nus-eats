@@ -94,3 +94,10 @@ export const cancelMeeting = id => ({
   type: types.CANCEL_MEETING,
   id,
 });
+
+export const updateMeeting = ({ id, newDate, newTime }) => ({
+  type: types.UPDATE_MEETING,
+  id,
+  newDate,
+  newTime,
+});

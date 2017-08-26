@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MeetingDate from '../components/MeetingDate';
-import { cancelMeeting } from '../actions';
+import { cancelMeeting, updateMeeting } from '../actions';
 
-const MeetingDatesContainer = ({ meetings, cancelMeeting }) => {
+const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
   if (meetings.length === 0) return null;
   return (
     <div>
@@ -15,6 +15,7 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting }) => {
           time={meeting.time}
           meetingID={meeting.id}
           cancelMeeting={cancelMeeting}
+          updateMeeting={updateMeeting}
         />
       ))}
     </div>
@@ -28,5 +29,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { cancelMeeting },
+    { cancelMeeting, updateMeeting },
 )(MeetingDatesContainer);
