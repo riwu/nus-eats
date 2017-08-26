@@ -330,26 +330,40 @@ FORMAT: 1A
 
 ## Appointment Upload [/appointments]
 
-### (NOT DONE) Create an Appointment [POST]
+### (DONE) Create an Appointment [POST]
 
 + Request JSON
 
     + Headers
     
             Authorization: Bearer <jwt>
+            Content-Type: application/json
             Accept: application/json
     
     + Body 
 
             {
                 "appointment": {
-                    "canteen_id": 1,
-                    "start_time": "140920171300",
-                    "end_time": "140920171400"
+                    "canteen_id": 3,
+                    "start_time": "2017-08-22 16:00:00+00"",
+                    "end_time": "2017-08-22 18:00:00+00""
                 }
             }
     
 + Response 201 (application/json)
+
+            {
+                "appointment": {
+                    "attendees": [],
+                    "id": 4,
+                    "user_id": "1524106284336095",
+                    "start_time": "2017-08-22T16:00:00.000Z",
+                    "end_time": "2017-08-22T18:00:00.000Z",
+                    "canteen_id": 3,
+                    "updated_at": "2017-08-26T14:53:36.864Z",
+                    "created_at": "2017-08-26T14:53:36.864Z"
+                }
+            }
 
 ## Appointment [/appointments/{id}]
 
