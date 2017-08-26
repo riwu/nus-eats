@@ -8,7 +8,7 @@ const style = {
 
 const stallsContainer = ({ stalls, canteenID }) => (
   <div style={style}>
-    {stalls.filter(stall => stall.canteenID === canteenID)
+    {stalls.filter(stall => stall.canteen_id === canteenID)
            .map(stall => (
              <StallContainer stall={stall} key={stall.id} />
            ))}

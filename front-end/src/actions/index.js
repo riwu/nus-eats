@@ -40,7 +40,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
   window.FB.login((response) => {
     if (response.status === 'connected') {
       const accessToken = window.FB.getAccessToken();
-      api.login(accessToken).then(({ token, facebookToken }) => {
+      api.login(accessToken).then(({token, facebookToken}) => {
         dispatch({
           apiToken: token,
           facebookToken,

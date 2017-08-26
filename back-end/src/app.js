@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var cors = require('cors');
 var db = require('./database/db');
 
 var injectJwtStrategy = require('./security/jwt');
@@ -17,6 +18,7 @@ var users = require('./routes/users')(db);
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,8 +31,8 @@ app.use(passport.initialize());
 
 const authenticateMiddleware = passport.authenticate('jwt', { session: false });
 app.use('/authentication', authentication);
-app.use('/canteens', authenticateMiddleware, canteens);
-app.use('/stalls', authenticateMiddleware, stalls);
+app.use('/canteens', canteens);
+app.use('/stalls', stalls);
 app.use('/users', authenticateMiddleware, users);
 
 // catch 404 and forward to error handler
