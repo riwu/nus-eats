@@ -1,49 +1,52 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request-promise');
+const asyncMiddleware = require('../utilities/async');
+const Boom = require('boom');
 
 module.exports = (db) => {
-  router.post('/', (req, res, next) => {
-    db['Appointment']
-    .create({
+
+  router.post('/', asyncMiddleware(async (req, res, next) => {
+    const appointment = await db['Appointment'].create({
       user_id: req.user.id,
       start_time: req.body.appointment.start_time,
       end_time: req.body.appointment.end_time,
       canteen_id: req.body.appointment.canteen_id
-    })
-    .then(appointment => res.status(201).json({appointment}));
-  });
+    });
+    res.status(201).json({appointment});
+  }));
 
-  router.patch('/:appointmentId', (req, res, next) => {
-    db['Appointment']
-    .findById(req.params.appointmentId)
-    .then(appointment => {
-      if (appointment.user_id == req.user.id) {
-        res.send(403);
+  router.patch('/:appointmentId', asyncMiddleware(async (req, res, next) => {
+    const appointment = await db['Appointment'].findById(req.params.appointmentId);
+
+    if (!appointment) {
+      throw Boom.notFound('Record not found.');
+    }
+
+    if (appointment.user_id == req.user.id) {
+      throw Boom.forbidden('Host cannot join his/her own appointment.');
+    }
+
+    appointment.attendees.forEach(attendee => {
+      if (attendee == req.user.id) {
+        throw Boom.forbidden('User has already joined appointment.');
       }
-  
-      appointment.attendees.forEach(attendee => {
-        if (attendee == req.user.id) {
-          res.status(409);
-        }
-      });
-
-      appointment.attendees.push(req.user.id);
-      return appointment.update({attendees: appointment.attendees});
-    }).then(appointment => {
-      res.json({appointment});
     });
-  });
 
-  router.delete('/:appointmentId', (req, res, next) => {
-    db['Appointment']
-    .destroy({
+    appointment.attendees.push(req.user.id);
+    await appointment.update({attendees: appointment.attendees});
+    res.json({appointment});
+  }));
+
+  router.delete('/:appointmentId', asyncMiddleware(async (req, res, next) => {
+    const result = await db['Appointment'].destroy({
       where: { id: req.params.appointmentId }
-    })
-    .then(response => {
-      res.json({response});
     });
-  });
+    if (result == 0) {
+      throw Boom.notFound('Record not found.');
+    } else {
+      res.status(204).send();
+    }
+  }));
 
   return router;
 }

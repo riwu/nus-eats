@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request-promise');
+const asyncMiddleware = require('../utilities/async');
 
 async function getCrowdValue() {
   const options = {
@@ -15,7 +16,7 @@ async function getCrowdValue() {
 }
 
 module.exports = (db) => {
-  router.get('/', async (req, res, next) => {
+  router.get('/', asyncMiddleware(async (req, res, next) => {
     const crowd = await getCrowdValue();
     var canteens = await db['Canteen'].findAll({
       order: [
@@ -35,9 +36,9 @@ module.exports = (db) => {
     });
 
     res.json({canteens});
-  });
-  
-  router.get('/:canteenId/stalls', async (req, res, next) => {
+  }));
+
+  router.get('/:canteenId/stalls', asyncMiddleware(async (req, res, next) => {
     const stalls = await db['Stall'].findAll({
       where: { canteen_id: req.params.canteenId },
       order: [
@@ -50,11 +51,11 @@ module.exports = (db) => {
         model: db['Rating'],
         as: 'ratings',
         attributes: []
-      }],   
+      }],
       group: ['Stall.id']
     });
     res.json({stalls});
-  });
+  }));
 
   return router;
 }

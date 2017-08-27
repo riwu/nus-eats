@@ -1,6 +1,7 @@
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const Boom = require('boom');
 
-function injectJwtStrategy(passport) {
+let injectJwtStrategy = (passport) => {
   const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET
@@ -11,6 +12,17 @@ function injectJwtStrategy(passport) {
   });
 
   passport.use(strategy);
-}
+};
 
-module.exports = injectJwtStrategy;
+let authenticateJwt = (passport) => {
+  return (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+      if (err) { return next(err); }
+      if (!user) { return next(Boom.unauthorized()); }
+      req.user = user;
+      return next();
+    })(req, res, next);
+  };
+};
+
+module.exports = { injectJwtStrategy, authenticateJwt };

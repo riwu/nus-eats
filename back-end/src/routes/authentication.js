@@ -1,7 +1,8 @@
 const express = require('express');
+const router = express.Router();
 const fb = require('../services/facebook');
 const jwt = require('jsonwebtoken');
-const router = express.Router();
+const Boom = require('boom');
 
 router.post('/login', (req, res, next) => {
   const shortAccessToken = req.body.accessToken;
@@ -57,7 +58,7 @@ router.post('/login', (req, res, next) => {
       });
     })
     .catch(() => {
-      res.status(401).json({errors: ['Invalid access token.']});
+      next(Boom.unauthorized('Invalid access token.'));
     });
 });
 
