@@ -32,11 +32,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 injectJwtStrategy(passport);
 app.use(passport.initialize());
 
+// TODO: Add back authenticateJwt(passport)
+
 app.use('/authentication', authentication);
 app.use('/canteens', canteens);
 app.use('/stalls', stalls);
-app.use('/users', authenticateJwt(passport), users);
-app.use('/appointments', authenticateJwt(passport), appointments);
+app.use('/users', users);
+app.use('/appointments', appointments);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -50,9 +52,9 @@ app.use((err, req, res, next) => {
   } else if (err instanceof db.Sequelize.ConnectionError) {
     next(Boom.badGateway('Problems connecting to database.'));
   } else if (err instanceof db.Sequelize.DatabaseError) {
-    next(Boom.badRequest('Invalid SQL query.'));
-  } else if (err instanceof db.Sequelize.ValidationError) {
     next(Boom.badRequest('Request breaks database constraints.'));
+  } else if (err instanceof db.Sequelize.ValidationError) {
+    next(Boom.badRequest('Sequelize validation failed.'));
   } else if (err instanceof db.Sequelize.Error) {
     next(Boom.badGateway('Unknown Sequelize error.'));
   }

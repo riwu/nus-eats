@@ -34,9 +34,9 @@ FORMAT: 1A
     + Body
 
             {
-                "errors": [
-                    "Invalid access token."
-                ]
+                "statusCode": 401,
+                "error": "Unauthorized",
+                "message": "Invalid access token."
             }
 
 # Group Canteens
@@ -68,6 +68,33 @@ FORMAT: 1A
                         "crowd_value": 0.1497255
                     }
                 ]
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "canteens": []
+            }
+
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Problems connecting to database."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Unknown Sequelize error."
             }
 
 ## Stall Collection [/canteens/{id}/stalls]
