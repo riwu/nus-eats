@@ -15,7 +15,6 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "strict": 0,
-    "react/no-unused-prop-types": [0]
+    "strict": 0
   }
 }
