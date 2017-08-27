@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 // Catch Sequelize error and forward to error handler
 app.use((err, req, res, next) => {
   if (err instanceof db.Sequelize.EmptyResultError) {
-    next(Boom.forbidden('Record not found.'));
+    next(Boom.notFound('Record not found.'));
   } else if (err instanceof db.Sequelize.ConnectionError) {
     next(Boom.badGateway('Problems connecting to database.'));
   } else if (err instanceof db.Sequelize.DatabaseError) {
