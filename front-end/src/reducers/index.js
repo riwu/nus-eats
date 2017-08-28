@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import canteens from './canteens';
 import stalls from './stalls';
 import openedStall from './opened_stall';
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   userRatings,
   meeting,
   expandedCanteenPanels,
+  routing: routerReducer,
 });
 
 export default reducer;

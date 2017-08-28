@@ -6,7 +6,7 @@ import FilterPanelContainer from './FilterPanelContainer';
 import FacebookSDKContainer from './FacebookSDKContainer';
 import NavBar from './NavBar';
 
-const App = () => (
+const MainPage = () => (
   <div>
     <NavBar />
     <FilterButtonContainer />
@@ -17,4 +17,4 @@ const App = () => (
   </div>
 );
 
-export default App;
+export default MainPage;
