@@ -60,6 +60,10 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
   }, { scope: 'public_profile,user_friends,email' });
 });
 
+export const logout = () => ({
+  type: types.LOGOUT
+});
+
 export const changeRating = (stallID, rating) => ({
   type: types.CHANGE_RATING,
   stallID,
