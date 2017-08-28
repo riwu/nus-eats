@@ -36,6 +36,13 @@ export const setFbReady = () => ({
   type: types.SET_FB_READY,
 });
 
+const getMeetings = (dispatch, user) => api.getAllMeetings(user).then((meetings) => {
+  dispatch({
+    type: types.RECEIVE_MEETINGS,
+    meetings,
+  });
+});
+
 export const login = () => dispatch => new Promise((resolve, reject) => {
   window.FB.login((response) => {
     if (response.status === 'connected') {
@@ -52,6 +59,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
             user,
             type: types.RECEIVE_CURRENT_USER,
           });
+          getMeetings(dispatch, user);
         });
       });
     } else {
@@ -61,7 +69,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
 });
 
 export const logout = () => ({
-  type: types.LOGOUT
+  type: types.LOGOUT,
 });
 
 export const changeRating = (stallID, rating) => ({

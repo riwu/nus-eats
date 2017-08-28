@@ -1,5 +1,5 @@
 import { TOGGLE_MEETING_WINDOW, CHANGE_MEETING_DATE, CHANGE_MEETING_TIME,
-  CREATE_MEETING, CANCEL_MEETING, UPDATE_MEETING } from '../constants/ActionTypes';
+  CREATE_MEETING, CANCEL_MEETING, UPDATE_MEETING, RECEIVE_MEETINGS } from '../constants/ActionTypes';
 
 const initialState = {
   canteenID: null,
@@ -9,6 +9,11 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case RECEIVE_MEETINGS:
+      return {
+        ...state,
+        meetings: action.meetings,
+      };
     case TOGGLE_MEETING_WINDOW:
       return {
         ...state,
