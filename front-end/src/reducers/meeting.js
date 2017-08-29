@@ -5,7 +5,8 @@ import {
   CREATE_MEETING,
   CANCEL_MEETING,
   UPDATE_MEETING,
-  RECEIVE_MEETINGS
+  RECEIVE_MEETINGS,
+  JOIN_MEETING
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -73,6 +74,25 @@ function reducer(state = initialState, action) {
         meetings,
       };
     }
+    case JOIN_MEETING:
+      const meetings = state.meetings.map((meeting) => {
+        if (meeting.id !== action.meetingId) {
+          return meeting;
+        }
+
+        return {
+          ...meeting,
+          attendees: [
+            ...meeting.attendees,
+            action.userId
+          ]
+        };
+      });
+
+      return {
+        ...state,
+        meetings,
+      };
     default:
       return state;
   }

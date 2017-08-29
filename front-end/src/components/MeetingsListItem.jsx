@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfilePicture from './ProfilePicture';
+import JoinMeetingButton from '../containers/JoinMeetingButtonContainer';
 
 const Attendees = ({attendees}) => (
   <span style={{marginLeft: '10px', paddingLeft: '10px', borderLeft: '1px solid gray'}}>
@@ -19,6 +20,9 @@ const MeetingsListItem = ({meeting}) => {
         By
         <ProfilePicture user={meeting.user} />
         <Attendees attendees={meeting.attendees} />
+      </div>
+      <div>
+        <JoinMeetingButton meetingId={meeting.id} />
       </div>
     </div>
   );
