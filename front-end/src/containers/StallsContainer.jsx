@@ -4,6 +4,7 @@ import StallContainer from './StallContainer';
 
 const style = {
   display: 'flex',
+  flexWrap: 'wrap',
 };
 
 const StallsContainer = ({ stalls, canteenId }) => (

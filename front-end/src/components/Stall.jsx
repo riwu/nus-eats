@@ -5,6 +5,8 @@ const style = {
   padding: '10px',
   margin: '10px',
   cursor: 'pointer',
+  width: '200px',
+  height: '200px',
 };
 
 const Stall = ({ stall, toggleStallView, ratingComponent }) => (
