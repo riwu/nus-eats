@@ -8,6 +8,7 @@ import history from './store/history';
 import { getAllCanteens, getAllStalls, getMeetings } from './actions';
 import store from './store';
 
+import FacebookSDK from './containers/FacebookSDKContainer';
 import MainPage from './containers/MainPage';
 import Feed from './containers/Feed';
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" component={MainPage} />
           <Route path="/feed" component={Feed} />
           <Route path="/stall/:id" component={MainPage} />
+          <FacebookSDK />
         </div>
       </ConnectedRouter>
     </Provider>
