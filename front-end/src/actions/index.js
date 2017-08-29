@@ -19,9 +19,9 @@ export const getAllStalls = () => (dispatch) => {
   });
 };
 
-export const toggleStallView = stall => ({
+export const toggleStallView = id => ({
   type: types.TOGGLE_STALL_VIEW,
-  stall,
+  id,
 });
 
 export const toggleFilter = () => ({

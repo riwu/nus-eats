@@ -21,6 +21,7 @@ function App() {
         <div>
           <Route exact path="/" component={MainPage} />
           <Route path="/feed" component={Feed} />
+          <Route path="/stall/:id" component={MainPage} />
         </div>
       </ConnectedRouter>
     </Provider>

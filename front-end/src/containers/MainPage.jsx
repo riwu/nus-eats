@@ -6,13 +6,13 @@ import FilterPanelContainer from './FilterPanelContainer';
 import FacebookSDKContainer from './FacebookSDKContainer';
 import NavBar from './NavBar';
 
-const MainPage = () => (
+const MainPage = ({ match }) => (
   <div>
     <NavBar />
     <FilterButtonContainer />
     <FilterPanelContainer />
     <CanteensContainer />
-    <DetailedStallContainer />
+    <DetailedStallContainer stallID={match.params.id} />
     <FacebookSDKContainer />
   </div>
 );

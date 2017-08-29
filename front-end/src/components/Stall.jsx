@@ -8,7 +8,7 @@ const style = {
 };
 
 const Stall = ({ stall, toggleStallView, ratingComponent }) => (
-  <div style={style} onClick={() => toggleStallView(stall)}>
+  <div style={style} onClick={toggleStallView}>
     <h3>{stall.name}</h3>
     <div>{stall.description}</div>
     {ratingComponent}
