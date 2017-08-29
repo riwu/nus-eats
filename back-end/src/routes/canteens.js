@@ -28,7 +28,7 @@ module.exports = (db) => {
       var canteen = c.toJSON();
       crowd.Cameras.forEach(camera => {
         if (camera._id == canteen.crowd_id) {
-          canteen.crowd_value = camera.crowdValue;
+          canteen.crowdValue = camera.crowdValue;
         }
       });
       delete canteen.crowd_id;

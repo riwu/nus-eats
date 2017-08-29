@@ -10,7 +10,7 @@ module.exports = (db) => {
         ['name', 'ASC']
       ],
       attributes: {
-        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'average_rating' ]]
+        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating' ]]
       },
       include: [{
         model: db['rating'],
@@ -24,7 +24,7 @@ module.exports = (db) => {
   router.get('/:id', asyncMiddleware(async (req, res, next) => {
     const stall = await db['stall'].findById(req.params.id, {
       attributes: {
-        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'average_rating' ]]
+        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating' ]]
       },
       include: [{
         model: db['rating'],
