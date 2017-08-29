@@ -5,14 +5,16 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import history from './store/history';
 
-import { getAllCanteens, getAllStalls } from './actions';
+import { getAllCanteens, getAllStalls, getMeetings } from './actions';
 import store from './store';
 
+import FacebookSDK from './containers/FacebookSDKContainer';
 import MainPage from './containers/MainPage';
 import Feed from './containers/Feed';
 
 store.dispatch(getAllCanteens());
 store.dispatch(getAllStalls());
+store.dispatch(getMeetings());
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <div>
           <Route exact path="/" component={MainPage} />
           <Route path="/feed" component={Feed} />
+          <Route path="/stall/:id" component={MainPage} />
+          <FacebookSDK />
         </div>
       </ConnectedRouter>
     </Provider>

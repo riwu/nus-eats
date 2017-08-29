@@ -4,7 +4,7 @@ const userRatings = (state = {}, action) => {
   if (action.type !== CHANGE_RATING) return state;
   return {
     ...state,
-    [action.stallID]: action.rating,
+    [action.stallId]: action.rating,
   };
 };
 

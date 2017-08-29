@@ -63,9 +63,9 @@ FORMAT: 1A
                         "name": "PGP E-Canteen",
                         "latitude": 1.2907629,
                         "longitude": 103.78228426,
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z",
-                        "crowd_value": 0.1497255
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z",
+                        "crowdValue": 0.1497255
                     }
                 ]
             }
@@ -78,70 +78,6 @@ FORMAT: 1A
                 "canteens": []
             }
 
-
-+ Response 502 (application/json)
-
-    + Body
-            {
-                "statusCode": 502,
-                "error": "Bad Gateway",
-                "message": "Problems connecting to database."
-            }
-
-+ Response 502 (application/json)
-
-    + Body
-            {
-                "statusCode": 502,
-                "error": "Bad Gateway",
-                "message": "Unknown Sequelize error."
-            }
-
-## Stall Collection [/canteens/{id}/stalls]
-
-### (ALMOST DONE) Get all Stalls belonging to a Canteen [GET]
-
-+ Request JSON
-
-    + Headers
-
-            Authorization: Bearer <jwt>
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "stalls": [
-                    {
-                        "id": 1,
-                        "name": "Dickson's North Indian Halal Food",
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z",
-                        "canteen_id": 1,
-                        "average_rating": 2.75
-                        "image": {
-                            "id": 1,
-                            "url": "/images/image.jpeg",
-                            "mimetype": "image/jpeg",
-                            "liked_users": [3, 4, 45, 47, 52],
-                            "user_id": 5,
-                            "stall_id": 1,
-                            "created_at": "2017-08-23T16:00:00.000Z",
-                            "updated_at": "2017-08-23T16:00:00.000Z"
-                        }
-                    }
-                ]
-            }
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "stalls": []
-            }
 
 + Response 502 (application/json)
 
@@ -183,19 +119,19 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "Dickson's North Indian Halal Food",
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z",
-                        "canteen_id": 1,
-                        "average_rating": 2.75
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z",
+                        "canteenId": 1,
+                        "averageRating": 2.75
                         "image": {
                             "id": 1,
                             "url": "/images/image.jpeg",
                             "mimetype": "image/jpeg",
-                            "liked_users": [3, 4, 45, 47, 52],
-                            "user_id": 5,
-                            "stall_id": 1,
-                            "created_at": "2017-08-23T16:00:00.000Z",
-                            "updated_at": "2017-08-23T16:00:00.000Z"
+                            "likedUsers": [3, 4, 45, 47, 52],
+                            "userId": 5,
+                            "stallId": 1,
+                            "createdAt": "2017-08-23T16:00:00.000Z",
+                            "updatedAt": "2017-08-23T16:00:00.000Z"
                         }
                     }
                 ]
@@ -246,10 +182,10 @@ FORMAT: 1A
                 "stall": {
                     "id": 1,
                     "name": "Dickson's North Indian Halal Food",
-                    "created_at": "2017-08-23T16:00:00.000Z",
-                    "updated_at": "2017-08-23T16:00:00.000Z",
-                    "canteen_id": 1,
-                    "average_rating": 2.75
+                    "createdAt": "2017-08-23T16:00:00.000Z",
+                    "updatedAt": "2017-08-23T16:00:00.000Z",
+                    "canteenId": 1,
+                    "averageRating": 2.75
                 }
             }
 
@@ -300,10 +236,10 @@ FORMAT: 1A
                     {
                         "id": 2,
                         "value": 2,
-                        "user_id": "8775234563",
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z",
-                        "stall_id": 1
+                        "userId": "8775234563",
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z",
+                        "stallId": 1
                     }
                 ]
             }
@@ -372,11 +308,11 @@ FORMAT: 1A
                         "id": 1,
                         "url": "/images/image.jpeg",
                         "mimetype": "image/jpeg",
-                        "liked_users": [3, 4, 45, 47, 52],
-                        "user_id": 5,
-                        "stall_id": 1,
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z"
+                        "likedUsers": [3, 4, 45, 47, 52],
+                        "userId": 5,
+                        "stallId": 1,
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z"
                     }
                 ]
             }
@@ -403,12 +339,12 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "attendees": ["336567", "787686", "39893", "579879"],
-                        "canteen_id": 1,
-                        "user_id": "23241",
-                        "start_time": "140920171300",
-                        "end_time": "140920171400",
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z",
+                        "canteenId": 1,
+                        "userId": "23241",
+                        "startTime": "140920171300",
+                        "endTime": "140920171400",
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z",
                     }
                 ]
             }
@@ -460,11 +396,11 @@ FORMAT: 1A
                         "id": 1,
                         "url": "/images/image.jpeg",
                         "mimetype": "image/jpeg",
-                        "liked_users": [3, 4, 45, 47, 52],
-                        "user_id": 5,
-                        "stall_id": 1,
-                        "created_at": "2017-08-23T16:00:00.000Z",
-                        "updated_at": "2017-08-23T16:00:00.000Z"
+                        "likedUsers": [3, 4, 45, 47, 52],
+                        "userId": 5,
+                        "stallId": 1,
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z"
                     }
                 ]
             }
@@ -526,9 +462,9 @@ FORMAT: 1A
 
             {
                 "appointment": {
-                    "canteen_id": 3,
-                    "start_time": "2017-08-22 16:00:00+00"",
-                    "end_time": "2017-08-22 18:00:00+00""
+                    "canteenId": 3,
+                    "startTime": "2017-08-22 16:00:00+00"",
+                    "endTime": "2017-08-22 18:00:00+00""
                 }
             }
 
@@ -538,12 +474,13 @@ FORMAT: 1A
                 "appointment": {
                     "attendees": [],
                     "id": 4,
-                    "user_id": "1524106284336095",
-                    "start_time": "2017-08-22T16:00:00.000Z",
-                    "end_time": "2017-08-22T18:00:00.000Z",
-                    "canteen_id": 3,
-                    "updated_at": "2017-08-26T14:53:36.864Z",
-                    "created_at": "2017-08-26T14:53:36.864Z"
+                    "userId": "1524106284336095",
+                    "startTime": "2017-08-22T16:00:00.000Z",
+                    "endTime": "2017-08-22T18:00:00.000Z",
+                    "canteenId": 3,
+                    "updatedAt": "2017-08-26T14:53:36.864Z",
+                    "createdAt": "2017-08-26T14:53:36.864Z",
+                    "deletedAt": null
                 }
             }
 
@@ -585,58 +522,40 @@ FORMAT: 1A
 
 ## Appointment [/appointments/{id}]
 
-### (DONE) Join an Appointment [PATCH]
+### (DONE) Update an Appointment [PATCH]
 
 + Request JSON
 
     + Headers
 
             Authorization: Bearer <jwt>
+            Content-Type: application/json
             Accept: application/json
-
-+ Response 200 (application/json)
 
     + Body
 
             {
                 "appointment": {
-                    "attendees": ["43255343"],
-                    "id": 4,
-                    "user_id": "1524106284336095",
-                    "start_time": "2017-08-22T16:00:00.000Z",
-                    "end_time": "2017-08-22T18:00:00.000Z",
-                    "canteen_id": 3,
-                    "updated_at": "2017-08-26T14:53:36.864Z",
-                    "created_at": "2017-08-26T14:53:36.864Z"
+                    "canteenId": 7,
+                    "startTime": "2017-08-22 16:00:00+00"",
+                    "endTime": "2017-08-22 18:00:00+00""
                 }
             }
 
++ Response 201 (application/json)
 
-+ Response 404 (application/json)
-
-    + Body
             {
-                "statusCode": 404,
-                "error": "Not Found",
-                "message": "Record not found."
-            }
-
-+ Response 403 (application/json)
-
-    + Body
-            {
-                "statusCode": 403,
-                "error": "Forbidden",
-                "message": "Host cannot join his/her own appointment."
-            }
-
-+ Response 403 (application/json)
-
-    + Body
-            {
-                "statusCode": 403,
-                "error": "Forbidden",
-                "message": "User has already joined appointment."
+                "appointment": {
+                    "attendees": [],
+                    "id": 4,
+                    "userId": "1524106284336095",
+                    "startTime": "2017-08-22T16:00:00.000Z",
+                    "endTime": "2017-08-22T18:00:00.000Z",
+                    "canteenId": 7,
+                    "updatedAt": "2017-08-26T14:53:36.864Z",
+                    "createdAt": "2017-08-26T14:53:36.864Z",
+                    "deletedAt": null
+                }
             }
 
 + Response 502 (application/json)
@@ -720,4 +639,172 @@ FORMAT: 1A
                 "statusCode": 400,
                 "error": "Bad Request",
                 "message": "Sequelize validation failed."
+            }
+
+## Join an Appointment [/appointments/{id}/join]
+
+### (DONE) Join an Appointment [POST]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointment": {
+                    "attendees": ["4"],
+                    "id": 4,
+                    "userId": "1524106284336095",
+                    "startTime": "2017-08-22T16:00:00.000Z",
+                    "end_time": "2017-08-22T18:00:00.000Z",
+                    "canteenId": 3,
+                    "updatedAt": "2017-08-26T14:53:36.864Z",
+                    "createdAt": "2017-08-26T14:53:36.864Z",
+                    "deletedAt": null
+                }
+            }
+
+
++ Response 404 (application/json)
+
+    + Body
+            {
+                "statusCode": 404,
+                "error": "Not Found",
+                "message": "Record not found."
+            }
+
++ Response 403 (application/json)
+
+    + Body
+            {
+                "statusCode": 403,
+                "error": "Forbidden",
+                "message": "Host cannot join his/her own appointment."
+            }
+
++ Response 403 (application/json)
+
+    + Body
+            {
+                "statusCode": 403,
+                "error": "Forbidden",
+                "message": "User has already joined appointment."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Problems connecting to database."
+            }
+
++ Response 400 (application/json)
+
+    + Body
+            {
+                "statusCode": 400,
+                "error": "Bad Request",
+                "message": "Request breaks database constraints."
+            }
+
++ Response 400 (application/json)
+
+    + Body
+            {
+                "statusCode": 400,
+                "error": "Bad Request",
+                "message": "Sequelize validation failed."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Unknown Sequelize error."
+            }
+
+## Unjoin an Appointment [/appointments/{id}/unjoin]
+
+### (DONE) Unjoin an Appointment [POST]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointment": {
+                    "attendees": [],
+                    "id": 4,
+                    "userId": "1524106284336095",
+                    "startTime": "2017-08-22T16:00:00.000Z",
+                    "end_time": "2017-08-22T18:00:00.000Z",
+                    "canteenId": 3,
+                    "updatedAt": "2017-08-26T14:53:36.864Z",
+                    "createdAt": "2017-08-26T14:53:36.864Z",
+                    "deletedAt": null
+                }
+            }
+
+
++ Response 404 (application/json)
+
+    + Body
+            {
+                "statusCode": 404,
+                "error": "Not Found",
+                "message": "Record not found."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Problems connecting to database."
+            }
+
++ Response 400 (application/json)
+
+    + Body
+            {
+                "statusCode": 400,
+                "error": "Bad Request",
+                "message": "Request breaks database constraints."
+            }
+
++ Response 400 (application/json)
+
+    + Body
+            {
+                "statusCode": 400,
+                "error": "Bad Request",
+                "message": "Sequelize validation failed."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Unknown Sequelize error."
             }

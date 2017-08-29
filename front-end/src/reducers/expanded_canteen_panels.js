@@ -2,7 +2,7 @@ import { TOGGLE_CANTEEN_PANEL } from '../constants/ActionTypes';
 
 function reducer(state = null, action) {
   if (action.type !== TOGGLE_CANTEEN_PANEL) return state;
-  return action.canteenID;
+  return action.canteenId;
 }
 
 export default reducer;

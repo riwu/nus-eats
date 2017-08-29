@@ -18,7 +18,7 @@ async function getCrowdValue() {
 module.exports = (db) => {
   router.get('/', asyncMiddleware(async (req, res, next) => {
     const crowd = await getCrowdValue();
-    var canteens = await db['Canteen'].findAll({
+    var canteens = await db['canteen'].findAll({
       order: [
         ['name', 'ASC']
       ]
@@ -28,7 +28,7 @@ module.exports = (db) => {
       var canteen = c.toJSON();
       crowd.Cameras.forEach(camera => {
         if (camera._id == canteen.crowd_id) {
-          canteen.crowd_value = camera.crowdValue;
+          canteen.crowdValue = camera.crowdValue;
         }
       });
       delete canteen.crowd_id;
@@ -36,25 +36,6 @@ module.exports = (db) => {
     });
 
     res.json({canteens});
-  }));
-
-  router.get('/:canteenId/stalls', asyncMiddleware(async (req, res, next) => {
-    const stalls = await db['Stall'].findAll({
-      where: { canteen_id: req.params.canteenId },
-      order: [
-        ['name', 'ASC']
-      ],
-      attributes: {
-        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'average_rating' ]]
-      },
-      include: [{
-        model: db['Rating'],
-        as: 'ratings',
-        attributes: []
-      }],
-      group: ['Stall.id']
-    });
-    res.json({stalls});
   }));
 
   return router;

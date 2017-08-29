@@ -1,8 +1,9 @@
 import React from 'react';
+import MeetingsListContainer from './MeetingsListContainer';
 
 const Feed = () => (
   <div>
-    Feed
+    <MeetingsListContainer />
   </div>
 );
 

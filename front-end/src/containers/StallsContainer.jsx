@@ -6,12 +6,13 @@ const style = {
   display: 'flex',
 };
 
-const stallsContainer = ({ stalls, canteenID }) => (
+const StallsContainer = ({ stalls, canteenId }) => (
   <div style={style}>
-    {stalls.filter(stall => stall.canteen_id === canteenID)
-           .map(stall => (
-             <StallContainer stall={stall} key={stall.id} />
-           ))}
+    {Object.entries(stalls)
+      .filter(([stallId, stall]) => stall.canteenId === canteenId)
+      .map(([stallId, stall]) => (
+        <StallContainer stall={stall} key={stallId} />
+      ))}
   </div>
 );
 
@@ -21,4 +22,4 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-)(stallsContainer);
+)(StallsContainer);

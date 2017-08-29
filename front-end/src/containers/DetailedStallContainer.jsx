@@ -1,17 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import DetailedStall from '../components/DetailedStall';
-import { toggleStallView } from '../actions';
 import RatingContainer from './RatingContainer';
 
-const mapStateToProps = state => ({
-  stall: state.openedStall,
-  ratingComponent: state.openedStall
-                 ? <RatingContainer useAvgRating={false} />
-                 : null,
-});
+const mapStateToProps = (state, ownProps) => {
+  const openedStall = state.stalls[ownProps.stallId];
+  return {
+    stall: openedStall,
+    ratingComponent: openedStall
+                   ? <RatingContainer useAvgRating={false} stall={openedStall} />
+                   : null,
+  };
+};
 
 export default connect(
   mapStateToProps,
-  { toggleStallView },
+  { toggleStallView: () => push('/') },
 )(DetailedStall);

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Canteen = sequelize.define('Canteen', {
+  const Canteen = sequelize.define('canteen', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -12,17 +12,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false
     },
-    crowd_id: {
+    crowdId: {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
-    underscored: true
   });
 
   Canteen.assoicate = (models) => {
-    Canteen.hasMany(models.Stall, { as: 'stalls', onDelete: 'CASCADE' } );
-    Canteen.hasMany(models.Appointment, { as: 'appointments', onDelete: 'CASCADE' } );
+    Canteen.hasMany(models.stall, { as: 'stalls', onDelete: 'CASCADE' } );
+    Canteen.hasMany(models.appointment, { as: 'appointments', onDelete: 'CASCADE' } );
   };
 
   return Canteen;

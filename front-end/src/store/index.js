@@ -7,6 +7,7 @@ import history from './history';
 import { get, set } from './local_storage';
 import reducer from '../reducers';
 import api from '../api';
+import fb from '../fb';
 
 const middleware = [thunk, routerMiddleware(history)];
 const store = createStore(
@@ -16,6 +17,7 @@ const store = createStore(
 );
 
 api.setStore(store);
+fb.setStore(store);
 
 store.subscribe(() => {
   set(store.getState());
