@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfilePicture from './ProfilePicture';
 import JoinMeetingButton from '../containers/JoinMeetingButtonContainer';
+import UnjoinMeetingButton from '../containers/UnjoinMeetingButtonContainer';
 
 const Attendees = ({attendees}) => (
   <span style={{marginLeft: '10px', paddingLeft: '10px', borderLeft: '1px solid gray'}}>
@@ -10,7 +11,17 @@ const Attendees = ({attendees}) => (
   </span>
 );
 
-const MeetingsListItem = ({meeting}) => {
+const MeetingsListItem = ({meeting, currentUserId}) => {
+  const renderJoinButton = () => {
+    if (meeting.user_id === currentUserId) {
+      return undefined;
+    } else if (meeting.attendees.findIndex(({id}) => id === currentUserId) !== -1) {
+      return <UnjoinMeetingButton meetingId={meeting.id} />;
+    } else {
+      return <JoinMeetingButton meetingId={meeting.id} />;
+    }
+  };
+
   return (
     <div>
       <div>
@@ -22,7 +33,7 @@ const MeetingsListItem = ({meeting}) => {
         <Attendees attendees={meeting.attendees} />
       </div>
       <div>
-        <JoinMeetingButton meetingId={meeting.id} />
+        { renderJoinButton() }
       </div>
     </div>
   );

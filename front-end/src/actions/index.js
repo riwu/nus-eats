@@ -135,3 +135,12 @@ export const joinMeeting = (meetingId, userId) => (dispatch) => {
     userId,
   });
 };
+
+export const unjoinMeeting = (meetingId, userId) => (dispatch) => {
+  // TODO Make server call
+  dispatch({
+    type: types.UNJOIN_MEETING,
+    meetingId,
+    userId
+  });
+};

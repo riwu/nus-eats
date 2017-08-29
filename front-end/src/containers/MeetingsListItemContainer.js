@@ -58,14 +58,15 @@ class MeetingsListItemContainer extends Component {
       attendees,
     };
 
-    return <MeetingsListItem meeting={meeting} />;
+    return <MeetingsListItem meeting={meeting} currentUserId={this.props.currentUserId} />;
   }
 }
 
 const mapStateToProps = (state) => ({
   canteens: state.canteens,
   isFbReady: state.isFbReady,
-  facebookUsers: state.facebookUsers
+  facebookUsers: state.facebookUsers,
+  currentUserId: state.currentUser.id
 });
 
 const mapDispatchToProps = (dispatch) => ({
