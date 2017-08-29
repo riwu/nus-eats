@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.ARRAY(DataTypes.STRING),
           defaultValue: []
       }
+    }, {
+      paranoid: true
     });
 
     Appointment.associate = (models) => {
