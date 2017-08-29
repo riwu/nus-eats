@@ -86,9 +86,9 @@ export const toggleMeetingWindow = canteenID => () => ({
   canteenID,
 });
 
-export const toggleCanteenPanel = canteenID => ({
+export const toggleCanteenPanel = canteenId => ({
   type: types.TOGGLE_CANTEEN_PANEL,
-  canteenID,
+  canteenId,
 });
 
 export const changeMeetingDate = date => ({

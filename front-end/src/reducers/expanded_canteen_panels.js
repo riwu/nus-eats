@@ -4,10 +4,10 @@ function reducer(state = new Set(), action) {
   if (action.type !== TOGGLE_CANTEEN_PANEL) return state;
 
   const expanded = new Set(state);
-  if (expanded.has(action.canteenID)) {
-    expanded.delete(action.canteenID);
+  if (expanded.has(action.canteenId)) {
+    expanded.delete(action.canteenId);
   } else {
-    expanded.add(action.canteenID);
+    expanded.add(action.canteenId);
   }
   return expanded;
 }
