@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEqual from 'lodash.isequal';
 import { getAllCanteens, getFacebookUser } from '../actions';
 import MeetingsListItem from '../components/MeetingsListItem';
 
@@ -15,7 +16,10 @@ class MeetingsListItemContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.isFbReady && this.props.isFbReady) {
+    if (
+      (!prevProps.isFbReady && this.props.isFbReady) ||
+      (!isEqual(prevProps.meeting.attendees, this.props.meeting.attendees))
+    ) {
       this.fetchFacebookUsers();
     }
   }
