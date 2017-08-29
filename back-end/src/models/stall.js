@@ -1,16 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-  const Stall = sequelize.define('Stall', {
+  const Stall = sequelize.define('stall', {
     name: {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
-    underscored: true
   });
 
   Stall.associate = (models) => {
-    Stall.belongsTo(models.Canteen, { onDelete: 'CASCADE' } );
-    Stall.hasMany(models.Rating, { as: 'ratings', onDelete: 'CASCADE' })
+    Stall.belongsTo(models.canteen, { onDelete: 'CASCADE' } );
+    Stall.hasMany(models.rating, { onDelete: 'CASCADE' })
   };
 
   return Stall;

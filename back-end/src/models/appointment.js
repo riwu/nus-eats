@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-    const Appointment = sequelize.define('Appointment', {
-      user_id: {
+    const Appointment = sequelize.define('appointment', {
+      userId: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      start_time: {
+      startTime: {
         type: DataTypes.DATE,
         allowNull: false
       },
-      end_time: {
+      endTime: {
         type: DataTypes.DATE,
         allowNull: false
       },
@@ -16,13 +16,11 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.ARRAY(DataTypes.STRING),
           defaultValue: []
       }
-    }, {
-      underscored: true
     });
 
     Appointment.associate = (models) => {
-        Appointment.belongsTo(models.Canteen, { onDelete: 'CASCADE' } );
+        Appointment.belongsTo(models.canteen, { onDelete: 'CASCADE' } );
     }
-  
+
     return Appointment;
   }

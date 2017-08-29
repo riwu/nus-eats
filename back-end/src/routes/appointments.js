@@ -6,7 +6,7 @@ const Boom = require('boom');
 module.exports = (db) => {
 
   router.post('/', asyncMiddleware(async (req, res, next) => {
-    const appointment = await db['Appointment'].create({
+    const appointment = await db['appointment'].create({
       user_id: req.user.id,
       start_time: req.body.appointment.start_time,
       end_time: req.body.appointment.end_time,
@@ -16,7 +16,7 @@ module.exports = (db) => {
   }));
 
   router.patch('/:appointmentId', asyncMiddleware(async (req, res, next) => {
-    const appointment = await db['Appointment'].findById(req.params.appointmentId);
+    const appointment = await db['appointment'].findById(req.params.appointmentId);
 
     if (!appointment) {
       throw Boom.notFound('Record not found.');
@@ -38,7 +38,7 @@ module.exports = (db) => {
   }));
 
   router.delete('/:appointmentId', asyncMiddleware(async (req, res, next) => {
-    const result = await db['Appointment'].destroy({
+    const result = await db['appointment'].destroy({
       where: { id: req.params.appointmentId }
     });
     if (result == 0) {

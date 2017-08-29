@@ -32,13 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 injectJwtStrategy(passport);
 app.use(passport.initialize());
 
-// TODO: Add back authenticateJwt(passport)
-
 app.use('/authentication', authentication);
 app.use('/canteens', canteens);
 app.use('/stalls', stalls);
-app.use('/users', users);
-app.use('/appointments', appointments);
+app.use('/users', authenticateJwt(passport), users);
+app.use('/appointments', authenticateJwt(passport), appointments);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
