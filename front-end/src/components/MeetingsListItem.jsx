@@ -13,7 +13,7 @@ const Attendees = ({attendees}) => (
 
 const MeetingsListItem = ({meeting, currentUserId}) => {
   const renderJoinButton = () => {
-    if (meeting.user_id === currentUserId) {
+    if (meeting.userId === currentUserId) {
       return undefined;
     } else if (meeting.attendees.findIndex(({id}) => id === currentUserId) !== -1) {
       return <UnjoinMeetingButton meetingId={meeting.id} />;
