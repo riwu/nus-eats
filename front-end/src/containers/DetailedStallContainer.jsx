@@ -5,7 +5,7 @@ import DetailedStall from '../components/DetailedStall';
 import RatingContainer from './RatingContainer';
 
 const mapStateToProps = (state, ownProps) => {
-  const openedStall = state.stalls.find(stall => stall.id === Number(ownProps.stallID));
+  const openedStall = state.stalls[ownProps.stallID];
   return {
     stall: openedStall,
     ratingComponent: openedStall

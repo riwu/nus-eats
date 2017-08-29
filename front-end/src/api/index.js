@@ -48,7 +48,10 @@ const post = (path, payload, headers) => {
 export default {
   setStore: (s) => { store = s; },
   getAllCanteens: () => get('/canteens').then(({ canteens }) => canteens),
-  getAllStalls: () => get('/stalls').then(({ stalls }) => stalls),
+  getAllStalls: () => get('/stalls').then(({ stalls }) => stalls.reduce((dict, stall) => ({
+    ...dict,
+    [stall.id]: stall,
+  }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
   getAllMeetings: id => get(`/users/${id}/appointments`).then(({ appointments }) => appointments),
 };
