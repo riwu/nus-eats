@@ -23,8 +23,9 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
 };
 
 const mapStateToProps = state => ({
-  meetings: state.meeting.meetings.filter(meeting => meeting.isActive &&
-    meeting.canteenId === state.meeting.canteenId),
+  meetings: Object.values(state.meeting.meetings)
+    .filter(meeting => meeting.isActive &&
+                       meeting.canteenId === state.meeting.canteenId),
 });
 
 export default connect(
