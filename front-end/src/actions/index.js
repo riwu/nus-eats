@@ -75,15 +75,15 @@ export const logout = () => ({
   type: types.LOGOUT,
 });
 
-export const changeRating = (stallID, rating) => ({
+export const changeRating = (stallId, rating) => ({
   type: types.CHANGE_RATING,
-  stallID,
+  stallId,
   rating,
 });
 
-export const toggleMeetingWindow = canteenID => () => ({
+export const toggleMeetingWindow = canteenId => () => ({
   type: types.TOGGLE_MEETING_WINDOW,
-  canteenID,
+  canteenId,
 });
 
 export const toggleCanteenPanel = canteenId => ({

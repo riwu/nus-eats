@@ -13,7 +13,7 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
           key={meeting.id}
           date={meeting.date}
           time={meeting.time}
-          meetingID={meeting.id}
+          meetingId={meeting.id}
           cancelMeeting={cancelMeeting}
           updateMeeting={updateMeeting}
         />
@@ -24,7 +24,7 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
 
 const mapStateToProps = state => ({
   meetings: state.meeting.meetings.filter(meeting => meeting.isActive &&
-    meeting.canteenID === state.meeting.canteenID),
+    meeting.canteenId === state.meeting.canteenId),
 });
 
 export default connect(

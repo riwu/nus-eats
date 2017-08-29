@@ -11,7 +11,7 @@ import {
 } from '../constants/ActionTypes';
 
 const initialState = {
-  canteenID: null,
+  canteenId: null,
   modalEntered: false,
   meetings: [],
 };
@@ -29,7 +29,7 @@ function reducer(state = initialState, action) {
     case TOGGLE_MEETING_WINDOW:
       return {
         ...state,
-        canteenID: state.canteenID === null ? action.canteenID : null,
+        canteenId: state.canteenId === null ? action.canteenId : null,
       };
     case CHANGE_MEETING_DATE:
       return {
@@ -45,7 +45,7 @@ function reducer(state = initialState, action) {
       const meetings = [...state.meetings];
       meetings.push({
         id: meetings.length + 1,
-        canteenID: state.canteenID,
+        canteenId: state.canteenId,
         date: state.date,
         time: state.time,
         isActive: true,

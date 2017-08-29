@@ -7,7 +7,7 @@ import MeetingDatesComponent from './MeetingDatesContainer';
 
 const mapStateToProps = (state, ownProps) => ({
   canteen: ownProps.canteen,
-  isOpen: state.meeting.canteenID === ownProps.canteen.id,
+  isOpen: state.meeting.canteenId === ownProps.canteen.id,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
