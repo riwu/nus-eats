@@ -128,19 +128,39 @@ export const getFacebookUser = (userId) => (dispatch) => {
 };
 
 export const joinMeeting = (id, userId) => (dispatch) => {
-  // TODO Make server call
   dispatch({
     type: types.JOIN_MEETING,
     id,
     userId,
   });
+
+  api
+    .joinMeeting(id)
+    .catch((error) => {
+      console.log('Cannot join meeting', error);
+      dispatch({
+        type: types.UNJOIN_MEETING,
+        id,
+        userId,
+      });
+    });
 };
 
 export const unjoinMeeting = (id, userId) => (dispatch) => {
-  // TODO Make server call
   dispatch({
     type: types.UNJOIN_MEETING,
     id,
     userId
   });
+
+  api
+    .unjoinMeeting(id)
+    .catch((error) => {
+      console.log('Cannot unjoin meeting', error);
+      dispatch({
+        type: types.JOIN_MEETING,
+        id,
+        userId,
+      });
+    });
 };

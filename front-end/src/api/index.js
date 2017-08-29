@@ -60,4 +60,6 @@ export default {
     ...dict,
     [appointment.id]: appointment,
   }), {})),
+  joinMeeting: (id) => post(`/appointments/${id}/join`),
+  unjoinMeeting: (id) => post(`/appointments/${id}/unjoin`),
 };
