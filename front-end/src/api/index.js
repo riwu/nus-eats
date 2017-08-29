@@ -56,5 +56,8 @@ export default {
     [stall.id]: stall,
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
-  getMeetings: () => timeoutPromise(100).then(() => appointments),
+  getMeetings: () => timeoutPromise(100).then(() => appointments.reduce((dict, appointment) => ({
+    ...dict,
+    [appointment.id]: appointment
+  }), {})),
 };

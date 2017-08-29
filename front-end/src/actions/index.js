@@ -127,20 +127,20 @@ export const getFacebookUser = (userId) => (dispatch) => {
     });
 };
 
-export const joinMeeting = (meetingId, userId) => (dispatch) => {
+export const joinMeeting = (id, userId) => (dispatch) => {
   // TODO Make server call
   dispatch({
     type: types.JOIN_MEETING,
-    meetingId,
+    id,
     userId,
   });
 };
 
-export const unjoinMeeting = (meetingId, userId) => (dispatch) => {
+export const unjoinMeeting = (id, userId) => (dispatch) => {
   // TODO Make server call
   dispatch({
     type: types.UNJOIN_MEETING,
-    meetingId,
+    id,
     userId
   });
 };
