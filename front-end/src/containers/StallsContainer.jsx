@@ -4,14 +4,15 @@ import StallContainer from './StallContainer';
 
 const style = {
   display: 'flex',
+  flexWrap: 'wrap',
 };
 
-const StallsContainer = ({ stalls, canteenID }) => (
+const StallsContainer = ({ stalls, canteenId }) => (
   <div style={style}>
     {Object.entries(stalls)
-      .filter(([stallID, stall]) => stall.canteen_id === canteenID)
-      .map(([stallID, stall]) => (
-        <StallContainer stall={stall} key={stallID} />
+      .filter(([stallId, stall]) => stall.canteenId === canteenId)
+      .map(([stallId, stall]) => (
+        <StallContainer stall={stall} key={stallId} />
       ))}
   </div>
 );

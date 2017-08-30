@@ -14,9 +14,9 @@ const CanteensContainer = ({ canteens }) => {
         <CanteenPanelContainer
           header={<CanteenHeaderContainer canteen={canteen} />}
           key={canteen.id}
-          canteenID={canteen.id}
+          canteenId={canteen.id}
         >
-          <StallsContainer canteenID={canteen.id} />
+          <StallsContainer canteenId={canteen.id} />
         </CanteenPanelContainer>
       ))}
     </div>

@@ -75,20 +75,20 @@ export const logout = () => ({
   type: types.LOGOUT,
 });
 
-export const changeRating = (stallID, rating) => ({
+export const changeRating = (stallId, rating) => ({
   type: types.CHANGE_RATING,
-  stallID,
+  stallId,
   rating,
 });
 
-export const toggleMeetingWindow = canteenID => () => ({
+export const toggleMeetingWindow = canteenId => () => ({
   type: types.TOGGLE_MEETING_WINDOW,
-  canteenID,
+  canteenId,
 });
 
-export const toggleCanteenPanel = canteenID => ({
+export const toggleCanteenPanel = canteenId => ({
   type: types.TOGGLE_CANTEEN_PANEL,
-  canteenID,
+  canteenId,
 });
 
 export const changeMeetingDate = date => ({
@@ -127,20 +127,40 @@ export const getFacebookUser = (userId) => (dispatch) => {
     });
 };
 
-export const joinMeeting = (meetingId, userId) => (dispatch) => {
-  // TODO Make server call
+export const joinMeeting = (id, userId) => (dispatch) => {
   dispatch({
     type: types.JOIN_MEETING,
-    meetingId,
+    id,
     userId,
   });
+
+  api
+    .joinMeeting(id)
+    .catch((error) => {
+      console.log('Cannot join meeting', error);
+      dispatch({
+        type: types.UNJOIN_MEETING,
+        id,
+        userId,
+      });
+    });
 };
 
-export const unjoinMeeting = (meetingId, userId) => (dispatch) => {
-  // TODO Make server call
+export const unjoinMeeting = (id, userId) => (dispatch) => {
   dispatch({
     type: types.UNJOIN_MEETING,
-    meetingId,
+    id,
     userId
   });
+
+  api
+    .unjoinMeeting(id)
+    .catch((error) => {
+      console.log('Cannot unjoin meeting', error);
+      dispatch({
+        type: types.JOIN_MEETING,
+        id,
+        userId,
+      });
+    });
 };

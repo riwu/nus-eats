@@ -11,7 +11,7 @@ const MainPage = ({ match }) => (
     <FilterButtonContainer />
     <FilterPanelContainer />
     <CanteensContainer />
-    <DetailedStallContainer stallID={match.params.id} />
+    <DetailedStallContainer stallId={match.params.id} />
   </div>
 );
 

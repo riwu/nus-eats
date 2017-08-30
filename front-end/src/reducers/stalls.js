@@ -1,6 +1,6 @@
 import { RECEIVE_STALLS } from '../constants/ActionTypes';
 
-const initialState = [];
+const initialState = {};
 
 function reducer(state = initialState, action) {
   switch (action.type) {

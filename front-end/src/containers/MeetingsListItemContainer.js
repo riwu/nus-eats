@@ -27,7 +27,7 @@ class MeetingsListItemContainer extends Component {
   fetchFacebookUsers() {
     const { meeting } = this.props;
 
-    this.fetchFacebookUserIfNecessary(meeting.user_id);
+    this.fetchFacebookUserIfNecessary(meeting.userId);
     meeting.attendees.forEach((id) => {
       this.fetchFacebookUserIfNecessary(id);
     });
@@ -40,7 +40,7 @@ class MeetingsListItemContainer extends Component {
   }
 
   findCanteen() {
-    return this.props.canteens.find(({id}) => id === this.props.meeting.canteenID);
+    return this.props.canteens.find(({id}) => id === this.props.meeting.canteenId);
   }
 
   findFacebookUser(id) {
@@ -49,7 +49,7 @@ class MeetingsListItemContainer extends Component {
 
   render() {
     const canteen = this.findCanteen() || {};
-    const user = this.findFacebookUser(this.props.meeting.user_id) || {};
+    const user = this.findFacebookUser(this.props.meeting.userId) || {};
     const attendees = this.props.meeting.attendees.map((id) => this.findFacebookUser(id)).filter(x => !!x);
     const meeting = {
       ...this.props.meeting,

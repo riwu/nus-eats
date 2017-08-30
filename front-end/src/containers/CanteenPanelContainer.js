@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import CanteenPanel from '../components/CanteenPanel';
 
 const mapStateToProps = (state, ownProps) => ({
-  expanded: state.expandedCanteenPanels.has(ownProps.canteenID),
+  expanded: state.expandedCanteenPanel === ownProps.canteenId,
   header: ownProps.header,
   children: ownProps.children,
 });

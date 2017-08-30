@@ -6,4 +6,4 @@ const mapStateToProps = state => ({
   isFilterExpanded: state.isFilterExpanded,
 });
 
-export default connect(mapStateToProps, { toggleMuslimOnly })(FilterPanel);
+export default connect(mapStateToProps, { toggleHalalOnly: toggleMuslimOnly })(FilterPanel);

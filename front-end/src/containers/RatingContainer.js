@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     rating: ownProps.useAvgRating ? ownProps.rating : state.userRatings[stall.id],
     readonly: ownProps.useAvgRating,
-    stallID: stall ? stall.id : null,
+    stallId: stall ? stall.id : null,
   };
 };
 

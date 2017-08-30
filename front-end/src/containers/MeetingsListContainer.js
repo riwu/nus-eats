@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import MeetingsList from '../components/MeetingsList';
 
 const mapStateToProps = (state) => ({
-  meetings: state.meeting.meetings
+  meetings: Object.values(state.meeting.meetings)
 });
 
 const MeetingsListContainer = connect(
