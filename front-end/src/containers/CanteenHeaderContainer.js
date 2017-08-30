@@ -1,13 +1,16 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import CanteenHeader from '../components/CanteenHeader';
-import { toggleCanteenPanel } from '../actions';
 import MeetingComponent from './MeetingContainer';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   canteen: ownProps.canteen,
-  toggleCanteenPanel: bindActionCreators(toggleCanteenPanel, dispatch),
+  toggleCanteenPanel: () => dispatch(
+    replace(ownProps.selectedCanteenId === ownProps.canteen.id
+      ? '/'
+      : `/canteen/${ownProps.canteen.id}`),
+    ),
   MeetingComponent: <MeetingComponent canteen={ownProps.canteen} />,
 });
 

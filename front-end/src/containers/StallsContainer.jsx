@@ -12,7 +12,7 @@ const StallsContainer = ({ stalls, canteenId }) => (
     {Object.entries(stalls)
       .filter(([stallId, stall]) => stall.canteenId === canteenId)
       .map(([stallId, stall]) => (
-        <StallContainer stall={stall} key={stallId} />
+        <StallContainer stall={stall} key={stallId} canteenId={canteenId} />
       ))}
   </div>
 );

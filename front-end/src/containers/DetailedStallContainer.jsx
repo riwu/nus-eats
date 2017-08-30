@@ -14,7 +14,11 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  toggleStallView: () => dispatch(push(ownProps.canteenPath)),
+});
+
 export default connect(
   mapStateToProps,
-  { toggleStallView: () => push('/') },
+  mapDispatchToProps,
 )(DetailedStall);

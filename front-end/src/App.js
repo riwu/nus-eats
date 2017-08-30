@@ -22,8 +22,8 @@ function App() {
       <ConnectedRouter history={history}>
         <div>
           <Route exact path="/" component={MainPage} />
-          <Route path="/feed" component={Feed} />
-          <Route path="/stall/:id" component={MainPage} />
+          <Route path="feed" component={Feed} />
+          <Route path="/canteen/:canteenId" component={MainPage} />
           <FacebookSDK />
         </div>
       </ConnectedRouter>
