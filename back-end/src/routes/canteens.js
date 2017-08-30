@@ -3,7 +3,7 @@ const router = express.Router();
 const request = require('request-promise');
 const asyncMiddleware = require('../utilities/async');
 
-async function getCrowdValue() {
+let getCrowdValue = async () => {
   const options = {
     method: 'GET',
     uri: 'http://nusfoodie-camera.simple-url.com/api/crowd',

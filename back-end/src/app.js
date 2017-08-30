@@ -65,6 +65,7 @@ app.use((err, req, res, next) => {
     res.status(err.output.statusCode).json(err.output.payload);
   } else {
     console.log(err.message);
+    console.log(err.stack);
     const internal_server_error = Boom.badImplementation();
     res.status(internal_server_error.output.statusCode).json(internal_server_error.output.payload);
   }

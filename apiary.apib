@@ -319,9 +319,9 @@ FORMAT: 1A
 
 # Group Users
 
-## Appointment Collection [/users/{id}/appointments]
+## Appointments User Initiated [/users/appointments/initiated]
 
-### (DONE) Get all appointments of a User [GET]
+### (DONE) Get all appointments that User initiated [GET]
 
 + Request JSON
 
@@ -337,14 +337,236 @@ FORMAT: 1A
             {
                 "appointments": [
                     {
-                        "id": 1,
-                        "attendees": ["336567", "787686", "39893", "579879"],
-                        "canteenId": 1,
-                        "userId": "23241",
-                        "startTime": "140920171300",
-                        "endTime": "140920171400",
-                        "createdAt": "2017-08-23T16:00:00.000Z",
-                        "updatedAt": "2017-08-23T16:00:00.000Z",
+                        "id": 35,
+                        "userId": "1524106284336095",
+                        startTime": "2017-08-22T16:00:00.000Z",
+                        "endTime": "2017-08-22T16:00:00.000Z",
+                        "attendees": [
+                            "10155542011118954",
+                            "10211829688110309",
+                            "10211095965894685"
+                        ],
+                        "createdAt": "2017-08-30T07:37:36.629Z",
+                        "updatedAt": "2017-08-30T07:40:31.301Z",
+                        "deletedAt": null,
+                        "canteenId": 1
+                    }
+                ]
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": []
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Problems connecting to database."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Unknown Sequelize error."
+            }
+
+## Appointments User Joined [/users/appointments/joined]
+
+### (DONE) Get all appointments that User joined [GET]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": [
+                    {
+                        "id": 38,
+                        "userId": "10211095965894685",
+                        startTime": "2017-08-22T16:00:00.000Z",
+                        "endTime": "2017-08-22T16:00:00.000Z",
+                        "attendees": [
+                            "1524106284336095"
+                        ],
+                        "createdAt": "2017-08-30T07:37:36.629Z",
+                        "updatedAt": "2017-08-30T07:40:31.301Z",
+                        "deletedAt": null,
+                        "canteenId": 1
+                    }
+                ]
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": []
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Problems connecting to database."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Unknown Sequelize error."
+            }
+
+## Friends of User [/users/friends]
+
+### (DONE) Get all friends of User [GET]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "friends": [
+                    {
+                        "name": "Riwu McAuthor",
+                        "id": "1024324525118954"
+                    },
+                    {
+                        "name": "Lim Jovin",
+                        "id": "102342558110309"
+                    },
+                    {
+                        "name": "Yihang Smith",
+                        "id": "13445566757586"
+                    }
+                ]
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "friends": []
+            }
+
+## Appointments Friends of User Initiated [/users/friends/appointments/initiated]
+
+### (DONE) Get all appointments that User's Friends initiated [GET]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": [
+                    {
+                        "id": 36,
+                        "userId": "10155542011118954",
+                        "startTime": "2017-09-22T16:00:00.000Z",
+                        "endTime": "2017-09-22T16:00:00.000Z",
+                        "attendees": [],
+                        "createdAt": "2017-08-30T07:37:48.925Z",
+                        "updatedAt": "2017-08-30T07:37:48.925Z",
+                        "deletedAt": null,
+                        "canteenId": 2
+                    }
+                ]
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": []
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Problems connecting to database."
+            }
+
++ Response 502 (application/json)
+
+    + Body
+            {
+                "statusCode": 502,
+                "error": "Bad Gateway",
+                "message": "Unknown Sequelize error."
+            }
+
+## Appointments Friends of User Joined [/users/friends/appointments/joined]
+
+### (DONE) Get all appointments that User's Friends joined [GET]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "appointments": [
+                    {
+                        "id": 35,
+                        "userId": "1524106284336095",
+                        "startTime": "2017-08-22T16:00:00.000Z",
+                        "endTime": "2017-08-22T16:00:00.000Z",
+                        "attendees": [
+                            "10155542011118954",
+                            "10211829688110309",
+                            "10211095965894685"
+                        ],
+                        "createdAt": "2017-08-30T07:37:36.629Z",
+                        "updatedAt": "2017-08-30T07:40:31.301Z",
+                        "deletedAt": null,
+                        "canteenId": 1
                     }
                 ]
             }
