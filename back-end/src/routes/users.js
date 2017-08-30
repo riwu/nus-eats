@@ -49,5 +49,33 @@ module.exports = (db) => {
       res.json({appointments});
     }));
 
+    router.get('/friends/appointments/initiated/combined', asyncMiddleware(async (req, res, next) => {
+      const friends = await getFacebookData('me/friends', req.user.facebookAccessToken);
+      const friendsId = friends.reduce((list, friend) => {
+        list.push(friend.id);
+        return list;
+      }, []);
+      const combinedId = friendsId.concat([req.user.id]);
+
+      const appointments = await db['appointment'].findAll({
+        where: { userId: { $in: combinedId }}
+      });
+      res.json({appointments});
+    }));
+
+    router.get('/friends/appointments/joined/combined', asyncMiddleware(async (req, res, next) => {
+      const friends = await getFacebookData('me/friends', req.user.facebookAccessToken);
+      const friendsId = friends.reduce((list, friend) => {
+        list.push(friend.id);
+        return list;
+      }, []);
+      const combinedId = friendsId.concat([req.user.id]);
+
+      const appointments = await db['appointment'].findAll({
+        where: { attendees: { $overlap: combinedId }}
+      });
+      res.json({appointments});
+    }));
+
     return router;
 };
