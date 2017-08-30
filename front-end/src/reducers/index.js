@@ -10,6 +10,7 @@ import currentUser from './currentUser';
 import userRatings from './userRatings';
 import meeting from './meeting';
 import facebookUsers from './facebookUsers';
+import isLoggingIn from './isLoggingIn';
 
 const reducer = combineReducers({
   canteens,
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   meeting,
   routing: routerReducer,
   facebookUsers,
+  isLoggingIn,
 });
 
 export default reducer;

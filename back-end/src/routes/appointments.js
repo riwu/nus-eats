@@ -34,6 +34,7 @@ module.exports = (db) => {
     });
 
     appointment.attendees.push(req.user.id);
+
     await appointment.update({attendees: appointment.attendees});
     res.json({appointment});
   }));
@@ -57,6 +58,10 @@ module.exports = (db) => {
       throw Boom.notFound('Record not found.');
     }
 
+    if (appointment.userId != req.user.id) {
+      throw Boom.unauthorized('Only appointment creator can edit the appointment.');
+    }
+
     await appointment.update({
       startTime: req.body.appointment.startTime,
       endTime: req.body.appointment.endTime,
@@ -66,9 +71,13 @@ module.exports = (db) => {
   }));
 
   router.delete('/:appointmentId', asyncMiddleware(async (req, res, next) => {
-    const result = await db['appointment'].destroy({
-      where: { id: req.params.appointmentId }
-    });
+    const appointment = await db['appointment'].findById(req.params.appointmentId);
+
+    if (appointment.userId != req.user.id) {
+      throw Boom.unauthorized('Only appointment creator can delete the appointment.');
+    }
+
+    const result = appointment.destroy();
     if (result == 0) {
       throw Boom.notFound('Record not found.');
     } else {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const fb = require('../services/facebook');
+const { fb } = require('../services/facebook');
 const jwt = require('jsonwebtoken');
 const Boom = require('boom');
 

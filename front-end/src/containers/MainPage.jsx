@@ -4,11 +4,11 @@ import CanteensContainer from './CanteensContainer';
 import DetailedStallContainer from './DetailedStallContainer';
 import FilterButtonContainer from './FilterButtonContainer';
 import FilterPanelContainer from './FilterPanelContainer';
-import NavBar from './NavBar';
+import NavigationBar from './NavigationBarContainer';
 
 const MainPage = ({ match }) => (
   <div>
-    <NavBar />
+    <NavigationBar />
     <FilterButtonContainer />
     <FilterPanelContainer />
     <CanteensContainer canteenId={match.params.canteenId} />
