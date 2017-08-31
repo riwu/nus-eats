@@ -13,12 +13,6 @@ const Sequelize = require('sequelize');
 
 const { injectJwtStrategy, authenticateJwt } = require('./security/jwt');
 
-const authentication = require('./routes/authentication');
-const canteens = require('./routes/canteens')(db);
-const stalls = require('./routes/stalls')(db);
-const users = require('./routes/users')(db);
-const appointments = require('./routes/appointments')(db);
-
 const app = express();
 
 app.use(cors());
@@ -31,6 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Setup security stuff
 injectJwtStrategy(passport);
 app.use(passport.initialize());
+
+const authentication = require('./routes/authentication');
+const canteens = require('./routes/canteens')(db);
+const stalls = require('./routes/stalls')(db, authenticateJwt(passport));
+const users = require('./routes/users')(db);
+const appointments = require('./routes/appointments')(db);
 
 app.use('/authentication', authentication);
 app.use('/canteens', canteens);
