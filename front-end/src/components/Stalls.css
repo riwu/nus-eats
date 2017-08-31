@@ -1,0 +1,60 @@
+/*
+ * We can't really use flex box here. To do that, we need justify-content: center. Doing that will cause the
+ * entire last row (even if it is incomplete) to be centered. Not using justify-content: center, however,
+ * will result in extra empty space on the right side.
+ *
+ * To simulate flex box, set the children to be inline-block and let them wrap. However, we also need to
+ * set the explicit width of the container for each breakpoint.
+ *
+ * To do that:
+ *
+ * 1. Determine the maximum number of columns that we want to show. In this case, 5. Calculate the total
+ *    amount of space (width) the children are going to take (including all the margins). In this case, each
+ *    child is 200px and there is a 20px margin between each other and the parent. The total width is then
+ *    220N + 20.
+ * 2. Calculate the minimum width that the screen should have to show N columns. This is usually the width of
+ *    the container + the extra paddings and margins added by the parents. In this case, 130px.
+ * 3. Create a media query using min screen width being the value in (2), set the width to value in (1).
+ * 4. Decrement N and repeat until N = 1.
+ *
+ */
+.Stalls {
+  margin: 0 auto;
+  width: 240px;
+  padding-left: 0;
+  font-size: 0;
+}
+
+@media (min-width: 590px) {
+  .Stalls {
+    width: 460px;
+  }
+}
+
+@media (min-width: 810px) {
+  .Stalls {
+    width: 680px;
+  }
+}
+
+@media (min-width: 1030px) {
+  .Stalls {
+    width: 900px;
+  }
+}
+
+@media (min-width: 1250px) {
+  .Stalls {
+    width: 1120px;
+  }
+}
+
+@media (min-width: 1470px) {
+  .Stalls {
+    width: 1340px;
+  }
+}
+
+.Stalls .Stall {
+  display: inline-block;
+}
