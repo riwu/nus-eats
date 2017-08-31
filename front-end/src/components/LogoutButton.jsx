@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const LogoutButton = ({onClick}) => (
-  <Button onClick={onClick}>Logout</Button>
+const LogoutButton = (props) => (
+  <Button {...props}>Logout</Button>
 );
 
 export default LogoutButton;

@@ -1,6 +1,3 @@
-import { appointments } from './appointments.json';
-import timeoutPromise from '../util/timeout_promise';
-
 let store;
 
 const makeHeaders = (headers = {}) => {
@@ -56,10 +53,12 @@ export default {
     [stall.id]: stall,
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
-  getMeetings: () => timeoutPromise(100).then(() => appointments.reduce((dict, appointment) => ({
-    ...dict,
-    [appointment.id]: appointment,
-  }), {})),
+  getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({appointments}) => {
+    return appointments.reduce((dict, appointment) => ({
+      ...dict,
+      [appointment.id]: appointment,
+    }), {});
+  }),
   joinMeeting: (id) => post(`/appointments/${id}/join`),
   unjoinMeeting: (id) => post(`/appointments/${id}/unjoin`),
 };

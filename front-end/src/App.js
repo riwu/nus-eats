@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import history from './store/history';
 
-import { getAllCanteens, getAllStalls, getMeetings } from './actions';
+import { getAllCanteens, getAllStalls } from './actions';
 import store from './store';
 
 import FacebookSDK from './containers/FacebookSDKContainer';
@@ -14,7 +14,6 @@ import Feed from './containers/Feed';
 
 store.dispatch(getAllCanteens());
 store.dispatch(getAllStalls());
-store.dispatch(getMeetings());
 
 function App() {
   return (
@@ -22,8 +21,8 @@ function App() {
       <ConnectedRouter history={history}>
         <div>
           <Route exact path="/" component={MainPage} />
-          <Route path="/feed" component={Feed} />
-          <Route path="/stall/:id" component={MainPage} />
+          <Route path="feed" component={Feed} />
+          <Route path="/canteen/:canteenId" component={MainPage} />
           <FacebookSDK />
         </div>
       </ConnectedRouter>

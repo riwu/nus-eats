@@ -1,0 +1,63 @@
+.NavigationBar {
+  width: 100%;
+  color: #fff;
+  margin: 17px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NavigationBar .profile-picture {
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+  margin-right: 13px;
+}
+
+.NavigationBar .name-container {
+  cursor: pointer;
+  user-select: none;
+}
+
+.NavigationBar .caret {
+  margin-left: 6px;
+}
+
+.NavigationBar .hamburger-container {
+  margin-left: 24px;
+  padding: 5px;
+}
+
+.NavigationBar .hamburger {
+  position: relative;
+  top: 3px;
+}
+
+.NavigationBar .btn-login,
+.NavigationBar .btn-login:hover,
+.NavigationBar .btn-login:active,
+.NavigationBar .btn-login:hover:active,
+.NavigationBar .btn-login:focus {
+  background-color: #fff;
+}
+
+.user-popover {
+  text-align: center;
+}
+
+.btn-shadow {
+  /* TODO Might make sense to override the .btn class with these */
+  box-shadow: 0 12px 22px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 3px;
+  border: 0;
+}
+
+.user-popover .btn-logout,
+.user-popover .btn-logout:hover,
+.user-popover .btn-logout:active,
+.user-popover .btn-logout:hover:active,
+.user-popover .btn-logout:focus {
+  margin-top: 7px;
+  background-color: #358ed7;
+  color: white;
+}

@@ -47,6 +47,10 @@ export const setFbReady = () => ({
 });
 
 export const login = () => dispatch => new Promise((resolve, reject) => {
+  dispatch({
+    type: types.BEGIN_LOGIN
+  });
+
   window.FB.login((response) => {
     if (response.status === 'connected') {
       const accessToken = window.FB.getAccessToken();
@@ -62,10 +66,19 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
             user,
             type: types.RECEIVE_CURRENT_USER,
           });
-          getMeetings(dispatch, user);
+
+          dispatch({
+            type: types.DONE_LOGIN
+          });
+
+          resolve();
         });
       });
     } else {
+      dispatch({
+        type: types.DONE_LOGIN
+      });
+
       reject();
     }
   }, { scope: 'public_profile,user_friends,email' });

@@ -1,26 +1,10 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import StallContainer from './StallContainer';
+import Stalls from '../components/Stalls';
 
-const style = {
-  display: 'flex',
-  flexWrap: 'wrap',
-};
-
-const StallsContainer = ({ stalls, canteenId }) => (
-  <div style={style}>
-    {Object.entries(stalls)
-      .filter(([stallId, stall]) => stall.canteenId === canteenId)
-      .map(([stallId, stall]) => (
-        <StallContainer stall={stall} key={stallId} />
-      ))}
-  </div>
-);
-
-const mapStateToProps = state => ({
-  stalls: state.stalls,
+const mapStateToProps = (state, {canteenId}) => ({
+  stalls: Object.values(state.stalls).filter((stall) => stall.canteenId === canteenId)
 });
 
 export default connect(
     mapStateToProps,
-)(StallsContainer);
+)(Stalls);

@@ -9,8 +9,8 @@ import accessTokens from './accessTokens';
 import currentUser from './currentUser';
 import userRatings from './userRatings';
 import meeting from './meeting';
-import expandedCanteenPanel from './expandedCanteenPanel';
 import facebookUsers from './facebookUsers';
+import isLoggingIn from './isLoggingIn';
 
 const reducer = combineReducers({
   canteens,
@@ -22,9 +22,9 @@ const reducer = combineReducers({
   currentUser,
   userRatings,
   meeting,
-  expandedCanteenPanel,
   routing: routerReducer,
   facebookUsers,
+  isLoggingIn,
 });
 
 export default reducer;
