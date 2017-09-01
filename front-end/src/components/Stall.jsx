@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
 import './Stall.css';
 
 const Stall = ({ stall, toggleStallView, ratingComponent }) => (
