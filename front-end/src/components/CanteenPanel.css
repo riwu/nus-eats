@@ -1,7 +1,12 @@
 .CanteenPanel {
-  cursor: pointer;
   background-color: transparent;
   border-color: transparent;
+}
+
+.CanteenPanel .panel-heading {
+  background-color: inherit;
+  border: none;
+  padding: 0;
 }
 
 .CanteenPanel .panel-collapse {

@@ -8,7 +8,6 @@ const CanteenPanel = ({ header, children, expanded }) => (
     collapsible
     expanded={expanded}
     header={header}
-    bsStyle="info"
   >
     {children}
   </Panel>

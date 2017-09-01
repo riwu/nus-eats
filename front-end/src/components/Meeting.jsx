@@ -4,8 +4,7 @@ import { Button, Glyphicon, Modal } from 'react-bootstrap';
 const Meeting = ({ toggleMeetingWindow, canteen, isOpen, DatePickerComponent, createMeeting, MeetingDatesComponent }) => (
   <div>
     <Button onClick={toggleMeetingWindow}>
-      <Glyphicon glyph="plus" />
-      Meeting
+      + Meeting
     </Button>
     <Modal
       show={isOpen}
