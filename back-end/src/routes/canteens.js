@@ -27,11 +27,11 @@ module.exports = (db) => {
     canteens.map( c => {
       var canteen = c.toJSON();
       crowd.Cameras.forEach(camera => {
-        if (camera._id == canteen.crowd_id) {
+        if (camera._id == canteen.crowdId) {
           canteen.crowdValue = camera.crowdValue;
         }
       });
-      delete canteen.crowd_id;
+      delete canteen.crowdId;
       return canteen;
     });
 
