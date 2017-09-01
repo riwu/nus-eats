@@ -1,0 +1,7 @@
+.rating-star.star-empty {
+  color: gray;
+}
+
+.rating-star.star-full {
+  color: gold;
+}
