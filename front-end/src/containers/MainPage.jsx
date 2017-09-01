@@ -14,7 +14,12 @@ const MainPage = ({ match }) => (
     <CanteensContainer selectedCanteenId={match.params.canteenId} />
     <Route
       path={`${match.url}/stall/:stallId`}
-      component={DetailedStallContainer}
+      render={props => (
+        <DetailedStallContainer
+          canteenPath={match.url}
+          stallId={props.match.params.stallId}
+        />
+      )}
     />
   </div>
 );
