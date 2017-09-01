@@ -117,12 +117,15 @@ export const createMeeting = dispatch => (meeting) => {
   });
 };
 
-export const cancelMeeting = id => ({
-  type: types.CANCEL_MEETING,
-  id,
-});
+export const cancelMeeting = dispatch => (id) => {
+  api.cancelMeeting(id);
+  dispatch({
+    type: types.CANCEL_MEETING,
+    id,
+  });
+};
 
-export const updateMeeting = meeting => ({
+export const updateMeeting = dispatch => meeting => dispatch({
   type: types.UPDATE_MEETING,
   ...meeting,
 });

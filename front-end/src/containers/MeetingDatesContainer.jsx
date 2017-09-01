@@ -28,7 +28,12 @@ const mapStateToProps = state => ({
                                meeting.canteenId === state.meeting.canteenId),
 });
 
+const mapDispatchToProps = dispatch => ({
+  cancelMeeting: cancelMeeting(dispatch),
+  updateMeeting: updateMeeting(dispatch),
+});
+
 export default connect(
     mapStateToProps,
-    { cancelMeeting, updateMeeting },
+    mapDispatchToProps,
 )(MeetingDatesContainer);

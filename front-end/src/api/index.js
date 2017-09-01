@@ -67,6 +67,7 @@ export default {
       },
     });
   },
+  cancelMeeting: id => post(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
 };
