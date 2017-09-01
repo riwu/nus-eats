@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
@@ -105,15 +106,18 @@ export const toggleCanteenPanel = canteenId => ({
 });
 
 export const createMeeting = dispatch => (meeting) => {
+  const tempId = moment().valueOf();
   api.createMeeting(meeting).then((result) => {
     dispatch({
       type: types.SET_MEETING_ID,
       id: result.appointment.id,
+      tempId,
     });
   });
   dispatch({
     type: types.CREATE_MEETING,
     ...meeting,
+    tempId,
   });
 };
 

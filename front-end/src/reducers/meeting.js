@@ -13,8 +13,6 @@ import {
 
 import getMergedDate from '../util/getMergedDate';
 
-const NEW_MEETING_TEMP_ID = ''; // new meeting with no id set yet
-
 const setCanteenId = (state = null, action) => {
   if (action.type !== TOGGLE_MEETING_WINDOW) return state;
   return state === null ? action.canteenId : null;
@@ -27,7 +25,7 @@ const setMeetings = (state = {}, action) => {
     case CREATE_MEETING: {
       return {
         ...state,
-        [NEW_MEETING_TEMP_ID]: {
+        [action.tempId]: {
           canteenId: action.canteenId,
           startTime: action.startTime,
           endTime: action.endTime,
@@ -38,8 +36,9 @@ const setMeetings = (state = {}, action) => {
     }
     case SET_MEETING_ID: {
       const meetings = { ...state };
-      meetings[action.id] = meetings[NEW_MEETING_TEMP_ID];
-      delete meetings[NEW_MEETING_TEMP_ID];
+      meetings[action.id] = meetings[action.tempId];
+      meetings[action.id].isIdSet = true;
+      delete meetings[action.tempId];
       return meetings;
     }
     case CANCEL_MEETING: {

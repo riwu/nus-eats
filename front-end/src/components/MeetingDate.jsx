@@ -8,22 +8,22 @@ import Config from '../constants/Config';
 
 const dateFormat = 'D MMM YY';
 
-const MeetingDate = ({ startTime, endTime, cancelMeeting, updateMeeting, meetingId }) => (
+const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
   <div>
     <DayPickerInput
-      value={startTime.format(dateFormat)}
+      value={meeting.startTime.format(dateFormat)}
       format={dateFormat}
       onDayChange={newDate => updateMeeting({ id: meetingId, newDate })}
     />
     <TimePicker
       showSecond={false}
       use12Hours
-      defaultValue={startTime}
+      defaultValue={meeting.startTime}
       disabledMinutes={() => Config.MINUTES_TO_HIDE}
       hideDisabledOptions
       onChange={newTime => updateMeeting({ id: meetingId, newTime })}
     />
-    <Button onClick={() => cancelMeeting(meetingId)}>Cancel</Button>
+    <Button disabled={!meeting.isIdSet} onClick={() => cancelMeeting(meetingId)}>Cancel</Button>
   </div>
 );
 
