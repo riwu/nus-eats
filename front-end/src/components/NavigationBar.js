@@ -21,11 +21,15 @@ const NavigationBar = ({ currentUser, onLogin, onLogout }) => {
 
     content = (
       <div className="content">
-        <Image className="profile-picture" src={`https://graph.facebook.com/${currentUser.id}/picture`} />
         <OverlayTrigger trigger="click" placement="bottom" overlay={ popover }>
-          <span className="name-container">
-            { currentUser.name }
-            <span className="caret" />
+          <span className="popover-trigger">
+            <Image className="profile-picture" src={`https://graph.facebook.com/${currentUser.id}/picture`} />
+            <span className="name-container">
+              <span className="hidden-xs">
+                { currentUser.name }
+              </span>
+              <span className="caret" />
+            </span>
           </span>
         </OverlayTrigger>
         <span className="hamburger-container">
