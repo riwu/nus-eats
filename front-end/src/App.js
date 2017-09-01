@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { ConnectedRouter } from 'react-router-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import history from './store/history';
 
 import { getAllCanteens, getAllStalls } from './actions';
@@ -20,9 +20,11 @@ function App() {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <div>
-          <Route exact path="/" component={MainPage} />
-          <Route path="feed" component={Feed} />
-          <Route path="/canteen/:canteenId" component={MainPage} />
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+            <Route path="feed" component={Feed} />
+            <Route path="/canteen/:canteenId" component={MainPage} />
+          </Switch>
           <FacebookSDK />
         </div>
       </ConnectedRouter>
