@@ -6,16 +6,16 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Config from '../constants/Config';
 
-const MeetingDate = ({ date, time, cancelMeeting, updateMeeting, meetingId }) => (
+const MeetingDate = ({ startTime, endTime, cancelMeeting, updateMeeting, meetingId }) => (
   <div>
     <DayPickerInput
-      value={date.format('DD/MM/YYYY')}
+      value={startTime.format('DD/MM/YYYY')}
       onDayChange={newDate => updateMeeting({ id: meetingId, newDate })}
     />
     <TimePicker
       showSecond={false}
       use12Hours
-      defaultValue={time}
+      defaultValue={startTime}
       disabledMinutes={() => Config.MINUTES_TO_HIDE}
       hideDisabledOptions
       onChange={newTime => updateMeeting({ id: meetingId, newTime })}

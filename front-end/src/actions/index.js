@@ -24,7 +24,7 @@ export const getMeetings = () => (dispatch) => {
   api.getMeetings().then((meetings) => {
     dispatch({
       type: types.RECEIVE_MEETINGS,
-      meetings
+      meetings,
     });
   });
 };
@@ -48,7 +48,7 @@ export const setFbReady = () => ({
 
 export const login = () => dispatch => new Promise((resolve, reject) => {
   dispatch({
-    type: types.BEGIN_LOGIN
+    type: types.BEGIN_LOGIN,
   });
 
   window.FB.login((response) => {
@@ -68,7 +68,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           });
 
           dispatch({
-            type: types.DONE_LOGIN
+            type: types.DONE_LOGIN,
           });
 
           resolve();
@@ -76,7 +76,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
       });
     } else {
       dispatch({
-        type: types.DONE_LOGIN
+        type: types.DONE_LOGIN,
       });
 
       reject();
@@ -104,19 +104,20 @@ export const toggleCanteenPanel = canteenId => ({
   canteenId,
 });
 
-export const changeMeetingDate = date => ({
-  type: types.CHANGE_MEETING_DATE,
-  date,
-});
+export const createMeeting = ({ canteenId, startTime, endTime }) => {
+  const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
 
-export const changeMeetingTime = time => ({
-  type: types.CHANGE_MEETING_TIME,
-  time,
-});
-
-export const createMeeting = () => ({
-  type: types.CREATE_MEETING,
-});
+  api.createMeeting({
+    canteenId,
+    startTime: formatTime(startTime),
+    endTime: formatTime(endTime),
+  });
+  return ({
+    type: types.CREATE_MEETING,
+    startTime,
+    endTime,
+  });
+};
 
 export const cancelMeeting = id => ({
   type: types.CANCEL_MEETING,
@@ -130,12 +131,12 @@ export const updateMeeting = ({ id, newDate, newTime }) => ({
   newTime,
 });
 
-export const getFacebookUser = (userId) => (dispatch) => {
+export const getFacebookUser = userId => (dispatch) => {
   fb.api(userId)
     .then((user) => {
       dispatch({
         type: types.RECEIVE_FACEBOOK_USER,
-        user
+        user,
       });
     });
 };
@@ -163,7 +164,7 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
   dispatch({
     type: types.UNJOIN_MEETING,
     id,
-    userId
+    userId,
   });
 
   api

@@ -53,12 +53,11 @@ export default {
     [stall.id]: stall,
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
-  getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({appointments}) => {
-    return appointments.reduce((dict, appointment) => ({
-      ...dict,
-      [appointment.id]: appointment,
-    }), {});
-  }),
-  joinMeeting: (id) => post(`/appointments/${id}/join`),
-  unjoinMeeting: (id) => post(`/appointments/${id}/unjoin`),
+  getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({ appointments }) => appointments.reduce((obj, appointment) => ({
+    ...obj,
+    [appointment.id]: appointment,
+  }), {})),
+  createMeeting: meeting => post('/appointments', { appointment: meeting }),
+  joinMeeting: id => post(`/appointments/${id}/join`),
+  unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
 };

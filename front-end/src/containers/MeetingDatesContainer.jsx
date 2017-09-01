@@ -11,8 +11,8 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
       {meetings.map(meeting => (
         <MeetingDate
           key={meeting.id}
-          date={meeting.date}
-          time={meeting.time}
+          startTime={meeting.startTime}
+          endTime={meeting.endTime}
           meetingId={meeting.id}
           cancelMeeting={cancelMeeting}
           updateMeeting={updateMeeting}

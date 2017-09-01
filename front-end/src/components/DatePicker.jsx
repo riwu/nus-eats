@@ -1,11 +1,12 @@
 import React from 'react';
-import Config from '../constants/Config';
 
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
+
+import Config from '../constants/Config';
 
 const DatePicker = ({ changeMeetingDate, changeMeetingTime }) => {
   const interval = Config.TIME_PICKER_MINUTE_INTERVAL;

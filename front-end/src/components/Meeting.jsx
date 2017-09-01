@@ -15,7 +15,7 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, DatePickerComponent, cr
         <Modal.Title>{canteen ? canteen.name : null}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <DatePickerComponent />
+        {DatePickerComponent}
         <MeetingDatesComponent />
       </Modal.Body>
       <Modal.Footer>
