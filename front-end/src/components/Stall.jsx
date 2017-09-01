@@ -4,9 +4,9 @@ import './Stall.css';
 
 const Stall = ({ stall, toggleStallView, ratingComponent }) => (
   <div className="Stall" onClick={toggleStallView}>
-    <div className="image-container">
-      <Image src="http://loremflickr.com/250/250/dog" />
-    </div>
+    <div
+      style={{backgroundImage: "url('http://loremflickr.com/250/250/dog"}}
+      className="image-container" />
 
     <div className="overlay" />
 
