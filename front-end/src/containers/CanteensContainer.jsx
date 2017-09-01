@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CanteenPanelContainer from './CanteenPanelContainer';
+import CanteenPanel from '../components/CanteenPanel';
 import CanteenHeaderContainer from './CanteenHeaderContainer';
 import StallsContainer from './StallsContainer';
 
@@ -14,7 +14,7 @@ const CanteensContainer = ({ canteens, selectedCanteenId }) => {
       {canteens.map((canteen) => {
         const isSelected = canteen.id === selectedCanteenIdNum;
         return (
-          <CanteenPanelContainer
+          <CanteenPanel
             header={
               <CanteenHeaderContainer
                 canteen={canteen}
@@ -27,7 +27,7 @@ const CanteensContainer = ({ canteens, selectedCanteenId }) => {
           >
             <div className="arrow" />
             <StallsContainer canteenId={canteen.id} />
-          </CanteenPanelContainer>
+          </CanteenPanel>
         );
       })}
     </div>

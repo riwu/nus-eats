@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 import CanteenHeader from '../components/CanteenHeader';
 import MeetingComponent from './MeetingContainer';
 
@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   canteen: ownProps.canteen,
-  toggleCanteenPanel: () => dispatch(push(ownProps.isSelected ? '/' : `/canteen/${ownProps.canteen.id}`)),
+  toggleCanteenPanel: () => dispatch(replace(ownProps.isSelected ? '/' : `/canteen/${ownProps.canteen.id}`)),
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
