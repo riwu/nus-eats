@@ -36,14 +36,17 @@ const get = (path, headers) => {
   }).then(processResponse);
 };
 
-const post = (path, payload, headers) => {
+const [post, destroy] = ['POST', 'DELETE'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
-  return fetch(`${baseUrl}${path}`, {
-    method: 'POST',
-    headers: makeHeaders(headers),
-    body: JSON.stringify(payload),
-  }).then(processResponse);
-};
+
+  return (path, payload, headers) => {
+    return fetch(`${baseUrl}${path}`, {
+      method,
+      headers: makeHeaders(headers),
+      body: JSON.stringify(payload),
+    }).then(processResponse);
+  };
+});
 
 export default {
   setStore: (s) => { store = s; },
@@ -67,7 +70,7 @@ export default {
       },
     });
   },
-  cancelMeeting: id => post(`/appointments/${id}`),
+  cancelMeeting: id => destroy(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
 };
