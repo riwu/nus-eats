@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import moment from 'moment';
+import getMergedDate from '../util/getMergedDate';
 import Meeting from '../components/Meeting';
 import { toggleMeetingWindow, createMeeting } from '../actions';
 import DatePicker from '../components/DatePicker';
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleMeetingWindow:
         bindActionCreators(toggleMeetingWindow(ownProps.canteen.id), dispatch),
     createMeeting: () => {
-      const startTime = moment(date.format('YYYY-MM-DD') + time.format(' HH:mm:ss'));
+      const startTime = getMergedDate(date, time);
       dispatch(createMeeting({
         canteenId: ownProps.canteen.id,
         startTime,

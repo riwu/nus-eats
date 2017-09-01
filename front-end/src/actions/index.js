@@ -124,11 +124,9 @@ export const cancelMeeting = id => ({
   id,
 });
 
-export const updateMeeting = ({ id, newDate, newTime }) => ({
+export const updateMeeting = meeting => ({
   type: types.UPDATE_MEETING,
-  id,
-  newDate,
-  newTime,
+  ...meeting,
 });
 
 export const getFacebookUser = userId => (dispatch) => {

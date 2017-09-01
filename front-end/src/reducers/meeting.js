@@ -8,6 +8,8 @@ import {
   UNJOIN_MEETING,
 } from '../constants/ActionTypes';
 
+import getMergedDate from '../util/getMergedDate';
+
 const initialState = {
   canteenId: null,
   meetings: {},
@@ -62,8 +64,13 @@ function reducer(state = initialState, action) {
     }
     case UPDATE_MEETING: {
       const meeting = { ...state.meetings[action.id] };
-      if (action.newDate) meeting.date = action.newDate;
-      if (action.newTime) meeting.time = action.newTime;
+      console.log(action, meeting);
+      if (action.newDate) {
+        meeting.startTime = getMergedDate(action.newDate, meeting.startTime);
+      }
+      if (action.newTime) {
+        meeting.startTime = getMergedDate(meeting.startTime, action.newTime);
+      }
       return {
         ...state,
         meetings: {
