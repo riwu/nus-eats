@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Stall.css';
+import RatingContainer from '../containers/RatingContainer';
 
-const Stall = ({ stall, toggleStallView, ratingComponent, canteenId }) => (
+const Stall = ({ stall, canteenId }) => (
   <Link className="Stall" to={`/canteen/${canteenId}/stall/${stall.id}`}>
     <div
       style={{ backgroundImage: "url('http://loremflickr.com/250/250/dog" }}
@@ -13,7 +14,7 @@ const Stall = ({ stall, toggleStallView, ratingComponent, canteenId }) => (
 
     <div className="content-container">
       <div>{stall.name}</div>
-      {ratingComponent}
+      <RatingContainer rating={stall.rating} useAvgRating />
     </div>
   </Link>
 );

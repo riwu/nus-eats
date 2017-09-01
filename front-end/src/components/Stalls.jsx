@@ -1,7 +1,6 @@
 import React from 'react';
 import Stall from './Stall';
 import './Stalls.css';
-import RatingContainer from '../containers/RatingContainer';
 
 const Stalls = ({ stalls, canteenId }) => (
   <div className="Stalls">
@@ -11,7 +10,6 @@ const Stalls = ({ stalls, canteenId }) => (
           key={stall.id}
           stall={stall}
           canteenId={canteenId}
-          ratingComponent={<RatingContainer rating={stall.rating} useAvgRating />}
         />
       ))
     }
