@@ -2,8 +2,8 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import FacebookCommentsContainer from '../containers/FacebookCommentsContainer';
 
-const DetailedStall = ({ stall, toggleStallView, ratingComponent }) => (
-  <Modal show={!!stall} onHide={toggleStallView}>
+const DetailedStall = ({ stall, closeModal, ratingComponent }) => (
+  <Modal show={!!stall} onHide={closeModal}>
     <Modal.Header closeButton>
       <Modal.Title>{stall ? stall.name : null}</Modal.Title>
     </Modal.Header>
@@ -14,7 +14,7 @@ const DetailedStall = ({ stall, toggleStallView, ratingComponent }) => (
       {stall && <FacebookCommentsContainer href={`${window.location.origin}/stalls/${stall.id}`} />}
     </Modal.Body>
     <Modal.Footer>
-      <Button onClick={toggleStallView}>Close</Button>
+      <Button onClick={closeModal}>Close</Button>
     </Modal.Footer>
   </Modal>
   );

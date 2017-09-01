@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import { goBack } from 'react-router-redux';
 import DetailedStall from '../components/DetailedStall';
 import RatingContainer from './RatingContainer';
 
 const mapStateToProps = (state, ownProps) => {
-  const openedStall = state.stalls[ownProps.stallId];
+  const openedStall = state.stalls[ownProps.match.params.stallId];
   return {
     stall: openedStall,
     ratingComponent: openedStall
@@ -14,8 +14,8 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggleStallView: () => dispatch(push(ownProps.canteenPath)),
+const mapDispatchToProps = dispatch => ({
+  closeModal: () => dispatch(goBack()),
 });
 
 export default connect(

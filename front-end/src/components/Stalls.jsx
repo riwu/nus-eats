@@ -1,12 +1,18 @@
 import React from 'react';
-import StallContainer from '../containers/StallContainer';
+import Stall from './Stall';
 import './Stalls.css';
+import RatingContainer from '../containers/RatingContainer';
 
 const Stalls = ({ stalls, canteenId }) => (
   <div className="Stalls">
     {
-      stalls.map((stall) => (
-        <StallContainer key={stall.id} stall={stall} canteenId={canteenId} />
+      stalls.map(stall => (
+        <Stall
+          key={stall.id}
+          stall={stall}
+          canteenId={canteenId}
+          ratingComponent={<RatingContainer rating={stall.rating} useAvgRating />}
+        />
       ))
     }
   </div>

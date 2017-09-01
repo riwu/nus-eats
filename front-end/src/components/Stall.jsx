@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Stall.css';
 
-const Stall = ({ stall, toggleStallView, ratingComponent }) => (
-  <div className="Stall" onClick={toggleStallView}>
+const Stall = ({ stall, toggleStallView, ratingComponent, canteenId }) => (
+  <Link className="Stall" to={`/canteen/${canteenId}/stall/${stall.id}`}>
     <div
-      style={{backgroundImage: "url('http://loremflickr.com/250/250/dog"}}
-      className="image-container" />
+      style={{ backgroundImage: "url('http://loremflickr.com/250/250/dog" }}
+      className="image-container"
+    />
 
     <div className="overlay" />
 
@@ -13,7 +15,7 @@ const Stall = ({ stall, toggleStallView, ratingComponent }) => (
       <div>{stall.name}</div>
       {ratingComponent}
     </div>
-  </div>
+  </Link>
 );
 
 export default Stall;
