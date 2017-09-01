@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Glyphicon, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 const Meeting = ({ toggleMeetingWindow, canteen, isOpen, DatePickerComponent, createMeeting, MeetingDatesComponent }) => (
   <div>
