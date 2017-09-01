@@ -1,0 +1,27 @@
+.CanteenPanel {
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.CanteenPanel .panel-collapse {
+  padding-top: 15px;
+}
+
+.CanteenPanel .panel-body {
+  background-color: white;
+  border-radius: 12px;
+  position: relative;
+}
+
+.CanteenPanel .arrow {
+  position: absolute;
+  left: 50%;
+  top: -11px;
+  width: 0;
+  height: 0;
+  border-bottom: 11px solid #fff;
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  margin-left: -11px;
+}

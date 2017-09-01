@@ -23,6 +23,7 @@ const CanteensContainer = ({ canteens, selectedCanteenId }) => {
           canteenId={canteen.id}
           expanded={canteen.id === selectedCanteenIdNum}
         >
+          <div className="arrow" />
           <StallsContainer canteenId={canteen.id} />
         </CanteenPanelContainer>
       ))}

@@ -23,6 +23,7 @@
   width: 240px;
   padding-left: 0;
   font-size: 0;
+  background-color: white;
 }
 
 @media (min-width: 590px) {
