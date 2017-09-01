@@ -94,7 +94,7 @@ export const changeRating = (stallId, rating) => ({
   rating,
 });
 
-export const toggleMeetingWindow = canteenId => () => ({
+export const toggleMeetingWindow = canteenId => ({
   type: types.TOGGLE_MEETING_WINDOW,
   canteenId,
 });
@@ -104,18 +104,16 @@ export const toggleCanteenPanel = canteenId => ({
   canteenId,
 });
 
-export const createMeeting = ({ canteenId, startTime, endTime }) => {
-  const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
-
-  api.createMeeting({
-    canteenId,
-    startTime: formatTime(startTime),
-    endTime: formatTime(endTime),
+export const createMeeting = dispatch => (meeting) => {
+  api.createMeeting(meeting).then((result) => {
+    dispatch({
+      type: types.SET_MEETING_ID,
+      id: result.appointment.id,
+    });
   });
-  return ({
+  dispatch({
     type: types.CREATE_MEETING,
-    startTime,
-    endTime,
+    ...meeting,
   });
 };
 

@@ -1,3 +1,5 @@
+import { combineReducers } from 'redux';
+
 import {
   TOGGLE_MEETING_WINDOW,
   CREATE_MEETING,
@@ -6,64 +8,53 @@ import {
   RECEIVE_MEETINGS,
   JOIN_MEETING,
   UNJOIN_MEETING,
+  SET_MEETING_ID,
 } from '../constants/ActionTypes';
 
 import getMergedDate from '../util/getMergedDate';
 
-const initialState = {
-  canteenId: null,
-  meetings: {},
+const NEW_MEETING_TEMP_ID = ''; // new meeting with no id set yet
+
+const setCanteenId = (state = null, action) => {
+  if (action.type !== TOGGLE_MEETING_WINDOW) return state;
+  return state === null ? action.canteenId : null;
 };
 
-function reducer(state = initialState, action) {
+const setMeetings = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_MEETINGS:
-      return {
-        ...state,
-        meetings: {
-          ...state.meetings,
-          ...action.meetings,
-        },
-      };
-    case TOGGLE_MEETING_WINDOW:
-      return {
-        ...state,
-        canteenId: state.canteenId === null ? action.canteenId : null,
-      };
+      return action.meetings;
     case CREATE_MEETING: {
-      const id = Object.keys(state.meetings).length + 1;
       return {
         ...state,
-        meetings: {
-          ...state.meetings,
-          [id]: {
-            id,
-            canteenId: state.canteenId, // can pass canteenId from action too
-            startTime: action.startTime,
-            endTime: action.endTime,
-            isActive: true,
-            attendees: [],
-          },
+        [NEW_MEETING_TEMP_ID]: {
+          canteenId: action.canteenId,
+          startTime: action.startTime,
+          endTime: action.endTime,
+          isActive: true,
+          attendees: [],
         },
       };
     }
+    case SET_MEETING_ID: {
+      const meetings = { ...state };
+      meetings[action.id] = meetings[NEW_MEETING_TEMP_ID];
+      delete meetings[NEW_MEETING_TEMP_ID];
+      return meetings;
+    }
     case CANCEL_MEETING: {
-      const meeting = state.meetings[action.id];
       // use flag instead of removing from array so that id can be maintained
       // and allows referencing cancelled meetings
       return {
         ...state,
-        meetings: {
-          ...state.meetings,
-          [meeting.id]: {
-            ...meeting,
-            isActive: false,
-          },
+        [action.id]: {
+          ...state[action.id],
+          isActive: false,
         },
       };
     }
     case UPDATE_MEETING: {
-      const meeting = { ...state.meetings[action.id] };
+      const meeting = { ...state[action.id] };
       if (action.newDate) {
         meeting.startTime = getMergedDate(action.newDate, meeting.startTime);
       }
@@ -72,44 +63,40 @@ function reducer(state = initialState, action) {
       }
       return {
         ...state,
-        meetings: {
-          ...state.meetings,
-          [meeting.id]: meeting,
-        },
+        [action.id]: meeting,
       };
     }
     case JOIN_MEETING: {
-      const meeting = state.meetings[action.id];
+      const meeting = state[action.id];
       return {
         ...state,
-        meetings: {
-          ...state.meetings,
-          [meeting.id]: {
-            ...meeting,
-            attendees: [
-              ...meeting.attendees,
-              action.userId,
-            ],
-          },
+        [action.id]: {
+          ...meeting,
+          attendees: [
+            ...meeting.attendees,
+            action.userId,
+          ],
         },
       };
     }
     case UNJOIN_MEETING: {
-      const meeting = state.meetings[action.id];
+      const meeting = state[action.id];
       return {
         ...state,
-        meetings: {
-          ...state.meetings,
-          [meeting.id]: {
-            ...meeting,
-            attendees: meeting.attendees.filter(id => id !== action.userId),
-          },
+        [action.id]: {
+          ...meeting,
+          attendees: meeting.attendees.filter(id => id !== action.userId),
         },
       };
     }
     default:
       return state;
   }
-}
+};
+
+const reducer = combineReducers({
+  canteenId: setCanteenId,
+  meetings: setMeetings,
+});
 
 export default reducer;

@@ -19,3 +19,4 @@ export const JOIN_MEETING = 'JOIN_MEETING';
 export const UNJOIN_MEETING = 'UNJOIN_MEETING';
 export const BEGIN_LOGIN = 'BEGIN_LOGIN';
 export const DONE_LOGIN = 'DONE_LOGIN';
+export const SET_MEETING_ID = 'SET_MEETING_ID';

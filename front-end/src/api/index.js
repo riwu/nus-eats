@@ -57,7 +57,16 @@ export default {
     ...obj,
     [appointment.id]: appointment,
   }), {})),
-  createMeeting: meeting => post('/appointments', { appointment: meeting }),
+  createMeeting: ({ canteenId, startTime, endTime }) => {
+    const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
+    return post('/appointments', {
+      appointment: {
+        canteenId,
+        startTime: formatTime(startTime),
+        endTime: formatTime(endTime),
+      },
+    });
+  },
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
 };
