@@ -64,7 +64,6 @@ function reducer(state = initialState, action) {
     }
     case UPDATE_MEETING: {
       const meeting = { ...state.meetings[action.id] };
-      console.log(action, meeting);
       if (action.newDate) {
         meeting.startTime = getMergedDate(action.newDate, meeting.startTime);
       }

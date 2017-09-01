@@ -5,8 +5,9 @@ import './CanteenHeader.css';
 const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingComponent }) => (
   <div className="CanteenHeader">
     <div
-      style={{backgroundImage: "url('http://loremflickr.com/500/500/dog')"}}
-      className="image-container" />
+      style={{ backgroundImage: "url('http://loremflickr.com/500/500/dog')" }}
+      className="image-container"
+    />
 
     <div className="content-container">
       <div className="title">
@@ -14,8 +15,7 @@ const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingCo
           { canteen.name }
         </div>
 
-        <div className="distance">
-        </div>
+        <div className="distance" />
       </div>
 
       <div className="statistics">
@@ -24,15 +24,13 @@ const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingCo
             { stallsCount }
           </div>
           <div className="description">
-            Canteen Stalls
-          </div>
+              Canteen Stalls
+            </div>
         </div>
 
-        <div className="ongoing-groups">
-        </div>
+        <div className="ongoing-groups" />
 
-        <div className="groups-met">
-        </div>
+        <div className="groups-met" />
       </div>
 
       <div className="buttons">
