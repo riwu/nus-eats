@@ -4,7 +4,7 @@ import canteens from './canteens';
 import stalls from './stalls';
 import isFilterExpanded from './isFilterExpanded';
 import toggleHalalOnly from './toggleHalalOnly';
-import isFbReady from './isFacebookReady';
+import isFacebookReady from './isFacebookReady';
 import accessTokens from './accessTokens';
 import currentUser from './currentUser';
 import userRatings from './userRatings';
@@ -18,7 +18,7 @@ const reducer = combineReducers({
   stalls,
   isFilterExpanded,
   toggleHalalOnly,
-  isFbReady,
+  isFacebookReady,
   accessTokens,
   currentUser,
   userRatings,

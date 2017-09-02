@@ -1,8 +1,14 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const LoginButton = ({ isLoggingIn, ...props }) => (
-  <Button disabled={ isLoggingIn } {...props}>{ isLoggingIn ? 'Loading...' : 'Login' }</Button>
-);
+const LoginButton = ({ isLoggingIn, isFacebookReady, ...props }) => {
+  const loading = isLoggingIn || !isFacebookReady;
+
+  return (
+    <Button disabled={ loading } {...props}>
+      { loading ? 'Loading...' : 'Login' }
+    </Button>
+  );
+};
 
 export default LoginButton;
