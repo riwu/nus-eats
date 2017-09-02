@@ -122,11 +122,10 @@ export const createMeeting = dispatch => (meeting) => {
 };
 
 export const cancelMeeting = dispatch => (id) => {
-  api.cancelMeeting(id);
-  dispatch({
+  api.cancelMeeting(id).then(() => dispatch({
     type: types.CANCEL_MEETING,
     id,
-  });
+  })).catch(error => alert(JSON.stringify(error)));
 };
 
 export const updateMeeting = dispatch => (id, meeting) => {

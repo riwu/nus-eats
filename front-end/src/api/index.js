@@ -47,7 +47,7 @@ const get = (path, headers) => {
   }).then(processResponse);
 };
 
-const [post, destroy, put] = ['POST', 'DELETE', 'PUT'].map((method) => {
+const [post, destroy, patch] = ['POST', 'DELETE', 'PATCH'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
@@ -78,7 +78,7 @@ export default {
       endTime: formatTime(endTime),
     },
   }),
-  updateMeeting: (id, { canteenId, startTime, endTime }) => put(`/appointments/${id}`, {
+  updateMeeting: (id, { canteenId, startTime, endTime }) => patch(`/appointments/${id}`, {
     appointment: {
       canteenId,
       startTime: formatTime(startTime),
