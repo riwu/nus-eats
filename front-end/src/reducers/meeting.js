@@ -11,8 +11,6 @@ import {
   SET_MEETING_ID,
 } from '../constants/ActionTypes';
 
-import getMergedDate from '../util/getMergedDate';
-
 const setCanteenId = (state = null, action) => {
   if (action.type !== TOGGLE_MEETING_WINDOW) return state;
   return state === null ? action.canteenId : null;
@@ -53,16 +51,9 @@ const setMeetings = (state = {}, action) => {
       };
     }
     case UPDATE_MEETING: {
-      const meeting = { ...state[action.id] };
-      if (action.newDate) {
-        meeting.startTime = getMergedDate(action.newDate, meeting.startTime);
-      }
-      if (action.newTime) {
-        meeting.startTime = getMergedDate(meeting.startTime, action.newTime);
-      }
       return {
         ...state,
-        [action.id]: meeting,
+        [action.id]: action.meeting,
       };
     }
     case JOIN_MEETING: {

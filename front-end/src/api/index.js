@@ -36,17 +36,17 @@ const get = (path, headers) => {
   }).then(processResponse);
 };
 
-const [post, destroy] = ['POST', 'DELETE'].map((method) => {
+const [post, destroy, put] = ['POST', 'DELETE', 'PUT'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
-  return (path, payload, headers) => {
-    return fetch(`${baseUrl}${path}`, {
-      method,
-      headers: makeHeaders(headers),
-      body: JSON.stringify(payload),
-    }).then(processResponse);
-  };
+  return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
+    method,
+    headers: makeHeaders(headers),
+    body: JSON.stringify(payload),
+  }).then(processResponse);
 });
+
+const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
 
 export default {
   setStore: (s) => { store = s; },
@@ -60,16 +60,20 @@ export default {
     ...obj,
     [appointment.id]: appointment,
   }), {})),
-  createMeeting: ({ canteenId, startTime, endTime }) => {
-    const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
-    return post('/appointments', {
-      appointment: {
-        canteenId,
-        startTime: formatTime(startTime),
-        endTime: formatTime(endTime),
-      },
-    });
-  },
+  createMeeting: ({ canteenId, startTime, endTime }) => post('/appointments', {
+    appointment: {
+      canteenId,
+      startTime: formatTime(startTime),
+      endTime: formatTime(endTime),
+    },
+  }),
+  updateMeeting: (id, { canteenId, startTime, endTime }) => put(`/appointments/${id}`, {
+    appointment: {
+      canteenId,
+      startTime: formatTime(startTime),
+      endTime: formatTime(endTime),
+    },
+  }),
   cancelMeeting: id => destroy(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),

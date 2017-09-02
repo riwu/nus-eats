@@ -5,6 +5,7 @@ import 'react-day-picker/lib/style.css';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Config from '../constants/Config';
+import getMergedDate from '../util/getMergedDate';
 
 const dateFormat = 'D MMM YY';
 
@@ -13,7 +14,10 @@ const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
     <DayPickerInput
       value={meeting.startTime.format(dateFormat)}
       format={dateFormat}
-      onDayChange={newDate => updateMeeting({ id: meetingId, newDate })}
+      onDayChange={newDate => updateMeeting(meetingId, {
+        ...meeting,
+        startTime: getMergedDate(newDate, meeting.startTime),
+      })}
     />
     <TimePicker
       showSecond={false}
@@ -21,7 +25,10 @@ const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
       defaultValue={meeting.startTime}
       disabledMinutes={() => Config.MINUTES_TO_HIDE}
       hideDisabledOptions
-      onChange={newTime => updateMeeting({ id: meetingId, newTime })}
+      onDayChange={newTime => updateMeeting(meetingId, {
+        ...meeting,
+        startTime: getMergedDate(meeting.startTime, newTime),
+      })}
     />
     <Button disabled={!meeting.isIdSet} onClick={() => cancelMeeting(meetingId)}>Cancel</Button>
   </div>

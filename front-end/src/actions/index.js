@@ -129,10 +129,14 @@ export const cancelMeeting = dispatch => (id) => {
   });
 };
 
-export const updateMeeting = dispatch => meeting => dispatch({
-  type: types.UPDATE_MEETING,
-  ...meeting,
-});
+export const updateMeeting = dispatch => (id, meeting) => {
+  api.updateMeeting(id, meeting);
+  dispatch({
+    type: types.UPDATE_MEETING,
+    id,
+    meeting,
+  });
+};
 
 export const getFacebookUser = userId => (dispatch) => {
   fb.api(userId)
