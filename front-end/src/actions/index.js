@@ -62,18 +62,30 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           type: types.RECEIVE_ACCESS_TOKENS,
         });
 
-        window.FB.api('me', { access_token: facebookToken }, (user) => {
-          dispatch({
-            user,
-            type: types.RECEIVE_CURRENT_USER,
+        fb.api('me')
+          .then((user) => {
+            dispatch({
+              user,
+              type: types.RECEIVE_CURRENT_USER,
+            });
+
+            dispatch({
+              type: types.DONE_LOGIN,
+            });
+
+            resolve();
           });
 
-          dispatch({
-            type: types.DONE_LOGIN,
-          });
+        fb.api('me/permissions')
+          .then((response) => {
+            const permissions = response.data.filter(({status}) => status === 'granted')
+                                             .map(({permission}) => permission);
 
-          resolve();
-        });
+            dispatch({
+              type: types.SET_GRANTED_PERMISSIONS,
+              permissions: new Set(permissions),
+            });
+          });
       });
     } else {
       dispatch({
@@ -82,7 +94,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
 
       reject();
     }
-  }, { scope: 'public_profile,user_friends,email' });
+  }, { scope: 'public_profile,user_friends' });
 });
 
 export const logout = () => ({
