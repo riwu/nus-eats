@@ -17,12 +17,23 @@ const makeHeaders = (headers = {}) => {
   });
 };
 
-const processResponse = (response) => {
-  if (response.ok) {
+const parseResponseBody = (response) => {
+  const contentType = response.headers.get('Content-Type');
+
+  if (!contentType) {
+    return response.text();
+  }
+
+  if (contentType.search(/^application\/json/) !== -1) {
     return response.json();
   }
-  return response
-      .json()
+};
+
+const processResponse = (response) => {
+  if (response.ok) {
+    return parseResponseBody(response);
+  }
+  return parseResponseBody(response)
       .then(body => Promise.reject({
         body,
         status: response.status,
