@@ -9,11 +9,17 @@ import {
   JOIN_MEETING,
   UNJOIN_MEETING,
   SET_MEETING_ID,
+  UPDATE_NEW_MEETING_DATE,
 } from '../constants/ActionTypes';
 
 const setCanteenId = (state = null, action) => {
   if (action.type !== TOGGLE_MEETING_WINDOW) return state;
   return state === null ? action.canteenId : null;
+};
+
+const updateNewMeetingDate = (state = null, action) => {
+  if (action.type !== UPDATE_NEW_MEETING_DATE) return state;
+  return action.date;
 };
 
 const setMeetings = (state = {}, action) => {
@@ -86,6 +92,7 @@ const setMeetings = (state = {}, action) => {
 
 const reducer = combineReducers({
   canteenId: setCanteenId,
+  newMeetingDate: updateNewMeetingDate,
   meetings: setMeetings,
 });
 

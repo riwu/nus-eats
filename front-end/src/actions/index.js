@@ -137,6 +137,11 @@ export const updateMeeting = dispatch => (id, meeting) => {
   });
 };
 
+export const updateNewMeetingDate = date => ({
+  type: types.UPDATE_NEW_MEETING_DATE,
+  date,
+});
+
 export const getFacebookUser = userId => (dispatch) => {
   fb.api(userId)
     .then((user) => {
