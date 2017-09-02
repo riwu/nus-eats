@@ -12,6 +12,8 @@ import FacebookSDK from './containers/FacebookSDKContainer';
 import MainPage from './containers/MainPage';
 import Feed from './containers/Feed';
 
+import * as GA from './google/analytics';
+
 store.dispatch(getAllCanteens());
 store.dispatch(getAllStalls());
 
@@ -31,5 +33,7 @@ function App() {
     </Provider>
   );
 }
+
+GA.initialize(process.env.REACT_APP_GA_TRACKING_CODE);
 
 export default App;
