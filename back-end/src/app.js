@@ -10,6 +10,13 @@ const cors = require('cors');
 const db = require('./database/db');
 const Boom = require('boom');
 const Sequelize = require('sequelize');
+const AWS = require('aws-sdk');
+const s3Bucket = new AWS.S3({
+  accessKeyId: process.env.S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  region: 'ap-southeast-1',
+  params: { Bucket: 'nuseats.club' }
+});
 
 const { injectJwtStrategy, authenticateJwt } = require('./security/jwt');
 
@@ -31,12 +38,14 @@ const canteens = require('./routes/canteens')(db);
 const stalls = require('./routes/stalls')(db, authenticateJwt(passport));
 const users = require('./routes/users')(db);
 const appointments = require('./routes/appointments')(db);
+const images = require('./routes/images')(db, s3Bucket);
 
 app.use('/authentication', authentication);
 app.use('/canteens', canteens);
 app.use('/stalls', stalls);
 app.use('/users', authenticateJwt(passport), users);
 app.use('/appointments', authenticateJwt(passport), appointments);
+app.use('/images', authenticateJwt(passport), images);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {

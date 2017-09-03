@@ -270,7 +270,7 @@ FORMAT: 1A
                 "message": "Unknown Sequelize error."
             }
 
-### (NOT DONE) Add user Ratings to a Stall [POST]
+### (DONE) Add user Ratings to a Stall [PUT]
 
 + Request JSON
 
@@ -282,10 +282,36 @@ FORMAT: 1A
     + Body
 
             {
-                "value": 3
+                "rating": {
+                    "value": 3
+                }
             }
 
 + Response 200 (application/json)
+
+    + Body
+
+            {
+                    "rating": {
+                        "id": 9,
+                        "value": 3,
+                        "userId": "1524106284336095",
+                        "createdAt": "2017-09-03T07:53:14.202Z",
+                        "updatedAt": "2017-09-03T07:54:24.670Z",
+                        "stallId": 2
+                    }
+            }
+
+### (DONE) Add user Ratings to a Stall [DELETE]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 204 (application/json)
 
 ## Images Collection [/stalls/{id}/images]
 
@@ -831,8 +857,8 @@ FORMAT: 1A
             {
                 "appointment": {
                     "canteenId": 3,
-                    "startTime": "2017-08-22 16:00:00+00"",
-                    "endTime": "2017-08-22 18:00:00+00""
+                    "startTime": "2017-08-22 16:00:00+00",
+                    "endTime": "2017-08-22 18:00:00+00"
                 }
             }
 
