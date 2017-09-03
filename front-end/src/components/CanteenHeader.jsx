@@ -1,24 +1,43 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import './CanteenHeader.css';
 
-const style = {
-  display: 'flex',
-};
+const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingComponent }) => (
+  <div className="CanteenHeader">
+    <div
+      style={{ backgroundImage: "url('http://loremflickr.com/500/500/dog')" }}
+      className="image-container"
+    />
 
-const clickableStyle = {
-  width: '100%',
-};
+    <div className="content-container">
+      <div className="title">
+        <div className="name">
+          { canteen.name }
+        </div>
 
-const titleStyle = {
-  fontSize: '25px',
-};
+        <div className="distance" />
+      </div>
 
-const CanteenHeader = ({ canteen, toggleCanteenPanel, MeetingComponent }) => (
-  <div style={style}>
-    <div onClick={() => toggleCanteenPanel(canteen.id)} style={clickableStyle}>
-      <div style={titleStyle}>{canteen.name}</div>
-      <div>{canteen.description}</div>
+      <div className="statistics">
+        <div className="stalls-count">
+          <div className="number">
+            { stallsCount }
+          </div>
+          <div className="description">
+              Canteen Stalls
+            </div>
+        </div>
+
+        <div className="ongoing-groups" />
+
+        <div className="groups-met" />
+      </div>
+
+      <div className="buttons">
+        <Button onClick={toggleCanteenPanel}>View Stalls</Button>
+        { MeetingComponent }
+      </div>
     </div>
-    {MeetingComponent}
   </div>
 );
 

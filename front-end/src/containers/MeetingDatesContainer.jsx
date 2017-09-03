@@ -8,12 +8,11 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
   return (
     <div>
       <div>Existing meetings</div>
-      {meetings.map(meeting => (
+      {meetings.map(([id, meeting]) => (
         <MeetingDate
-          key={meeting.id}
-          date={meeting.date}
-          time={meeting.time}
-          meetingId={meeting.id}
+          key={id}
+          meeting={meeting}
+          meetingId={id}
           cancelMeeting={cancelMeeting}
           updateMeeting={updateMeeting}
         />
@@ -23,12 +22,17 @@ const MeetingDatesContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
 };
 
 const mapStateToProps = state => ({
-  meetings: Object.values(state.meeting.meetings)
-    .filter(meeting => meeting.isActive &&
-                       meeting.canteenId === state.meeting.canteenId),
+  meetings: Object.entries(state.meeting.meetings)
+    .filter(([id, meeting]) => meeting.isActive &&
+                               meeting.canteenId === state.meeting.canteenId),
+});
+
+const mapDispatchToProps = dispatch => ({
+  cancelMeeting: cancelMeeting(dispatch),
+  updateMeeting: updateMeeting(dispatch),
 });
 
 export default connect(
     mapStateToProps,
-    { cancelMeeting, updateMeeting },
+    mapDispatchToProps,
 )(MeetingDatesContainer);

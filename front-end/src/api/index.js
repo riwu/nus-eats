@@ -17,12 +17,23 @@ const makeHeaders = (headers = {}) => {
   });
 };
 
-const processResponse = (response) => {
-  if (response.ok) {
+const parseResponseBody = (response) => {
+  const contentType = response.headers.get('Content-Type');
+
+  if (!contentType) {
+    return response.text();
+  }
+
+  if (contentType.search(/^application\/json/) !== -1) {
     return response.json();
   }
-  return response
-      .json()
+};
+
+const processResponse = (response) => {
+  if (response.ok) {
+    return parseResponseBody(response);
+  }
+  return parseResponseBody(response)
       .then(body => Promise.reject({
         body,
         status: response.status,
@@ -36,14 +47,17 @@ const get = (path, headers) => {
   }).then(processResponse);
 };
 
-const post = (path, payload, headers) => {
+const [post, destroy, patch] = ['POST', 'DELETE', 'PATCH'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
-  return fetch(`${baseUrl}${path}`, {
-    method: 'POST',
+
+  return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
+    method,
     headers: makeHeaders(headers),
     body: JSON.stringify(payload),
   }).then(processResponse);
-};
+});
+
+const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
 
 export default {
   setStore: (s) => { store = s; },
@@ -53,12 +67,25 @@ export default {
     [stall.id]: stall,
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
-  getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({appointments}) => {
-    return appointments.reduce((dict, appointment) => ({
-      ...dict,
-      [appointment.id]: appointment,
-    }), {});
+  getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({ appointments }) => appointments.reduce((obj, appointment) => ({
+    ...obj,
+    [appointment.id]: appointment,
+  }), {})),
+  createMeeting: ({ canteenId, startTime, endTime }) => post('/appointments', {
+    appointment: {
+      canteenId,
+      startTime: formatTime(startTime),
+      endTime: formatTime(endTime),
+    },
   }),
-  joinMeeting: (id) => post(`/appointments/${id}/join`),
-  unjoinMeeting: (id) => post(`/appointments/${id}/unjoin`),
+  updateMeeting: (id, { canteenId, startTime, endTime }) => patch(`/appointments/${id}`, {
+    appointment: {
+      canteenId,
+      startTime: formatTime(startTime),
+      endTime: formatTime(endTime),
+    },
+  }),
+  cancelMeeting: id => destroy(`/appointments/${id}`),
+  joinMeeting: id => post(`/appointments/${id}/join`),
+  unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
 };

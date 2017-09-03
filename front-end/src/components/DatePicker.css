@@ -1,0 +1,14 @@
+.DatePicker {
+  display: flex;
+  text-align: center;
+}
+
+.DatePicker .picker {
+  border: 1px solid #ddd;
+  background: #FDFDFD;
+  margin: 5px;
+}
+
+.DatePicker .picker .text {
+  font-weight: bold;
+}

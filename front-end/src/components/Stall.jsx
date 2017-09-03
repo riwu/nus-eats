@@ -1,20 +1,22 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Stall.css';
+import RatingContainer from '../containers/RatingContainer';
 
-const Stall = ({ stall, toggleStallView, ratingComponent }) => (
-  <div className="Stall" onClick={toggleStallView}>
-    <div className="image-container">
-      <Image src="http://loremflickr.com/250/250/dog" />
-    </div>
+const Stall = ({ stall, canteenId }) => (
+  <Link className="Stall" to={`/canteen/${canteenId}/stall/${stall.id}`}>
+    <div
+      style={{ backgroundImage: "url('http://loremflickr.com/250/250/dog" }}
+      className="image-container"
+    />
 
     <div className="overlay" />
 
     <div className="content-container">
       <div>{stall.name}</div>
-      {ratingComponent}
+      <RatingContainer rating={stall.rating} useAvgRating />
     </div>
-  </div>
+  </Link>
 );
 
 export default Stall;

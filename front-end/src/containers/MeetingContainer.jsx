@@ -1,21 +1,16 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Meeting from '../components/Meeting';
 import { toggleMeetingWindow, createMeeting } from '../actions';
-import DatePickerComponent from './DatePickerContainer';
-import MeetingDatesComponent from './MeetingDatesContainer';
 
 const mapStateToProps = (state, ownProps) => ({
   canteen: ownProps.canteen,
   isOpen: state.meeting.canteenId === ownProps.canteen.id,
+  newMeetingDate: state.meeting.newMeetingDate,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggleMeetingWindow:
-    bindActionCreators(toggleMeetingWindow(ownProps.canteen.id), dispatch),
-  createMeeting: bindActionCreators(createMeeting, dispatch),
-  DatePickerComponent,
-  MeetingDatesComponent,
+  toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteen.id)),
+  createMeeting: createMeeting(dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meeting);

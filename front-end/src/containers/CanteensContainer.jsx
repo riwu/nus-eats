@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CanteenPanelContainer from './CanteenPanelContainer';
+import CanteenPanel from '../components/CanteenPanel';
 import CanteenHeaderContainer from './CanteenHeaderContainer';
 import StallsContainer from './StallsContainer';
 
@@ -11,28 +11,32 @@ const CanteensContainer = ({ canteens, selectedCanteenId }) => {
   const selectedCanteenIdNum = Number(selectedCanteenId);
   return (
     <div>
-      {canteens.map(canteen => (
-        <CanteenPanelContainer
-          header={
-            <CanteenHeaderContainer
-              canteen={canteen}
-              selectedCanteenId={selectedCanteenIdNum}
-            />
-          }
-          key={canteen.id}
-          canteenId={canteen.id}
-          expanded={canteen.id === selectedCanteenIdNum}
-        >
-          <StallsContainer canteenId={canteen.id} />
-        </CanteenPanelContainer>
-      ))}
+      {canteens.map((canteen) => {
+        const isSelected = canteen.id === selectedCanteenIdNum;
+        return (
+          <CanteenPanel
+            header={
+              <CanteenHeaderContainer
+                canteen={canteen}
+                isSelected={isSelected}
+              />
+            }
+            key={canteen.id}
+            canteenId={canteen.id}
+            expanded={isSelected}
+          >
+            <div className="arrow" />
+            <StallsContainer canteenId={canteen.id} />
+          </CanteenPanel>
+        );
+      })}
     </div>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
   canteens: state.canteens,
-  selectedCanteenId: ownProps.canteenId,
+  selectedCanteenId: ownProps.selectedCanteenId,
 });
 
 export default connect(

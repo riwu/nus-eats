@@ -1,17 +1,13 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
-
-const style = {
-  cursor: 'pointer',
-};
+import './CanteenPanel.css';
 
 const CanteenPanel = ({ header, children, expanded }) => (
   <Panel
-    style={style}
+    className="CanteenPanel"
     collapsible
     expanded={expanded}
     header={header}
-    bsStyle="info"
   >
     {children}
   </Panel>

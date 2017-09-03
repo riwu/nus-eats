@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button, Glyphicon, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
+import DatePicker from '../containers/DatePickerContainer';
+import MeetingDatesComponent from '../containers/MeetingDatesContainer';
+import getMergedDate from '../util/getMergedDate';
 
-const Meeting = ({ toggleMeetingWindow, canteen, isOpen, DatePickerComponent, createMeeting, MeetingDatesComponent }) => (
+const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting, newMeetingDate }) => (
   <div>
     <Button onClick={toggleMeetingWindow}>
-      <Glyphicon glyph="plus" />
-      Meeting
+      + Meeting
     </Button>
     <Modal
       show={isOpen}
@@ -16,11 +18,25 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, DatePickerComponent, cr
         <Modal.Title>{canteen ? canteen.name : null}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <DatePickerComponent />
+        <DatePicker
+          updateNewMeetingTime={(newTime) => { this.time = newTime; }}
+        />
         <MeetingDatesComponent />
       </Modal.Body>
       <Modal.Footer>
-        <Button bsStyle="primary" onClick={createMeeting}>Create</Button>
+        <Button
+          bsStyle="primary"
+          onClick={() => {
+            const startTime = getMergedDate(newMeetingDate, this.time);
+            createMeeting({
+              canteenId: canteen.id,
+              startTime,
+              endTime: startTime,
+            });
+          }}
+        >
+          Create
+        </Button>
         <Button onClick={toggleMeetingWindow}>Close</Button>
       </Modal.Footer>
     </Modal>

@@ -1,0 +1,89 @@
+.CanteenHeader {
+  display: flex;
+  height: 290px;
+  box-shadow: 0 10px 55px 0 rgba(0,0,0,0.24), 0 10px 55px 0 rgba(0,0,0,0.14);
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.CanteenHeader .image-container {
+  flex-basis: 0;
+  flex-grow: 1;
+  background-size: cover;
+  background-position: 50% 50%;
+  border-radius: 12px;
+  box-shadow: 0 10px 55px 0 rgba(0,0,0,0.24), 0 10px 55px 0 rgba(0,0,0,0.14);
+}
+
+.CanteenHeader .content-container {
+  flex-basis: 0;
+  flex-grow: 2;
+  padding: 12px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.CanteenHeader .title {
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.CanteenHeader .name {
+  flex-grow: 1;
+  font-size: 36px;
+}
+
+.CanteenHeader .statistics {
+  flex-basis: 0;
+  flex-grow: 2;
+  display: flex;
+  text-align: center;
+}
+
+.CanteenHeader .stalls-count,
+.CanteenHeader .ongoing-groups,
+.CanteenHeader .groups-met {
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.CanteenHeader .number {
+  font-size: 72px;
+  color: #70a7ee;
+}
+
+.CanteenHeader .buttons {
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.CanteenHeader .buttons .btn:first-child {
+  margin-right: 10px;
+}
+
+.CanteenHeader .btn-default {
+  border-radius: 12px;
+  padding: 10px 30px;
+  border: 1px solid #5d9cec;
+  color: #5d9cec;
+  text-transform: uppercase;
+}
+
+.CanteenHeader .btn-default:active,
+.CanteenHeader .btn-default:focus {
+  background-color: white;
+}
+
+.CanteenHeader .btn-default:hover {
+  background-color: #5d9cec;
+  color: white;
+}
+
+.CanteenHeader .btn-default:active:hover {
+  border-color: #5d9cec;
+}

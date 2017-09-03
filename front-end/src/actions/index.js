@@ -1,3 +1,4 @@
+import moment from 'moment';
 import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
@@ -24,7 +25,7 @@ export const getMeetings = () => (dispatch) => {
   api.getMeetings().then((meetings) => {
     dispatch({
       type: types.RECEIVE_MEETINGS,
-      meetings
+      meetings,
     });
   });
 };
@@ -48,7 +49,7 @@ export const setFbReady = () => ({
 
 export const login = () => dispatch => new Promise((resolve, reject) => {
   dispatch({
-    type: types.BEGIN_LOGIN
+    type: types.BEGIN_LOGIN,
   });
 
   window.FB.login((response) => {
@@ -61,27 +62,39 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           type: types.RECEIVE_ACCESS_TOKENS,
         });
 
-        window.FB.api('me', { access_token: facebookToken }, (user) => {
-          dispatch({
-            user,
-            type: types.RECEIVE_CURRENT_USER,
+        fb.api('me')
+          .then((user) => {
+            dispatch({
+              user,
+              type: types.RECEIVE_CURRENT_USER,
+            });
+
+            dispatch({
+              type: types.DONE_LOGIN,
+            });
+
+            resolve();
           });
 
-          dispatch({
-            type: types.DONE_LOGIN
-          });
+        fb.api('me/permissions')
+          .then((response) => {
+            const permissions = response.data.filter(({status}) => status === 'granted')
+                                             .map(({permission}) => permission);
 
-          resolve();
-        });
+            dispatch({
+              type: types.SET_GRANTED_PERMISSIONS,
+              permissions: new Set(permissions),
+            });
+          });
       });
     } else {
       dispatch({
-        type: types.DONE_LOGIN
+        type: types.DONE_LOGIN,
       });
 
       reject();
     }
-  }, { scope: 'public_profile,user_friends,email' });
+  }, { scope: 'public_profile,user_friends' });
 });
 
 export const logout = () => ({
@@ -94,7 +107,7 @@ export const changeRating = (stallId, rating) => ({
   rating,
 });
 
-export const toggleMeetingWindow = canteenId => () => ({
+export const toggleMeetingWindow = canteenId => ({
   type: types.TOGGLE_MEETING_WINDOW,
   canteenId,
 });
@@ -104,38 +117,49 @@ export const toggleCanteenPanel = canteenId => ({
   canteenId,
 });
 
-export const changeMeetingDate = date => ({
-  type: types.CHANGE_MEETING_DATE,
+export const createMeeting = dispatch => (meeting) => {
+  const tempId = moment().valueOf();
+  api.createMeeting(meeting).then((result) => {
+    dispatch({
+      type: types.SET_MEETING_ID,
+      id: result.appointment.id,
+      tempId,
+    });
+  });
+  dispatch({
+    type: types.CREATE_MEETING,
+    ...meeting,
+    tempId,
+  });
+};
+
+export const cancelMeeting = dispatch => (id) => {
+  api.cancelMeeting(id).then(() => dispatch({
+    type: types.CANCEL_MEETING,
+    id,
+  })).catch(error => alert(JSON.stringify(error)));
+};
+
+export const updateMeeting = dispatch => (id, meeting) => {
+  api.updateMeeting(id, meeting);
+  dispatch({
+    type: types.UPDATE_MEETING,
+    id,
+    meeting,
+  });
+};
+
+export const updateNewMeetingDate = date => ({
+  type: types.UPDATE_NEW_MEETING_DATE,
   date,
 });
 
-export const changeMeetingTime = time => ({
-  type: types.CHANGE_MEETING_TIME,
-  time,
-});
-
-export const createMeeting = () => ({
-  type: types.CREATE_MEETING,
-});
-
-export const cancelMeeting = id => ({
-  type: types.CANCEL_MEETING,
-  id,
-});
-
-export const updateMeeting = ({ id, newDate, newTime }) => ({
-  type: types.UPDATE_MEETING,
-  id,
-  newDate,
-  newTime,
-});
-
-export const getFacebookUser = (userId) => (dispatch) => {
+export const getFacebookUser = userId => (dispatch) => {
   fb.api(userId)
     .then((user) => {
       dispatch({
         type: types.RECEIVE_FACEBOOK_USER,
-        user
+        user,
       });
     });
 };
@@ -163,7 +187,7 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
   dispatch({
     type: types.UNJOIN_MEETING,
     id,
-    userId
+    userId,
   });
 
   api

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import FacebookComments from '../components/FacebookComments';
 
 const mapStateToProps = (state) => ({
-  loading: !state.isFbReady
+  loading: !state.isFacebookReady
 });
 
 const FacebookCommentsContainer = connect(

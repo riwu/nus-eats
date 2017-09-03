@@ -11,10 +11,15 @@
   width: 34px;
   height: 34px;
   border-radius: 17px;
-  margin-right: 13px;
 }
 
-.NavigationBar .name-container {
+@media (min-width: 768px) {
+  .NavigationBar .profile-picture {
+    margin-right: 13px;
+  }
+}
+
+.NavigationBar .popover-trigger {
   cursor: pointer;
   user-select: none;
 }

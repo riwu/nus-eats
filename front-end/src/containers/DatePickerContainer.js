@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
+import { updateNewMeetingDate } from '../actions';
 import DatePicker from '../components/DatePicker';
-import { changeMeetingDate, changeMeetingTime } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  enteredModal: state.meeting.modalEntered,
+  newMeetingDate: state.meeting.newMeetingDate,
+  updateNewMeetingTime: ownProps.updateNewMeetingTime,
 });
 
-
-export default connect(mapStateToProps,
-  { changeMeetingDate, changeMeetingTime })(DatePicker);
+export default connect(
+  mapStateToProps,
+  { updateNewMeetingDate },
+)(DatePicker);
