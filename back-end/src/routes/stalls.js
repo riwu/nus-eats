@@ -49,28 +49,26 @@ module.exports = (db, authenticateMiddleware) => {
     res.json({ratings});
   }));
 
-  router.post('/:stallId/ratings', authenticateMiddleware, asyncMiddleware(async (req, res, next) => {
-    const rating = await db['rating'].create({
-      userId: req.user.id,
-      stallId: req.params.stallId,
-      value: req.body.rating.value
-    });
-    res.status(201).json({rating});
-  }));
-
-  router.patch('/:stallId/ratings', authenticateMiddleware, asyncMiddleware(async (req, res, next) => {
-    const rating = await db['rating'].findOne({
+  router.put('/:stallId/ratings', authenticateMiddleware, asyncMiddleware(async (req, res, next) => {
+    let rating = await db['rating'].findOne({
       where: {
         stallId: req.params.stallId,
         userId: req.user.id
       }
     });
 
-    if (!rating) {
-      throw Boom.notFound('Record not found.');
+    if (rating) {
+      await rating.update({
+        value: req.body.rating.value
+      });
+    } else {
+      rating = await db['rating'].create({
+        stallId: req.params.stallId,
+        userId: req.user.id,
+        value: req.body.rating.value
+      });
     }
 
-    await rating.update({ value: req.body.rating.value })
     res.json({rating});
   }));
 
