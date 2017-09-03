@@ -81,18 +81,11 @@ module.exports = (db, authenticateMiddleware) => {
     });
 
     if (!rating) {
-      console.log('here');
       throw Boom.notFound('Record not found.');
     }
 
-    const result = await rating.destroy();
-    if (result == 0) {
-      console.log(result);
-      throw Boom.notFound('Record not found.');
-    } else {
-      res.status(204).send();
-    }
-
+    await rating.destroy();
+    res.status(204).send();
   }));
 
   return router;
