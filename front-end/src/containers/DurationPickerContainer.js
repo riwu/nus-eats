@@ -6,4 +6,4 @@ const mapStateToProps = state => ({
   duration: state.meeting.newMeeting.duration,
 });
 
-export default connect(mapStateToProps, { updateNewMeetingDuration })(DurationPicker);
+export default connect(mapStateToProps, { updateDuration: updateNewMeetingDuration })(DurationPicker);

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import moment from 'moment';
 
 import {
   TOGGLE_MEETING_WINDOW,
@@ -19,7 +20,8 @@ const setCanteenId = (state = null, action) => {
   return state === null ? action.canteenId : null;
 };
 
-const updateNewMeeting = (state = { duration: 60 }, action) => {
+const initialNewMeetingState = { duration: moment.duration(60, 'minutes') };
+const updateNewMeeting = (state = initialNewMeetingState, action) => {
   switch (action.type) {
     case UPDATE_NEW_MEETING_DATE:
       return {
@@ -51,7 +53,7 @@ const setMeetings = (state = {}, action) => {
         [action.tempId]: {
           canteenId: action.canteenId,
           startTime: action.startTime,
-          endTime: action.endTime,
+          duration: action.duration,
           isActive: true,
           attendees: [],
         },

@@ -12,6 +12,8 @@ class DatePicker extends React.Component {
   componentWillMount() {
     const interval = Config.TIME_PICKER_MINUTE_INTERVAL;
     this.now = moment();
+    // update both time and date here instead of in their own components
+    // to ensure they are defaulting to same time
     this.now.add(interval - (this.now.minute() % interval), 'minutes');
     this.props.updateNewMeetingDate(this.now);
     this.props.updateNewMeetingTime(this.now);

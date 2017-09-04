@@ -4,7 +4,7 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import TimePicker from './TimePicker';
 import getMergedDate from '../util/getMergedDate';
-import DurationPicker from '../containers/DurationPickerContainer';
+import DurationPicker from './DurationPicker';
 
 const dateFormat = 'D MMM YY';
 
@@ -25,7 +25,14 @@ const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
         startTime: getMergedDate(meeting.startTime, newTime),
       })}
     />
-    <DurationPicker />
+    <DurationPicker
+      duration={meeting.duration}
+      updateDuration={newDuration => updateMeeting(meetingId, {
+        ...meeting,
+        duration: newDuration,
+      })}
+      showRadio={false}
+    />
     <Button disabled={!meeting.isIdSet} onClick={() => cancelMeeting(meetingId)}>Cancel</Button>
   </div>
 );

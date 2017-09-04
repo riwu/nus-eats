@@ -26,13 +26,10 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting, newMeeti
         <Button
           bsStyle="primary"
           onClick={() => {
-            const startTime = getMergedDate(newMeetingDate, newMeetingTime);
-            const endTime = moment(startTime);
-            endTime.add(newMeetingDuration, 'minutes');
             createMeeting({
               canteenId: canteen.id,
-              startTime,
-              endTime,
+              startTime: getMergedDate(newMeetingDate, newMeetingTime),
+              duration: newMeetingDuration,
             });
           }}
         >
