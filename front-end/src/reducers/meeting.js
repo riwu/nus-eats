@@ -10,6 +10,8 @@ import {
   UNJOIN_MEETING,
   SET_MEETING_ID,
   UPDATE_NEW_MEETING_DATE,
+  UPDATE_NEW_MEETING_TIME,
+  UPDATE_NEW_MEETING_DURATION,
 } from '../constants/ActionTypes';
 
 const setCanteenId = (state = null, action) => {
@@ -17,9 +19,26 @@ const setCanteenId = (state = null, action) => {
   return state === null ? action.canteenId : null;
 };
 
-const updateNewMeetingDate = (state = null, action) => {
-  if (action.type !== UPDATE_NEW_MEETING_DATE) return state;
-  return action.date;
+const updateNewMeeting = (state = { duration: 60 }, action) => {
+  switch (action.type) {
+    case UPDATE_NEW_MEETING_DATE:
+      return {
+        ...state,
+        date: action.date,
+      };
+    case UPDATE_NEW_MEETING_TIME:
+      return {
+        ...state,
+        time: action.time,
+      };
+    case UPDATE_NEW_MEETING_DURATION:
+      return {
+        ...state,
+        duration: action.duration,
+      };
+    default:
+      return state;
+  }
 };
 
 const setMeetings = (state = {}, action) => {
@@ -92,7 +111,7 @@ const setMeetings = (state = {}, action) => {
 
 const reducer = combineReducers({
   canteenId: setCanteenId,
-  newMeetingDate: updateNewMeetingDate,
+  newMeeting: updateNewMeeting,
   meetings: setMeetings,
 });
 

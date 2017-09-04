@@ -158,6 +158,16 @@ export const updateNewMeetingDate = date => ({
   date,
 });
 
+export const updateNewMeetingTime = time => ({
+  type: types.UPDATE_NEW_MEETING_TIME,
+  time,
+});
+
+export const updateNewMeetingDuration = duration => ({
+  type: types.UPDATE_NEW_MEETING_DURATION,
+  duration,
+});
+
 export const getFacebookUser = userId => (dispatch) => {
   fb.api(userId)
     .then((user) => {

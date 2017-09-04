@@ -9,6 +9,8 @@ import 'rc-time-picker/assets/index.css';
 import Config from '../constants/Config';
 import getMergedDate from '../util/getMergedDate';
 
+import DurationPicker from '../containers/DurationPickerContainer';
+
 const dateFormat = 'D MMM YY';
 
 const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
@@ -32,6 +34,7 @@ const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
         startTime: getMergedDate(meeting.startTime, newTime),
       })}
     />
+    <DurationPicker />
     <Button disabled={!meeting.isIdSet} onClick={() => cancelMeeting(meetingId)}>Cancel</Button>
   </div>
 );
