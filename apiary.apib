@@ -313,9 +313,9 @@ FORMAT: 1A
 
 + Response 204 (application/json)
 
-## Images Collection [/stalls/{id}/images]
+## Photos Collection [/stalls/{id}/photos]
 
-### (NOT DONE) Get all Images of a Stall [GET]
+### (DONE) Get all Photos of a Stall [GET]
 
 + Request JSON
 
@@ -329,11 +329,10 @@ FORMAT: 1A
     + Body
 
             {
-                "images": [
+                "photos": [
                     {
                         "id": 1,
                         "url": "/images/image.jpeg",
-                        "mimetype": "image/jpeg",
                         "likedUsers": [3, 4, 45, 47, 52],
                         "userId": 5,
                         "stallId": 1,
@@ -769,9 +768,9 @@ FORMAT: 1A
                 "message": "Unknown Sequelize error."
             }
 
-## Image Collection [/users/{id}/images]
+## Photo Collection [/users/{id}/photos]
 
-### (NOT DONE) Get all images uploaded by a User [GET]
+### (DONE) Get all photos uploaded by a User [GET]
 
 + Request JSON
 
@@ -788,8 +787,7 @@ FORMAT: 1A
                 "images": [
                     {
                         "id": 1,
-                        "url": "/images/image.jpeg",
-                        "mimetype": "image/jpeg",
+                        "url": "/images/image.jpeg"
                         "likedUsers": [3, 4, 45, 47, 52],
                         "userId": 5,
                         "stallId": 1,
@@ -799,11 +797,11 @@ FORMAT: 1A
                 ]
             }
 
-# Group Images
+# Group Photos
 
-## Image Upload [/images]
+## Photo Upload [/photos]
 
-### (NOT DONE) Upload an Image [POST]
+### (DONE) Upload a Photo [POST]
 
 + Request JSON
 
@@ -814,29 +812,42 @@ FORMAT: 1A
 
 + Response 201 (application/json)
 
-## Image [/images/{id}]
+## Like Photo [/photos/{id}/like]
 
-### (NOT DONE) Like an Image [PATCH]
-
-+ Request JSON
-
-    + Headers
-
-            Authorization: Bearer <jwt>
-            Accept: application/json
-
-+ Response 200 (application/json)
-
-### (NOT DONE) Delete an Image [DELETE]
+### (DONE) Like a Photo [POST]
 
 + Request JSON
 
     + Headers
 
             Authorization: Bearer <jwt>
-            Accept: application/json
+            Accept: multipart/form-data
 
 + Response 200 (application/json)
+
+## Like Photo [/photos/{id}/unlike]
+### (DONE) Unlike a Photo [POST]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: multipart/form-data
+
++ Response 200 (application/json)
+
+## Delete Photo [/photos/{id}/]
+### (DONE) Delete a Photo [POST]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: multipart/form-data
+
++ Response 204 (application/json)
 
 # Group Appointments
 
