@@ -11,6 +11,8 @@ import store from './store';
 import FacebookSDK from './containers/FacebookSDKContainer';
 import MainPage from './containers/MainPage';
 import Feed from './containers/Feed';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 
 import * as GA from './google/analytics';
 
@@ -26,6 +28,8 @@ function App() {
             <Route exact path="/" component={MainPage} />
             <Route path="feed" component={Feed} />
             <Route path="/canteen/:canteenId" component={MainPage} />
+            <Route path="/privacy_policy" component={PrivacyPolicy} />
+            <Route path="/terms_of_service" component={TermsOfService} />
           </Switch>
           <FacebookSDK />
         </div>
