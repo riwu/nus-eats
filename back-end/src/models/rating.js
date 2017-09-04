@@ -8,10 +8,15 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
           allowNull: false
       }
+    }, {
+      indexes: [{
+        unique: true,
+        fields: ['userId', 'stallId']
+      }]
     });
 
     Rating.associate = (models) => {
-      Rating.belongsTo(models.stall, { onDelete: 'CASCADE' } );
+      Rating.belongsTo(models.stall, { onDelete: 'CASCADE' });
     };
 
     return Rating;

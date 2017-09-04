@@ -8,7 +8,7 @@ const fb = new FB.Facebook({
   appSecret: process.env.FB_APP_SECRET
 });
 
-let getFacebookData = async (apiCall, accessToken) => {
+const getFacebookData = async (apiCall, accessToken) => {
   let dataList = [];
   let next = null;
 

@@ -1,8 +1,9 @@
 const express = require('express');
-const router = express.Router();
-const { fb } = require('../services/facebook');
 const jwt = require('jsonwebtoken');
 const Boom = require('boom');
+const { fb } = require('../services/facebook');
+
+const router = express.Router();
 
 router.post('/login', (req, res, next) => {
   const shortAccessToken = req.body.accessToken;

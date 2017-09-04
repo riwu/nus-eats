@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Appointment.associate = (models) => {
-        Appointment.belongsTo(models.canteen, { onDelete: 'CASCADE' } );
+        Appointment.belongsTo(models.canteen, { onDelete: 'CASCADE' });
     }
 
     return Appointment;

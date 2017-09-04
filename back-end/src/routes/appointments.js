@@ -1,8 +1,9 @@
 const express = require('express');
-const router = express.Router();
+const Boom = require('boom');
 const asyncMiddleware = require('../utilities/async');
 const removeElement = require('../utilities/array');
-const Boom = require('boom');
+
+const router = express.Router();
 
 module.exports = (db) => {
 
@@ -59,7 +60,7 @@ module.exports = (db) => {
     }
 
     if (appointment.userId != req.user.id) {
-      throw Boom.unauthorized('Only appointment creator can edit the appointment.');
+      throw Boom.forbidden('Only appointment creator can edit the appointment.');
     }
 
     await appointment.update({
@@ -73,16 +74,16 @@ module.exports = (db) => {
   router.delete('/:appointmentId', asyncMiddleware(async (req, res, next) => {
     const appointment = await db['appointment'].findById(req.params.appointmentId);
 
-    if (appointment.userId != req.user.id) {
-      throw Boom.unauthorized('Only appointment creator can delete the appointment.');
+    if (!appointment) {
+      throw Boom.notFound('Record not found.');
     }
 
-    const result = appointment.destroy();
-    if (result == 0) {
-      throw Boom.notFound('Record not found.');
-    } else {
-      res.status(204).send();
+    if (appointment.userId != req.user.id) {
+      throw Boom.forbidden('Only appointment creator can delete the appointment.');
     }
+
+    await appointment.destroy();
+    res.status(204).send();
   }));
 
   return router;

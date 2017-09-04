@@ -1,9 +1,12 @@
 const express = require('express');
-const router = express.Router();
-const asyncMiddleware = require('../utilities/async');
 const Boom = require('boom');
+const passport = require('passport');
+const asyncMiddleware = require('../utilities/async');
+const { authenticateJwt } = require('../security/jwt');
 
-module.exports = (db, authenticateMiddleware) => {
+const router = express.Router();
+
+module.exports = (db, s3) => {
   router.get('/', asyncMiddleware(async (req, res, next) => {
     const stalls = await db['stall'].findAll({
       order: [
@@ -49,7 +52,7 @@ module.exports = (db, authenticateMiddleware) => {
     res.json({ratings});
   }));
 
-  router.put('/:stallId/ratings', authenticateMiddleware, asyncMiddleware(async (req, res, next) => {
+  router.put('/:stallId/ratings', authenticateJwt(passport), asyncMiddleware(async (req, res, next) => {
     let rating = await db['rating'].findOne({
       where: {
         stallId: req.params.stallId,
@@ -72,7 +75,7 @@ module.exports = (db, authenticateMiddleware) => {
     res.json({rating});
   }));
 
-  router.delete('/:stallId/ratings', authenticateMiddleware, asyncMiddleware(async (req, res, next) => {
+  router.delete('/:stallId/ratings', authenticateJwt(passport), asyncMiddleware(async (req, res, next) => {
     const rating = await db['rating'].findOne({
       where: {
         stallId: req.params.stallId,
@@ -86,6 +89,24 @@ module.exports = (db, authenticateMiddleware) => {
 
     await rating.destroy();
     res.status(204).send();
+  }));
+
+  router.get('/:stallId/photos', asyncMiddleware(async (req, res, next) => {
+    const photos = await db['photo'].findAll({
+      where: {
+        stallId: req.params.stallId
+      }
+    });
+
+    photos.map(photo => {
+      photo.dataValues.url = s3.getSignedUrl('getObject', {
+        Bucket: process.env.S3_BUCKET,
+        Key: photo.uuid
+      });
+      return photo;
+    });
+
+    res.json({photos});
   }));
 
   return router;

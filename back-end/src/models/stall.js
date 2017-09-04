@@ -7,8 +7,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Stall.associate = (models) => {
-    Stall.belongsTo(models.canteen, { onDelete: 'CASCADE' } );
-    Stall.hasMany(models.rating, { onDelete: 'CASCADE' })
+    Stall.belongsTo(models.canteen, { onDelete: 'CASCADE' });
+    Stall.hasMany(models.rating, { onDelete: 'CASCADE' });
+    Stall.hasMany(models.photo, { onDelete: 'CASCADE' });
   };
 
   return Stall;

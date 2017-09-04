@@ -1,4 +1,4 @@
-let removeElement = (array, element) => {
+const removeElement = (array, element) => {
   const index = array.indexOf(element);
 
   if (index !== -1) {

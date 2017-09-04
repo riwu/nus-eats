@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const asyncMiddleware = require('../utilities/async');
 const { getFacebookData } = require('../services/facebook');
 
-module.exports = (db) => {
+const router = express.Router();
+
+module.exports = (db, s3) => {
     router.get('/appointments/initiated', asyncMiddleware(async (req, res, next) => {
       const appointments = await db['appointment'].findAll({
         where: { userId: req.user.id }
@@ -75,6 +76,24 @@ module.exports = (db) => {
         where: { attendees: { $overlap: combinedId }}
       });
       res.json({appointments});
+    }));
+
+    router.get('/photos', asyncMiddleware(async (req, res, next) => {
+      const photos = await db['photo'].findAll({
+        where: {
+          userId: req.user.id
+        }
+      });
+
+      photos.map(photo => {
+        photo.dataValues.url = s3.getSignedUrl('getObject', {
+          Bucket: process.env.S3_BUCKET,
+          Key: photo.uuid
+        });
+        return photo;
+      });
+
+      res.json({photos});
     }));
 
     return router;
