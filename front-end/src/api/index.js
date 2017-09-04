@@ -47,7 +47,7 @@ const get = (path, headers) => {
   }).then(processResponse);
 };
 
-const [post, destroy, patch] = ['POST', 'DELETE', 'PATCH'].map((method) => {
+const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
@@ -88,4 +88,9 @@ export default {
   cancelMeeting: id => destroy(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
+  updateRating: (id, rating) => put(`/stalls/${id}/ratings`, {
+    rating: {
+      value: rating,
+    },
+  }),
 };

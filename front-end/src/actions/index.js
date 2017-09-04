@@ -78,8 +78,8 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
 
         fb.api('me/permissions')
           .then((response) => {
-            const permissions = response.data.filter(({status}) => status === 'granted')
-                                             .map(({permission}) => permission);
+            const permissions = response.data.filter(({ status }) => status === 'granted')
+                                             .map(({ permission }) => permission);
 
             dispatch({
               type: types.SET_GRANTED_PERMISSIONS,
@@ -101,12 +101,16 @@ export const logout = () => ({
   type: types.LOGOUT,
 });
 
-export const changeRating = (stallId, rating) => ({
-  type: types.CHANGE_RATING,
-  stallId,
-  rating,
-});
-
+export const changeRating = (stallId, rating) => (dispatch) => {
+  api.updateRating(stallId, rating).then((response) => {
+    console.log(response);
+  });
+  dispatch({
+    type: types.CHANGE_RATING,
+    stallId,
+    rating,
+  });
+};
 export const toggleMeetingWindow = canteenId => ({
   type: types.TOGGLE_MEETING_WINDOW,
   canteenId,
@@ -117,7 +121,7 @@ export const toggleCanteenPanel = canteenId => ({
   canteenId,
 });
 
-export const createMeeting = dispatch => (meeting) => {
+export const createMeeting = meeting => (dispatch) => {
   const tempId = moment().valueOf();
   api.createMeeting(meeting).then((result) => {
     dispatch({
@@ -133,14 +137,14 @@ export const createMeeting = dispatch => (meeting) => {
   });
 };
 
-export const cancelMeeting = dispatch => (id) => {
+export const cancelMeeting = id => (dispatch) => {
   api.cancelMeeting(id).then(() => dispatch({
     type: types.CANCEL_MEETING,
     id,
   })).catch(error => alert(JSON.stringify(error)));
 };
 
-export const updateMeeting = dispatch => (id, meeting) => {
+export const updateMeeting = (id, meeting) => (dispatch) => {
   api.updateMeeting(id, meeting);
   dispatch({
     type: types.UPDATE_MEETING,

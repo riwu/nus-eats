@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteen.id)),
-  createMeeting: createMeeting(dispatch),
+  createMeeting: meeting => dispatch(createMeeting(meeting)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meeting);

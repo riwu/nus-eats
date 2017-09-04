@@ -28,8 +28,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  cancelMeeting: cancelMeeting(dispatch),
-  updateMeeting: updateMeeting(dispatch),
+  cancelMeeting: id => dispatch(cancelMeeting(id)),
+  updateMeeting: (id, meeting) => dispatch(updateMeeting(id, meeting)),
 });
 
 export default connect(
