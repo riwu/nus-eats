@@ -1,11 +1,8 @@
 import React from 'react';
-
+import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import TimePicker from 'rc-time-picker';
-import 'rc-time-picker/assets/index.css';
-import moment from 'moment';
-
+import TimePicker from '../containers/TimePickerContainer';
 import DurationPicker from '../containers/DurationPickerContainer';
 
 import Config from '../constants/Config';
@@ -31,16 +28,7 @@ class DatePicker extends React.Component {
         </div>
         <div className="picker">
           <div className="text">Select Time</div>
-          <TimePicker
-            className="timePicker"
-            showSecond={false}
-            use12Hours
-            value={this.props.newMeetingTime}
-            disabledMinutes={() => Config.MINUTES_TO_HIDE}
-            hideDisabledOptions
-            getPopupContainer={triggerNode => triggerNode.parentNode}
-            onChange={this.props.updateNewMeetingTime}
-          />
+          <TimePicker />
         </div>
         <div className="picker">
           <div className="text">Select Duration</div>

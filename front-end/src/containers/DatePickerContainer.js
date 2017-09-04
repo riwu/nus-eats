@@ -4,7 +4,6 @@ import DatePicker from '../components/DatePicker';
 
 const mapStateToProps = state => ({
   newMeetingDate: state.meeting.newMeeting.date,
-  newMeetingTime: state.meeting.newMeeting.time,
   newMeetingDuration: state.meeting.newMeeting.duration,
 });
 
