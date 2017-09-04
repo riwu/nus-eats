@@ -13,13 +13,21 @@ module.exports = (db, s3) => {
         ['name', 'ASC']
       ],
       attributes: {
-        include: [[ db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating' ]]
+        include: [
+          [db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating']
+          // [db.sequelize.fn('MAX'), db.sequelize.col('photos.likedCount'), 'likedCount']
+        ]
       },
       include: [{
         model: db['rating'],
         attributes: []
+      }, {
+        model: db['photo'],
+        attributes: {
+          include: [[db.sequelize.fn('cardinality', db.sequelize.col('photos.liked')), 'likedCount']]
+        }
       }],
-      group: ['stall.id']
+      group: ['stall.id', 'photos.uuid']
     });
     res.json({stalls});
   }));
