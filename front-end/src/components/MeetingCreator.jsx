@@ -6,9 +6,9 @@ import TimePicker from '../containers/TimePickerContainer';
 import DurationPicker from '../containers/DurationPickerContainer';
 
 import Config from '../constants/Config';
-import './DatePicker.css';
+import './MeetingCreator.css';
 
-class DatePicker extends React.Component {
+class MeetingCreator extends React.Component {
   componentWillMount() {
     const interval = Config.TIME_PICKER_MINUTE_INTERVAL;
     this.now = moment();
@@ -20,7 +20,7 @@ class DatePicker extends React.Component {
   }
   render() {
     return (
-      <div className="DatePicker">
+      <div className="MeetingCreator">
         <div className="picker">
           <div className="text">Select Date</div>
           <DayPicker
@@ -41,4 +41,4 @@ class DatePicker extends React.Component {
   }
 }
 
-export default DatePicker;
+export default MeetingCreator;

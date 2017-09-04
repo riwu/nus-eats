@@ -8,7 +8,7 @@ import DurationPicker from './DurationPicker';
 
 const dateFormat = 'D MMM YY';
 
-const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
+const MeetingDisplay = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
   <div>
     <DayPickerInput
       value={meeting.startTime.format(dateFormat)}
@@ -37,4 +37,4 @@ const MeetingDate = ({ meeting, cancelMeeting, updateMeeting, meetingId }) => (
   </div>
 );
 
-export default MeetingDate;
+export default MeetingDisplay;

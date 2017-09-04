@@ -1,14 +1,14 @@
-.DatePicker {
+.MeetingCreator {
   display: flex;
   text-align: center;
 }
 
-.DatePicker .picker {
+.MeetingCreator .picker {
   border: 1px solid #ddd;
   background: #FDFDFD;
   margin: 5px;
 }
 
-.DatePicker .picker .text {
+.MeetingCreator .picker .text {
   font-weight: bold;
 }
