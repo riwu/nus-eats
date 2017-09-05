@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateNewMeetingDate, updateNewMeetingTime } from '../../../actions/index';
+import { updateNewMeetingDate, updateNewMeetingTime } from '../../../actions';
 import MeetingCreator from './MeetingCreator';
 
 const mapStateToProps = state => ({

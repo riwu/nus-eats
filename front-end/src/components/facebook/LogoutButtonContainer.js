@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import LogoutButton from './LogoutButton';
-import { logout } from '../../actions/index';
+import { logout } from '../../actions';
 
 const mapStateToProps = (state) => ({
 });

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import FilterPanel from './FilterPanel';
-import { toggleMuslimOnly } from '../../actions/index';
+import { toggleMuslimOnly } from '../../actions';
 
 const mapStateToProps = state => ({
   isFilterExpanded: state.isFilterExpanded,

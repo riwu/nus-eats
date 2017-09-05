@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEqual from 'lodash.isequal';
-import { getAllCanteens, getFacebookUser } from '../../actions/index';
+import { getAllCanteens, getFacebookUser } from '../../actions';
 import MeetingsListItem from './MeetingsListItem';
 
 class MeetingsListItemContainer extends Component {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Meeting from './Meeting';
-import { toggleMeetingWindow, createMeeting } from '../../../actions/index';
+import { toggleMeetingWindow, createMeeting } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   canteen: ownProps.canteen,

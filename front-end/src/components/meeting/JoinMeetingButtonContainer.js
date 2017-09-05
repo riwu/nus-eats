@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { joinMeeting } from '../../actions/index';
+import { joinMeeting } from '../../actions';
 import JoinMeetingButton from './JoinMeetingButton';
 
 const mapStateToProps = (state) => ({

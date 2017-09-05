@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MeetingDisplay from './MeetingDisplay';
-import { cancelMeeting, updateMeeting } from '../../../actions/index';
+import { cancelMeeting, updateMeeting } from '../../../actions';
 
 const MeetingsDisplayContainer = ({ meetings, cancelMeeting, updateMeeting }) => {
   if (meetings.length === 0) return null;

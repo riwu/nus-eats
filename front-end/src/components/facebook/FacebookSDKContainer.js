@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setFbReady } from '../../actions/index';
+import { setFbReady } from '../../actions';
 import FacebookSDK from './FacebookSDK';
 
 const mapStateToProps = () => ({
