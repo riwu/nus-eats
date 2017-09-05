@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import DatePicker from '../containers/DatePickerContainer';
-import MeetingDatesComponent from '../containers/MeetingDatesContainer';
+import MeetingCreator from '../containers/MeetingCreatorContainer';
+import MeetingsDisplay from '../containers/MeetingsDisplayContainer';
 import getMergedDate from '../util/getMergedDate';
 
-const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting, newMeetingDate }) => (
+const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting, newMeetingDate, newMeetingTime, newMeetingDuration }) => (
   <div>
     <Button onClick={toggleMeetingWindow}>
       + Meeting
@@ -18,20 +18,17 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting, newMeeti
         <Modal.Title>{canteen ? canteen.name : null}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <DatePicker
-          updateNewMeetingTime={(newTime) => { this.time = newTime; }}
-        />
-        <MeetingDatesComponent />
+        <MeetingCreator />
+        <MeetingsDisplay />
       </Modal.Body>
       <Modal.Footer>
         <Button
           bsStyle="primary"
           onClick={() => {
-            const startTime = getMergedDate(newMeetingDate, this.time);
             createMeeting({
               canteenId: canteen.id,
-              startTime,
-              endTime: startTime,
+              startTime: getMergedDate(newMeetingDate, newMeetingTime),
+              duration: newMeetingDuration,
             });
           }}
         >

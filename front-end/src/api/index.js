@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 let store;
 
 const makeHeaders = (headers = {}) => {
@@ -47,7 +49,7 @@ const get = (path, headers) => {
   }).then(processResponse);
 };
 
-const [post, destroy, patch] = ['POST', 'DELETE', 'PATCH'].map((method) => {
+const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
@@ -57,7 +59,13 @@ const [post, destroy, patch] = ['POST', 'DELETE', 'PATCH'].map((method) => {
   }).then(processResponse);
 });
 
-const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -2);
+const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -3);
+
+const getEndTime = (startTime, duration) => {
+  const endTime = moment(startTime);
+  endTime.add(duration);
+  return formatTime(endTime);
+};
 
 export default {
   setStore: (s) => { store = s; },
@@ -71,21 +79,26 @@ export default {
     ...obj,
     [appointment.id]: appointment,
   }), {})),
-  createMeeting: ({ canteenId, startTime, endTime }) => post('/appointments', {
+  createMeeting: ({ canteenId, startTime, duration }) => post('/appointments', {
     appointment: {
       canteenId,
       startTime: formatTime(startTime),
-      endTime: formatTime(endTime),
+      endTime: getEndTime(startTime, duration),
     },
   }),
-  updateMeeting: (id, { canteenId, startTime, endTime }) => patch(`/appointments/${id}`, {
+  updateMeeting: (id, { canteenId, startTime, duration }) => patch(`/appointments/${id}`, {
     appointment: {
       canteenId,
       startTime: formatTime(startTime),
-      endTime: formatTime(endTime),
+      endTime: getEndTime(startTime, duration),
     },
   }),
   cancelMeeting: id => destroy(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
+  updateRating: (id, rating) => put(`/stalls/${id}/ratings`, {
+    rating: {
+      value: rating,
+    },
+  }),
 };
