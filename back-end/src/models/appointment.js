@@ -15,6 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       attendees: {
           type: DataTypes.ARRAY(DataTypes.STRING),
           defaultValue: []
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      description: {
+        type: DataTypes.STRING
       }
     }, {
       paranoid: true

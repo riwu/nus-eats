@@ -12,7 +12,9 @@ module.exports = (db) => {
       userId: req.user.id,
       startTime: req.body.appointment.startTime,
       endTime: req.body.appointment.endTime,
-      canteenId: req.body.appointment.canteenId
+      canteenId: req.body.appointment.canteenId,
+      title: req.body.appointment.title,
+      description: req.body.appointment.description
     });
     res.status(201).json({appointment});
   }));
@@ -66,7 +68,9 @@ module.exports = (db) => {
     await appointment.update({
       startTime: req.body.appointment.startTime,
       endTime: req.body.appointment.endTime,
-      canteenId: req.body.appointment.canteenId
+      canteenId: req.body.appointment.canteenId,
+      title: req.body.appointment.title,
+      description: req.body.appointment.description
     });
     res.json({appointment});
   }));
