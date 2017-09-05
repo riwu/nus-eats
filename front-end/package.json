@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "history": "^4.7.2",
+    "jwt-decode": "^2.2.0",
     "lodash.isequal": "^4.5.0",
     "moment": "^2.18.1",
     "rc-time-picker": "^2.4.1",
