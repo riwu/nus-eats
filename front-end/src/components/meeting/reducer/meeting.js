@@ -13,7 +13,7 @@ import {
   UPDATE_NEW_MEETING_DATE,
   UPDATE_NEW_MEETING_TIME,
   UPDATE_NEW_MEETING_DURATION,
-} from '../../constants/ActionTypes';
+} from '../../../constants/ActionTypes';
 
 const setCanteenId = (state = null, action) => {
   if (action.type !== TOGGLE_MEETING_WINDOW) return state;

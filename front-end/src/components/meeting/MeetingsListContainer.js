@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getMeetings } from '../actions/index';
+import { getMeetings } from '../../actions';
 import MeetingsList from './MeetingsList';
 
 class MeetingsListContainer extends Component {

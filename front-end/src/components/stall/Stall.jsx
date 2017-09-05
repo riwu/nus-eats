@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Stall.css';
-import RatingContainer from '../containers/RatingContainer';
+import RatingContainer from './RatingContainer';
 
 const Stall = ({ stall, canteenId }) => (
   <Link className="Stall" to={`/canteen/${canteenId}/stall/${stall.id}`}>

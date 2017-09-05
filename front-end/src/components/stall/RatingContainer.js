@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Rating from './Rating';
-import { changeRating } from '../../actions/index';
+import { changeRating } from '../../actions';
 
 const mapStateToProps = (state, ownProps) => {
   const stall = ownProps.stall;

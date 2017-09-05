@@ -8,7 +8,7 @@ import isFacebookReady from '../../facebook/reducer/isFacebookReady';
 import accessTokens from '../../facebook/reducer/accessTokens';
 import currentUser from '../../facebook/reducer/currentUser';
 import userRatings from '../../stall/reducer/userRatings';
-import meeting from '../../meeting/meetingReducer';
+import meeting from '../../meeting/reducer/meeting';
 import facebookUsers from '../../facebook/reducer/facebookUsers';
 import isLoggingIn from '../../facebook/reducer/isLoggingIn';
 import grantedPermissions from '../../facebook/reducer/grantedPermissions';
