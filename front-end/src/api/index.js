@@ -78,6 +78,7 @@ export default {
   getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({ appointments }) => appointments.reduce((obj, appointment) => ({
     ...obj,
     [appointment.id]: appointment,
+    duration: moment.duration(appointment.endTime.diff(appointment.startTime)),
   }), {})),
   createMeeting: ({ canteenId, startTime, duration }) => post('/appointments', {
     appointment: {
