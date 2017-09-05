@@ -96,5 +96,15 @@ module.exports = (db, s3) => {
       res.json({photos});
     }));
 
+    router.get('/ratings', asyncMiddleware(async (req, res, next) => {
+      const ratings = await db['rating'].findAll({
+        where: {
+          userId: req.user.id
+        }
+      });
+
+      res.json({ratings});
+    }));
+
     return router;
 };

@@ -768,9 +768,9 @@ FORMAT: 1A
                 "message": "Unknown Sequelize error."
             }
 
-## Photo Collection [/users/{id}/photos]
+## Photo Collection [/users/photos]
 
-### (DONE) Get all photos uploaded by a User [GET]
+### (DONE) Get all Photos uploaded by a User [GET]
 
 + Request JSON
 
@@ -796,6 +796,35 @@ FORMAT: 1A
                     }
                 ]
             }
+
+## Ratings Collection [/users/ratings]
+
+### (DONE) Get all Ratings of a User [GET]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "ratings": [
+                    {
+                        "id": 1,
+                        "value": 3
+                        "userId": 5,
+                        "stallId": 1,
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z"
+                    }
+                ]
+            }
+
 
 # Group Photos
 
