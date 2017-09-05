@@ -8,11 +8,11 @@ import history from './store/history';
 import { getAllCanteens, getAllStalls } from './actions';
 import store from './store';
 
-import FacebookSDK from './containers/FacebookSDKContainer';
-import MainPage from './containers/MainPage';
-import Feed from './containers/Feed';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import TermsOfService from './components/TermsOfService';
+import FacebookSDK from './components/facebook/FacebookSDKContainer';
+import MainPage from './components/main/MainPage';
+import Feed from './components/main/Feed';
+import PrivacyPolicy from './components/misc/PrivacyPolicy';
+import TermsOfService from './components/misc/TermsOfService';
 
 import * as GA from './google/analytics';
 
