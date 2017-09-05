@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
 import history from './store/history';
 
-import { getAllCanteens, getAllStalls } from './actions';
+import { getAllCanteens, getAllStalls, getRatings } from './actions';
 import store from './store';
 
 import FacebookSDK from './components/facebook/FacebookSDKContainer';
@@ -16,8 +16,9 @@ import TermsOfService from './components/misc/TermsOfService';
 
 import * as GA from './google/analytics';
 
-store.dispatch(getAllCanteens());
-store.dispatch(getAllStalls());
+store.dispatch(getAllCanteens);
+store.dispatch(getAllStalls);
+if (store.getState().accessTokens.api) store.dispatch(getRatings);
 
 function App() {
   return (

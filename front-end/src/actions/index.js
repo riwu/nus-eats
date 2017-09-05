@@ -3,7 +3,7 @@ import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
 
-export const getAllCanteens = () => (dispatch) => {
+export const getAllCanteens = (dispatch) => {
   api.getAllCanteens().then((canteens) => {
     dispatch({
       type: types.RECEIVE_CANTEENS,
@@ -12,7 +12,7 @@ export const getAllCanteens = () => (dispatch) => {
   });
 };
 
-export const getAllStalls = () => (dispatch) => {
+export const getAllStalls = (dispatch) => {
   api.getAllStalls().then((stalls) => {
     dispatch({
       type: types.RECEIVE_STALLS,
@@ -21,7 +21,7 @@ export const getAllStalls = () => (dispatch) => {
   });
 };
 
-export const getMeetings = () => (dispatch) => {
+export const getMeetings = (dispatch) => {
   api.getMeetings().then((meetings) => {
     dispatch({
       type: types.RECEIVE_MEETINGS,
@@ -47,6 +47,15 @@ export const setFbReady = () => ({
   type: types.SET_FB_READY,
 });
 
+export const getRatings = (dispatch) => {
+  api.getRatings().then((ratings) => {
+    dispatch({
+      type: types.RECEIVE_RATINGS,
+      ratings,
+    });
+  });
+};
+
 export const login = () => dispatch => new Promise((resolve, reject) => {
   dispatch({
     type: types.BEGIN_LOGIN,
@@ -61,6 +70,8 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           facebookToken,
           type: types.RECEIVE_ACCESS_TOKENS,
         });
+
+        dispatch(getRatings);
 
         fb.api('me')
           .then((user) => {

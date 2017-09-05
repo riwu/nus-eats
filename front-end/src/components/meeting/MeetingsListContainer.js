@@ -13,15 +13,15 @@ class MeetingsListContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  meetings: Object.values(state.meeting.meetings)
+const mapStateToProps = state => ({
+  meetings: Object.values(state.meeting.meetings),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchFeed: () => dispatch(getMeetings())
+const mapDispatchToProps = dispatch => ({
+  fetchFeed: () => dispatch(getMeetings),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MeetingsListContainer);

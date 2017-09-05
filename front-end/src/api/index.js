@@ -96,6 +96,7 @@ export default {
   cancelMeeting: id => destroy(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
+  getRatings: () => get('/users/ratings').then(ratings => ratings.ratings),
   updateRating: (id, rating) => put(`/stalls/${id}/ratings`, {
     rating: {
       value: rating,
