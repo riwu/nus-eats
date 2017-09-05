@@ -371,6 +371,8 @@ FORMAT: 1A
                             "10211829688110309",
                             "10211095965894685"
                         ],
+                        "title": "TGIF meetup",
+                        "description": "Birthday party",
                         "createdAt": "2017-08-30T07:37:36.629Z",
                         "updatedAt": "2017-08-30T07:40:31.301Z",
                         "deletedAt": null,
@@ -430,6 +432,8 @@ FORMAT: 1A
                         "attendees": [
                             "1524106284336095"
                         ],
+                        "title": "TGIF meetup",
+                        "description": "Birthday party",
                         "createdAt": "2017-08-30T07:37:36.629Z",
                         "updatedAt": "2017-08-30T07:40:31.301Z",
                         "deletedAt": null,
@@ -527,6 +531,8 @@ FORMAT: 1A
                         "startTime": "2017-09-22T16:00:00.000Z",
                         "endTime": "2017-09-22T16:00:00.000Z",
                         "attendees": [],
+                        "title": "TGIF meetup",
+                        "description": "Birthday party",
                         "createdAt": "2017-08-30T07:37:48.925Z",
                         "updatedAt": "2017-08-30T07:37:48.925Z",
                         "deletedAt": null,
@@ -588,6 +594,8 @@ FORMAT: 1A
                             "10211829688110309",
                             "10211095965894685"
                         ],
+                        "title": "TGIF meetup",
+                        "description": "Birthday party",
                         "createdAt": "2017-08-30T07:37:36.629Z",
                         "updatedAt": "2017-08-30T07:40:31.301Z",
                         "deletedAt": null,
@@ -649,6 +657,8 @@ FORMAT: 1A
                             "10211829688110309",
                             "10211095965894685"
                         ],
+                        "title": "TGIF meetup",
+                        "description": "Birthday party",
                         "createdAt": "2017-08-30T07:37:36.629Z",
                         "updatedAt": "2017-08-30T07:40:31.301Z",
                         "deletedAt": null,
@@ -660,6 +670,8 @@ FORMAT: 1A
                         "startTime": "2017-09-22T16:00:00.000Z",
                         "endTime": "2017-09-22T16:00:00.000Z",
                         "attendees": [],
+                        "title": "Sat meetup",
+                        "description": "Christmas party",
                         "createdAt": "2017-08-30T07:37:48.925Z",
                         "updatedAt": "2017-08-30T07:37:48.925Z",
                         "deletedAt": null,
@@ -721,6 +733,8 @@ FORMAT: 1A
                             "10211829688110309",
                             "10211095965894685"
                         ],
+                        "title": "TGIF meetup",
+                        "description": "Birthday party",
                         "createdAt": "2017-08-30T07:37:36.629Z",
                         "updatedAt": "2017-08-30T07:40:31.301Z",
                         "deletedAt": null,
@@ -734,6 +748,8 @@ FORMAT: 1A
                         "attendees": [
                             "1524106284336095"
                         ],
+                        "title": "Sat meetup",
+                        "description": "Christmas party",
                         "createdAt": "2017-08-30T07:38:20.711Z",
                         "updatedAt": "2017-08-30T07:38:20.711Z",
                         "deletedAt": null,
@@ -768,9 +784,9 @@ FORMAT: 1A
                 "message": "Unknown Sequelize error."
             }
 
-## Photo Collection [/users/{id}/photos]
+## Photo Collection [/users/photos]
 
-### (DONE) Get all photos uploaded by a User [GET]
+### (DONE) Get all Photos uploaded by a User [GET]
 
 + Request JSON
 
@@ -796,6 +812,35 @@ FORMAT: 1A
                     }
                 ]
             }
+
+## Ratings Collection [/users/ratings]
+
+### (DONE) Get all Ratings of a User [GET]
+
++ Request JSON
+
+    + Headers
+
+            Authorization: Bearer <jwt>
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "ratings": [
+                    {
+                        "id": 1,
+                        "value": 3
+                        "userId": 5,
+                        "stallId": 1,
+                        "createdAt": "2017-08-23T16:00:00.000Z",
+                        "updatedAt": "2017-08-23T16:00:00.000Z"
+                    }
+                ]
+            }
+
 
 # Group Photos
 
@@ -869,7 +914,9 @@ FORMAT: 1A
                 "appointment": {
                     "canteenId": 3,
                     "startTime": "2017-08-22 16:00:00+00",
-                    "endTime": "2017-08-22 18:00:00+00"
+                    "endTime": "2017-08-22 18:00:00+00",
+                    "title": "TGIF meetup",
+                    "description": "Birthday party"
                 }
             }
 
@@ -883,6 +930,8 @@ FORMAT: 1A
                     "startTime": "2017-08-22T16:00:00.000Z",
                     "endTime": "2017-08-22T18:00:00.000Z",
                     "canteenId": 3,
+                    "title": "TGIF meetup",
+                    "description": "Birthday party",
                     "updatedAt": "2017-08-26T14:53:36.864Z",
                     "createdAt": "2017-08-26T14:53:36.864Z",
                     "deletedAt": null
@@ -942,8 +991,10 @@ FORMAT: 1A
             {
                 "appointment": {
                     "canteenId": 7,
-                    "startTime": "2017-08-22 16:00:00+00"",
-                    "endTime": "2017-08-22 18:00:00+00""
+                    "startTime": "2017-08-22 16:00:00+00",
+                    "endTime": "2017-08-22 18:00:00+00",
+                    "title": "TGIF meetup",
+                    "description": "Birthday party"
                 }
             }
 
@@ -957,6 +1008,8 @@ FORMAT: 1A
                     "startTime": "2017-08-22T16:00:00.000Z",
                     "endTime": "2017-08-22T18:00:00.000Z",
                     "canteenId": 7,
+                    "title": "TGIF meetup",
+                    "description": "Birthday party",
                     "updatedAt": "2017-08-26T14:53:36.864Z",
                     "createdAt": "2017-08-26T14:53:36.864Z",
                     "deletedAt": null
@@ -1069,6 +1122,8 @@ FORMAT: 1A
                     "startTime": "2017-08-22T16:00:00.000Z",
                     "end_time": "2017-08-22T18:00:00.000Z",
                     "canteenId": 3,
+                    "title": "TGIF meetup",
+                    "description": "Birthday party",
                     "updatedAt": "2017-08-26T14:53:36.864Z",
                     "createdAt": "2017-08-26T14:53:36.864Z",
                     "deletedAt": null
@@ -1162,6 +1217,8 @@ FORMAT: 1A
                     "startTime": "2017-08-22T16:00:00.000Z",
                     "end_time": "2017-08-22T18:00:00.000Z",
                     "canteenId": 3,
+                    "title": "TGIF meetup",
+                    "description": "Birthday party",
                     "updatedAt": "2017-08-26T14:53:36.864Z",
                     "createdAt": "2017-08-26T14:53:36.864Z",
                     "deletedAt": null
