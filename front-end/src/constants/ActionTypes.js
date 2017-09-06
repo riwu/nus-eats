@@ -25,3 +25,4 @@ export const BEGIN_LOGIN = 'BEGIN_LOGIN';
 export const DONE_LOGIN = 'DONE_LOGIN';
 export const SET_MEETING_ID = 'SET_MEETING_ID';
 export const SET_GRANTED_PERMISSIONS = 'SET_GRANTED_PERMISSIONS';
+export const TOGGLE_FEED = 'TOGGLE_FEED';

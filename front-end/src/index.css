@@ -1,12 +1,6 @@
 body {
   margin: 0;
-  padding: 10px;
   font-family: sans-serif;
   background-color: #5d9cec;
-}
-
-@media (min-width: 768px) {
-  body {
-    padding: 10px 50px;
-  }
+  height: 100vh;
 }

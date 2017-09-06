@@ -31,6 +31,7 @@
 .NavigationBar .hamburger-container {
   margin-left: 24px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .NavigationBar .hamburger {

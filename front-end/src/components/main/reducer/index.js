@@ -12,6 +12,7 @@ import meeting from '../../meeting/reducer/meeting';
 import facebookUsers from '../../facebook/reducer/facebookUsers';
 import isLoggingIn from '../../facebook/reducer/isLoggingIn';
 import grantedPermissions from '../../facebook/reducer/grantedPermissions';
+import isFeedExpanded from './isFeedExpanded';
 
 const reducer = combineReducers({
   canteens,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   facebookUsers,
   isLoggingIn,
   grantedPermissions,
+  isFeedExpanded,
 });
 
 export default reducer;

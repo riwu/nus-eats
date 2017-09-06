@@ -5,9 +5,10 @@ import DetailedStallContainer from '../stall/DetailedStallContainer';
 import FilterButtonContainer from '../filter/FilterButtonContainer';
 import FilterPanelContainer from '../filter/FilterPanelContainer';
 import NavigationBarContainer from './NavigationBarContainer';
+import './MainPage.css';
 
 const MainPage = ({ match }) => (
-  <div>
+  <div className="MainPage">
     <NavigationBarContainer />
     <FilterButtonContainer />
     <FilterPanelContainer />
