@@ -20,24 +20,30 @@ const setCanteenId = (state = null, action) => {
   return state === null ? action.canteenId : null;
 };
 
-const initialNewMeetingState = { duration: moment.duration(60, 'minutes') };
-const updateNewMeeting = (state = initialNewMeetingState, action) => {
+const defaultTimes = [null, '12:00', '13:00'].map(time => moment(time, 'HH:mm'));
+const defaultDurations = [30, 60, 120].map(min => moment.duration(min, 'm'));
+const initialMeetingModifiers = defaultTimes.map((time, index) => ({
+  time,
+  duration: defaultDurations[index],
+}));
+
+const meetingModifier = (state = initialMeetingModifiers, action) => {
   switch (action.type) {
-    case UPDATE_NEW_MEETING_DATE:
-      return {
-        ...state,
-        date: action.date,
-      };
-    case UPDATE_NEW_MEETING_TIME:
-      return {
-        ...state,
-        time: action.time,
-      };
-    case UPDATE_NEW_MEETING_DURATION:
-      return {
-        ...state,
-        duration: action.duration,
-      };
+    case UPDATE_NEW_MEETING_DATE: {
+      const newState = [...state];
+      newState[0].date = action.date;
+      return newState;
+    }
+    case UPDATE_NEW_MEETING_TIME: {
+      const newState = [...state];
+      newState[action.index].time = action.time;
+      return newState;
+    }
+    case UPDATE_NEW_MEETING_DURATION: {
+      const newState = [...state];
+      newState[action.index].duration = action.duration;
+      return newState;
+    }
     default:
       return state;
   }
@@ -113,7 +119,7 @@ const setMeetings = (state = {}, action) => {
 
 const reducer = combineReducers({
   canteenId: setCanteenId,
-  newMeeting: updateNewMeeting,
+  meetingModifer: meetingModifier,
   meetings: setMeetings,
 });
 

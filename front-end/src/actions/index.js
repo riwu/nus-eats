@@ -169,14 +169,16 @@ export const updateNewMeetingDate = date => ({
   date,
 });
 
-export const updateNewMeetingTime = time => ({
+export const updateNewMeetingTime = (time, index) => ({
   type: types.UPDATE_NEW_MEETING_TIME,
   time,
+  index,
 });
 
-export const updateNewMeetingDuration = duration => ({
+export const updateNewMeetingDuration = (duration, index) => ({
   type: types.UPDATE_NEW_MEETING_DURATION,
   duration,
+  index,
 });
 
 export const getFacebookUser = userId => (dispatch) => {

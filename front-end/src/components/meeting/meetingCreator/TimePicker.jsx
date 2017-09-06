@@ -5,16 +5,16 @@ import 'rc-time-picker/assets/index.css';
 
 import Config from '../../../constants/Config';
 
-const TimePicker = ({ time, updateTime }) => (
+const TimePicker = ({ value, onUpdate }) => (
   <Picker
-    value={time}
-    onChange={updateTime}
+    value={value}
+    onChange={onUpdate}
     disabledMinutes={() => Config.MINUTES_TO_HIDE}
     showSecond={false}
     use12Hours
     hideDisabledOptions
     getPopupContainer={triggerNode => triggerNode.parentNode}
   />
-  );
+);
 
 export default TimePicker;
