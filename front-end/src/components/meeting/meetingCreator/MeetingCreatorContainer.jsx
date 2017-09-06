@@ -31,7 +31,7 @@ class MeetingCreatorContainer extends React.Component {
   render() {
     return (
       <MeetingCreator
-        meetings={this.props.meetingModifer}
+        meetings={this.props.meetingModifier}
       />
     );
   }
@@ -39,7 +39,7 @@ class MeetingCreatorContainer extends React.Component {
 
 const mapStateToProps = state => ({
   meetings: state.meeting.meetings,
-  meetingModifer: state.meeting.meetingModifer,
+  meetingModifier: state.meeting.meetingModifier.modifier,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -51,7 +51,7 @@ const mapDispatchToProps = dispatch => ({
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
   ...dispatchProps,
-  meetingModifer: stateProps.meetingModifer.map((meeting, index) => ({
+  meetingModifier: stateProps.meetingModifier.map((meeting, index) => ({
     ...meeting,
     onDateUpdate: dispatchProps.onDateUpdate,
     onTimeUpdate: newTime => dispatchProps.onTimeUpdate(newTime, index),

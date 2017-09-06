@@ -181,6 +181,16 @@ export const updateNewMeetingDuration = (duration, index) => ({
   index,
 });
 
+export const updateTimeModifierRadio = index => ({
+  type: types.UPDATE_TIME_MODIFER_RADIO,
+  index,
+});
+
+export const updateDurationModiferRadio = index => ({
+  type: types.UPDATE_DURATION_MODIFER_RADIO,
+  index,
+});
+
 export const getFacebookUser = userId => (dispatch) => {
   fb.api(userId)
     .then((user) => {

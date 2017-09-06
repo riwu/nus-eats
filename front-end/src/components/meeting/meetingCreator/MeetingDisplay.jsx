@@ -19,14 +19,16 @@ const MeetingDisplay = ({ meeting, cancelMeeting, updateMeeting, meetingId }) =>
       })}
     />
     <TimePicker
-      time={meeting.startTime}
+      value={meeting.startTime}
       updateTime={newTime => updateMeeting(meetingId, {
         ...meeting,
         startTime: getMergedDate(meeting.startTime, newTime),
       })}
     />
     <DurationPicker
-      duration={meeting.duration}
+      durations={[meeting.duration].map(duration => ({
+        value: duration,
+      }))}
       updateDuration={newDuration => updateMeeting(meetingId, {
         ...meeting,
         duration: newDuration,
