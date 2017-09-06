@@ -6,7 +6,7 @@ import RatingContainer from './RatingContainer';
 const Stall = ({ stall, canteenId }) => (
   <Link className="Stall" to={`/canteen/${canteenId}/stall/${stall.id}`}>
     <div
-      style={{ backgroundImage: "url('http://loremflickr.com/250/250/dog" }}
+      style={{ backgroundImage: `url('${stall.imageUrl}')` }}
       className="image-container"
     />
 

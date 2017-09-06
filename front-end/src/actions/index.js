@@ -1,4 +1,5 @@
 import moment from 'moment';
+import jwtDecode from 'jwt-decode';
 import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
@@ -69,6 +70,17 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           apiToken: token,
           facebookToken,
           type: types.RECEIVE_ACCESS_TOKENS,
+        });
+
+        const jwt = jwtDecode(token);
+        const currentUser = {
+          name: jwt.user.name,
+          id: jwt.user.id
+        };
+
+        dispatch({
+          user: currentUser,
+          type: types.RECEIVE_CURRENT_USER,
         });
 
         dispatch(getRatings);
@@ -238,3 +250,7 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
       });
     });
 };
+
+export const toggleFeed = () => ({
+  type: types.TOGGLE_FEED
+});

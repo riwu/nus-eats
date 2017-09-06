@@ -6,7 +6,81 @@ const { authenticateJwt } = require('../security/jwt');
 
 const router = express.Router();
 
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const download = require('image-downloader');
+
+var fs = require('fs'),
+request = require('request');
+
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
+const multerMiddleware = (s3) => {
+  return multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: process.env.S3_BUCKET,
+      contentType: multerS3.AUTO_CONTENT_TYPE,
+      key: function (req, file, cb) {
+        cb(null, 'default/' + req.params.photoId);
+      }
+    })
+  });
+}
+
 module.exports = (db, s3) => {
+
+  router.post('/:photoId', multerMiddleware(s3).single('photo'), asyncMiddleware(async (req, res, next) => {
+    const url = s3.getSignedUrl('getObject', {
+      Bucket: process.env.S3_BUCKET,
+      Key: 'default/' + req.params.photoId
+    });
+
+    res.json({url});
+  }));
+
+  router.get('/download', asyncMiddleware(async (req, res, next) => {
+    const stalls = await db['stall'].findAll({
+      order: [
+        ['name', 'ASC']
+      ],
+      attributes: {
+        include: [
+          [db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating']
+        ]
+      },
+      include: [{
+        model: db['rating'],
+        attributes: []
+      }],
+      group: ['stall.id']
+    });
+
+    stalls.map(async (stall) => {
+      stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
+        Bucket: process.env.S3_BUCKET,
+        Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
+      });
+
+      download(stall.dataValues.imageUrl, '~/Downloads' + stall.dataValues.uuid, () => {
+        console.log('Downloaded:' + stall.dataValues.uuid);
+      });
+
+      return stall;
+    });
+
+
+
+    res.send('ok');
+  }));
+
   router.get('/', asyncMiddleware(async (req, res, next) => {
     const stalls = await db['stall'].findAll({
       order: [
@@ -15,20 +89,24 @@ module.exports = (db, s3) => {
       attributes: {
         include: [
           [db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating']
-          // [db.sequelize.fn('MAX'), db.sequelize.col('photos.likedCount'), 'likedCount']
         ]
       },
       include: [{
         model: db['rating'],
         attributes: []
-      }, {
-        model: db['photo'],
-        attributes: {
-          include: [[db.sequelize.fn('cardinality', db.sequelize.col('photos.liked')), 'likedCount']]
-        }
       }],
-      group: ['stall.id', 'photos.uuid']
+      group: ['stall.id']
     });
+
+    stalls.map(stall => {
+      stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
+        Bucket: process.env.S3_BUCKET,
+        Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
+      });
+      delete stall.dataValues.uuid;
+      return stall;
+    });
+
     res.json({stalls});
   }));
 
@@ -47,6 +125,13 @@ module.exports = (db, s3) => {
     if (!stall) {
       throw Boom.notFound('Record not found.');
     }
+
+    stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
+      Bucket: process.env.S3_BUCKET,
+      Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
+    });
+    delete stall.dataValues.uuid;
+
     res.json({stall});
   }));
 

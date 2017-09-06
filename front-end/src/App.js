@@ -8,13 +8,15 @@ import history from './store/history';
 import { getAllCanteens, getAllStalls, getRatings } from './actions';
 import store from './store';
 
+import FeedContainer from './components/main/FeedContainer';
 import FacebookSDK from './components/facebook/FacebookSDKContainer';
 import MainPage from './components/main/MainPage';
-import Feed from './components/main/Feed';
 import PrivacyPolicy from './components/misc/PrivacyPolicy';
 import TermsOfService from './components/misc/TermsOfService';
 
 import * as GA from './google/analytics';
+
+import './App.css';
 
 store.dispatch(getAllCanteens);
 store.dispatch(getAllStalls);
@@ -24,14 +26,17 @@ function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div>
-          <Switch>
-            <Route exact path="/" component={MainPage} />
-            <Route path="feed" component={Feed} />
-            <Route path="/canteen/:canteenId" component={MainPage} />
-            <Route path="/privacy_policy" component={PrivacyPolicy} />
-            <Route path="/terms_of_service" component={TermsOfService} />
-          </Switch>
+        <div className="App">
+          <FeedContainer />
+
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={MainPage} />
+              <Route path="/canteen/:canteenId" component={MainPage} />
+              <Route path="/privacy_policy" component={PrivacyPolicy} />
+              <Route path="/terms_of_service" component={TermsOfService} />
+            </Switch>
+          </div>
           <FacebookSDK />
         </div>
       </ConnectedRouter>

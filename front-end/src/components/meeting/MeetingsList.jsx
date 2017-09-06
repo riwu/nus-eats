@@ -1,8 +1,9 @@
 import React from 'react';
 import MeetingsListItem from './MeetingsListItemContainer';
+import './MeetingsList.css';
 
 const MeetingsList = ({meetings}) => (
-  <div>
+  <div className="MeetingsList">
     {
       meetings.map((meeting) => (
         <MeetingsListItem key={meeting.id} meeting={meeting} />

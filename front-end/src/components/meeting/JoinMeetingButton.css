@@ -1,0 +1,15 @@
+.JoinMeetingButton {
+  text-transform: uppercase;
+  border: 1px solid #ff5334;
+  border-radius: 12px;
+  color: #ff5334;
+  width: 140px;
+}
+
+.JoinMeetingButton:hover,
+.JoinMeetingButton:active,
+.JoinMeetingButton:hover:active {
+  background-color: #ff5334;
+  color: #fff;
+  border: 1px solid #ff5334;
+}
