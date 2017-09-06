@@ -1,0 +1,76 @@
+.MeetingsListItem {
+  background-color: white;
+  border-radius: 12px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 35px;
+  color: #505050;
+}
+
+@media (min-width: 768px) {
+  .MeetingsListItem {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .MeetingsListItem > div {
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+}
+
+.MeetingsListItem .right-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.MeetingsListItem .description {
+  flex-basis: 0;
+  flex-grow: 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .MeetingsListItem .description {
+    flex-basis: auto;
+    flex-grow: 1;
+  }
+}
+
+.MeetingsListItem .buttons {
+  padding-top: 10px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .MeetingsListItem .buttons {
+    text-align: left;
+  }
+}
+
+.MeetingsListItem .title {
+  color: #5a97e6;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.MeetingsListItem .details {
+  border-left: 1px solid #000;
+  margin: 5px 0 22px 0;
+  padding: 2px 0 2px 9px;
+}
+
+.MeetingsListItem .attendees-count {
+  margin-bottom: 7px;
+}
+
+.MeetingsListItem .going {
+  color: #5794e1;
+}
+
+.MeetingsListItem .Attendees img {
+  margin-right: 5px;
+}
+

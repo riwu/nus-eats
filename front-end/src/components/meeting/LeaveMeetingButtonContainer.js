@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { unjoinMeeting } from '../../actions';
-import UnjoinMeetingButton from './UnjoinMeetingButton';
+import LeaveMeetingButton from './LeaveMeetingButton';
 
 const mapStateToProps = (state) => ({
   userId: state.currentUser.id
@@ -19,10 +19,10 @@ const mergeProps = (stateProps, { dispatch, ...dispatchProps }, ownProps) => ({
   }
 });
 
-const UnjoinMeetingButtonContainer = connect(
+const LeaveMeetingButtonContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
-)(UnjoinMeetingButton);
+)(LeaveMeetingButton);
 
-export default UnjoinMeetingButtonContainer;
+export default LeaveMeetingButtonContainer;
