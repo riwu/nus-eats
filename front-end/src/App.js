@@ -27,7 +27,7 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/" component={MainPage} />
-            <Route path="feed" component={Feed} />
+            <Route path="/feed" component={Feed} />
             <Route path="/canteen/:canteenId" component={MainPage} />
             <Route path="/privacy_policy" component={PrivacyPolicy} />
             <Route path="/terms_of_service" component={TermsOfService} />
