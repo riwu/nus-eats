@@ -7,6 +7,6 @@ body {
 
 @media (min-width: 768px) {
   body {
-    padding: 10px 50px;
+    padding: 10px 15%;
   }
 }
