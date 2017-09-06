@@ -6,7 +6,6 @@ const { authenticateJwt } = require('../security/jwt');
 
 const router = express.Router();
 
-
 module.exports = (db, s3) => {
 
   router.get('/', asyncMiddleware(async (req, res, next) => {
@@ -27,9 +26,9 @@ module.exports = (db, s3) => {
     });
 
     stalls.map(stall => {
-      stall.dataValues.url = s3.getSignedUrl('getObject', {
+      stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
         Bucket: process.env.S3_BUCKET,
-        Key: process.env.S3_DEFAULT_FOLDER + req.params.photoId
+        Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
       });
       delete stall.dataValues.uuid;
       return stall;
@@ -54,9 +53,9 @@ module.exports = (db, s3) => {
       throw Boom.notFound('Record not found.');
     }
 
-    stall.dataValues.url = s3.getSignedUrl('getObject', {
+    stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
       Bucket: process.env.S3_BUCKET,
-      Key: process.env.S3_DEFAULT_FOLDER + req.params.photoId
+      Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
     });
     delete stall.dataValues.uuid;
 
