@@ -10,6 +10,18 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const download = require('image-downloader');
 
+var fs = require('fs'),
+request = require('request');
+
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
+
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
+
 const multerMiddleware = (s3) => {
   return multer({
     storage: multerS3({
@@ -21,15 +33,6 @@ const multerMiddleware = (s3) => {
       }
     })
   });
-}
-
-async function downloadIMG(options) {
-  try {
-    const { filename, image } = await download.image(options)
-    console.log(filename) // => /path/to/dest/image.jpg
-  } catch (e) {
-    console.log(e.message);
-  }
 }
 
 module.exports = (db, s3) => {
@@ -66,12 +69,9 @@ module.exports = (db, s3) => {
         Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
       });
 
-      const options = {
-        url: stall.dataValues.imageUrl,
-        dest: '/Downloads/'                  // Save to /path/to/dest/image.jpg
-      }
-
-      await downloadIMG(options);
+      download(stall.dataValues.imageUrl, '~/Downloads' + stall.dataValues.uuid, () => {
+        console.log('Downloaded:' + stall.dataValues.uuid);
+      });
 
       return stall;
     });
