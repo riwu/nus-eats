@@ -1,0 +1,9 @@
+.MainPage {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .MainPage {
+    padding: 10px 50px;
+  }
+}

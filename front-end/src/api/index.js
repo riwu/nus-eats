@@ -1,4 +1,5 @@
 import moment from 'moment';
+import * as time from '../util/time';
 
 let store;
 
@@ -59,12 +60,10 @@ const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((meth
   }).then(processResponse);
 });
 
-const formatTime = time => time.format('YYYY-MM-DD HH:mm:ssZ').slice(0, -3);
-
 const getEndTime = (startTime, duration) => {
   const endTime = moment(startTime);
   endTime.add(duration);
-  return formatTime(endTime);
+  return time.format(endTime);
 };
 
 export default {
@@ -75,22 +74,38 @@ export default {
     [stall.id]: stall,
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
-  getMeetings: () => get('/users/friends/appointments/initiated/combined').then(({ appointments }) => appointments.reduce((obj, appointment) => ({
-    ...obj,
-    [appointment.id]: appointment,
-    duration: moment.duration(appointment.endTime.diff(appointment.startTime)),
-  }), {})),
+
+  getMeetings() {
+    return get('/users/friends/appointments/initiated/combined')
+      .then(({appointments}) => {
+        return appointments.reduce((obj, appointment) => {
+          const startTime = time.parse(appointment.startTime);
+          const endTime = time.parse(appointment.endTime);
+          const duration = moment.duration(endTime.diff(startTime));
+
+          obj[appointment.id] = {
+            ...appointment,
+            startTime,
+            endTime,
+            duration,
+          };
+
+          return obj;
+        }, {});
+      });
+  },
+
   createMeeting: ({ canteenId, startTime, duration }) => post('/appointments', {
     appointment: {
       canteenId,
-      startTime: formatTime(startTime),
+      startTime: time.format(startTime),
       endTime: getEndTime(startTime, duration),
     },
   }),
   updateMeeting: (id, { canteenId, startTime, duration }) => patch(`/appointments/${id}`, {
     appointment: {
       canteenId,
-      startTime: formatTime(startTime),
+      startTime: time.format(startTime),
       endTime: getEndTime(startTime, duration),
     },
   }),

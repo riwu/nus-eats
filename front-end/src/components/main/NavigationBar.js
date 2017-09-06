@@ -5,7 +5,7 @@ import LogoutButton from '../facebook/LogoutButtonContainer';
 import logo from '../../images/logo.jpg';
 import './NavigationBar.css';
 
-const NavigationBar = ({ currentUser, onLogin, onLogout }) => {
+const NavigationBar = ({ currentUser, toggleFeed, onLogin, onLogout }) => {
   let content;
 
   if (currentUser) {
@@ -32,7 +32,7 @@ const NavigationBar = ({ currentUser, onLogin, onLogout }) => {
             </span>
           </span>
         </OverlayTrigger>
-        <span className="hamburger-container">
+        <span onClick={ toggleFeed }className="hamburger-container">
           <Glyphicon className="hamburger" glyph="menu-hamburger" />
         </span>
       </div>

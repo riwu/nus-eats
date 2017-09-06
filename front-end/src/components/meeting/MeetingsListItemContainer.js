@@ -10,14 +10,14 @@ class MeetingsListItemContainer extends Component {
       this.props.getAllCanteens();
     }
 
-    if (this.props.isFbReady) {
+    if (this.props.isFacebookReady) {
       this.fetchFacebookUsers();
     }
   }
 
   componentDidUpdate(prevProps) {
     if (
-      (!prevProps.isFbReady && this.props.isFbReady) ||
+      (!prevProps.isFacebookReady && this.props.isFacebookReady) ||
       (!isEqual(prevProps.meeting.attendees, this.props.meeting.attendees))
     ) {
       this.fetchFacebookUsers();
@@ -64,7 +64,7 @@ class MeetingsListItemContainer extends Component {
 
 const mapStateToProps = (state) => ({
   canteens: state.canteens,
-  isFbReady: state.isFbReady,
+  isFacebookReady: state.isFacebookReady,
   facebookUsers: state.facebookUsers,
   currentUserId: state.currentUser.id
 });

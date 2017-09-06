@@ -238,3 +238,7 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
       });
     });
 };
+
+export const toggleFeed = () => ({
+  type: types.TOGGLE_FEED
+});

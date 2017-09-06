@@ -1,0 +1,15 @@
+.LeaveMeetingButton {
+  text-transform: uppercase;
+  border: 1px solid #5b98e8;
+  border-radius: 12px;
+  color: #5b98e8;
+  width: 140px;
+}
+
+.LeaveMeetingButton:hover,
+.LeaveMeetingButton:active,
+.LeaveMeetingButton:hover:active {
+  background-color: #5b98e8;
+  color: #fff;
+  border: 1px solid #5b98e8;
+}

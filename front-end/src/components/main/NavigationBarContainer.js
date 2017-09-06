@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { logout } from '../../actions';
+import { logout, toggleFeed } from '../../actions';
 import NavigationBar from './NavigationBar';
 
 const mapStateToProps = (state) => ({
@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLogout: () => dispatch(logout())
+  onLogout: () => dispatch(logout()),
+  toggleFeed: () => dispatch(toggleFeed()),
 });
 
 const NavigationBarContainer = connect(
