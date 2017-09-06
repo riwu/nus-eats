@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import ProfilePicture from '../facebook/ProfilePicture';
 import JoinMeetingButton from './JoinMeetingButtonContainer';
 import LeaveMeetingButton from './LeaveMeetingButtonContainer';
@@ -27,7 +28,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
 
   const date = meeting.startTime.format('MMMM D, YYYY');
   const startTime = meeting.startTime.format('HHmm');
-  const endTime = meeting.startTime.add(meeting.duration).format('HHmm');
+  const endTime = moment(meeting.startTime).add(meeting.duration).format('HHmm');
   const attendeesCount = meeting.attendees.length + 1;
 
   const displayedAttendees = [

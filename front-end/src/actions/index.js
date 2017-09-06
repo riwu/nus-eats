@@ -75,7 +75,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
         const jwt = jwtDecode(token);
         const currentUser = {
           name: jwt.user.name,
-          id: jwt.user.id
+          id: jwt.user.id,
         };
 
         dispatch({
@@ -152,7 +152,7 @@ export const createMeeting = meeting => (dispatch) => {
       id: result.appointment.id,
       tempId,
     });
-  });
+  }).catch(error => console.log(error));
   dispatch({
     type: types.CREATE_MEETING,
     ...meeting,
@@ -252,5 +252,5 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
 };
 
 export const toggleFeed = () => ({
-  type: types.TOGGLE_FEED
+  type: types.TOGGLE_FEED,
 });
