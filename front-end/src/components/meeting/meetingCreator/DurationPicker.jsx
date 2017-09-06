@@ -11,7 +11,7 @@ const DurationPicker = ({ durations, updateDurationModifierRadio, activeDuration
         <FormGroup key={index}>
           <Radio
             checked={index === activeDurationModifierIndex}
-            onClick={event => updateDurationModifierRadio(event.target.value)}
+            onChange={() => { updateDurationModifierRadio(index); }}
           />
           <FormControl
             className="inputBox"

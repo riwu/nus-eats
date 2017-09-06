@@ -194,12 +194,12 @@ export const updateNewMeetingDuration = (duration, index) => ({
 });
 
 export const updateTimeModifierRadio = index => ({
-  type: types.UPDATE_TIME_MODIFER_RADIO,
+  type: types.UPDATE_TIME_MODIFIER_RADIO,
   index,
 });
 
 export const updateDurationModifierRadio = index => ({
-  type: types.UPDATE_DURATION_MODIFER_RADIO,
+  type: types.UPDATE_DURATION_MODIFIER_RADIO,
   index,
 });
 

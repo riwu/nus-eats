@@ -5,8 +5,8 @@ import {
   UPDATE_NEW_MEETING_DATE,
   UPDATE_NEW_MEETING_TIME,
   UPDATE_NEW_MEETING_DURATION,
-  UPDATE_TIME_MODIFER_RADIO,
-  UPDATE_DURATION_MODIFER_RADIO,
+  UPDATE_TIME_MODIFIER_RADIO,
+  UPDATE_DURATION_MODIFIER_RADIO,
 } from '../../../constants/ActionTypes';
 
 const defaultTimes = [null, '12:00', '13:00'].map(time => moment(time, 'HH:mm'));
@@ -39,12 +39,12 @@ const meetingModifier = (state = initialMeetingModifiers, action) => {
 };
 
 const activeTimeModifierIndex = (state = 0, action) => {
-  if (action.type !== UPDATE_TIME_MODIFER_RADIO) return state;
+  if (action.type !== UPDATE_TIME_MODIFIER_RADIO) return state;
   return action.index;
 };
 
 const activeDurationModifierIndex = (state = 0, action) => {
-  if (action.type !== UPDATE_DURATION_MODIFER_RADIO) return state;
+  if (action.type !== UPDATE_DURATION_MODIFIER_RADIO) return state;
   return action.index;
 };
 

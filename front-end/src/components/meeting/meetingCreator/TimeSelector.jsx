@@ -10,7 +10,7 @@ const TimeSelector = ({ timings, activeTimeModifierIndex, updateTimeModifierRadi
         <FormGroup key={index}>
           <Radio
             checked={index === activeTimeModifierIndex}
-            onClick={event => updateTimeModifierRadio(event.target.value)}
+            onChange={() => updateTimeModifierRadio(index)}
           />
           <TimePicker
             value={time.value}
