@@ -198,7 +198,7 @@ export const updateTimeModifierRadio = index => ({
   index,
 });
 
-export const updateDurationModiferRadio = index => ({
+export const updateDurationModifierRadio = index => ({
   type: types.UPDATE_DURATION_MODIFER_RADIO,
   index,
 });

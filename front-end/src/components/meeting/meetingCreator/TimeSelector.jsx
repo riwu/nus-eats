@@ -3,12 +3,15 @@ import { Form, Radio, FormGroup } from 'react-bootstrap';
 import TimePicker from './TimePicker';
 
 // have to use index as key as time can be set to the same
-const TimeSelector = ({ timings }) => (
+const TimeSelector = ({ timings, activeTimeModifierIndex, updateTimeModifierRadio }) => (
   <div>
     <Form inline>
       {timings.map((time, index) => (
         <FormGroup key={index}>
-          <Radio />
+          <Radio
+            checked={index === activeTimeModifierIndex}
+            onClick={event => updateTimeModifierRadio(event.target.value)}
+          />
           <TimePicker
             value={time.value}
             onUpdate={value => time.onUpdate(value)}

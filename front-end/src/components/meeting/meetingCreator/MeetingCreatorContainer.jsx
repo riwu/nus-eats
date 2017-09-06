@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { updateNewMeetingDate, updateNewMeetingTime, updateNewMeetingDuration } from '../../../actions';
+import { updateNewMeetingDate, updateNewMeetingTime, updateNewMeetingDuration, updateTimeModifierRadio, updateDurationModifierRadio } from '../../../actions';
 import MeetingCreator from './MeetingCreator';
 
 import Config from '../../../constants/Config';
@@ -32,6 +32,10 @@ class MeetingCreatorContainer extends React.Component {
     return (
       <MeetingCreator
         meetings={this.props.meetingModifier}
+        updateTimeModifierRadio={this.props.updateTimeModifierRadio}
+        updateDurationModifierRadio={this.props.updateDurationModifierRadio}
+        activeTimeModifierIndex={this.props.activeTimeModifierIndex}
+        activeDurationModifierIndex={this.props.activeDurationModifierIndex}
       />
     );
   }
@@ -40,12 +44,16 @@ class MeetingCreatorContainer extends React.Component {
 const mapStateToProps = state => ({
   meetings: state.meeting.meetings,
   meetingModifier: state.meeting.meetingModifier.modifier,
+  activeTimeModifierIndex: state.meeting.meetingModifier.activeTimeModifierIndex,
+  activeDurationModifierIndex: state.meeting.meetingModifier.activeDurationModifierIndex,
 });
 
 const mapDispatchToProps = dispatch => ({
   onDateUpdate: date => dispatch(updateNewMeetingDate(date)),
   onTimeUpdate: (newTime, index) => dispatch(updateNewMeetingTime(newTime, index)),
   onDurationUpdate: (newDuration, index) => dispatch(updateNewMeetingDuration(newDuration, index)),
+  updateTimeModifierRadio: index => dispatch(updateTimeModifierRadio(index)),
+  updateDurationModifierRadio: index => dispatch(updateDurationModifierRadio(index)),
 });
 
 const mergeProps = (stateProps, dispatchProps) => ({

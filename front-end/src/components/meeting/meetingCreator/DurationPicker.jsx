@@ -4,12 +4,15 @@ import { Form, FormControl, Radio, FormGroup, ControlLabel } from 'react-bootstr
 import './DurationPicker.css';
 
 // have to use index as key as duration can be set to the same
-const DurationPicker = ({ durations }) => (
+const DurationPicker = ({ durations, updateDurationModifierRadio, activeDurationModifierIndex }) => (
   <div>
     <Form inline>
       {durations.map((duration, index) => (
         <FormGroup key={index}>
-          <Radio defaultChecked />
+          <Radio
+            checked={index === activeDurationModifierIndex}
+            onClick={event => updateDurationModifierRadio(event.target.value)}
+          />
           <FormControl
             className="inputBox"
             type="number"
