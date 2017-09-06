@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import moment from 'moment';
 
 import {
   UPDATE_NEW_MEETING_DATE,
@@ -9,14 +8,7 @@ import {
   UPDATE_DURATION_MODIFIER_RADIO,
 } from '../../../constants/ActionTypes';
 
-const defaultTimes = [null, '12:00', '13:00'].map(time => moment(time, 'HH:mm'));
-const defaultDurations = [30, 60, 120].map(min => moment.duration(min, 'm'));
-const initialMeetingModifiers = defaultTimes.map((time, index) => ({
-  time,
-  duration: defaultDurations[index],
-}));
-
-const meetingModifier = (state = initialMeetingModifiers, action) => {
+const meetingModifier = (state = [{}, {}, {}], action) => {
   switch (action.type) {
     case UPDATE_NEW_MEETING_DATE: {
       const newState = [...state];

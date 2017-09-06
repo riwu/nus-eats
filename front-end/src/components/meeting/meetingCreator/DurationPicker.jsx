@@ -17,7 +17,7 @@ const DurationPicker = ({ durations, updateDurationModifierRadio, activeDuration
             className="inputBox"
             type="number"
             min={0}
-            value={duration.value.asMinutes()}
+            value={duration.value ? duration.value.asMinutes() : ''}
             onChange={event => duration.onUpdate(moment.duration(Number(event.target.value), 'minutes'))}
             step={10}
           />
