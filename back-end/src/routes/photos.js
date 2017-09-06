@@ -49,49 +49,6 @@ module.exports = (db, s3) => {
     res.json({photo});
   }));
 
-  router.post('/:photoId/like', asyncMiddleware(async (req, res, next) => {
-    const photo = await db['photo'].findById(req.params.photoId);
-
-    if (!photo) {
-      throw Boom.notFound('Record not found.');
-    }
-
-    photo.liked.forEach(user => {
-      if (user == req.user.id) {
-        throw Boom.forbidden('User has already liked photo.');
-      }
-    });
-
-    photo.liked.push(req.user.id);
-
-    await photo.update({liked: photo.liked});
-
-    photo.dataValues.url = s3.getSignedUrl('getObject', {
-      Bucket: process.env.S3_BUCKET,
-      Key: photo.uuid
-    });
-
-    res.json({photo});
-  }));
-
-  router.post('/:photoId/unlike', asyncMiddleware(async (req, res, next) => {
-    const photo = await db['photo'].findById(req.params.photoId);
-
-    if (!photo) {
-      throw Boom.notFound('Record not found.');
-    }
-
-    removeElement(photo.liked, req.user.id);
-    await photo.update({liked: photo.liked});
-
-    photo.dataValues.url = s3.getSignedUrl('getObject', {
-      Bucket: process.env.S3_BUCKET,
-      Key: photo.uuid
-    });
-
-    res.json({photo});
-  }));
-
   router.delete('/:photoId', asyncMiddleware(async (req, res, next) => {
     const photo = await db['photo'].findById(req.params.photoId);
 

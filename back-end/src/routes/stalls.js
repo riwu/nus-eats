@@ -6,7 +6,9 @@ const { authenticateJwt } = require('../security/jwt');
 
 const router = express.Router();
 
+
 module.exports = (db, s3) => {
+
   router.get('/', asyncMiddleware(async (req, res, next) => {
     const stalls = await db['stall'].findAll({
       order: [
@@ -15,20 +17,24 @@ module.exports = (db, s3) => {
       attributes: {
         include: [
           [db.sequelize.fn('AVG', db.sequelize.col('ratings.value')), 'averageRating']
-          // [db.sequelize.fn('MAX'), db.sequelize.col('photos.likedCount'), 'likedCount']
         ]
       },
       include: [{
         model: db['rating'],
         attributes: []
-      }, {
-        model: db['photo'],
-        attributes: {
-          include: [[db.sequelize.fn('cardinality', db.sequelize.col('photos.liked')), 'likedCount']]
-        }
       }],
-      group: ['stall.id', 'photos.uuid']
+      group: ['stall.id']
     });
+
+    stalls.map(stall => {
+      stall.dataValues.url = s3.getSignedUrl('getObject', {
+        Bucket: process.env.S3_BUCKET,
+        Key: process.env.S3_DEFAULT_FOLDER + req.params.photoId
+      });
+      delete stall.dataValues.uuid;
+      return stall;
+    });
+
     res.json({stalls});
   }));
 
@@ -47,6 +53,13 @@ module.exports = (db, s3) => {
     if (!stall) {
       throw Boom.notFound('Record not found.');
     }
+
+    stall.dataValues.url = s3.getSignedUrl('getObject', {
+      Bucket: process.env.S3_BUCKET,
+      Key: process.env.S3_DEFAULT_FOLDER + req.params.photoId
+    });
+    delete stall.dataValues.uuid;
+
     res.json({stall});
   }));
 

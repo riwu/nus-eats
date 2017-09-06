@@ -123,16 +123,7 @@ FORMAT: 1A
                         "updatedAt": "2017-08-23T16:00:00.000Z",
                         "canteenId": 1,
                         "averageRating": 2.75
-                        "image": {
-                            "id": 1,
-                            "url": "/images/image.jpeg",
-                            "mimetype": "image/jpeg",
-                            "likedUsers": [3, 4, 45, 47, 52],
-                            "userId": 5,
-                            "stallId": 1,
-                            "createdAt": "2017-08-23T16:00:00.000Z",
-                            "updatedAt": "2017-08-23T16:00:00.000Z"
-                        }
+                        "url": "https:www.image.com/image.jpeg"
                     }
                 ]
             }
@@ -185,7 +176,8 @@ FORMAT: 1A
                     "createdAt": "2017-08-23T16:00:00.000Z",
                     "updatedAt": "2017-08-23T16:00:00.000Z",
                     "canteenId": 1,
-                    "averageRating": 2.75
+                    "averageRating": 2.75,
+                    "url": "https:www.image.com/image.jpeg"
                 }
             }
 
@@ -333,7 +325,6 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "url": "/images/image.jpeg",
-                        "likedUsers": [3, 4, 45, 47, 52],
                         "userId": 5,
                         "stallId": 1,
                         "createdAt": "2017-08-23T16:00:00.000Z",
@@ -803,8 +794,7 @@ FORMAT: 1A
                 "images": [
                     {
                         "id": 1,
-                        "url": "/images/image.jpeg"
-                        "likedUsers": [3, 4, 45, 47, 52],
+                        "url": "/images/image.jpeg",
                         "userId": 5,
                         "stallId": 1,
                         "createdAt": "2017-08-23T16:00:00.000Z",
@@ -856,31 +846,6 @@ FORMAT: 1A
             Accept: multipart/form-data
 
 + Response 201 (application/json)
-
-## Like Photo [/photos/{id}/like]
-
-### (DONE) Like a Photo [POST]
-
-+ Request JSON
-
-    + Headers
-
-            Authorization: Bearer <jwt>
-            Accept: multipart/form-data
-
-+ Response 200 (application/json)
-
-## Like Photo [/photos/{id}/unlike]
-### (DONE) Unlike a Photo [POST]
-
-+ Request JSON
-
-    + Headers
-
-            Authorization: Bearer <jwt>
-            Accept: multipart/form-data
-
-+ Response 200 (application/json)
 
 ## Delete Photo [/photos/{id}/]
 ### (DONE) Delete a Photo [POST]

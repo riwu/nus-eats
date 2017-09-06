@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    liked: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      defaultValue: []
     }
   });
 
