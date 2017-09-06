@@ -15,6 +15,7 @@ const TimeSelector = ({ timings, activeTimeModifierIndex, updateTimeModifierRadi
           <TimePicker
             value={time.value}
             onUpdate={value => time.onUpdate(value)}
+            updateTimeModifierRadio={() => updateTimeModifierRadio(index)}
           />
         </FormGroup>
         ))}

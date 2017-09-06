@@ -20,6 +20,7 @@ const DurationPicker = ({ durations, updateDurationModifierRadio, activeDuration
             value={duration.value ? duration.value.asMinutes() : ''}
             onChange={event => duration.onUpdate(moment.duration(Number(event.target.value), 'minutes'))}
             step={10}
+            onClick={() => { updateDurationModifierRadio(index); }}
           />
           <ControlLabel>Minutes</ControlLabel>
         </FormGroup>

@@ -5,7 +5,7 @@ import 'rc-time-picker/assets/index.css';
 
 import Config from '../../../constants/Config';
 
-const TimePicker = ({ value, onUpdate }) => (
+const TimePicker = ({ value, onUpdate, updateTimeModifierRadio }) => (
   <Picker
     value={value}
     onChange={onUpdate}
@@ -14,6 +14,7 @@ const TimePicker = ({ value, onUpdate }) => (
     use12Hours
     hideDisabledOptions
     getPopupContainer={triggerNode => triggerNode.parentNode}
+    onOpen={updateTimeModifierRadio}
   />
 );
 
