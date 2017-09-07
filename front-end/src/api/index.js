@@ -60,11 +60,7 @@ const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((meth
   }).then(processResponse);
 });
 
-const getEndTime = (startTime, duration) => {
-  const endTime = moment(startTime);
-  endTime.add(duration);
-  return time.format(endTime);
-};
+const getEndTime = (startTime, duration) => time.format(moment(startTime).add(duration));
 
 export default {
   setStore: (s) => { store = s; },
@@ -77,22 +73,20 @@ export default {
 
   getMeetings() {
     return get('/users/friends/appointments/initiated/combined')
-      .then(({appointments}) => {
-        return appointments.reduce((obj, appointment) => {
-          const startTime = time.parse(appointment.startTime);
-          const endTime = time.parse(appointment.endTime);
-          const duration = moment.duration(endTime.diff(startTime));
+      .then(({ appointments }) => appointments.reduce((obj, appointment) => {
+        const startTime = time.parse(appointment.startTime);
+        const endTime = time.parse(appointment.endTime);
+        const duration = moment.duration(endTime.diff(startTime));
 
-          obj[appointment.id] = {
-            ...appointment,
-            startTime,
-            endTime,
-            duration,
-          };
+        obj[appointment.id] = {
+          ...appointment,
+          startTime,
+          endTime,
+          duration,
+        };
 
-          return obj;
-        }, {});
-      });
+        return obj;
+      }, {}));
   },
 
   createMeeting: ({ canteenId, startTime, duration }) => post('/appointments', {

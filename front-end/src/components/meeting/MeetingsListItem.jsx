@@ -1,38 +1,38 @@
 import React from 'react';
+import moment from 'moment';
 import ProfilePicture from '../facebook/ProfilePicture';
 import JoinMeetingButton from './JoinMeetingButtonContainer';
 import LeaveMeetingButton from './LeaveMeetingButtonContainer';
 import './MeetingsListItem.css';
 
-const Attendees = ({attendees}) => (
+const Attendees = ({ attendees }) => (
   <span className="Attendees">
     {
-      attendees.map((user) => <ProfilePicture key={user.id} user={user} size={30}/>)
+      attendees.map(user => <ProfilePicture key={user.id} user={user} size={30} />)
     }
   </span>
 );
 
-const MeetingsListItem = ({meeting, currentUserId}) => {
+const MeetingsListItem = ({ meeting, currentUserId }) => {
   const isAttending = (meeting.userId === currentUserId) ||
-                      meeting.attendees.findIndex(({id}) => id === currentUserId) !== -1;
+                      meeting.attendees.findIndex(({ id }) => id === currentUserId) !== -1;
 
   const renderJoinButton = () => {
     if (meeting.userId === currentUserId) {
       return undefined;
-    } else if (meeting.attendees.findIndex(({id}) => id === currentUserId) !== -1) {
+    } else if (meeting.attendees.findIndex(({ id }) => id === currentUserId) !== -1) {
       return <LeaveMeetingButton meetingId={meeting.id} />;
-    } else {
-      return <JoinMeetingButton meetingId={meeting.id} />;
     }
+    return <JoinMeetingButton meetingId={meeting.id} />;
   };
 
   const date = meeting.startTime.format('MMMM D, YYYY');
   const startTime = meeting.startTime.format('HHmm');
-  const endTime = meeting.endTime.format('HHmm');
+  const endTime = moment(meeting.startTime).add(meeting.duration).format('HHmm');
   const attendeesCount = meeting.attendees.length + 1;
 
   const displayedAttendees = [
-    ...meeting.attendees.slice(0, 4)
+    ...meeting.attendees.slice(0, 4),
   ];
 
   if (meeting.user.id) {
@@ -60,7 +60,7 @@ const MeetingsListItem = ({meeting, currentUserId}) => {
             { isAttending && <span className="going"> (You are going)</span> }
           </div>
           <div>
-            <Attendees attendees={ displayedAttendees } />
+            <Attendees attendees={displayedAttendees} />
           </div>
         </div>
       </div>

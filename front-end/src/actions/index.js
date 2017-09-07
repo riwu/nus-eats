@@ -75,7 +75,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
         const jwt = jwtDecode(token);
         const currentUser = {
           name: jwt.user.name,
-          id: jwt.user.id
+          id: jwt.user.id,
         };
 
         dispatch({
@@ -152,7 +152,7 @@ export const createMeeting = meeting => (dispatch) => {
       id: result.appointment.id,
       tempId,
     });
-  });
+  }).catch(error => console.log(error));
   dispatch({
     type: types.CREATE_MEETING,
     ...meeting,
@@ -181,14 +181,26 @@ export const updateNewMeetingDate = date => ({
   date,
 });
 
-export const updateNewMeetingTime = time => ({
+export const updateNewMeetingTime = (time, index) => ({
   type: types.UPDATE_NEW_MEETING_TIME,
   time,
+  index,
 });
 
-export const updateNewMeetingDuration = duration => ({
+export const updateNewMeetingDuration = (duration, index) => ({
   type: types.UPDATE_NEW_MEETING_DURATION,
   duration,
+  index,
+});
+
+export const updateTimeModifierRadio = index => ({
+  type: types.UPDATE_TIME_MODIFIER_RADIO,
+  index,
+});
+
+export const updateDurationModifierRadio = index => ({
+  type: types.UPDATE_DURATION_MODIFIER_RADIO,
+  index,
 });
 
 export const getFacebookUser = userId => (dispatch) => {
@@ -240,5 +252,5 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
 };
 
 export const toggleFeed = () => ({
-  type: types.TOGGLE_FEED
+  type: types.TOGGLE_FEED,
 });
