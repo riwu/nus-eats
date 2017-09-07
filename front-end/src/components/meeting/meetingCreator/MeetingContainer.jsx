@@ -3,13 +3,15 @@ import Meeting from './Meeting';
 import { toggleMeetingWindow, createMeeting } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => {
-  const meetingModifier = state.meeting.meetingModifier;
+  const meetingCreator = state.meeting.meetingModifier;
   return ({
     canteen: ownProps.canteen,
     isOpen: state.meeting.canteenId === ownProps.canteen.id,
-    newMeetingDate: meetingModifier.modifier[0].date,
-    newMeetingTime: meetingModifier.modifier[meetingModifier.activeTimeModifierIndex].time,
-    newMeetingDuration: meetingModifier.modifier[meetingModifier.activeDurationModifierIndex].duration,
+    newMeetingDate: meetingCreator.modifier[0].date,
+    newMeetingTime: meetingCreator.modifier[meetingCreator.activeTimeModifierIndex].time,
+    newMeetingDuration: meetingCreator.modifier[meetingCreator.activeDurationModifierIndex].duration,
+    title: meetingCreator.title,
+    description: meetingCreator.description,
   });
 };
 

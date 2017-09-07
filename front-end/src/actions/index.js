@@ -193,6 +193,16 @@ export const updateNewMeetingDuration = (duration, index) => ({
   index,
 });
 
+export const updateMeetingCreatorTitle = title => ({
+  type: types.UPDATE_MEETING_CREATOR_TITLE,
+  title,
+});
+
+export const updateMeetingCreatorDescription = description => ({
+  type: types.UPDATE_MEETING_CREATOR_DESCRIPTION,
+  description,
+});
+
 export const updateTimeModifierRadio = index => ({
   type: types.UPDATE_TIME_MODIFIER_RADIO,
   index,

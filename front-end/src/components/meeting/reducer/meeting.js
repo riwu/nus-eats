@@ -27,6 +27,8 @@ const setMeetings = (state = {}, action) => {
           canteenId: action.canteenId,
           startTime: action.startTime,
           duration: action.duration,
+          title: action.title,
+          description: action.description,
           isActive: true,
           attendees: [],
         },
