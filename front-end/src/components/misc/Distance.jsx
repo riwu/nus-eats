@@ -25,7 +25,6 @@ const Distance = ({ isAvailable, permission, initializeGeolocation, coordinates,
     return null;
   }
 
-  let content;
   if (permission === 'unknown') {
     return (
       <div className="Distance prompt">
