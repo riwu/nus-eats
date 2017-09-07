@@ -9,12 +9,12 @@ import { getAllCanteens, getAllStalls, getRatings } from './actions';
 import store from './store';
 
 import FeedContainer from './components/main/FeedContainer';
-import FacebookSDK from './components/facebook/FacebookSDKContainer';
 import MainPage from './components/main/MainPage';
 import PrivacyPolicy from './components/misc/PrivacyPolicy';
 import TermsOfService from './components/misc/TermsOfService';
 
 import * as GA from './google/analytics';
+import FB from './fb';
 
 import './App.css';
 
@@ -37,13 +37,13 @@ function App() {
               <Route path="/terms_of_service" component={TermsOfService} />
             </Switch>
           </div>
-          <FacebookSDK />
         </div>
       </ConnectedRouter>
     </Provider>
   );
 }
 
+FB.initialize();
 GA.initialize(process.env.REACT_APP_GA_TRACKING_CODE);
 
 export default App;
