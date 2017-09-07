@@ -11,7 +11,7 @@ const DetailedStall = ({ stall, closeModal }) => (
     <Modal.Body>
       {stall ? stall.description : null}
       <div>Your rating:</div>
-      {stall ? <RatingContainer useAvgRating={false} stall={stall} /> : null }
+      {stall ? <RatingContainer stallId={stall.id} /> : null }
       {stall && <FacebookCommentsContainer href={`${window.location.origin}/stalls/${stall.id}`} />}
     </Modal.Body>
     <Modal.Footer>

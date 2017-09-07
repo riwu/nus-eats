@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Stall.css';
-import RatingContainer from './RatingContainer';
+import Rating from './Rating';
 
 const Stall = ({ stall, canteenId }) => (
   <Link className="Stall" to={`/canteen/${canteenId}/stall/${stall.id}`}>
@@ -14,7 +14,7 @@ const Stall = ({ stall, canteenId }) => (
 
     <div className="content-container">
       <div>{stall.name}</div>
-      <RatingContainer rating={Number(stall.averageRating)} useAvgRating />
+      <Rating value={Number(stall.averageRating)} readonly />
     </div>
   </Link>
 );

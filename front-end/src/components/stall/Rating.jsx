@@ -6,14 +6,14 @@ import './Rating.css';
 const emptyStar = <Glyphicon className="rating-star star-empty" glyph="star" />;
 const fullStar = <Glyphicon className="rating-star star-full" glyph="star" />;
 
-const ratingComponent = ({ useAvgRating, rating, changeRating, stallId }) => (
+const RatingComponent = ({ readonly, value, changeRating }) => (
   <Rating
-    initialRate={rating}
-    readonly={useAvgRating}
+    initialRate={value}
+    readonly={readonly}
     empty={emptyStar}
     full={fullStar}
-    onChange={rate => changeRating(stallId, rate)}
+    onChange={changeRating}
   />
 );
 
-export default ratingComponent;
+export default RatingComponent;

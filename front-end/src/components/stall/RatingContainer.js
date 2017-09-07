@@ -2,13 +2,14 @@ import { connect } from 'react-redux';
 import Rating from './Rating';
 import { changeRating } from '../../actions';
 
-const mapStateToProps = (state, ownProps) => {
-  const stall = ownProps.stall;
-  return {
-    rating: ownProps.useAvgRating ? ownProps.rating : state.userRatings[stall.id],
-    readonly: ownProps.useAvgRating,
-    stallId: stall ? stall.id : null,
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  value: state.userRatings[ownProps.stallId],
+  readonly: false,
+  stallId: ownProps.stallId,
+});
 
-export default connect(mapStateToProps, { changeRating })(Rating);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  changeRating: rating => dispatch(changeRating(ownProps.stallId, rating)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Rating);
