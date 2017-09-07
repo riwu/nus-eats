@@ -42,7 +42,7 @@ app.use('/authentication', authentication);
 app.use('/canteens', canteens);
 app.use('/stalls', stalls);
 app.use('/users', authenticateJwt(passport), users);
-app.use('/appointments', authenticateJwt(passport), appointments);
+app.use('/appointments', appointments);
 app.use('/photos', authenticateJwt(passport), photos);
 
 // Catch 404 and forward to error handler
