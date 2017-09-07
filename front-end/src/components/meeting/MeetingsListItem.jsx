@@ -3,6 +3,7 @@ import moment from 'moment';
 import ProfilePicture from '../facebook/ProfilePicture';
 import JoinMeetingButton from './JoinMeetingButtonContainer';
 import LeaveMeetingButton from './LeaveMeetingButtonContainer';
+import ShareMeetingButton from './ShareMeetingButtonContainer';
 import './MeetingsListItem.css';
 
 const Attendees = ({ attendees }) => (
@@ -40,7 +41,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
   }
 
   return (
-    <div className="MeetingsListItem">
+    <div className={ isAttending ? 'MeetingsListItem joined' : 'MeetingsListItem' }>
       <div className="left-container">
         <div className="title">
           { meeting.title }
@@ -72,6 +73,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
 
         <div className="buttons">
           { renderJoinButton() }
+          <ShareMeetingButton meeting={ meeting } />
         </div>
       </div>
     </div>
