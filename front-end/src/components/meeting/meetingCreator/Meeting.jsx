@@ -6,7 +6,7 @@ import getMergedDate from '../../../util/getMergedDate';
 
 const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
    newMeetingDate, newMeetingTime, newMeetingDuration, title, description, titlePlaceholder,
-   isLoggedIn, login }) => (
+   isLoggedIn, login, userId }) => (
      <div>
        <Button
          onClick={toggleMeetingWindow}
@@ -35,6 +35,7 @@ const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMe
                  duration: newMeetingDuration,
                  title: title.trim() || titlePlaceholder,
                  description,
+                 userId,
                });
                if (!isLoggedIn) {
                  login().then(() => {
