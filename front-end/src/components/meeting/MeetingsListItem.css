@@ -27,27 +27,52 @@
 }
 
 .MeetingsListItem .description {
-  flex-basis: 0;
-  flex-grow: 0;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .MeetingsListItem .description {
-    flex-basis: auto;
-    flex-grow: 1;
-  }
+  flex-basis: auto;
+  flex-grow: 1;
 }
 
 .MeetingsListItem .buttons {
   padding-top: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 768px) {
   .MeetingsListItem .buttons {
     text-align: left;
   }
+}
+
+.MeetingsListItem .btn {
+  text-transform: uppercase;
+  border: 1px solid #ff5334;
+  border-radius: 12px;
+  color: #ff5334;
+  width: 140px;
+  margin-bottom: 5px;
+}
+
+.MeetingsListItem .btn:hover,
+.MeetingsListItem .btn:active,
+.MeetingsListItem .btn:hover:active {
+  background-color: #ff5334;
+  color: #fff;
+  border: 1px solid #ff5334;
+}
+
+.MeetingsListItem.joined .btn {
+  border: 1px solid #5b98e8;
+  color: #5b98e8;
+}
+
+.MeetingsListItem.joined .btn:hover,
+.MeetingsListItem.joined .btn:active,
+.MeetingsListItem.joined .btn:hover:active {
+  background-color: #5b98e8;
+  color: #fff;
+  border: 1px solid #5b98e8;
 }
 
 .MeetingsListItem .title {

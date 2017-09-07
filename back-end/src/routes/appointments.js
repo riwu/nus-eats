@@ -1,13 +1,25 @@
 const express = require('express');
 const Boom = require('boom');
+const passport = require('passport');
 const asyncMiddleware = require('../utilities/async');
 const removeElement = require('../utilities/array');
+const { authenticateJwt } = require('../security/jwt');
 
 const router = express.Router();
 
 module.exports = (db) => {
 
-  router.post('/', asyncMiddleware(async (req, res, next) => {
+  router.get('/:appointmentId', asyncMiddleware(async (req, res, next) => {
+    const appointment = await db['appointment'].findById(req.params.appointmentId);
+
+    if (!appointment) {
+      throw Boom.notFound('Record not found.');
+    }
+
+    res.json({appointment});
+  }));
+
+  router.post('/', authenticateJwt(passport), asyncMiddleware(async (req, res, next) => {
     const appointment = await db['appointment'].create({
       userId: req.user.id,
       startTime: req.body.appointment.startTime,
@@ -19,7 +31,7 @@ module.exports = (db) => {
     res.status(201).json({appointment});
   }));
 
-  router.post('/:appointmentId/join', asyncMiddleware(async (req, res, next) => {
+  router.post('/:appointmentId/join', authenticateJwt(passport), asyncMiddleware(async (req, res, next) => {
     const appointment = await db['appointment'].findById(req.params.appointmentId);
 
     if (!appointment) {
@@ -42,7 +54,7 @@ module.exports = (db) => {
     res.json({appointment});
   }));
 
-  router.post('/:appointmentId/unjoin', asyncMiddleware(async (req, res, next) => {
+  router.post('/:appointmentId/unjoin',authenticateJwt(passport),  asyncMiddleware(async (req, res, next) => {
     const appointment = await db['appointment'].findById(req.params.appointmentId);
 
     if (!appointment) {
@@ -54,7 +66,7 @@ module.exports = (db) => {
     res.json({appointment});
   }));
 
-  router.patch('/:appointmentId', asyncMiddleware(async (req, res, next) => {
+  router.patch('/:appointmentId', authenticateJwt(passport), asyncMiddleware(async (req, res, next) => {
     const appointment = await db['appointment'].findById(req.params.appointmentId);
 
     if (!appointment) {
@@ -75,7 +87,7 @@ module.exports = (db) => {
     res.json({appointment});
   }));
 
-  router.delete('/:appointmentId', asyncMiddleware(async (req, res, next) => {
+  router.delete('/:appointmentId', authenticateJwt(passport), asyncMiddleware(async (req, res, next) => {
     const appointment = await db['appointment'].findById(req.params.appointmentId);
 
     if (!appointment) {
