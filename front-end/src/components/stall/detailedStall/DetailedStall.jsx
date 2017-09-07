@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import FacebookCommentsContainer from '../facebook/FacebookCommentsContainer';
-import RatingContainer from './RatingContainer';
+import FacebookCommentsContainer from '../../facebook/FacebookCommentsContainer';
+import RatingContainer from '../RatingContainer';
 
 const DetailedStall = ({ stall, closeModal }) => (
   <Modal show={!!stall} onHide={closeModal}>

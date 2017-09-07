@@ -5,7 +5,7 @@ import { routerMiddleware } from 'react-router-redux';
 import history from './history';
 
 import { get, set } from './local_storage';
-import reducer from '../components/main/reducer/index';
+import reducer from '../components/main/reducer';
 import api from '../api';
 import fb from '../fb';
 
