@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import placeholder from '../../images/dog.jpg';
 import './CanteenHeader.css';
 
 const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingComponent }) => (
   <div className="CanteenHeader">
     <div
-      style={{ backgroundImage: "url('http://loremflickr.com/500/500/dog')" }}
+      style={{ backgroundImage: `url('${placeholder}')` }}
       className="image-container"
     />
 
