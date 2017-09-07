@@ -1,5 +1,4 @@
 import moment from 'moment';
-import jwtDecode from 'jwt-decode';
 import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
@@ -72,32 +71,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           type: types.RECEIVE_ACCESS_TOKENS,
         });
 
-        const jwt = jwtDecode(token);
-        const currentUser = {
-          name: jwt.user.name,
-          id: jwt.user.id,
-        };
-
-        dispatch({
-          user: currentUser,
-          type: types.RECEIVE_CURRENT_USER,
-        });
-
         dispatch(getRatings);
-
-        fb.api('me')
-          .then((user) => {
-            dispatch({
-              user,
-              type: types.RECEIVE_CURRENT_USER,
-            });
-
-            dispatch({
-              type: types.DONE_LOGIN,
-            });
-
-            resolve();
-          });
 
         fb.api('me/permissions')
           .then((response) => {
@@ -108,6 +82,12 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
               type: types.SET_GRANTED_PERMISSIONS,
               permissions: new Set(permissions),
             });
+
+            dispatch({
+              type: types.DONE_LOGIN,
+            });
+
+            resolve();
           });
       });
     } else {
