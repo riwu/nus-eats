@@ -1,17 +1,29 @@
-.MeetingCreator {
+.pickers {
   display: flex;
   text-align: center;
 }
 
-.MeetingCreator .picker {
+.pickers .picker {
   border: 1px solid #ddd;
   background: #FDFDFD;
   margin: 5px;
 }
 
-.MeetingCreator .input {
+.pickers .picker .text {
+  font-weight: bold;
 }
 
-.MeetingCreator .picker .text {
-  font-weight: bold;
+.close {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+  height: 16px;
+  margin: auto;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.formInput {
+  width: 100%;
 }

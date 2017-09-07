@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, ButtonGroup, Glyphicon } from 'react-bootstrap';
 import TimeSelector from './TimeSelector';
 import DurationPicker from './DurationPicker';
 
@@ -12,7 +12,7 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
   activeDurationModifierIndex, updateDurationModifierRadio, titlePlaceholder,
   title, description, updateMeetingCreatorTitle, updateMeetingCreatorDescription }) => (
     <div>
-      <div className="MeetingCreator">
+      <div className="pickers">
         <div className="picker">
           <div className="text">Select Date</div>
           <DayPicker
@@ -46,22 +46,36 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
         </div>
       </div>
 
-      <FormGroup className="input">
+      <FormGroup>
         <ControlLabel>Title</ControlLabel>
-        <FormControl
-          value={title}
-          placeholder={titlePlaceholder}
-          onChange={event => updateMeetingCreatorTitle(event.target.value)}
-        />
+        <ButtonGroup className="formInput">
+          <FormControl
+            value={title}
+            placeholder={titlePlaceholder}
+            onChange={event => updateMeetingCreatorTitle(event.target.value)}
+          />
+          <Glyphicon
+            className="close"
+            glyph="remove-sign"
+            onClick={() => updateMeetingCreatorTitle('')}
+          />
+        </ButtonGroup>
       </FormGroup>
-      <FormGroup className="picker">
+      <FormGroup>
         <ControlLabel>Description</ControlLabel>
-        <FormControl
-          placeholder="Enter an optional description"
-          componentClass="textarea"
-          value={description}
-          onChange={event => updateMeetingCreatorDescription(event.target.value)}
-        />
+        <ButtonGroup className="formInput">
+          <FormControl
+            placeholder="Enter an optional description"
+            componentClass="textarea"
+            value={description}
+            onChange={event => updateMeetingCreatorDescription(event.target.value)}
+          />
+          <Glyphicon
+            className="close"
+            glyph="remove-sign"
+            onClick={() => updateMeetingCreatorDescription('')}
+          />
+        </ButtonGroup>
       </FormGroup>
     </div>
 );
