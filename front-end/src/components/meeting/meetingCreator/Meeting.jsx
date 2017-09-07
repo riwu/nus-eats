@@ -5,13 +5,13 @@ import MeetingsDisplay from './MeetingsDisplayContainer';
 import getMergedDate from '../../../util/getMergedDate';
 
 const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting,
-   newMeetingDate, newMeetingTime, newMeetingDuration, title, description }) => {
+   newMeetingDate, newMeetingTime, newMeetingDuration, title, description, isLoggedIn, login }) => {
   const trimmedTitle = title.trim();
   const button = (
     <Button
       bsStyle="primary"
       onClick={() => {
-        if (trimmedTitle === '') {
+        if (trimmedTitle === '' || !isLoggedIn) {
           return;
         }
         createMeeting({
@@ -28,7 +28,14 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting,
   );
   return (
     <div>
-      <Button onClick={toggleMeetingWindow}>
+      <Button
+        onClick={() => {
+          if (!isLoggedIn) {
+            login();
+          }
+          toggleMeetingWindow();
+        }}
+      >
         + Meeting
       </Button>
       <Modal
@@ -49,7 +56,11 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting,
             <OverlayTrigger
               ref={(ref) => { this.overlayRef = ref; }}
               placement="left"
-              overlay={<Tooltip id="Enter a title">Enter a title!</Tooltip>}
+              overlay={
+                <Tooltip id="Enter a title">
+                  {isLoggedIn ? 'Enter a title!' : 'Please log in first!'}
+                </Tooltip>
+              }
             >
               {button}
             </OverlayTrigger>
