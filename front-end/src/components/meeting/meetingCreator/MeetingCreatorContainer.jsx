@@ -7,10 +7,8 @@ import MeetingCreator from './MeetingCreator';
 
 import Config from '../../../constants/Config';
 
-class MeetingCreatorContainer extends React.Component {
-
-  getMealName(time) {
-    const hour = time.hour();
+const getDefaultTitle = (time, canteenName) => {
+  const getMealName = (hour) => {
     switch (true) {
       case (hour < 9):
         return 'Breakfast';
@@ -21,17 +19,18 @@ class MeetingCreatorContainer extends React.Component {
       default:
         return 'Supper';
     }
-  }
+  };
+  return `${getMealName(time.hour())} at ${canteenName}`;
+};
 
+class MeetingCreatorContainer extends React.Component {
   componentWillMount() {
     const interval = Config.TIME_PICKER_MINUTE_INTERVAL;
     const now = moment();
     now.add(interval - (now.minute() % interval), 'minutes');
 
     this.props.onDateUpdate(now);
-
-    const mealName = this.getMealName(now);
-    this.props.updateMeetingCreatorTitle(`${mealName} at ${this.props.canteenName}`);
+    this.props.updateMeetingCreatorTitle(getDefaultTitle(now, this.props.canteenName));
 
     const recentMeetings = Object.values(this.props.meetings)
       .sort((a, b) => now.diff(a.startTime) - now.diff(b.startTime));
@@ -53,14 +52,25 @@ class MeetingCreatorContainer extends React.Component {
   render() {
     return (
       <MeetingCreator
-        meetings={this.props.meetingModifier}
+        meetings={this.props.meetingModifier.map(mod => ({
+          ...mod,
+          onTimeUpdate: (newTime) => {
+            mod.onTimeUpdate(newTime);
+            if (!this.userEditedTitle) {
+              this.props.updateMeetingCreatorTitle(getDefaultTitle(newTime, this.props.canteenName));
+            }
+          },
+        }))}
         updateTimeModifierRadio={this.props.updateTimeModifierRadio}
         updateDurationModifierRadio={this.props.updateDurationModifierRadio}
         activeTimeModifierIndex={this.props.activeTimeModifierIndex}
         activeDurationModifierIndex={this.props.activeDurationModifierIndex}
         title={this.props.title}
         description={this.props.description}
-        updateMeetingCreatorTitle={this.props.updateMeetingCreatorTitle}
+        updateMeetingCreatorTitle={(title) => {
+          this.userEditedTitle = true;
+          this.props.updateMeetingCreatorTitle(title);
+        }}
         updateMeetingCreatorDescription={this.props.updateMeetingCreatorDescription}
       />
     );
