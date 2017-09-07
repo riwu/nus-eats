@@ -30,6 +30,7 @@ const setMeetings = (state = {}, action) => {
           duration: action.duration,
           title: action.title,
           description: action.description,
+          userId: action.userId,
           isActive: true,
           attendees: [],
         },
