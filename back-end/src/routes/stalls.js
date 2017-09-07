@@ -13,7 +13,7 @@ const download = require('image-downloader');
 var fs = require('fs'),
 request = require('request');
 
-var download = function(uri, filename, callback){
+var downloader = function(uri, filename, callback){
   request.head(uri, function(err, res, body){
     console.log('content-type:', res.headers['content-type']);
     console.log('content-length:', res.headers['content-length']);
@@ -69,7 +69,7 @@ module.exports = (db, s3) => {
         Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
       });
 
-      download(stall.dataValues.imageUrl, '~/Downloads' + stall.dataValues.uuid, () => {
+      downloader(stall.dataValues.imageUrl, '~/Downloads' + stall.dataValues.uuid, () => {
         console.log('Downloaded:' + stall.dataValues.uuid);
       });
 

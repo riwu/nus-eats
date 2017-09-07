@@ -16,7 +16,7 @@ const models_dir = path.join(__dirname, '..', 'models');
 
 fs
 .readdirSync(models_dir)
-.filter(file => 
+.filter(file =>
   (file.indexOf('.') !== 0) && (file.slice(-3) === '.js')
 )
 .forEach(file => {
