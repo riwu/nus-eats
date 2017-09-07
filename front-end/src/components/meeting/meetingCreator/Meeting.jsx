@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import MeetingCreator from './MeetingCreatorContainer';
 import MeetingsDisplay from './MeetingsDisplayContainer';
 import getMergedDate from '../../../util/getMergedDate';
@@ -23,20 +23,29 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting,
            <MeetingsDisplay />
          </Modal.Body>
          <Modal.Footer>
-           <Button
-             bsStyle="primary"
-             onClick={() => {
-               createMeeting({
-                 canteenId: canteen.id,
-                 startTime: getMergedDate(newMeetingDate, newMeetingTime),
-                 duration: newMeetingDuration,
-                 title,
-                 description,
-               });
-             }}
+           <OverlayTrigger
+             placement="left"
+             overlay={title.trim() ? '' : <Tooltip id="Enter a title">Enter a title!</Tooltip>}
            >
-          Create
-        </Button>
+             <div style={{ display: 'inline' }}>
+               <Button
+                 style={{ pointerEvents: 'none' }}
+                 bsStyle="primary"
+                 disabled={!title.trim()}
+                 onClick={() => {
+                   createMeeting({
+                     canteenId: canteen.id,
+                     startTime: getMergedDate(newMeetingDate, newMeetingTime),
+                     duration: newMeetingDuration,
+                     title: title.trim(),
+                     description,
+                   });
+                 }}
+               >
+                Create
+              </Button>
+             </div>
+           </OverlayTrigger>
            <Button onClick={toggleMeetingWindow}>Close</Button>
          </Modal.Footer>
        </Modal>
