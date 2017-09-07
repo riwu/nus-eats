@@ -1,5 +1,4 @@
 import moment from 'moment';
-import jwtDecode from 'jwt-decode';
 import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
@@ -72,32 +71,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
           type: types.RECEIVE_ACCESS_TOKENS,
         });
 
-        const jwt = jwtDecode(token);
-        const currentUser = {
-          name: jwt.user.name,
-          id: jwt.user.id,
-        };
-
-        dispatch({
-          user: currentUser,
-          type: types.RECEIVE_CURRENT_USER,
-        });
-
         dispatch(getRatings);
-
-        fb.api('me')
-          .then((user) => {
-            dispatch({
-              user,
-              type: types.RECEIVE_CURRENT_USER,
-            });
-
-            dispatch({
-              type: types.DONE_LOGIN,
-            });
-
-            resolve();
-          });
 
         fb.api('me/permissions')
           .then((response) => {
@@ -108,6 +82,12 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
               type: types.SET_GRANTED_PERMISSIONS,
               permissions: new Set(permissions),
             });
+
+            dispatch({
+              type: types.DONE_LOGIN,
+            });
+
+            resolve();
           });
       });
     } else {
@@ -193,6 +173,16 @@ export const updateNewMeetingDuration = (duration, index) => ({
   index,
 });
 
+export const updateMeetingCreatorTitle = title => ({
+  type: types.UPDATE_MEETING_CREATOR_TITLE,
+  title,
+});
+
+export const updateMeetingCreatorDescription = description => ({
+  type: types.UPDATE_MEETING_CREATOR_DESCRIPTION,
+  description,
+});
+
 export const updateTimeModifierRadio = index => ({
   type: types.UPDATE_TIME_MODIFIER_RADIO,
   index,
@@ -254,3 +244,12 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
 export const toggleFeed = () => ({
   type: types.TOGGLE_FEED,
 });
+
+export const shareMeeting = (meeting) => {
+  const origin = window.location.origin;
+
+  window.FB.ui({
+    method: 'share',
+    href: `${origin}/meetings/${meeting.id}`
+  });
+};

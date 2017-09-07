@@ -52,7 +52,6 @@ const get = (path, headers) => {
 
 const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
-
   return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
     method,
     headers: makeHeaders(headers),
@@ -78,29 +77,34 @@ export default {
         const endTime = time.parse(appointment.endTime);
         const duration = moment.duration(endTime.diff(startTime));
 
-        obj[appointment.id] = {
-          ...appointment,
-          startTime,
-          endTime,
-          duration,
+        return {
+          ...obj,
+          [appointment.id]: {
+            ...appointment,
+            startTime,
+            endTime,
+            duration,
+          },
         };
-
-        return obj;
       }, {}));
   },
 
-  createMeeting: ({ canteenId, startTime, duration }) => post('/appointments', {
+  createMeeting: ({ canteenId, startTime, duration, title, description }) => post('/appointments', {
     appointment: {
       canteenId,
       startTime: time.format(startTime),
       endTime: getEndTime(startTime, duration),
+      title,
+      description,
     },
   }),
-  updateMeeting: (id, { canteenId, startTime, duration }) => patch(`/appointments/${id}`, {
+  updateMeeting: (id, { canteenId, startTime, duration, title, description }) => patch(`/appointments/${id}`, {
     appointment: {
       canteenId,
       startTime: time.format(startTime),
       endTime: getEndTime(startTime, duration),
+      title,
+      description,
     },
   }),
   cancelMeeting: id => destroy(`/appointments/${id}`),

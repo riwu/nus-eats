@@ -6,6 +6,8 @@ import {
   UPDATE_NEW_MEETING_DURATION,
   UPDATE_TIME_MODIFIER_RADIO,
   UPDATE_DURATION_MODIFIER_RADIO,
+  UPDATE_MEETING_CREATOR_TITLE,
+  UPDATE_MEETING_CREATOR_DESCRIPTION,
 } from '../../../constants/ActionTypes';
 
 const meetingModifier = (state = [{}, {}, {}], action) => {
@@ -40,11 +42,22 @@ const activeDurationModifierIndex = (state = 0, action) => {
   return action.index;
 };
 
+const title = (state = '', action) => {
+  if (action.type !== UPDATE_MEETING_CREATOR_TITLE) return state;
+  return action.title;
+};
+
+const description = (state = '', action) => {
+  if (action.type !== UPDATE_MEETING_CREATOR_DESCRIPTION) return state;
+  return action.description;
+};
 
 const reducer = combineReducers({
   modifier: meetingModifier,
   activeTimeModifierIndex,
   activeDurationModifierIndex,
+  title,
+  description,
 });
 
 export default reducer;

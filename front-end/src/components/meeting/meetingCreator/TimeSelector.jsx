@@ -4,10 +4,10 @@ import TimePicker from './TimePicker';
 
 // have to use index as key as time can be set to the same
 const TimeSelector = ({ timings, activeTimeModifierIndex, updateTimeModifierRadio }) => (
-  <div>
-    <Form inline>
-      {timings.map((time, index) => (
-        <FormGroup key={index}>
+  <Form inline>
+    {timings.map((time, index) => (
+      <div key={index}>
+        <FormGroup>
           <Radio
             checked={index === activeTimeModifierIndex}
             onChange={() => updateTimeModifierRadio(index)}
@@ -18,9 +18,10 @@ const TimeSelector = ({ timings, activeTimeModifierIndex, updateTimeModifierRadi
             updateTimeModifierRadio={() => updateTimeModifierRadio(index)}
           />
         </FormGroup>
+      </div>
+
         ))}
-    </Form>
-  </div>
+  </Form>
 );
 
 export default TimeSelector;

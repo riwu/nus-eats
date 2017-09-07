@@ -1,18 +1,20 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import placeholder from '../../images/dog.jpg';
 import './CanteenHeader.css';
+import Meeting from '../meeting/meetingCreator/MeetingContainer';
 
-const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingComponent }) => (
+const CanteenHeader = ({ canteenId, canteenName, stallsCount = 0, toggleCanteenPanel }) => (
   <div className="CanteenHeader">
     <div
-      style={{ backgroundImage: "url('http://loremflickr.com/500/500/dog')" }}
+      style={{ backgroundImage: `url('${placeholder}')` }}
       className="image-container"
     />
 
     <div className="content-container">
       <div className="title">
         <div className="name">
-          { canteen.name }
+          { canteenName }
         </div>
 
         <div className="distance" />
@@ -35,7 +37,7 @@ const CanteenHeader = ({ canteen, stallsCount = 0, toggleCanteenPanel, MeetingCo
 
       <div className="buttons">
         <Button onClick={toggleCanteenPanel}>View Stalls</Button>
-        { MeetingComponent }
+        <Meeting canteenId={canteenId} canteenName={canteenName} />,
       </div>
     </div>
   </div>

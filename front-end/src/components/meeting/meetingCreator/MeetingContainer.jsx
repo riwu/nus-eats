@@ -1,21 +1,26 @@
 import { connect } from 'react-redux';
 import Meeting from './Meeting';
-import { toggleMeetingWindow, createMeeting } from '../../../actions';
+import { toggleMeetingWindow, createMeeting, login } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => {
-  const meetingModifier = state.meeting.meetingModifier;
+  const meetingCreator = state.meeting.meetingModifier;
   return ({
-    canteen: ownProps.canteen,
-    isOpen: state.meeting.canteenId === ownProps.canteen.id,
-    newMeetingDate: meetingModifier.modifier[0].date,
-    newMeetingTime: meetingModifier.modifier[meetingModifier.activeTimeModifierIndex].time,
-    newMeetingDuration: meetingModifier.modifier[meetingModifier.activeDurationModifierIndex].duration,
+    canteenId: ownProps.canteenId,
+    canteenName: ownProps.canteenName,
+    isOpen: state.meeting.canteenId === ownProps.canteenId,
+    newMeetingDate: meetingCreator.modifier[0].date,
+    newMeetingTime: meetingCreator.modifier[meetingCreator.activeTimeModifierIndex].time,
+    newMeetingDuration: meetingCreator.modifier[meetingCreator.activeDurationModifierIndex].duration,
+    title: meetingCreator.title,
+    description: meetingCreator.description,
+    isLoggedIn: !!state.accessTokens.api,
   });
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteen.id)),
+  toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteenId)),
   createMeeting: meeting => dispatch(createMeeting(meeting)),
+  login: () => dispatch(login()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meeting);

@@ -40,7 +40,7 @@ class MeetingsListItemContainer extends Component {
   }
 
   findCanteen() {
-    return this.props.canteens.find(({id}) => id === this.props.meeting.canteenId);
+    return this.props.canteens.find(({ id }) => id === this.props.meeting.canteenId);
   }
 
   findFacebookUser(id) {
@@ -50,7 +50,7 @@ class MeetingsListItemContainer extends Component {
   render() {
     const canteen = this.findCanteen() || {};
     const user = this.findFacebookUser(this.props.meeting.userId) || {};
-    const attendees = this.props.meeting.attendees.map((id) => this.findFacebookUser(id)).filter(x => !!x);
+    const attendees = this.props.meeting.attendees.map(id => this.findFacebookUser(id)).filter(x => !!x);
     const meeting = {
       ...this.props.meeting,
       canteen,
@@ -62,19 +62,19 @@ class MeetingsListItemContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   canteens: state.canteens,
   isFacebookReady: state.isFacebookReady,
   facebookUsers: state.facebookUsers,
-  currentUserId: state.currentUser.id
+  currentUserId: state.currentUser.id,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getAllCanteens: () => dispatch(getAllCanteens()),
-  getFacebookUser: (id) => dispatch(getFacebookUser(id))
+  getFacebookUser: id => dispatch(getFacebookUser(id)),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MeetingsListItemContainer);
