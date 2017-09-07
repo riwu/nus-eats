@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => {
     newMeetingTime: meetingCreator.modifier[meetingCreator.activeTimeModifierIndex].time,
     newMeetingDuration: meetingCreator.modifier[meetingCreator.activeDurationModifierIndex].duration,
     title: meetingCreator.title,
+    titlePlaceholder: meetingCreator.titlePlaceholder,
     description: meetingCreator.description,
     isLoggedIn: !!state.accessTokens.api,
   });
