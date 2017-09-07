@@ -3,8 +3,9 @@ import { Button } from 'react-bootstrap';
 import placeholder from '../../images/dog.jpg';
 import './CanteenHeader.css';
 import Meeting from '../meeting/meetingCreator/MeetingContainer';
+import Distance from '../misc/DistanceContainer';
 
-const CanteenHeader = ({ canteenId, canteenName, stallsCount = 0, toggleCanteenPanel }) => (
+const CanteenHeader = ({ canteenId, canteenName, latitude, longitude, stallsCount = 0, toggleCanteenPanel }) => (
   <div className="CanteenHeader">
     <div
       style={{ backgroundImage: `url('${placeholder}')` }}
@@ -17,7 +18,9 @@ const CanteenHeader = ({ canteenId, canteenName, stallsCount = 0, toggleCanteenP
           { canteenName }
         </div>
 
-        <div className="distance" />
+        <div className="distance">
+          <Distance target={{ latitude, longitude }} />
+        </div>
       </div>
 
       <div className="statistics">

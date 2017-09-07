@@ -13,6 +13,7 @@ import facebookUsers from '../../facebook/reducer/facebookUsers';
 import isLoggingIn from '../../facebook/reducer/isLoggingIn';
 import grantedPermissions from '../../facebook/reducer/grantedPermissions';
 import isFeedExpanded from './isFeedExpanded';
+import geolocation from './geolocation';
 
 const reducer = combineReducers({
   canteens,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   isLoggingIn,
   grantedPermissions,
   isFeedExpanded,
+  geolocation,
 });
 
 export default reducer;

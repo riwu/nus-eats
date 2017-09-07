@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllCanteens, getMeeting } from '../../actions';
 import MeetingPage from './MeetingPage';
-import MeetingNotFound from './MeetingNotFound';
 
 class MeetingPageContainer extends Component {
   componentDidMount() {

@@ -9,6 +9,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   canteenName: ownProps.canteen.name,
   canteenId: ownProps.canteen.id,
+  latitude: ownProps.canteen.latitude,
+  longitude: ownProps.canteen.longitude,
   toggleCanteenPanel: () => dispatch(replace(ownProps.isSelected ? '/' : `/canteen/${ownProps.canteen.id}`)),
 });
 

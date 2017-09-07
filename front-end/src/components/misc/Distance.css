@@ -1,0 +1,7 @@
+.Distance {
+  color: #505050;
+}
+
+.Distance.prompt {
+  cursor: pointer;
+}

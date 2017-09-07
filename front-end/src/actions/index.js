@@ -275,3 +275,30 @@ export const getMeeting = (id) => (dispatch) => {
       });
     });
 };
+
+export const initializeGeolocation = () => (dispatch) => {
+  dispatch({
+    type: types.SET_GEOLOCATION_PERMISSION,
+    permission: 'pending',
+  });
+
+  let permissionsUpdated = false;
+  navigator.geolocation.watchPosition((position) => {
+    if (!permissionsUpdated) {
+      dispatch({
+        type: types.SET_GEOLOCATION_PERMISSION,
+        permission: 'granted',
+      });
+    }
+
+    dispatch({
+      type: types.SET_LOCATION,
+      coordinates: position.coords,
+    });
+  }, (error) => {
+    dispatch({
+      type: types.SET_GEOLOCATION_PERMISSION,
+      permission: 'denied',
+    });
+  });
+};
