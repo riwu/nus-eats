@@ -178,6 +178,11 @@ export const updateMeetingCreatorTitle = title => ({
   title,
 });
 
+export const updateMeetingCreatorTitlePlaceholder = title => ({
+  type: types.UPDATE_MEETING_CREATOR_TITLE_PLACEHOLDER,
+  title,
+});
+
 export const updateMeetingCreatorDescription = description => ({
   type: types.UPDATE_MEETING_CREATOR_DESCRIPTION,
   description,
@@ -250,6 +255,6 @@ export const shareMeeting = (meeting) => {
 
   window.FB.ui({
     method: 'share',
-    href: `${origin}/meetings/${meeting.id}`
+    href: `${origin}/meetings/${meeting.id}`,
   });
 };

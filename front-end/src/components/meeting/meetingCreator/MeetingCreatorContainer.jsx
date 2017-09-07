@@ -2,7 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { updateNewMeetingDate, updateNewMeetingTime, updateNewMeetingDuration,
-  updateTimeModifierRadio, updateDurationModifierRadio, updateMeetingCreatorTitle, updateMeetingCreatorDescription } from '../../../actions';
+  updateTimeModifierRadio, updateDurationModifierRadio,
+  updateMeetingCreatorTitle, updateMeetingCreatorDescription, updateMeetingCreatorTitlePlaceholder } from '../../../actions';
 import MeetingCreator from './MeetingCreator';
 
 import Config from '../../../constants/Config';
@@ -30,7 +31,9 @@ class MeetingCreatorContainer extends React.Component {
     now.add(interval - (now.minute() % interval), 'minutes');
 
     this.props.onDateUpdate(now);
-    this.props.updateMeetingCreatorTitle(getDefaultTitle(now, this.props.canteenName));
+    const title = getDefaultTitle(now, this.props.canteenName);
+    this.props.updateMeetingCreatorTitle(title);
+    this.props.updateMeetingCreatorTitlePlaceholder(title);
 
     const recentMeetings = Object.values(this.props.meetings)
       .sort((a, b) => now.diff(a.startTime) - now.diff(b.startTime));
@@ -56,8 +59,10 @@ class MeetingCreatorContainer extends React.Component {
           ...mod,
           onTimeUpdate: (newTime) => {
             mod.onTimeUpdate(newTime);
+            const title = getDefaultTitle(newTime, this.props.canteenName);
+            this.props.updateMeetingCreatorTitlePlaceholder(title);
             if (!this.userEditedTitle) {
-              this.props.updateMeetingCreatorTitle(getDefaultTitle(newTime, this.props.canteenName));
+              this.props.updateMeetingCreatorTitle(title);
             }
           },
         }))}
@@ -66,6 +71,7 @@ class MeetingCreatorContainer extends React.Component {
         activeTimeModifierIndex={this.props.activeTimeModifierIndex}
         activeDurationModifierIndex={this.props.activeDurationModifierIndex}
         title={this.props.title}
+        titlePlaceholder={this.props.titlePlaceholder}
         description={this.props.description}
         updateMeetingCreatorTitle={(title) => {
           this.userEditedTitle = true;
@@ -85,6 +91,7 @@ const mapStateToProps = (state, ownProps) => {
     activeTimeModifierIndex: meetingCreator.activeTimeModifierIndex,
     activeDurationModifierIndex: meetingCreator.activeDurationModifierIndex,
     title: meetingCreator.title,
+    titlePlaceholder: meetingCreator.titlePlaceholder,
     description: meetingCreator.description,
     canteenName: ownProps.canteenName,
   };
@@ -98,6 +105,7 @@ const mapDispatchToProps = dispatch => ({
   updateDurationModifierRadio: index => dispatch(updateDurationModifierRadio(index)),
   updateMeetingCreatorTitle: title => dispatch(updateMeetingCreatorTitle(title)),
   updateMeetingCreatorDescription: description => dispatch(updateMeetingCreatorDescription(description)),
+  updateMeetingCreatorTitlePlaceholder: title => dispatch(updateMeetingCreatorTitlePlaceholder(title)),
 });
 
 const mergeProps = (stateProps, dispatchProps) => ({

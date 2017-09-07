@@ -9,7 +9,7 @@ import DurationPicker from './DurationPicker';
 import './MeetingCreator.css';
 
 const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierRadio,
-  activeDurationModifierIndex, updateDurationModifierRadio,
+  activeDurationModifierIndex, updateDurationModifierRadio, titlePlaceholder,
   title, description, updateMeetingCreatorTitle, updateMeetingCreatorDescription }) => (
     <div>
       <div className="MeetingCreator">
@@ -50,6 +50,7 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
         <ControlLabel>Title</ControlLabel>
         <FormControl
           value={title}
+          placeholder={titlePlaceholder}
           onChange={event => updateMeetingCreatorTitle(event.target.value)}
         />
       </FormGroup>
