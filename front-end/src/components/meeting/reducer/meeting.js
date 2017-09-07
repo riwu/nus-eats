@@ -8,6 +8,7 @@ import {
   JOIN_MEETING,
   UNJOIN_MEETING,
   SET_MEETING_ID,
+  LOGOUT,
 } from '../../../constants/ActionTypes';
 import meetingModifier from './meetingModifier';
 
@@ -81,6 +82,8 @@ const setMeetings = (state = {}, action) => {
         },
       };
     }
+    case LOGOUT:
+      return {};
     default:
       return state;
   }
