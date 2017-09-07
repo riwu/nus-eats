@@ -8,12 +8,30 @@ import MeetingCreator from './MeetingCreator';
 import Config from '../../../constants/Config';
 
 class MeetingCreatorContainer extends React.Component {
+
+  getMealName(time) {
+    const hour = time.hour();
+    switch (true) {
+      case (hour < 9):
+        return 'Breakfast';
+      case (hour < 15):
+        return 'Lunch';
+      case (hour < 20):
+        return 'Dinner';
+      default:
+        return 'Supper';
+    }
+  }
+
   componentWillMount() {
     const interval = Config.TIME_PICKER_MINUTE_INTERVAL;
     const now = moment();
     now.add(interval - (now.minute() % interval), 'minutes');
 
     this.props.onDateUpdate(now);
+
+    const mealName = this.getMealName(now);
+    this.props.updateMeetingCreatorTitle(`${mealName} at ${this.props.canteenName}`);
 
     const recentMeetings = Object.values(this.props.meetings)
       .sort((a, b) => now.diff(a.startTime) - now.diff(b.startTime));
@@ -49,7 +67,7 @@ class MeetingCreatorContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const meetingCreator = state.meeting.meetingModifier;
   return {
     meetings: state.meeting.meetings,
@@ -58,6 +76,7 @@ const mapStateToProps = (state) => {
     activeDurationModifierIndex: meetingCreator.activeDurationModifierIndex,
     title: meetingCreator.title,
     description: meetingCreator.description,
+    canteenName: ownProps.canteenName,
   };
 };
 

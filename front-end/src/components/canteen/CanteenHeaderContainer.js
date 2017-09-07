@@ -1,27 +1,18 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import CanteenHeader from './CanteenHeader';
-import MeetingComponent from '../meeting/meetingCreator/MeetingContainer';
 
 const mapStateToProps = (state, ownProps) => ({
   stallsCount: Object.values(state.stalls).filter(({ canteenId }) => canteenId === ownProps.canteen.id).length,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  canteen: ownProps.canteen,
+  canteenName: ownProps.canteen.name,
+  canteenId: ownProps.canteen.id,
   toggleCanteenPanel: () => dispatch(replace(ownProps.isSelected ? '/' : `/canteen/${ownProps.canteen.id}`)),
-});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  MeetingComponent: <MeetingComponent canteen={ownProps.canteen} />,
-  ...ownProps,
-  ...stateProps,
-  ...dispatchProps,
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
 )(CanteenHeader);

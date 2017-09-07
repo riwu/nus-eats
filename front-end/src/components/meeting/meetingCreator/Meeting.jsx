@@ -1,40 +1,16 @@
 import React from 'react';
-import { Button, Modal, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import MeetingCreator from './MeetingCreatorContainer';
 import MeetingsDisplay from './MeetingsDisplayContainer';
 import getMergedDate from '../../../util/getMergedDate';
 
-const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting,
+const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
    newMeetingDate, newMeetingTime, newMeetingDuration, title, description, isLoggedIn, login }) => {
   const trimmedTitle = title.trim();
-  const button = (
-    <Button
-      bsStyle="primary"
-      onClick={() => {
-        if (trimmedTitle === '' || !isLoggedIn) {
-          return;
-        }
-        createMeeting({
-          canteenId: canteen.id,
-          startTime: getMergedDate(newMeetingDate, newMeetingTime),
-          duration: newMeetingDuration,
-          title: trimmedTitle,
-          description,
-        });
-      }}
-    >
-      Create
-    </Button>
-  );
   return (
     <div>
       <Button
-        onClick={() => {
-          if (!isLoggedIn) {
-            login();
-          }
-          toggleMeetingWindow();
-        }}
+        onClick={toggleMeetingWindow}
       >
         + Meeting
       </Button>
@@ -44,28 +20,34 @@ const Meeting = ({ toggleMeetingWindow, canteen, isOpen, createMeeting,
         animation={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{canteen ? canteen.name : null}</Modal.Title>
+          <Modal.Title>{canteenName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <MeetingCreator />
+          <MeetingCreator canteenName={canteenName} />
           <MeetingsDisplay />
         </Modal.Body>
         <Modal.Footer>
-          {
-            trimmedTitle ? button :
-            <OverlayTrigger
-              ref={(ref) => { this.overlayRef = ref; }}
-              placement="left"
-              overlay={
-                <Tooltip id="Enter a title">
-                  {isLoggedIn ? 'Enter a title!' : 'Please log in first!'}
-                </Tooltip>
+          <Button
+            bsStyle="primary"
+            onClick={() => {
+              const invokeCreateMeeting = () => createMeeting({
+                canteenId,
+                startTime: getMergedDate(newMeetingDate, newMeetingTime),
+                duration: newMeetingDuration,
+                title: trimmedTitle,
+                description,
+              });
+              if (!isLoggedIn) {
+                login().then(() => {
+                  invokeCreateMeeting();
+                }).catch(() => {}); // do nothing if user refuse to log in
+              } else {
+                invokeCreateMeeting();
               }
-            >
-              {button}
-            </OverlayTrigger>
-          }
-
+            }}
+          >
+            {isLoggedIn ? 'Create' : 'Login and create'}
+          </Button>
           <Button onClick={toggleMeetingWindow}>Close</Button>
         </Modal.Footer>
       </Modal>

@@ -5,8 +5,9 @@ import { toggleMeetingWindow, createMeeting, login } from '../../../actions';
 const mapStateToProps = (state, ownProps) => {
   const meetingCreator = state.meeting.meetingModifier;
   return ({
-    canteen: ownProps.canteen,
-    isOpen: state.meeting.canteenId === ownProps.canteen.id,
+    canteenId: ownProps.canteenId,
+    canteenName: ownProps.canteenName,
+    isOpen: state.meeting.canteenId === ownProps.canteenId,
     newMeetingDate: meetingCreator.modifier[0].date,
     newMeetingTime: meetingCreator.modifier[meetingCreator.activeTimeModifierIndex].time,
     newMeetingDuration: meetingCreator.modifier[meetingCreator.activeDurationModifierIndex].duration,
@@ -17,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteen.id)),
+  toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteenId)),
   createMeeting: meeting => dispatch(createMeeting(meeting)),
   login: () => dispatch(login()),
 });

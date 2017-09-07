@@ -49,7 +49,6 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
       <FormGroup className="input">
         <ControlLabel>Title</ControlLabel>
         <FormControl
-          placeholder="Enter a title"
           value={title}
           onChange={event => updateMeetingCreatorTitle(event.target.value)}
         />
