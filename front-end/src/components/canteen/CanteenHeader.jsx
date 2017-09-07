@@ -37,7 +37,7 @@ const CanteenHeader = ({ canteenId, canteenName, stallsCount = 0, toggleCanteenP
 
       <div className="buttons">
         <Button onClick={toggleCanteenPanel}>View Stalls</Button>
-        <Meeting canteenId={canteenId} canteenName={canteenName} />,
+        <Meeting canteenId={canteenId} canteenName={canteenName} />
       </div>
     </div>
   </div>
