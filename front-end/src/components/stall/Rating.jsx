@@ -4,7 +4,7 @@ import Rating from 'react-rating';
 import './Rating.css';
 
 const emptyStar = <Glyphicon className="rating-star star-empty" glyph="star" />;
-const fullStar  = <Glyphicon className="rating-star star-full" glyph="star" />;
+const fullStar = <Glyphicon className="rating-star star-full" glyph="star" />;
 
 const ratingComponent = ({ useAvgRating, rating, changeRating, stallId }) => (
   <Rating

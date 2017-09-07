@@ -1,4 +1,4 @@
-import { RECEIVE_STALLS } from '../../constants/ActionTypes';
+import { RECEIVE_STALLS } from '../../../constants/ActionTypes';
 
 const initialState = {};
 

@@ -14,7 +14,7 @@ const Stall = ({ stall, canteenId }) => (
 
     <div className="content-container">
       <div>{stall.name}</div>
-      <RatingContainer rating={stall.rating} useAvgRating />
+      <RatingContainer rating={Number(stall.averageRating)} useAvgRating />
     </div>
   </Link>
 );
