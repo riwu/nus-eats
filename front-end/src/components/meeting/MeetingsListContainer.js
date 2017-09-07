@@ -14,7 +14,7 @@ class MeetingsListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  meetings: Object.values(state.meeting.meetings),
+  meetings: Object.entries(state.meeting.meetings),
 });
 
 const mapDispatchToProps = dispatch => ({
