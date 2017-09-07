@@ -12,6 +12,7 @@ import FeedContainer from './components/main/FeedContainer';
 import MainPage from './components/main/MainPage';
 import PrivacyPolicy from './components/misc/PrivacyPolicy';
 import TermsOfService from './components/misc/TermsOfService';
+import MeetingPage from './components/meeting/MeetingPageContainer';
 
 import * as GA from './google/analytics';
 import FB from './fb';
@@ -33,6 +34,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={MainPage} />
               <Route path="/canteen/:canteenId" component={MainPage} />
+              <Route path="/meetings/:id" component={MeetingPage} />
               <Route path="/privacy_policy" component={PrivacyPolicy} />
               <Route path="/terms_of_service" component={TermsOfService} />
             </Switch>

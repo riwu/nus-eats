@@ -1,0 +1,9 @@
+.MeetingPage {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .MeetingPage {
+    padding: 10px 50px;
+  }
+}

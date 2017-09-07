@@ -258,3 +258,20 @@ export const shareMeeting = (meeting) => {
     href: `${origin}/meetings/${meeting.id}`,
   });
 };
+
+export const getMeeting = (id) => (dispatch) => {
+  return api.getMeeting(id)
+    .then((meeting) => {
+      dispatch({
+        type: types.RECEIVE_MEETING,
+        meeting,
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+      dispatch({
+        type: types.MEETING_NOT_FOUND,
+        id,
+      });
+    });
+};

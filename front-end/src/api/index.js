@@ -116,4 +116,16 @@ export default {
       value: rating,
     },
   }),
+  getMeeting: (id) => get(`/appointments/${id}`).then(({appointment}) => {
+    const startTime = time.parse(appointment.startTime);
+    const endTime = time.parse(appointment.endTime);
+    const duration = moment.duration(endTime.diff(startTime));
+
+    return {
+      ...appointment,
+      startTime,
+      endTime,
+      duration,
+    };
+  }),
 };

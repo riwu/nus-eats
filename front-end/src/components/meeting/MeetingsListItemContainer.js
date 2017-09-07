@@ -70,7 +70,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAllCanteens: () => dispatch(getAllCanteens()),
+  getAllCanteens: () => dispatch(getAllCanteens),
   getFacebookUser: id => dispatch(getFacebookUser(id)),
 });
 

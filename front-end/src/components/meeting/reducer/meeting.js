@@ -5,10 +5,11 @@ import {
   CANCEL_MEETING,
   UPDATE_MEETING,
   RECEIVE_MEETINGS,
+  RECEIVE_MEETING,
   JOIN_MEETING,
   UNJOIN_MEETING,
   SET_MEETING_ID,
-  LOGOUT,
+  MEETING_NOT_FOUND,
 } from '../../../constants/ActionTypes';
 import meetingModifier from './meetingModifier';
 
@@ -20,7 +21,15 @@ const setCanteenId = (state = null, action) => {
 const setMeetings = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_MEETINGS:
-      return action.meetings;
+      return {
+        ...state,
+        ...action.meetings,
+      };
+    case RECEIVE_MEETING:
+      return {
+        ...state,
+        [action.meeting.id]: action.meeting
+      };
     case CREATE_MEETING: {
       return {
         ...state,
@@ -83,8 +92,18 @@ const setMeetings = (state = {}, action) => {
         },
       };
     }
-    case LOGOUT:
-      return {};
+    default:
+      return state;
+  }
+};
+
+const notFound = (state = [], action) => {
+  switch (action.type) {
+    case MEETING_NOT_FOUND:
+      return [
+        ...state,
+        action.id,
+      ];
     default:
       return state;
   }
@@ -94,6 +113,7 @@ const reducer = combineReducers({
   canteenId: setCanteenId,
   meetingModifier,
   meetings: setMeetings,
+  notFound,
 });
 
 export default reducer;

@@ -19,7 +19,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
                       meeting.attendees.findIndex(({ id }) => id === currentUserId) !== -1;
 
   const renderJoinButton = () => {
-    if (meeting.userId === currentUserId) {
+    if (!currentUserId || meeting.userId === currentUserId) {
       return undefined;
     } else if (meeting.attendees.findIndex(({ id }) => id === currentUserId) !== -1) {
       return <LeaveMeetingButton meetingId={meeting.id} />;
@@ -48,7 +48,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
         </div>
 
         <div className="details">
-          <div>{ meeting.canteen.name }</div>
+          <div>{ meeting.canteen && meeting.canteen.name }</div>
           <div>{ date }</div>
           <div>
             { `${startTime} hours - ${endTime} hours` }
