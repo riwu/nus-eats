@@ -1,3 +1,20 @@
 .TermsOfService {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .TermsOfService {
+    padding: 10px 50px;
+  }
+}
+
+.TermsOfService > .content {
   background-color: #fff;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .TermsOfService > .content {
+    padding: 5px 25px;
+  }
 }
