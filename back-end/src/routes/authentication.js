@@ -99,7 +99,7 @@ module.exports = (db, s3) => {
         Bucket: process.env.S3_BUCKET,
         Key: photo.uuid
       };
-      s3.deleteObject(params, (err, data) => {
+      s3.deleteObject(params, async (err, data) => {
         if (err) {
           next(Boom.badGateway(err.message));
         }
