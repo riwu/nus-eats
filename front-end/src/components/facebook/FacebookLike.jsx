@@ -36,7 +36,6 @@ class FacebookLike extends Component {
   }
 
   render() {
-    console.log('href', this.props.href);
     if (this.props.loading) {
       return null;
     }

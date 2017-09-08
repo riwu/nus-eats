@@ -99,7 +99,7 @@ export default {
     },
   }), {})),
   getAllPhotos: stallId => get(`/stalls/${stallId}/photos`)
-    .then(({ photos }) => photos.reduce((obj, photo) => ({
+    .then(({ photos }) => photos.sort((photo1, photo2) => moment(photo1.createdAt) - moment(photo2.createdAt)).reduce((obj, photo) => ({
       ...obj,
       [photo.stallId]: [photo].concat(obj[photo.stallId] || []),
     }), {})),
