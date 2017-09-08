@@ -17,7 +17,12 @@ class MeetingsListContainer extends Component {
 const mapStateToProps = state => ({
   meetings: Object.entries(state.meeting.meetings).filter(([id, meeting]) => {
     const startTime = moment(meeting.startTime);
-    return startTime.add(meeting.duration).isAfter(state.currentTime);
+    const currentUserId = (state.currentUser || {}).id;
+    const over = startTime.add(meeting.duration).isAfter(state.currentTime);
+    const cancelled = !!meeting.deletedAt;
+    const attending = meeting.attendees.findIndex((id) => id === currentUserId) !== -1;
+
+    return !over && (!cancelled || attending);
   }),
 });
 

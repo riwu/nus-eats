@@ -46,6 +46,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
       <div className="left-container">
         <div className="title">
           { meeting.title }
+          { !!meeting.deletedAt && <span className="cancelled"> (Cancelled)</span> }
         </div>
 
         <div className="details">
@@ -73,9 +74,9 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
         </div>
 
         <div className="buttons">
-          { meeting.id < 10000000 && renderJoinButton() }
+          { meeting.id < 10000000 && !meeting.deletedAt && renderJoinButton() }
           {
-            meeting.id < 10000000 &&
+            meeting.id < 10000000 && !meeting.deletedAt &&
             <ShareMeetingButton meeting={ meeting } />
           }
           {
