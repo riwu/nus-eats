@@ -11,8 +11,6 @@ import './MainPage.css';
 const MainPage = ({ match }) => (
   <div className="MainPage">
     <NavigationBarContainer />
-    <FilterButtonContainer />
-    <FilterPanelContainer />
     <CanteensContainer selectedCanteenId={match.params.canteenId} />
     <Route
       path={`${match.url}/stall/:stallId`}
