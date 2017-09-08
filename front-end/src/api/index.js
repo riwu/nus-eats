@@ -20,22 +20,6 @@ const makeHeaders = (headers = {}) => {
   });
 };
 
-const encodeBody = (body, headers) => {
-  const contentType = headers.get('Content-Type');
-
-  switch (contentType) {
-    case 'application/json':
-      return JSON.stringify(body);
-    case 'multipart/form-data':
-      return Object.entries(body).reduce((form, [key, value]) => {
-        form.set(key, value);
-        return form;
-      }, new FormData());
-    default:
-      return undefined;
-  }
-};
-
 const parseResponseBody = (response) => {
   const contentType = response.headers.get('Content-Type');
 
