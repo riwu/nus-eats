@@ -40,7 +40,7 @@ const processResponse = (response) => {
 
   if (response.status === 401) {
     store.dispatch({
-      type: LOGOUT
+      type: LOGOUT,
     });
   }
 
@@ -103,13 +103,10 @@ export default {
       ...obj,
       [photo.stallId]: [photo].concat(obj[photo.stallId] || []),
     }), {})),
-  uploadFiles: (files, stallId) => [...files].forEach((file) => {
-    console.log('file: ', file, stallId);
-    postWithFile('/photos', {
-      photo: file,
-      stallId,
-    }).catch(e => console.log(e));
-  }),
+  uploadFiles: (files, stallId) => Promise.all([...files].map(file => postWithFile('/photos', {
+    photo: file,
+    stallId,
+  }).catch(e => console.log(e)))),
   login: accessToken => post('/authentication/login', { accessToken }),
 
   getMeetings() {

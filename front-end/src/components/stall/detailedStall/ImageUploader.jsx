@@ -2,9 +2,8 @@ import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import ImageUpload from 'react-file-reader-input';
 import './ImageUploader.css';
-import api from '../../../api';
 
-const ImageUploader = ({ stallId }) => (
+const ImageUploader = ({ uploadFiles }) => (
   <div className="ImageUpload">
     <ImageUpload
       onChange={(e, results) => {
@@ -16,7 +15,7 @@ const ImageUploader = ({ stallId }) => (
           alert(`Invalid file type: ${getFileType(invalidResult[1])}. Only ${acceptedFileTypes.join(', ')} are accepted.`);
           return;
         }
-        api.uploadFiles(results.map(([ignore, file]) => file), stallId);
+        uploadFiles(results.map(([ignore, file]) => file));
       }}
       accept="image/*"
       multiple
