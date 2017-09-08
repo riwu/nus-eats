@@ -9,7 +9,6 @@ const Photos = ({ photos }) => (
     <ImageGallery
       items={photos}
       slideInterval={2000}
-      showBullets
       showIndex
       onSlide={(index) => { this.index = index; }}
       renderCustomControls={() => (
