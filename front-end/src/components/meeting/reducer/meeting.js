@@ -64,7 +64,7 @@ const setMeetings = (state = {}, action) => {
         ...state,
         [action.id]: {
           ...state[action.id],
-          isActive: false,
+          deletedAt: true,
         },
       };
     }
