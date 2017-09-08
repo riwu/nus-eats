@@ -26,14 +26,17 @@ const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMe
            <Button
              bsStyle="primary"
              onClick={() => {
-               const invokeCreateMeeting = () => createMeeting({
-                 canteenId,
-                 startTime: getMergedDate(newMeetingDate, newMeetingTime),
-                 duration: newMeetingDuration,
-                 title: title.trim() || titlePlaceholder,
-                 description,
-                 userId,
-               });
+               const invokeCreateMeeting = () => {
+                 createMeeting({
+                   canteenId,
+                   startTime: getMergedDate(newMeetingDate, newMeetingTime),
+                   duration: newMeetingDuration,
+                   title: title.trim() || titlePlaceholder,
+                   description,
+                   userId,
+                 });
+                 toggleMeetingWindow();
+               };
                if (!isLoggedIn) {
                  login().then(() => {
                    invokeCreateMeeting();
