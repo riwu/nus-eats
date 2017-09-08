@@ -19,6 +19,13 @@ module.exports = (db) => {
           canteen.dataValues.crowdValue = camera.crowdValue;
         }
       });
+
+      canteen.dataValues.imageUrl = s3.getSignedUrl('getObject', {
+        Bucket: process.env.S3_BUCKET,
+        Key: process.env.S3_CANTEENS_FOLDER + canteen.dataValues.uuid
+      });
+
+      delete canteen.dataValues.uuid;
       delete canteen.dataValues.crowdId;
       return canteen;
     });

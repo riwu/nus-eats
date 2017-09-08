@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     crowdId: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false
     }
   });
 
