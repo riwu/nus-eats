@@ -33,7 +33,8 @@ module.exports = (db, s3) => {
   router.post('/', createUuid(), multerMiddleware(s3).single('photo'), asyncMiddleware(async (req, res, next) => {
     const photo = await db['photo'].create({
       uuid: req.uuid,
-      stallId: req.body.stallId
+      stallId: req.body.stallId,
+      userId: req.user.id
     });
 
     photo.dataValues.url = s3.getSignedUrl('getObject', {
