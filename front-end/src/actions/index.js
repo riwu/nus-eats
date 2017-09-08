@@ -260,11 +260,9 @@ export const toggleFeed = () => ({
 });
 
 export const shareMeeting = (meeting) => {
-  const origin = window.location.origin;
-
   window.FB.ui({
     method: 'share',
-    href: `${origin}/meetings/${meeting.id}`,
+    href: `https://fb.nuseats.club/meetings/${meeting.id}`,
   });
 };
 
