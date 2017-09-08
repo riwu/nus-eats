@@ -59,7 +59,8 @@ module.exports = (db, s3) => {
       const combinedId = friendsId.concat([req.user.id]);
 
       const appointments = await db['appointment'].findAll({
-        where: { userId: { $in: combinedId }}
+        where: { userId: { $in: combinedId }},
+        paranoid: false
       });
       res.json({appointments});
     }));
