@@ -307,3 +307,8 @@ export const initializeGeolocation = () => (dispatch) => {
     });
   });
 };
+
+export const setCurrentTime = (currentTime) => ({
+  type: types.SET_CURRENT_TIME,
+  currentTime,
+});
