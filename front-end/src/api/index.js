@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { LOGOUT } from '../constants/ActionTypes';
 import * as time from '../util/time';
 
 let store;
@@ -36,6 +37,13 @@ const processResponse = (response) => {
   if (response.ok) {
     return parseResponseBody(response);
   }
+
+  if (response.status === 401) {
+    store.dispatch({
+      type: LOGOUT
+    });
+  }
+
   return parseResponseBody(response)
       .then(body => Promise.reject({
         body,
