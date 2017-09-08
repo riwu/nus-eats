@@ -20,6 +20,22 @@ const makeHeaders = (headers = {}) => {
   });
 };
 
+const encodeBody = (body, headers) => {
+  const contentType = headers.get('Content-Type');
+
+  switch (contentType) {
+    case 'application/json':
+      return JSON.stringify(body);
+    case 'multipart/form-data':
+      return Object.entries(body).reduce((form, [key, value]) => {
+        form.set(key, value);
+        return form;
+      }, new FormData());
+    default:
+      return undefined;
+  }
+};
+
 const parseResponseBody = (response) => {
   const contentType = response.headers.get('Content-Type');
 
@@ -52,11 +68,17 @@ const get = (path, headers) => {
 
 const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
-  return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
-    method,
-    headers: makeHeaders(headers),
-    body: JSON.stringify(payload),
-  }).then(processResponse);
+
+  return (path, payload, headers) => {
+    const requestHeaders = makeHeaders(headers);
+    const requestBody = encodeBody(payload, requestHeaders);
+
+    return fetch(`${baseUrl}${path}`, {
+      method,
+      headers: requestHeaders,
+      body: requestBody,
+    }).then(processResponse);
+  };
 });
 
 const getEndTime = (startTime, duration) => time.format(moment(startTime).add(duration));
