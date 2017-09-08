@@ -7,6 +7,10 @@
   margin: 5px;
 }
 
+.durationPicker {
+  margin-left: 20px;
+}
+
 .text {
   font-weight: bold;
 }
