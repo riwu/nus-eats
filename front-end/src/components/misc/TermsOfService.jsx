@@ -1,5 +1,6 @@
 import React from 'react';
 import NavigationBar from '../main/NavigationBarContainer';
+import Footer from '../main/Footer';
 import './TermsOfService.css';
 
 const TermsOfService = () => (
@@ -113,6 +114,7 @@ const TermsOfService = () => (
         you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.
       </p>
     </div>
+    <Footer />
   </div>
 );
 

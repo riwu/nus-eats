@@ -5,6 +5,7 @@ import DetailedStallContainer from '../stall/detailedStall/DetailedStallContaine
 import FilterButtonContainer from '../filter/FilterButtonContainer';
 import FilterPanelContainer from '../filter/FilterPanelContainer';
 import NavigationBarContainer from './NavigationBarContainer';
+import Footer from './Footer';
 import './MainPage.css';
 
 const MainPage = ({ match }) => (
@@ -22,6 +23,7 @@ const MainPage = ({ match }) => (
         />
       )}
     />
+    <Footer />
   </div>
 );
 
