@@ -1,0 +1,11 @@
+{
+  "name": "prerenderer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Yihang Ho <hoyihang5@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "isomorphic-fetch": "^2.2.1"
+  }
+}
