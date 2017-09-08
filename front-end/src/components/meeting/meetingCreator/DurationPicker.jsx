@@ -1,34 +1,24 @@
 import React from 'react';
 import moment from 'moment';
-import { Form, FormControl, Radio, FormGroup, ControlLabel } from 'react-bootstrap';
+import { ButtonGroup, Button } from 'react-bootstrap';
 import './DurationPicker.css';
 
-// have to use index as key as duration can be set to the same
-const DurationPicker = ({ durations, updateDurationModifierRadio, activeDurationModifierIndex }) => (
-  <Form inline>
-    {durations.map((duration, index) => (
-      <div key={index}>
-        <FormGroup className="group">
-          {durations.length === 1 ? null :
-          <Radio
-            checked={index === activeDurationModifierIndex}
-            onChange={() => { updateDurationModifierRadio(index); }}
-          />
-          }
-          <FormControl
-            className="inputBox"
-            type="number"
-            min={0}
-            value={duration.value ? duration.value.asMinutes() : ''}
-            onChange={event => duration.onUpdate(moment.duration(Number(event.target.value), 'minutes'))}
-            step={10}
-            onClick={() => { updateDurationModifierRadio(index); }}
-          />
-          <ControlLabel>Minutes</ControlLabel>
-        </FormGroup>
-      </div>
-      ))}
-  </Form>
+const DurationPicker = ({ durations }) => (
+  <ButtonGroup vertical className="buttonGroup">
+    {[15, 30, 45, 60, 90, 120, 180].map((minutes) => {
+      const duration = moment.duration(minutes, 'm');
+      const currentDuration = durations[0].value;
+      return (
+        <Button
+          key={minutes}
+          bsStyle={((currentDuration ? currentDuration.asMinutes() : null) === minutes) ? 'primary' : 'default'}
+          onClick={() => durations[0].onUpdate(duration)}
+        >
+          {minutes < 60 ? `${duration.minutes()} min` : `${duration.asMinutes() / 60} hr` }
+        </Button>
+      );
+    })}
+  </ButtonGroup>
 );
 
 export default DurationPicker;

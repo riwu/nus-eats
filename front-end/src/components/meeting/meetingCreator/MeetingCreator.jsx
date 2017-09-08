@@ -31,7 +31,7 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
             activeTimeModifierIndex={activeTimeModifierIndex}
           />
         </div>
-        <div className="picker">
+        <div className="durationPicker">
           <div className="text">Pick a Duration</div>
           <DurationPicker
             durations={meetings.map(meeting => ({

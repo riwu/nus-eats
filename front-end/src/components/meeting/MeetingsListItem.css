@@ -21,6 +21,10 @@
   }
 }
 
+.MeetingsListItem .cancelled {
+  color: red;
+}
+
 .MeetingsListItem .right-container {
   display: flex;
   flex-direction: column;

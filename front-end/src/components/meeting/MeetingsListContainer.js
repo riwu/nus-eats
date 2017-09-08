@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { getMeetings } from '../../actions';
 import MeetingsList from './MeetingsList';
 
@@ -14,7 +15,17 @@ class MeetingsListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  meetings: Object.entries(state.meeting.meetings),
+  meetings: Object.entries(state.meeting.meetings).filter(([id, meeting]) => {
+    const startTime = moment(meeting.startTime);
+    const currentUserId = (state.currentUser || {}).id;
+    const over = startTime.add(meeting.duration).isBefore(state.currentTime);
+    const cancelled = !!meeting.deletedAt;
+    const attending = meeting.attendees.findIndex((id) => id === currentUserId) !== -1;
+
+    return !over && (!cancelled || attending);
+  }).sort(([id1], [id2]) => {
+    return -(id1 - id2);
+  }),
 });
 
 const mapDispatchToProps = dispatch => ({
