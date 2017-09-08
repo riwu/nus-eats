@@ -12,7 +12,7 @@ const Photos = ({ photos }) => (
       showIndex
       onSlide={(index) => { this.index = index; }}
       renderCustomControls={() => (
-        <FacebookLike href={`${window.location.origin}/photos/${(photos[this.index || 0] || {}).id}`} />
+        <FacebookLike href={`${window.location.origin}/photos/${(photos[this.index || 0] || {}).uuid}`} />
       )}
     />
   </div>

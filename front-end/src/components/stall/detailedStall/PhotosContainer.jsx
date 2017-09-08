@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { getAllPhotos } from '../../../actions';
 import Photos from './Photos';
 
-const stallPhotos = [...Array(10).keys()].reduce((obj, value) => ({
-  ...obj,
-  [value]: {
-    original: `http://lorempixel.com/250/150/nature/${value}/`,
-    thumbnail: `http://lorempixel.com/250/150/nature/${value}/`,
-  },
-}), {});
+const stallPhotos = [...Array(10).keys()].map(value => ({
+  url: `http://lorempixel.com/250/150/nature/${value}/`,
+  uuid: value,
+}));
 
 class PhotosContainer extends React.Component {
   componentDidMount() {
@@ -22,13 +19,16 @@ class PhotosContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  photos: Object.entries(stallPhotos).map(([id, photo]) => ({
-    original: photo.original,
-    thumbnail: photo.thumbnail,
-    id,
-  })),
-});
+const mapStateToProps = (state, ownProps) => {
+  console.log('photos:', state.stallPhotos[ownProps.stallId]);
+  return ({
+    photos: Object.values(state.stallPhotos[ownProps.stallId] || stallPhotos).map(photo => ({
+      original: photo.url,
+      thumbnail: photo.url,
+      uuid: photo.uuid,
+    })),
+  });
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getAllPhotos: () => dispatch(getAllPhotos(ownProps.stallId)),

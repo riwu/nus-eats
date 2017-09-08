@@ -96,7 +96,7 @@ export default {
   getAllPhotos: stallId => get(`/stalls/${stallId}/photos`)
     .then(({ photos }) => photos.reduce((obj, photo) => ({
       ...obj,
-      [photo.id]: photo,
+      [photo.stallId]: [photo].concat(obj[photo.stallId] || []),
     }), {})),
   uploadFiles: (files, stallId) => [...files].forEach((file) => {
     console.log('file: ', file, stallId);
