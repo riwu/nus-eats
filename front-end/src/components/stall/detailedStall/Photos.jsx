@@ -9,11 +9,12 @@ const Photos = ({ photos }) => (
     <ImageGallery
       items={photos}
       slideInterval={2000}
-      onImageLoad={this.handleImageLoad}
       showBullets
       showIndex
-      onClick={e => console.log(e.target)}
-      renderCustomControls={() => <FacebookLike />}
+      onSlide={(index) => { this.index = index; }}
+      renderCustomControls={() => (
+        <FacebookLike href={`${window.location.origin}/photos/${(photos[this.index || 0] || {}).id}`} />
+      )}
     />
   </div>
 );

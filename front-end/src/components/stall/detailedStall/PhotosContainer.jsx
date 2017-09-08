@@ -26,6 +26,7 @@ const mapStateToProps = state => ({
   photos: Object.entries(stallPhotos).map(([id, photo]) => ({
     original: photo.original,
     thumbnail: photo.thumbnail,
+    id,
   })),
 });
 

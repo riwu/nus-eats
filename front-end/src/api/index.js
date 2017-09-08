@@ -103,7 +103,7 @@ export default {
     post('/photos', {
       file,
       stallId,
-    }, { 'Content-Type': 'multipart/form-data' }).catch(e => console.log(e));
+    }).catch(e => console.log(e));
   }),
   login: accessToken => post('/authentication/login', { accessToken }),
 
