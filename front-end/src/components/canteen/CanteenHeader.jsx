@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import placeholder from '../../images/dog.jpg';
 import './CanteenHeader.css';
 import Meeting from '../meeting/meetingCreator/MeetingContainer';
 import Distance from '../misc/DistanceContainer';
