@@ -1,0 +1,18 @@
+.imageUploader {
+  float: left !important;
+  vertical-align: top;
+  height: 100px;
+}
+
+.button {
+  float: left !important;
+  vertical-align: top;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.label {
+  position: absolute;
+  width: 0;
+  height: 0;
+}

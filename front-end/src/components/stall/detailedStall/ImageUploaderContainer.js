@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import ImageUploader from './ImageUploader';
 import api from '../../../api';
 
