@@ -28,7 +28,7 @@ module.exports = (db, s3) => {
     stalls.map(stall => {
       stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
         Bucket: process.env.S3_BUCKET,
-        Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
+        Key: process.env.S3_STALLS_FOLDER + stall.dataValues.uuid
       });
       delete stall.dataValues.uuid;
       return stall;
@@ -55,7 +55,7 @@ module.exports = (db, s3) => {
 
     stall.dataValues.imageUrl = s3.getSignedUrl('getObject', {
       Bucket: process.env.S3_BUCKET,
-      Key: process.env.S3_DEFAULT_FOLDER + stall.dataValues.uuid
+      Key: process.env.S3_STALLS_FOLDER + stall.dataValues.uuid
     });
     delete stall.dataValues.uuid;
 
