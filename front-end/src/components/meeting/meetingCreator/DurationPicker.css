@@ -1,3 +1,9 @@
 .inputBox {
   width: 65px !important;
+  margin-right: 5px;
+}
+
+.group {
+  margin-top: 12px;
+  margin-left: 10px;
 }

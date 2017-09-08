@@ -14,14 +14,14 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
     <div>
       <div className="pickers">
         <div className="picker">
-          <div className="text">Select Date</div>
+          <div className="text">Pick a Date</div>
           <DayPicker
             onDayClick={date => meetings[0].onDateUpdate(moment(date))}
             selectedDays={meetings[0].date ? meetings[0].date.toDate() : null}
           />
         </div>
         <div className="picker">
-          <div className="text">Select Time</div>
+          <div className="text">Pick a Time</div>
           <TimeSelector
             timings={meetings.map(meeting => ({
               value: meeting.time,
@@ -32,7 +32,7 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
           />
         </div>
         <div className="picker">
-          <div className="text">Select Duration</div>
+          <div className="text">Pick a Duration</div>
           <DurationPicker
             durations={meetings.map(meeting => ({
               value: meeting.duration,

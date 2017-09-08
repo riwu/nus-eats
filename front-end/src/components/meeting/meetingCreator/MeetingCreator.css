@@ -3,13 +3,11 @@
   text-align: center;
 }
 
-.pickers .picker {
-  border: 1px solid #ddd;
-  background: #FDFDFD;
+.picker {
   margin: 5px;
 }
 
-.pickers .picker .text {
+.text {
   font-weight: bold;
 }
 
@@ -26,4 +24,8 @@
 
 .formInput {
   width: 100%;
+}
+
+.timeSelector {
+  margin-top: 20px;
 }
