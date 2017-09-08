@@ -4,6 +4,7 @@ import ProfilePicture from '../facebook/ProfilePicture';
 import JoinMeetingButton from './JoinMeetingButtonContainer';
 import LeaveMeetingButton from './LeaveMeetingButtonContainer';
 import ShareMeetingButton from './ShareMeetingButtonContainer';
+import CancelMeetingButton from './CancelMeetingButtonContainer';
 import './MeetingsListItem.css';
 
 const Attendees = ({ attendees }) => (
@@ -72,8 +73,15 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
         </div>
 
         <div className="buttons">
-          { renderJoinButton() }
-          <ShareMeetingButton meeting={ meeting } />
+          { meeting.id < 10000000 && renderJoinButton() }
+          {
+            meeting.id < 10000000 &&
+            <ShareMeetingButton meeting={ meeting } />
+          }
+          {
+            meeting.userId === currentUserId && !meeting.deletedAt && meeting.id < 10000000 &&
+            <CancelMeetingButton meeting={ meeting } />
+          }
         </div>
       </div>
     </div>

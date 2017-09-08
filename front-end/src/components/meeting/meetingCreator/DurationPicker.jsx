@@ -8,11 +8,13 @@ const DurationPicker = ({ durations, updateDurationModifierRadio, activeDuration
   <Form inline>
     {durations.map((duration, index) => (
       <div key={index}>
-        <FormGroup>
+        <FormGroup className="group">
+          {durations.length === 1 ? null :
           <Radio
             checked={index === activeDurationModifierIndex}
             onChange={() => { updateDurationModifierRadio(index); }}
           />
+          }
           <FormControl
             className="inputBox"
             type="number"

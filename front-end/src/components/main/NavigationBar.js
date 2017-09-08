@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Glyphicon, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Button, Image, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginButton from '../facebook/LoginButtonContainer';
 import LogoutButton from '../facebook/LogoutButtonContainer';
 import logo from '../../images/logo.jpg';
@@ -33,9 +33,7 @@ const NavigationBar = ({ currentUser, toggleFeed, onLogin, onLogout }) => {
             </span>
           </span>
         </OverlayTrigger>
-        <span onClick={ toggleFeed }className="hamburger-container">
-          <Glyphicon className="hamburger" glyph="menu-hamburger" />
-        </span>
+        <Button className="btn-discover btn-shadow" onClick={ toggleFeed }>Discover</Button>
       </div>
     );
   } else {

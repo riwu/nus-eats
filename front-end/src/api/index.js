@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { LOGOUT } from '../constants/ActionTypes';
 import * as time from '../util/time';
 
 let store;
@@ -20,22 +21,6 @@ const makeHeaders = (headers = {}) => {
   });
 };
 
-const encodeBody = (body, headers) => {
-  const contentType = headers.get('Content-Type');
-
-  switch (contentType) {
-    case 'application/json':
-      return JSON.stringify(body);
-    case 'multipart/form-data':
-      return Object.entries(body).reduce((form, [key, value]) => {
-        form.set(key, value);
-        return form;
-      }, new FormData());
-    default:
-      return undefined;
-  }
-};
-
 const parseResponseBody = (response) => {
   const contentType = response.headers.get('Content-Type');
 
@@ -52,6 +37,13 @@ const processResponse = (response) => {
   if (response.ok) {
     return parseResponseBody(response);
   }
+
+  if (response.status === 401) {
+    store.dispatch({
+      type: LOGOUT
+    });
+  }
+
   return parseResponseBody(response)
       .then(body => Promise.reject({
         body,

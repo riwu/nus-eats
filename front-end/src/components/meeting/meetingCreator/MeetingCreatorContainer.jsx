@@ -38,17 +38,18 @@ class MeetingCreatorContainer extends React.Component {
     const recentMeetings = Object.values(this.props.meetings)
       .sort((a, b) => now.diff(a.startTime) - now.diff(b.startTime));
 
+    const pickerCount = 1;
     // can not set default in reducer as duplicates must be filtered
     const timeFormat = 'HH:mm';
     const defaultTimes = ['12:00', '13:00'];
     [...new Set([now].concat(recentMeetings.map(meeting => meeting.startTime))
       .map(meeting => meeting.format(timeFormat)).concat(defaultTimes))]
-      .slice(0, 3).map(time => moment(time, timeFormat))
+      .slice(0, pickerCount).map(time => moment(time, timeFormat))
       .forEach((time, index) => this.props.onTimeUpdate(time, index));
 
     const defaultDurations = [30, 60, 120];
     [...new Set(recentMeetings.map(meeting => meeting.duration.asMinutes()).concat(defaultDurations))]
-      .slice(0, 3).map(min => moment.duration(min, 'm'))
+      .slice(0, pickerCount).map(min => moment.duration(min, 'm'))
       .forEach((duration, index) => this.props.onDurationUpdate(duration, index));
   }
 

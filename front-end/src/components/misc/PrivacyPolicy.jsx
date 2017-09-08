@@ -1,5 +1,6 @@
 import React from 'react';
 import NavigationBar from '../main/NavigationBarContainer';
+import Footer from '../main/Footer';
 import './PrivacyPolicy.css'
 
 const PrivacyPolicy = () => (
@@ -132,6 +133,7 @@ const PrivacyPolicy = () => (
         take immediate effect. We may notify you should there be any major changes to the policies.
       </p>
     </div>
+    <Footer />
   </div>
 );
 

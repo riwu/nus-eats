@@ -14,38 +14,35 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
     <div>
       <div className="pickers">
         <div className="picker">
-          <div className="text">Select Date</div>
+          <div className="text">Pick a Date</div>
           <DayPicker
             onDayClick={date => meetings[0].onDateUpdate(moment(date))}
             selectedDays={meetings[0].date ? meetings[0].date.toDate() : null}
           />
         </div>
-        <div>
-          <div className="picker">
-            <div className="text">Select Time</div>
-            <TimeSelector
-              timings={meetings.map(meeting => ({
-                value: meeting.time,
-                onUpdate: time => meeting.onTimeUpdate(time),
-              }))}
-              updateTimeModifierRadio={updateTimeModifierRadio}
-              activeTimeModifierIndex={activeTimeModifierIndex}
-            />
-          </div>
-          <div className="picker">
-            <div className="text">Select Duration</div>
-            <DurationPicker
-              durations={meetings.map(meeting => ({
-                value: meeting.duration,
-                onUpdate: duration => meeting.onDurationUpdate(duration),
-              }))}
-              updateDurationModifierRadio={updateDurationModifierRadio}
-              activeDurationModifierIndex={activeDurationModifierIndex}
-            />
-          </div>
+        <div className="picker">
+          <div className="text">Pick a Time</div>
+          <TimeSelector
+            timings={meetings.map(meeting => ({
+              value: meeting.time,
+              onUpdate: time => meeting.onTimeUpdate(time),
+            }))}
+            updateTimeModifierRadio={updateTimeModifierRadio}
+            activeTimeModifierIndex={activeTimeModifierIndex}
+          />
+        </div>
+        <div className="picker">
+          <div className="text">Pick a Duration</div>
+          <DurationPicker
+            durations={meetings.map(meeting => ({
+              value: meeting.duration,
+              onUpdate: duration => meeting.onDurationUpdate(duration),
+            }))}
+            updateDurationModifierRadio={updateDurationModifierRadio}
+            activeDurationModifierIndex={activeDurationModifierIndex}
+          />
         </div>
       </div>
-
       <FormGroup>
         <ControlLabel>Title</ControlLabel>
         <ButtonGroup className="formInput">

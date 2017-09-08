@@ -46,9 +46,13 @@ const setMeetings = (state = {}, action) => {
       };
     }
     case SET_MEETING_ID: {
-      const meetings = { ...state };
-      meetings[action.id] = meetings[action.tempId];
-      meetings[action.id].isIdSet = true;
+      const meetings = {
+        ...state,
+        [action.id]: {
+          ...state[action.tempId],
+          id: action.id,
+        },
+      };
       delete meetings[action.tempId];
       return meetings;
     }

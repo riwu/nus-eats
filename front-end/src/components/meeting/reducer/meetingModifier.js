@@ -11,7 +11,7 @@ import {
   UPDATE_MEETING_CREATOR_TITLE_PLACEHOLDER,
 } from '../../../constants/ActionTypes';
 
-const meetingModifier = (state = [{}, {}, {}], action) => {
+const meetingModifier = (state = [{}], action) => {
   switch (action.type) {
     case UPDATE_NEW_MEETING_DATE: {
       const newState = [...state];
