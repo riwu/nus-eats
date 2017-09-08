@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import MeetingCreator from './MeetingCreatorContainer';
-import MeetingsDisplay from './MeetingsDisplayContainer';
 import getMergedDate from '../../../util/getMergedDate';
 
 const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
@@ -23,7 +22,6 @@ const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMe
          </Modal.Header>
          <Modal.Body>
            <MeetingCreator canteenName={canteenName} />
-           <MeetingsDisplay />
          </Modal.Body>
          <Modal.Footer>
            <Button
