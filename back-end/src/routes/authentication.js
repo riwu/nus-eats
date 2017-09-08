@@ -88,26 +88,25 @@ module.exports = (db, s3) => {
       }
     });
 
-    const params = {
-      Bucket: process.env.S3_BUCKET,
-      Key: photo.uuid
-    };
-
     const photos = await db['photo'].findAll({
       where: {
         userId: currentUserId
       }
     });
 
-    photos.forEach(photo => {
+    photos.forEach(async photo =>  {
+      const params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: photo.uuid
+      };
       s3.deleteObject(params, (err, data) => {
         if (err) {
           next(Boom.badGateway(err.message));
         }
       });
+      await photo.destroy();
     });
 
-    await photos.destroy();
     res.status(204).send();
   }));
 
