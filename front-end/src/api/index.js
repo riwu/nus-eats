@@ -98,10 +98,13 @@ export default {
       ...obj,
       [photo.id]: photo,
     }), {})),
-  uploadFiles: (files, stallId) => [...files].forEach(file => post('/photos', {
-    file,
-    stallId,
-  }, { 'Content-Type': 'multipart/form-data' }).catch(e => console.log(e))),
+  uploadFiles: (files, stallId) => [...files].forEach((file) => {
+    console.log('file: ', file, stallId);
+    post('/photos', {
+      file,
+      stallId,
+    }, { 'Content-Type': 'multipart/form-data' }).catch(e => console.log(e));
+  }),
   login: accessToken => post('/authentication/login', { accessToken }),
 
   getMeetings() {
