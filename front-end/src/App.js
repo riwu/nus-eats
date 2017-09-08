@@ -3,9 +3,10 @@ import { Provider } from 'react-redux';
 
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch } from 'react-router-dom';
+import moment from 'moment';
 import history from './store/history';
 
-import { getAllCanteens, getAllStalls, getRatings } from './actions';
+import { getAllCanteens, getAllStalls, getRatings, setCurrentTime } from './actions';
 import store from './store';
 
 import FeedContainer from './components/main/FeedContainer';
@@ -21,6 +22,8 @@ import './App.css';
 
 store.dispatch(getAllCanteens);
 store.dispatch(getAllStalls);
+store.dispatch(setCurrentTime(moment()));
+setInterval(() => store.dispatch(setCurrentTime(moment())), 1 * 60 * 1000);
 if (store.getState().accessTokens.api) store.dispatch(getRatings);
 
 function App() {

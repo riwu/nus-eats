@@ -4,6 +4,7 @@ import NavigationBar from '../main/NavigationBarContainer';
 import MeetingPageContent from './MeetingPageContent';
 import MeetingNotFound from './MeetingNotFound';
 import LoadingMeeting from './LoadingMeeting';
+import Footer from '../main/Footer';
 import './MeetingPage.css';
 
 const MeetingPage = ({ meeting, notFound }) => {
@@ -35,7 +36,10 @@ const MeetingPage = ({ meeting, notFound }) => {
     <div className="MeetingPage">
       { header }
       <NavigationBar />
-      { content }
+      <div className="content">
+        { content }
+      </div>
+      <Footer />
     </div>
   );
 };

@@ -34,6 +34,7 @@ const setMeetings = (state = {}, action) => {
       return {
         ...state,
         [action.tempId]: {
+          id: action.tempId,
           canteenId: action.canteenId,
           startTime: action.startTime,
           duration: action.duration,

@@ -1,9 +1,17 @@
 .MeetingPage {
-  padding: 10px;
+  padding: 0 10px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.MeetingPage > .content {
+  flex-grow: 1;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {
   .MeetingPage {
-    padding: 10px 50px;
+    padding: 0 50px;
   }
 }
