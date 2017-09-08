@@ -13,6 +13,7 @@
     "react-bootstrap": "^0.31.2",
     "react-day-picker": "^6.1.0",
     "react-dom": "^15.6.1",
+    "react-flip-move": "^2.9.15",
     "react-helmet": "^5.2.0",
     "react-rating": "^0.8.1",
     "react-redux": "^5.0.6",
@@ -28,7 +29,8 @@
     "eslint-config-airbnb": "^15.0.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-react": "^7.1.0",
+    "prop-types": "^15.5.10"
   },
   "scripts": {
     "start": "react-scripts start",
