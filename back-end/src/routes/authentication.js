@@ -104,9 +104,9 @@ module.exports = (db, s3) => {
           next(Boom.badGateway(err.message));
         }
       });
+      await photo.destroy();
     });
 
-    await photos.destroy();
     res.status(204).send();
   }));
 
