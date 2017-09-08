@@ -6,7 +6,7 @@ import Photos from './Photos';
 const stallPhotos = [...Array(10).keys()].reduce((obj, value) => ({
   ...obj,
   [value]: {
-    original: `http://lorempixel.com/1000/600/nature/${value}/`,
+    original: `http://lorempixel.com/250/150/nature/${value}/`,
     thumbnail: `http://lorempixel.com/250/150/nature/${value}/`,
   },
 }), {});
