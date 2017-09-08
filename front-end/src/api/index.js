@@ -69,17 +69,30 @@ const get = (path, headers) => {
 const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((method) => {
   const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
-  return (path, payload, headers) => {
-    const requestHeaders = makeHeaders(headers);
-    const requestBody = encodeBody(payload, requestHeaders);
-
-    return fetch(`${baseUrl}${path}`, {
-      method,
-      headers: requestHeaders,
-      body: requestBody,
-    }).then(processResponse);
-  };
+  return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
+    method,
+    headers: makeHeaders(headers),
+    body: JSON.stringify(payload),
+  }).then(processResponse);
 });
+
+const postWithFile = (path, payload, headers) => {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
+
+  const requestHeaders = makeHeaders(headers);
+  const requestBody = Object.entries(payload).reduce((form, [key, value]) => {
+    form.append(key, value);
+    return form;
+  }, new FormData());
+
+  requestHeaders.delete('Content-Type');
+
+  return fetch(`${baseUrl}${path}`, {
+    method: 'POST',
+    headers: requestHeaders,
+    body: requestBody,
+  }).then(processResponse);
+};
 
 const getEndTime = (startTime, duration) => time.format(moment(startTime).add(duration));
 
@@ -100,8 +113,8 @@ export default {
     }), {})),
   uploadFiles: (files, stallId) => [...files].forEach((file) => {
     console.log('file: ', file, stallId);
-    post('/photos', {
-      file,
+    postWithFile('/photos', {
+      photo: file,
       stallId,
     }).catch(e => console.log(e));
   }),
