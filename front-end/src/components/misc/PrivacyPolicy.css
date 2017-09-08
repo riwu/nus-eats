@@ -1,3 +1,20 @@
 .PrivacyPolicy {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .PrivacyPolicy {
+    padding: 10px 50px;
+  }
+}
+
+.PrivacyPolicy > .content {
   background-color: #fff;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .PrivacyPolicy > .content {
+    padding: 5px 25px;
+  }
 }

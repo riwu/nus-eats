@@ -42,10 +42,11 @@ const Distance = ({ isAvailable, permission, initializeGeolocation, coordinates,
     const walkingSpeed = 5000 / 60; // m / min
     const time = distance / walkingSpeed;
     const estimatedTime = Math.ceil(time / 5) * 5;
+    const estimatedDistance = Math.ceil(distance / 100) * 100;
 
     return (
       <div className="Distance">
-        <Glyphicon glyph="time" />{ ' ' }{ estimatedTime } mins away
+        <Glyphicon glyph="time" />{ ' ' }{ estimatedDistance }m ({ estimatedTime } mins away)
       </div>
     );
   }

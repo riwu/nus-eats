@@ -13,10 +13,13 @@ const MeetingPage = ({ meeting, notFound }) => {
     header = (
       <Helmet>
         <meta property="og:url" content={ `${window.location.origin}/meetings/${meeting.id}` } />
-        <meta property="og:type" content="restaurant" />
         {
           meeting.canteen &&
-          <meta property="og:title" content={ meeting.canteen.name } />
+          <meta property="og:title" content={ meeting.title } />
+        }
+        {
+          meeting.canteen &&
+          <meta property="og:description" content={ meeting.description} />
         }
       </Helmet>
     );

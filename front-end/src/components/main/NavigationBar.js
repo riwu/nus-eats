@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Image, Glyphicon, OverlayTrigger, Popover } from 'react-bootstrap';
 import LoginButton from '../facebook/LoginButtonContainer';
 import LogoutButton from '../facebook/LogoutButtonContainer';
@@ -47,7 +48,9 @@ const NavigationBar = ({ currentUser, toggleFeed, onLogin, onLogout }) => {
 
   return (
     <div className="NavigationBar">
-      <Image src={logo} />
+      <Link to="/">
+        <Image src={logo} />
+      </Link>
       { content }
     </div>
   );

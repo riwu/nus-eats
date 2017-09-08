@@ -11,6 +11,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   canteenId: ownProps.canteen.id,
   latitude: ownProps.canteen.latitude,
   longitude: ownProps.canteen.longitude,
+  imageUrl: ownProps.canteen.imageUrl,
   toggleCanteenPanel: () => dispatch(replace(ownProps.isSelected ? '/' : `/canteen/${ownProps.canteen.id}`)),
 });
 
