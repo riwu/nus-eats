@@ -73,10 +73,13 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
         </div>
 
         <div className="buttons">
-          { renderJoinButton() }
-          <ShareMeetingButton meeting={ meeting } />
+          { meeting.id < 10000000 && renderJoinButton() }
           {
-            meeting.userId === currentUserId && !meeting.deletedAt &&
+            meeting.id < 10000000 &&
+            <ShareMeetingButton meeting={ meeting } />
+          }
+          {
+            meeting.userId === currentUserId && !meeting.deletedAt && meeting.id < 10000000 &&
             <CancelMeetingButton meeting={ meeting } />
           }
         </div>
