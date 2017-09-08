@@ -88,7 +88,10 @@ export default {
   getAllCanteens: () => get('/canteens').then(({ canteens }) => canteens),
   getAllStalls: () => get('/stalls').then(({ stalls }) => stalls.reduce((dict, stall) => ({
     ...dict,
-    [stall.id]: stall,
+    [stall.id]: {
+      ...stall,
+      averageRating: Number(stall.averageRating),
+    },
   }), {})),
   login: accessToken => post('/authentication/login', { accessToken }),
 
