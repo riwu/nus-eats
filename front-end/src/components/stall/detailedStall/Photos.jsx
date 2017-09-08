@@ -1,13 +1,15 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const Photos = ({ photos }) => (
   <div>
-    {Object.entries(photos).map(([id, photo]) => (
-      <Image src={photo.url} />
-    ))}
+    <ImageGallery
+      items={photos}
+      slideInterval={2000}
+      onImageLoad={this.handleImageLoad}
+    />
   </div>
-
 );
 
 export default Photos;
