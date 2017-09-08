@@ -1,5 +1,7 @@
 import React from 'react';
-import { Glyphicon } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
+import walk from '../../images/walk.png';
+import place from '../../images/place.png';
 import './Distance.css';
 
 const distanceBetweenPoints = (a, b) => {
@@ -28,7 +30,11 @@ const Distance = ({ isAvailable, permission, initializeGeolocation, coordinates,
   if (permission === 'unknown') {
     return (
       <div className="Distance prompt">
-        <span onClick={initializeGeolocation}>How far away?</span>
+        <span onClick={initializeGeolocation}>
+          <Image src={ place } style={{width: '10px', height: '10px'}} />
+          { ' ' }
+          How far?
+        </span>
       </div>
     );
   } else if (permission === 'pending' || !coordinates) {
@@ -46,7 +52,8 @@ const Distance = ({ isAvailable, permission, initializeGeolocation, coordinates,
 
     return (
       <div className="Distance">
-        <Glyphicon glyph="time" />{ ' ' }{ estimatedDistance }m ({ estimatedTime } mins away)
+        <Image src={ walk } style={{width: '10px', height: '10px'}} />
+        { ' ' } { estimatedTime } { ' ' } min ({ estimatedDistance }m)
       </div>
     );
   }
