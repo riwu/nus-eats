@@ -13,7 +13,7 @@ const DetailedStall = ({ stall, closeModal }) => (
     <Modal.Body>
       {stall ? stall.description : null}
       <PhotosContainer stallId={stall ? stall.id : null} />
-      <ImageUploader />
+      <ImageUploader stallId={stall ? stall.id : null} />
       <div>Your rating:</div>
       {stall ? <RatingContainer stallId={stall.id} /> : null }
       {stall && <FacebookCommentsContainer href={`${window.location.origin}/stalls/${stall.id}`} />}

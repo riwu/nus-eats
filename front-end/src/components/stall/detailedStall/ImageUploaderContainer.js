@@ -17,7 +17,7 @@ class ImageUploaderContainer extends React.Component {
         onFileUpload={files => this.setState({ files })}
         onSave={() => {
           console.log(this.state.files);
-          api.uploadFiles(this.state.files);
+          api.uploadFiles(this.state.files, this.props.stallId);
         }}
         hasFile={this.state.files.length > 0}
       />
@@ -25,11 +25,4 @@ class ImageUploaderContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  // cannot use goBack() as user might navigate to it directly with url
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ImageUploaderContainer);
+export default ImageUploaderContainer;

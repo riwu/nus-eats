@@ -99,7 +99,7 @@ export default {
       [photo.id]: photo,
     }), {})),
   uploadFiles: (files, stallId) => [...files].forEach((file) => {
-    console.log('file: ', file);
+    console.log('file: ', file, stallId);
     post('/photos', {
       file,
       stallId,
