@@ -5,10 +5,10 @@ import './CanteenHeader.css';
 import Meeting from '../meeting/meetingCreator/MeetingContainer';
 import Distance from '../misc/DistanceContainer';
 
-const CanteenHeader = ({ canteenId, canteenName, latitude, longitude, stallsCount = 0, toggleCanteenPanel }) => (
+const CanteenHeader = ({ canteenId, canteenName, imageUrl, latitude, longitude, stallsCount = 0, toggleCanteenPanel }) => (
   <div className="CanteenHeader">
     <div
-      style={{ backgroundImage: `url('${placeholder}')` }}
+      style={{ backgroundImage: `url('${imageUrl}')` }}
       className="image-container"
     />
 
