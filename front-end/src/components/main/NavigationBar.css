@@ -28,15 +28,13 @@
   margin-left: 6px;
 }
 
-.NavigationBar .hamburger-container {
-  margin-left: 24px;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.NavigationBar .hamburger {
-  position: relative;
-  top: 3px;
+.NavigationBar .btn-discover,
+.NavigationBar .btn-discover:hover,
+.NavigationBar .btn-discover:active,
+.NavigationBar .btn-discover:hover:active,
+.NavigationBar .btn-discover:focus {
+  margin-left: 10px;
+  background-color: #fff;
 }
 
 .NavigationBar .btn-login,
