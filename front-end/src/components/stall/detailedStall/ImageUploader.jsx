@@ -1,23 +1,21 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import ImageUpload from './react-images-upload';
-// import './ImageUploader.css';
+import { Button, Glyphicon } from 'react-bootstrap';
+import ImageUpload from 'react-file-reader-input';
+import './ImageUploader.css';
+import api from '../../../api';
 
-const ImageUploader = ({ onFileUpload, onSave, hasFile }) => (
-  <div>
+const ImageUploader = ({ stallId }) => (
+  <div className="ImageUpload">
     <ImageUpload
-      className="imageUploader"
-      buttonClassName="button"
-      labelClass="label"
-      onChange={onFileUpload}
-      withIcon={false}
-      withLabel={false}
-      maxFileSize={20000000}
-      buttonText="Upload photos"
-    />
-    {!hasFile ? null : <Button onClick={onSave}>Save</Button>
-}
-
+      onChange={(e, results) =>
+        api.uploadFiles(results.map(([ignore, file]) => file), stallId)
+      }
+    >
+      <Button bsStyle="primary">
+        <Glyphicon glyph="upload" className="uploadGlyph" />
+        Upload Photos
+      </Button>
+    </ImageUpload>
   </div>
 );
 
