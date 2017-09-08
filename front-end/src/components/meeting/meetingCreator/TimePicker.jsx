@@ -12,6 +12,7 @@ const TimePicker = ({ value, onUpdate, updateTimeModifierRadio }) => (
     disabledMinutes={() => Config.MINUTES_TO_HIDE}
     showSecond={false}
     use12Hours
+    open
     hideDisabledOptions
     getPopupContainer={triggerNode => triggerNode.parentNode}
     onOpen={updateTimeModifierRadio}

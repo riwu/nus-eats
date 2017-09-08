@@ -8,10 +8,12 @@ const TimeSelector = ({ timings, activeTimeModifierIndex, updateTimeModifierRadi
     {timings.map((time, index) => (
       <div key={index}>
         <FormGroup>
+          {timings.length === 1 ? null :
           <Radio
             checked={index === activeTimeModifierIndex}
             onChange={() => updateTimeModifierRadio(index)}
           />
+          }
           <TimePicker
             value={time.value}
             onUpdate={value => time.onUpdate(value)}

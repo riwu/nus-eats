@@ -51,7 +51,7 @@ const setMeetings = (state = {}, action) => {
         [action.id]: {
           ...state[action.tempId],
           id: action.id,
-        }
+        },
       };
       delete meetings[action.tempId];
       return meetings;
