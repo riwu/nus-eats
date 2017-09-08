@@ -2,8 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import CanteensContainer from '../canteen/CanteensContainer';
 import DetailedStallContainer from '../stall/detailedStall/DetailedStallContainer';
-import FilterButtonContainer from '../filter/FilterButtonContainer';
-import FilterPanelContainer from '../filter/FilterPanelContainer';
 import NavigationBarContainer from './NavigationBarContainer';
 import Footer from './Footer';
 import './MainPage.css';
