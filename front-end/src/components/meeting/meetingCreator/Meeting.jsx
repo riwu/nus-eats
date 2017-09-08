@@ -15,7 +15,6 @@ const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMe
        <Modal
          show={isOpen}
          onHide={toggleMeetingWindow}
-         animation={false}
        >
          <Modal.Header closeButton>
            <Modal.Title>{canteenName}</Modal.Title>
