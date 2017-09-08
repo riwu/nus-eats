@@ -4,7 +4,7 @@ const getCrowdValue = require('../services/crowd');
 
 const router = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, s3) => {
   router.get('/', asyncMiddleware(async (req, res, next) => {
     const crowd = await getCrowdValue();
     const canteens = await db['canteen'].findAll({
