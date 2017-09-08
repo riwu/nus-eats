@@ -24,7 +24,7 @@ class FacebookLike extends Component {
     this.container.innerHTML = `
       <div
         class="fb-like"
-        data-href="${ href }"
+        data-href="${href}"
         data-layout="button_count"
         data-action="like"
         data-size="small"
@@ -40,7 +40,7 @@ class FacebookLike extends Component {
       return null;
     }
 
-    return <div ref={(c) => this.container = c} />;
+    return <div ref={c => this.container = c} />;
   }
 }
 
