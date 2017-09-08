@@ -114,9 +114,7 @@ export const logout = () => ({
 });
 
 export const changeRating = (stallId, rating) => (dispatch) => {
-  api.updateRating(stallId, rating).then((response) => {
-    console.log(response);
-  });
+  api.updateRating(stallId, rating);
   dispatch({
     type: types.CHANGE_RATING,
     stallId,
@@ -308,7 +306,7 @@ export const initializeGeolocation = () => (dispatch) => {
   });
 };
 
-export const setCurrentTime = (currentTime) => ({
+export const setCurrentTime = currentTime => ({
   type: types.SET_CURRENT_TIME,
   currentTime,
 });
