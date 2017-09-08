@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import ImageUpload from './react-images-upload';
-import './ImageUploader.css';
+// import './ImageUploader.css';
 
 const ImageUploader = ({ onFileUpload, onSave, hasFile }) => (
   <div>

@@ -42,18 +42,18 @@ class ReactImageUploadComponent extends React.PureComponent {
       this.props.onChange(files);
     }
 		// Iterate over all uploaded files
-    for (let i = 0, f; f = files[i]; i++) {
+    for (let i = 0; i < files.length; i++) {
 			// Check for file extension
-      if (!this.hasExtension(f.name)) {
+      if (!this.hasExtension(files[i].name)) {
         const newArray = _this.state.notAcceptedFileType.slice();
-        newArray.push(f.name);
+        newArray.push(files[i].name);
         _this.setState({ notAcceptedFileType: newArray });
         continue;
       }
 			// Check for file size
-      if (f.size > this.props.maxFileSize) {
+      if (files[i].size > this.props.maxFileSize) {
         const newArray = _this.state.notAcceptedFileSize.slice();
-        newArray.push(f.name);
+        newArray.push(files[i].name);
         _this.setState({ notAcceptedFileSize: newArray });
         continue;
       }
@@ -68,8 +68,8 @@ class ReactImageUploadComponent extends React.PureComponent {
             _this.setState({ pictures: newArray });
           }
         };
-      }(f));
-      reader.readAsDataURL(f);
+      }(files[i]));
+      reader.readAsDataURL(files[i]);
     }
   }
 
