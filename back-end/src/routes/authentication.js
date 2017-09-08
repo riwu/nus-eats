@@ -88,11 +88,6 @@ module.exports = (db, s3) => {
       }
     });
 
-    const params = {
-      Bucket: process.env.S3_BUCKET,
-      Key: photo.uuid
-    };
-
     const photos = await db['photo'].findAll({
       where: {
         userId: currentUserId
@@ -100,6 +95,10 @@ module.exports = (db, s3) => {
     });
 
     photos.forEach(photo => {
+      const params = {
+        Bucket: process.env.S3_BUCKET,
+        Key: photo.uuid
+      };
       s3.deleteObject(params, (err, data) => {
         if (err) {
           next(Boom.badGateway(err.message));
