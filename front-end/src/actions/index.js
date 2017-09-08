@@ -114,7 +114,9 @@ export const logout = () => ({
 });
 
 export const changeRating = (stallId, rating) => (dispatch) => {
-  api.updateRating(stallId, rating);
+  api.updateRating(stallId, rating).then((res) => {
+    dispatch(getAllStalls);
+  });
   dispatch({
     type: types.CHANGE_RATING,
     stallId,
