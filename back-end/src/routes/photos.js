@@ -24,7 +24,8 @@ const multerMiddleware = (s3) => {
       key: function (req, file, cb) {
         cb(null, req.uuid);
       }
-    })
+    }),
+    limits: {fileSize: 10000000 }
   });
 }
 
