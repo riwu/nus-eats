@@ -93,6 +93,15 @@ export default {
       averageRating: Number(stall.averageRating),
     },
   }), {})),
+  getAllPhotos: stallId => get(`/stalls/${stallId}/photos`)
+    .then(({ photos }) => photos.reduce((obj, photo) => ({
+      ...obj,
+      [photo.id]: photo,
+    }), {})),
+  uploadFiles: (files, stallId) => [...files].forEach(file => post('/photos', {
+    file,
+    stallId,
+  }, { 'Content-Type': 'multipart/form-data' }).catch(e => console.log(e))),
   login: accessToken => post('/authentication/login', { accessToken }),
 
   getMeetings() {
@@ -123,15 +132,16 @@ export default {
       description,
     },
   }),
-  updateMeeting: (id, { canteenId, startTime, duration, title, description }) => patch(`/appointments/${id}`, {
-    appointment: {
-      canteenId,
-      startTime: time.format(startTime),
-      endTime: getEndTime(startTime, duration),
-      title,
-      description,
-    },
-  }),
+  updateMeeting: (id, { canteenId, startTime, duration, title, description }) =>
+    patch(`/appointments/${id}`, {
+      appointment: {
+        canteenId,
+        startTime: time.format(startTime),
+        endTime: getEndTime(startTime, duration),
+        title,
+        description,
+      },
+    }),
   cancelMeeting: id => destroy(`/appointments/${id}`),
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
@@ -141,7 +151,7 @@ export default {
       value: rating,
     },
   }),
-  getMeeting: (id) => get(`/appointments/${id}`).then(({appointment}) => {
+  getMeeting: id => get(`/appointments/${id}`).then(({ appointment }) => {
     const startTime = time.parse(appointment.startTime);
     const endTime = time.parse(appointment.endTime);
     const duration = moment.duration(endTime.diff(startTime));

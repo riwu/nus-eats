@@ -28,7 +28,7 @@ const setMeetings = (state = {}, action) => {
     case RECEIVE_MEETING:
       return {
         ...state,
-        [action.meeting.id]: action.meeting
+        [action.meeting.id]: action.meeting,
       };
     case CREATE_MEETING: {
       return {

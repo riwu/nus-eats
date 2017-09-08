@@ -21,6 +21,15 @@ export const getAllStalls = (dispatch) => {
   });
 };
 
+export const getAllPhotos = stallId => (dispatch) => {
+  api.getAllPhotos(stallId).then((photos) => {
+    dispatch({
+      type: types.RECEIVE_STALL_PHOTOS,
+      photos,
+    });
+  });
+};
+
 export const getMeetings = (dispatch) => {
   api.getMeetings().then((meetings) => {
     dispatch({
@@ -259,8 +268,7 @@ export const shareMeeting = (meeting) => {
   });
 };
 
-export const getMeeting = (id) => (dispatch) => {
-  return api.getMeeting(id)
+export const getMeeting = id => dispatch => api.getMeeting(id)
     .then((meeting) => {
       dispatch({
         type: types.RECEIVE_MEETING,
@@ -274,7 +282,6 @@ export const getMeeting = (id) => (dispatch) => {
         id,
       });
     });
-};
 
 export const initializeGeolocation = () => (dispatch) => {
   dispatch({
@@ -282,7 +289,7 @@ export const initializeGeolocation = () => (dispatch) => {
     permission: 'pending',
   });
 
-  let permissionsUpdated = false;
+  const permissionsUpdated = false;
   navigator.geolocation.watchPosition((position) => {
     if (!permissionsUpdated) {
       dispatch({
