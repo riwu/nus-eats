@@ -20,7 +20,7 @@ const s3 = new AWS.S3({
 const { injectJwtStrategy, authenticateJwt } = require('./security/jwt');
 const app = express();
 
-const authentication = require('./routes/authentication');
+const authentication = require('./routes/authentication')(db, s3);
 const canteens = require('./routes/canteens')(db);
 const stalls = require('./routes/stalls')(db, s3);
 const users = require('./routes/users')(db, s3);
