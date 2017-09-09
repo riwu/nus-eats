@@ -1,14 +1,13 @@
 .MeetingCreator .pickers {
   display: flex;
   text-align: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.MeetingCreator .picker {
-  margin: 5px;
-}
-
-.MeetingCreator .durationPicker {
-  margin-left: 20px;
+.MeetingCreator .timePicker {
+  margin-top: 12px;
+  margin-bottom: 155px;
 }
 
 .MeetingCreator .text {

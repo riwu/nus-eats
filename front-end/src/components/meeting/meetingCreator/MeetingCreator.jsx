@@ -11,22 +11,24 @@ const MeetingCreator = ({ meetings, recentMeetings, activeTimeModifierIndex, upd
   title, description, updateMeetingCreatorTitle, updateMeetingCreatorDescription }) => (
     <div className="MeetingCreator">
       <div className="pickers">
-        <div className="picker">
+        <div>
           <div className="text">Pick a Date</div>
           <DayPicker meetings={meetings} recentMeetings={recentMeetings} />
         </div>
-        <div className="picker">
+        <div>
           <div className="text">Pick a Time</div>
-          <TimeSelector
-            timings={recentMeetings.map(meeting => ({
-              value: meeting.time,
-              onUpdate: time => meeting.onTimeUpdate(time),
-            }))}
-            updateTimeModifierRadio={updateTimeModifierRadio}
-            activeTimeModifierIndex={activeTimeModifierIndex}
-          />
+          <div className="timePicker">
+            <TimeSelector
+              timings={recentMeetings.map(meeting => ({
+                value: meeting.time,
+                onUpdate: time => meeting.onTimeUpdate(time),
+              }))}
+              updateTimeModifierRadio={updateTimeModifierRadio}
+              activeTimeModifierIndex={activeTimeModifierIndex}
+            />
+          </div>
         </div>
-        <div className="durationPicker">
+        <div>
           <div className="text">Pick a Duration</div>
           <DurationPicker
             durations={recentMeetings.map(meeting => ({
