@@ -38,7 +38,7 @@ const api = (...args) => {
   const [path, method, params] = extractArguments(args);
 
   if (store.getState().accessTokens.facebook && !params.access_token) {
-    params.access_token = store.getState().accessTokens.facebook;
+    params.access_token = (store.getState().accessTokens || {}).facebook;
   }
 
   return new Promise((resolve) => {

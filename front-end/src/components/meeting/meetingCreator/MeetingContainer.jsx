@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
     title: meetingCreator.title,
     titlePlaceholder: meetingCreator.titlePlaceholder,
     description: meetingCreator.description,
-    isLoggedIn: !!state.accessTokens.api,
+    isLoggedIn: !!(state.accessTokens || {}).api,
     userId: (state.currentUser || {}).id,
   });
 };

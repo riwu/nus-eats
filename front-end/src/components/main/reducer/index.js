@@ -16,6 +16,7 @@ import grantedPermissions from '../../facebook/reducer/grantedPermissions';
 import isFeedExpanded from './isFeedExpanded';
 import geolocation from './geolocation';
 import currentTime from './currentTime';
+import notFirstTimeVisit from './notFirstTimeVisit';
 
 const reducer = combineReducers({
   canteens,
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   isFeedExpanded,
   geolocation,
   currentTime,
+  notFirstTimeVisit,
 });
 
 export default reducer;

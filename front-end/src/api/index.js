@@ -9,7 +9,7 @@ const makeHeaders = (headers = {}) => {
     'Content-Type': 'application/json',
   };
 
-  const accessToken = store.getState().accessTokens.api;
+  const accessToken = (store.getState().accessTokens || {}).api;
 
   if (accessToken) {
     defaultHeaders.Authorization = `Bearer ${accessToken}`;

@@ -4,7 +4,7 @@ import api from '../../../api';
 import ImageUploader from './ImageUploader';
 
 const mapStateToProps = state => ({
-  isLoggedIn: !!state.accessTokens.api,
+  isLoggedIn: !!(state.accessTokens || {}).api,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

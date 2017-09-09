@@ -14,7 +14,7 @@ import MainPage from './components/main/MainPage';
 import PrivacyPolicy from './components/misc/PrivacyPolicy';
 import TermsOfService from './components/misc/TermsOfService';
 import MeetingPage from './components/meeting/MeetingPageContainer';
-import LandingModal from './components/main/LandingModal';
+import LandingModal from './components/main/LandingModalContainer';
 
 import * as GA from './google/analytics';
 import FB from './fb';
@@ -25,7 +25,7 @@ store.dispatch(getAllCanteens);
 store.dispatch(getAllStalls);
 store.dispatch(setCurrentTime(moment()));
 setInterval(() => store.dispatch(setCurrentTime(moment())), 1 * 60 * 1000);
-if (store.getState().accessTokens.api) store.dispatch(getRatings);
+if ((store.getState().accessTokens || {}).api) store.dispatch(getRatings);
 
 if ('permissions' in navigator) {
   navigator.permissions.query({ name: 'geolocation' }).then((result) => {

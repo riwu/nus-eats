@@ -6,7 +6,7 @@ const mapStateToProps = (state, ownProps) => ({
   value: state.userRatings[ownProps.stallId],
   readonly: false,
   stallId: ownProps.stallId,
-  isLoggedIn: !!state.accessTokens.api,
+  isLoggedIn: !!(state.accessTokens || {}).api,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

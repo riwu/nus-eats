@@ -6,21 +6,20 @@ import Feed from './Feed';
 const FeedContainer = ({ isLoggedIn, ...props }) => {
   if (isLoggedIn) {
     return <Feed {...props} />;
-  } else {
-    return null;
   }
+  return null;
 };
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: !!state.accessTokens.api,
-  expanded: state.isFeedExpanded
+const mapStateToProps = state => ({
+  isLoggedIn: !!(state.accessTokens || {}).api,
+  expanded: state.isFeedExpanded,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  closeFeed: () => dispatch(toggleFeed())
+const mapDispatchToProps = dispatch => ({
+  closeFeed: () => dispatch(toggleFeed()),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FeedContainer);

@@ -3,6 +3,10 @@ import * as types from '../constants/ActionTypes';
 import api from '../api';
 import fb from '../fb';
 
+export const setNotFirstTimeVisit = () => ({
+  type: types.SET_NOT_FIRST_TIME_VISIT,
+});
+
 export const getAllCanteens = (dispatch) => {
   api.getAllCanteens().then((canteens) => {
     dispatch({
