@@ -41,7 +41,7 @@ const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMe
                if (!isLoggedIn) {
                  login().then(() => {
                    invokeCreateMeeting();
-                 }).catch(() => {}); // do nothing if user refuse to log in
+                 });
                } else {
                  invokeCreateMeeting();
                }

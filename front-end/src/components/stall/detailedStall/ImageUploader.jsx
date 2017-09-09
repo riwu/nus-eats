@@ -3,7 +3,7 @@ import { Button, Glyphicon } from 'react-bootstrap';
 import ImageUpload from 'react-file-reader-input';
 import './ImageUploader.css';
 
-const ImageUploader = ({ uploadFiles }) => (
+const ImageUploader = ({ uploadFiles, isLoggedIn, login }) => (
   <div className="ImageUpload">
     <ImageUpload
       onChange={(e, results) => {
@@ -20,9 +20,15 @@ const ImageUploader = ({ uploadFiles }) => (
       accept="image/*"
       multiple
     >
-      <Button bsStyle="primary">
+      <Button
+        bsStyle="primary"
+        onClick={() => {
+          if (isLoggedIn) return;
+          login();
+        }}
+      >
         <Glyphicon glyph="upload" className="uploadGlyph" />
-        Upload Photos
+        {isLoggedIn ? 'Upload Photos' : 'Login to upload'}
       </Button>
     </ImageUpload>
   </div>

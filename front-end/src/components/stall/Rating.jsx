@@ -16,7 +16,7 @@ const RatingComponent = ({ readonly, value, changeRating, isLoggedIn, login }) =
       if (!isLoggedIn) {
         login().then(() => {
           changeRating(rating);
-        }).catch(() => {}); // do nothing if user refuse to log in
+        });
       } else {
         changeRating(rating);
       }

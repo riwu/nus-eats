@@ -107,7 +107,7 @@ export const login = () => dispatch => new Promise((resolve, reject) => {
       reject();
     }
   }, { scope: 'public_profile,user_friends' });
-});
+}).catch(() => {}); // ignore if user refuse to login
 
 export const logout = () => ({
   type: types.LOGOUT,
