@@ -90,7 +90,10 @@ const getEndTime = (startTime, duration) => time.format(moment(startTime).add(du
 
 export default {
   setStore: (s) => { store = s; },
-  getAllCanteens: () => get('/canteens').then(({ canteens }) => canteens),
+  getAllCanteens: () => get('/canteens').then(({ canteens }) => canteens.map((obj, canteen) => ({
+    ...obj,
+    crowdValue: Number(canteen.crowdValue),
+  }))),
   getAllStalls: () => get('/stalls').then(({ stalls }) => stalls.reduce((dict, stall) => ({
     ...dict,
     [stall.id]: {
