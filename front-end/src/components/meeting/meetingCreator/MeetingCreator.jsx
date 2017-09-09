@@ -11,7 +11,7 @@ import './MeetingCreator.css';
 const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierRadio,
   activeDurationModifierIndex, updateDurationModifierRadio, titlePlaceholder,
   title, description, updateMeetingCreatorTitle, updateMeetingCreatorDescription }) => (
-    <div>
+    <div className="MeetingCreator">
       <div className="pickers">
         <div className="picker">
           <div className="text">Pick a Date</div>

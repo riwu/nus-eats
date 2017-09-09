@@ -22,6 +22,6 @@ const DetailedStall = ({ stall, closeModal }) => (
       <Button onClick={closeModal}>Close</Button>
     </Modal.Footer>
   </Modal>
-  );
+);
 
 export default DetailedStall;

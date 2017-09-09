@@ -4,7 +4,7 @@ import { ButtonGroup, Button } from 'react-bootstrap';
 import './DurationPicker.css';
 
 const DurationPicker = ({ durations }) => (
-  <ButtonGroup vertical className="buttonGroup">
+  <ButtonGroup vertical className="DurationPicker">
     {[15, 30, 45, 60, 90, 120, 180].map((minutes) => {
       const duration = moment.duration(minutes, 'm');
       const currentDuration = durations[0].value;

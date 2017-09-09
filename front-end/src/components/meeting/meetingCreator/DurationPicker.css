@@ -1,8 +1,8 @@
-.inputBox {
+.DurationPicker .inputBox {
   width: 65px !important;
   margin-right: 5px;
 }
 
-.buttonGroup {
+.DurationPicker .buttonGroup {
   margin-top: 6px;
 }

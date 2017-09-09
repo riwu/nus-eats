@@ -1,21 +1,21 @@
-.pickers {
+.MeetingCreator .pickers {
   display: flex;
   text-align: center;
 }
 
-.picker {
+.MeetingCreator .picker {
   margin: 5px;
 }
 
-.durationPicker {
+.MeetingCreator .durationPicker {
   margin-left: 20px;
 }
 
-.text {
+.MeetingCreator .text {
   font-weight: bold;
 }
 
-.close {
+.MeetingCreator .close {
   position: absolute;
   right: 15px;
   top: 0;
@@ -26,10 +26,10 @@
   cursor: pointer;
 }
 
-.formInput {
+.MeetingCreator .formInput {
   width: 100%;
 }
 
-.timeSelector {
+.MeetingCreator .timeSelector {
   margin-top: 20px;
 }

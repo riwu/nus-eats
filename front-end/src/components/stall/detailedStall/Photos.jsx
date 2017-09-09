@@ -9,7 +9,7 @@ const Photos = ({ photos }) => {
     return null;
   }
   return (
-    <div>
+    <div className="Photos">
       <ImageGallery
         items={photos}
         showIndex
