@@ -1,29 +1,24 @@
 import React from 'react';
-import moment from 'moment';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 import { FormGroup, ControlLabel, FormControl, ButtonGroup, Glyphicon } from 'react-bootstrap';
+import DayPicker from './DayPicker';
 import TimeSelector from './TimeSelector';
 import DurationPicker from './DurationPicker';
 
 import './MeetingCreator.css';
 
-const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierRadio,
+const MeetingCreator = ({ meetings, recentMeetings, activeTimeModifierIndex, updateTimeModifierRadio,
   activeDurationModifierIndex, updateDurationModifierRadio, titlePlaceholder,
   title, description, updateMeetingCreatorTitle, updateMeetingCreatorDescription }) => (
     <div className="MeetingCreator">
       <div className="pickers">
         <div className="picker">
           <div className="text">Pick a Date</div>
-          <DayPicker
-            onDayClick={date => meetings[0].onDateUpdate(moment(date))}
-            selectedDays={meetings[0].date ? meetings[0].date.toDate() : null}
-          />
+          <DayPicker meetings={meetings} recentMeetings={recentMeetings} />
         </div>
         <div className="picker">
           <div className="text">Pick a Time</div>
           <TimeSelector
-            timings={meetings.map(meeting => ({
+            timings={recentMeetings.map(meeting => ({
               value: meeting.time,
               onUpdate: time => meeting.onTimeUpdate(time),
             }))}
@@ -34,7 +29,7 @@ const MeetingCreator = ({ meetings, activeTimeModifierIndex, updateTimeModifierR
         <div className="durationPicker">
           <div className="text">Pick a Duration</div>
           <DurationPicker
-            durations={meetings.map(meeting => ({
+            durations={recentMeetings.map(meeting => ({
               value: meeting.duration,
               onUpdate: duration => meeting.onDurationUpdate(duration),
             }))}

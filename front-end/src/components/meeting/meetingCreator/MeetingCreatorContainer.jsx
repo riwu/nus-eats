@@ -56,7 +56,8 @@ class MeetingCreatorContainer extends React.Component {
   render() {
     return (
       <MeetingCreator
-        meetings={this.props.meetingModifier.map(mod => ({
+        meetings={Object.values(this.props.meetings)}
+        recentMeetings={this.props.meetingModifier.map(mod => ({
           ...mod,
           onTimeUpdate: (newTime) => {
             mod.onTimeUpdate(newTime);
