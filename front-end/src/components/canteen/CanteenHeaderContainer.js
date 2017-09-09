@@ -6,14 +6,18 @@ const mapStateToProps = (state, ownProps) => ({
   stallsCount: Object.values(state.stalls).filter(({ canteenId }) => canteenId === ownProps.canteen.id).length,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  canteenName: ownProps.canteen.name,
-  canteenId: ownProps.canteen.id,
-  latitude: ownProps.canteen.latitude,
-  longitude: ownProps.canteen.longitude,
-  imageUrl: ownProps.canteen.imageUrl,
-  toggleCanteenPanel: () => dispatch(replace(ownProps.isSelected ? '/' : `/canteen/${ownProps.canteen.id}`)),
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const canteen = ownProps.canteen;
+  return {
+    canteenName: canteen.name,
+    canteenId: canteen.id,
+    crowdedness: canteen.crowdValue,
+    latitude: canteen.latitude,
+    longitude: canteen.longitude,
+    imageUrl: canteen.imageUrl,
+    toggleCanteenPanel: () => dispatch(replace(ownProps.isSelected ? '/' : `/canteen/${canteen.id}`)),
+  };
+};
 
 export default connect(
   mapStateToProps,

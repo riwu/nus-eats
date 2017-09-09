@@ -122,6 +122,10 @@
   .CanteenHeader .buttons .btn:first-child {
     margin-right: 10px;
   }
+
+  .CanteenHeader .crowdedness {
+    margin-left: auto;
+  }
 }
 
 .CanteenHeader .btn-default {
