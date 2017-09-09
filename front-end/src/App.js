@@ -13,6 +13,7 @@ import FeedContainer from './components/main/FeedContainer';
 import MainPage from './components/main/MainPage';
 import PrivacyPolicy from './components/misc/PrivacyPolicy';
 import TermsOfService from './components/misc/TermsOfService';
+import About from './components/misc/About';
 import MeetingPage from './components/meeting/MeetingPageContainer';
 import LandingModal from './components/main/LandingModalContainer';
 
@@ -54,6 +55,7 @@ function App() {
               <Route path="/meetings/:id" component={MeetingPage} />
               <Route path="/privacy_policy" component={PrivacyPolicy} />
               <Route path="/terms_of_service" component={TermsOfService} />
+              <Route path="/about" component={About} />
             </Switch>
           </div>
         </div>

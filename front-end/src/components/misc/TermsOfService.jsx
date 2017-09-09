@@ -7,7 +7,7 @@ const TermsOfService = () => (
   <div className="TermsOfService">
     <NavigationBar />
     <div className="content">
-      <h1>NUS Eats Terms of Service</h1>
+      <h1>Terms of Service</h1>
 
       <h2>Terms</h2>
 

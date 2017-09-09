@@ -9,6 +9,10 @@ const Footer = () => (
     &middot;
     { ' ' }
     <Link to="/terms_of_service">Terms of Service</Link>
+    { ' ' }
+    &middot;
+    { ' ' }
+    <Link to="/about">About</Link>
   </div>
 );
 

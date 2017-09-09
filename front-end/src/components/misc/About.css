@@ -1,0 +1,21 @@
+.About {
+  padding: 0 10px;
+}
+
+@media (min-width: 768px) {
+  .About {
+    padding: 0 50px;
+  }
+}
+
+.About > .content {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .About > .content {
+    padding: 5px 25px;
+  }
+}
