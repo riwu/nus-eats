@@ -14,6 +14,7 @@ import MainPage from './components/main/MainPage';
 import PrivacyPolicy from './components/misc/PrivacyPolicy';
 import TermsOfService from './components/misc/TermsOfService';
 import MeetingPage from './components/meeting/MeetingPageContainer';
+import LandingModal from './components/main/LandingModal';
 
 import * as GA from './google/analytics';
 import FB from './fb';
@@ -27,11 +28,11 @@ setInterval(() => store.dispatch(setCurrentTime(moment())), 1 * 60 * 1000);
 if (store.getState().accessTokens.api) store.dispatch(getRatings);
 
 if ('permissions' in navigator) {
-  navigator.permissions.query({name:'geolocation'}).then((result) => {
+  navigator.permissions.query({ name: 'geolocation' }).then((result) => {
     if (result.state === 'granted') {
       store.dispatch({
         type: 'SET_GEOLOCATION_PERMISSION',
-        permission: 'granted'
+        permission: 'granted',
       });
       store.dispatch(initializeGeolocation());
     }
@@ -43,6 +44,7 @@ function App() {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <div className="App">
+          <LandingModal />
           <FeedContainer />
 
           <div className="content">
