@@ -43,6 +43,7 @@ const setMeetings = (state = {}, action) => {
           userId: action.userId,
           isActive: true,
           attendees: [],
+          createdAt: action.createdAt,
         },
       };
     }

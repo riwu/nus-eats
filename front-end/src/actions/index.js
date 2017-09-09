@@ -150,6 +150,7 @@ export const createMeeting = meeting => (dispatch) => {
     type: types.CREATE_MEETING,
     ...meeting,
     tempId,
+    createdAt: moment(),
   });
 };
 

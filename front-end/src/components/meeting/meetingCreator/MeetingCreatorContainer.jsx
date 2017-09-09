@@ -36,7 +36,7 @@ class MeetingCreatorContainer extends React.Component {
     this.props.updateMeetingCreatorTitlePlaceholder(title);
 
     const recentMeetings = Object.values(this.props.meetings)
-      .sort((a, b) => now.diff(a.startTime) - now.diff(b.startTime));
+      .sort((a, b) => b.createdAt.diff(a.createdAt));
 
     const pickerCount = 1;
     // can not set default in reducer as duplicates must be filtered

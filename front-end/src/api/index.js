@@ -117,15 +117,14 @@ export default {
       .then(({ appointments }) => appointments.reduce((obj, appointment) => {
         const startTime = time.parse(appointment.startTime);
         const endTime = time.parse(appointment.endTime);
-        const duration = moment.duration(endTime.diff(startTime));
-
         return {
           ...obj,
           [appointment.id]: {
             ...appointment,
             startTime,
             endTime,
-            duration,
+            duration: moment.duration(endTime.diff(startTime)),
+            createdAt: time.parse(appointment.createdAt),
           },
         };
       }, {}));
