@@ -53,7 +53,8 @@ const Distance = ({ isAvailable, permission, initializeGeolocation, coordinates,
   return (
     <div className="Distance">
       <Image src={walk} style={{ width: '10px', height: '10px' }} />
-      {` ${estimatedTime} ` + `min (${estimatedDistance}m)`}
+      {` ${estimatedTime} min (${estimatedDistance < 1000
+        ? `${estimatedDistance}m` : `${estimatedDistance / 1000}km`})`}
     </div>
   );
 };
