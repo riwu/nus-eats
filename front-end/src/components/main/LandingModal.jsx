@@ -27,6 +27,28 @@ class LandingModal extends React.Component {
           <div>Real-time information on canteens around NUS are also provided, including reviews, photos, distance and even crowdedness!</div>
         </Modal.Body>
         <Modal.Footer>
+          <div
+            style={{
+              position: 'absolute',
+              left: '10px',
+              bottom: '10px',
+              fontSize: '0.8em',
+              color: 'grey',
+            }}
+          >
+            Brought to you by {' '}
+            {Object.entries({
+              Riwu: 'https://github.com/riwu',
+              Charlton: 'https://github.com/cadmusthefounder',
+              Yihang: 'https://github.com/yihangho',
+              Jovin: 'https://github.com/liewyyjovin',
+            }).map(([name, url], index) => (
+              <span key={name}>
+                <a target="_blank" rel="noreferrer noopener" href={url}>{name}</a>
+                {index === 3 ? '' : ', '}
+              </span>
+            ))}
+          </div>
           <Button bsStyle="primary" onClick={() => this.closeModal()}>Let's begin!</Button>
         </Modal.Footer>
       </Modal>
