@@ -28,9 +28,10 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
     return <JoinMeetingButton meetingId={meeting.id} />;
   };
 
-  const date = meeting.startTime.format('MMMM D, YYYY');
-  const startTime = meeting.startTime.format('HHmm');
-  const endTime = moment(meeting.startTime).add(meeting.duration).format('HHmm');
+  const timeFormat = 'h:mma';
+  const date = meeting.startTime.format('ddd, D MMM YY');
+  const startTime = meeting.startTime.format(timeFormat);
+  const endTime = moment(meeting.startTime).add(meeting.duration).format(timeFormat);
   const attendeesCount = meeting.attendees.length + 1;
 
   const displayedAttendees = [
@@ -42,7 +43,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
   }
 
   return (
-    <div className={ isAttending ? 'MeetingsListItem joined' : 'MeetingsListItem' }>
+    <div className={isAttending ? 'MeetingsListItem joined' : 'MeetingsListItem'}>
       <div className="left-container">
         <div className="title">
           { meeting.title }
@@ -53,7 +54,7 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
           <div>{ meeting.canteen && meeting.canteen.name }</div>
           <div>{ date }</div>
           <div>
-            { `${startTime} hours - ${endTime} hours` }
+            { `${startTime} - ${endTime}` }
           </div>
         </div>
 
@@ -77,11 +78,11 @@ const MeetingsListItem = ({ meeting, currentUserId }) => {
           { meeting.id < 10000000 && !meeting.deletedAt && renderJoinButton() }
           {
             meeting.id < 10000000 && !meeting.deletedAt &&
-            <ShareMeetingButton meeting={ meeting } />
+            <ShareMeetingButton meeting={meeting} />
           }
           {
             meeting.userId === currentUserId && !meeting.deletedAt && meeting.id < 10000000 &&
-            <CancelMeetingButton meeting={ meeting } />
+            <CancelMeetingButton meeting={meeting} />
           }
         </div>
       </div>

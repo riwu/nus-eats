@@ -63,7 +63,7 @@
 @media (min-width: 768px) {
   .Feed .content {
     padding: 46px;
-    width: 50%;
+    width: 550px;
     left: -50%;
   }
 }
