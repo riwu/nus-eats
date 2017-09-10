@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Meeting from './Meeting';
-import { toggleMeetingWindow, createMeeting, login } from '../../../actions';
+import { toggleFeed, toggleMeetingWindow, createMeeting, login } from '../../../actions';
 
 const mapStateToProps = (state, ownProps) => {
   const meetingCreator = state.meeting.meetingModifier;
@@ -16,6 +16,7 @@ const mapStateToProps = (state, ownProps) => {
     description: meetingCreator.description,
     isLoggedIn: !!(state.accessTokens || {}).api,
     userId: (state.currentUser || {}).id,
+    isFeedExpanded: state.isFeedExpanded,
   });
 };
 
@@ -23,6 +24,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleMeetingWindow: () => dispatch(toggleMeetingWindow(ownProps.canteenId)),
   createMeeting: meeting => dispatch(createMeeting(meeting)),
   login: () => dispatch(login()),
+  toggleFeed: () => dispatch(toggleFeed()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Meeting);
+const mergeProps = (stateProps, dispatchProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  openFeed: () => { if (!stateProps.isFeedExpanded) dispatchProps.toggleFeed(); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Meeting);

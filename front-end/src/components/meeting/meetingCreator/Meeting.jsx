@@ -3,7 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import MeetingCreator from './MeetingCreatorContainer';
 import getMergedDate from '../../../util/getMergedDate';
 
-const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
+const Meeting = ({ openFeed, toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
    newMeetingDate, newMeetingTime, newMeetingDuration, title, description, titlePlaceholder,
    isLoggedIn, login, userId }) => (
      <div>
@@ -37,6 +37,7 @@ const Meeting = ({ toggleMeetingWindow, canteenName, canteenId, isOpen, createMe
                    userId,
                  });
                  toggleMeetingWindow();
+                 openFeed();
                };
                if (!isLoggedIn) {
                  login().then(() => {
