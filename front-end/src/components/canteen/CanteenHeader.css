@@ -68,9 +68,31 @@
   }
 }
 
+.CanteenHeader .number {
+  font-size: 20px;
+  color: #70a7ee;
+  margin-right: 5px;
+}
+
+@media (min-width: 768px) {
+  .CanteenHeader .number {
+    font-size: 72px;
+  }
+}
+
 .CanteenHeader .stalls-count {
   flex-basis: 0;
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .CanteenHeader .stalls-count {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .CanteenHeader .ongoing-groups,
@@ -85,11 +107,6 @@
   .CanteenHeader .groups-met {
     flex-grow: 1;
   }
-}
-
-.CanteenHeader .number {
-  font-size: 72px;
-  color: #70a7ee;
 }
 
 .CanteenHeader .buttons {

@@ -28,7 +28,7 @@ const CanteenHeader = ({ crowdedness, canteenId, canteenName, imageUrl, latitude
           </div>
           <div className="description">
               Canteen Stalls
-            </div>
+          </div>
         </div>
 
         <div className="ongoing-groups" />
