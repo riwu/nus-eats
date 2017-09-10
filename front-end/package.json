@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^2.13.0",
     "bootstrap": "^3.3.7",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
@@ -32,7 +33,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.1.0",
-    "prop-types": "^15.5.10",
     "react-app-rewired": "^1.2.5"
   },
   "scripts": {
