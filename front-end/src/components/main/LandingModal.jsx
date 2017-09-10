@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import './LandingModal.css';
 
 const LandingModal = ({ isOpen, setNotFirstTimeVisit }) => (
-  <Modal show={isOpen} onHide={setNotFirstTimeVisit}>
+  <Modal show={isOpen} onHide={setNotFirstTimeVisit} className="LandingModal">
     <Modal.Header closeButton>
       <Modal.Title>Welcome to NUS Eats!</Modal.Title>
     </Modal.Header>
@@ -14,29 +15,23 @@ const LandingModal = ({ isOpen, setNotFirstTimeVisit }) => (
       <p>Real-time information on canteens around NUS are also provided, including reviews, photos, distance and even crowdedness!</p>
     </Modal.Body>
     <Modal.Footer>
-      <div
-        style={{
-          position: 'absolute',
-          left: '10px',
-          bottom: '10px',
-          fontSize: '0.8em',
-          color: 'grey',
-        }}
-      >
-            Brought to you by {' '}
-        {Object.entries({
-          Riwu: 'https://github.com/riwu',
-          Charlton: 'https://github.com/cadmusthefounder',
-          Yihang: 'https://github.com/yihangho',
-          Jovin: 'https://github.com/liewyyjovin',
-        }).map(([name, url], index) => (
-          <span key={name}>
-            <a target="_blank" rel="noreferrer noopener" href={url}>{name}</a>
-            {index === 3 ? '' : ', '}
-          </span>
-            ))}
+      <div className="footer">
+        <div className="credits">
+          Brought to you by {' '}
+          {Object.entries({
+            Riwu: 'https://github.com/riwu',
+            Charlton: 'https://github.com/cadmusthefounder',
+            Yihang: 'https://github.com/yihangho',
+            Jovin: 'https://github.com/liewyyjovin',
+          }).map(([name, url], index) => (
+            <span key={name}>
+              <a target="_blank" rel="noreferrer noopener" href={url}>{name}</a>
+              {index === 3 ? '' : ', '}
+            </span>
+          ))}
+        </div>
+        <Button className="button" bsStyle="primary" onClick={setNotFirstTimeVisit}>Let's begin!</Button>
       </div>
-      <Button bsStyle="primary" onClick={setNotFirstTimeVisit}>Let's begin!</Button>
     </Modal.Footer>
   </Modal>
 );

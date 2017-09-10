@@ -1,0 +1,14 @@
+.LandingModal .footer {
+  display: flex;
+}
+
+.LandingModal .credits {
+  margin-right: 10px;
+  align-self: flex-end;
+  font-size: 0.8em;
+  color: grey;
+}
+
+.LandingModal .button {
+  margin-left: auto;
+}
