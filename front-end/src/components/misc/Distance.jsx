@@ -47,7 +47,7 @@ const Distance = ({ isAvailable, permission, initializeGeolocation, coordinates,
   const distance = distanceBetweenPoints(coordinates, target);
   const walkingSpeed = 5000 / 60; // m / min
   const time = distance / walkingSpeed;
-  const estimatedTime = Math.ceil(time / 5) * 5;
+  const estimatedTime = Math.round(time);
   const estimatedDistance = Math.ceil(distance / 100) * 100;
 
   return (
