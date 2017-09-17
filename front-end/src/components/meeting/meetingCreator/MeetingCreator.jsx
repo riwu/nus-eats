@@ -17,7 +17,7 @@ const MeetingCreator = ({ meetings, recentMeetings, activeTimeModifierIndex, upd
         </div>
         <div>
           <div className="text">Pick a Time</div>
-          <div className="timePicker">
+          <div>
             <TimeSelector
               timings={recentMeetings.map(meeting => ({
                 value: meeting.time,

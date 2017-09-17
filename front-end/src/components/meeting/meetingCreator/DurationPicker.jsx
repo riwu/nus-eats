@@ -11,7 +11,10 @@ class DurationPicker extends React.Component {
     this.state = {
       verticalSelection: isBigWindow(),
     };
-    window.onresize = () => this.setState({ verticalSelection: isBigWindow() });
+    window.onresize = () => {
+      console.log(Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
+      this.setState({ verticalSelection: isBigWindow() });
+    };
   }
   render() {
     return (
