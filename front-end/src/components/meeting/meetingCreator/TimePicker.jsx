@@ -1,12 +1,17 @@
 import React from 'react';
 
-import Picker from 'rc-time-picker';
+import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 
 import Config from '../../../constants/Config';
+import './TimePicker.css';
 
-const TimePicker = ({ value, onUpdate, updateTimeModifierRadio }) => (
-  <Picker
+const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+const className = isMobile ? 'TimePickerMobile' : 'TimePicker';
+
+const TimePickerComponent = ({ value, onUpdate, updateTimeModifierRadio }) => (
+  <TimePicker
+    className={className}
     value={value}
     onChange={onUpdate}
     disabledMinutes={() => Config.MINUTES_TO_HIDE}
@@ -20,4 +25,4 @@ const TimePicker = ({ value, onUpdate, updateTimeModifierRadio }) => (
   />
 );
 
-export default TimePicker;
+export default TimePickerComponent;

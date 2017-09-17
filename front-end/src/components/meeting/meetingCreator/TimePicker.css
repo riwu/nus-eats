@@ -1,0 +1,15 @@
+.rc-time-picker-input {
+  border: 0;
+}
+
+.TimePicker {
+  margin-top: 12px;
+  margin-bottom: 155px;
+  margin-right: 23px;
+}
+
+.TimePickerMobile {
+  margin-top: 12px;
+  margin-bottom: 155px;
+  margin-left: 14px;
+}
