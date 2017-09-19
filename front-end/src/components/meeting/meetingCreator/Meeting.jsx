@@ -24,6 +24,7 @@ const Meeting = ({ openFeed, toggleMeetingWindow, canteenName, canteenId, isOpen
            <MeetingCreator canteenName={canteenName} />
          </Modal.Body>
          <Modal.Footer>
+           <Button onClick={toggleMeetingWindow}>Cancel</Button>
            <Button
              bsStyle="primary"
              onClick={() => {
@@ -50,7 +51,6 @@ const Meeting = ({ openFeed, toggleMeetingWindow, canteenName, canteenId, isOpen
            >
              {isLoggedIn ? 'Create' : 'Login and create'}
            </Button>
-           <Button onClick={toggleMeetingWindow}>Close</Button>
          </Modal.Footer>
        </Modal>
      </div>

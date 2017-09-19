@@ -6,6 +6,7 @@ import 'rc-time-picker/assets/index.css';
 import Config from '../../../constants/Config';
 import './TimePicker.css';
 
+// needed due to TimePicker different appearance only on mobile (irrespective of screen size)
 const isMobile = 'ontouchstart' in window || navigator.msMaxTouchPoints;
 const className = isMobile ? 'TimePickerMobile' : 'TimePicker';
 
