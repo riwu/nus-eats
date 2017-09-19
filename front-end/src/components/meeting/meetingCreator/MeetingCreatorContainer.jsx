@@ -1,12 +1,57 @@
 import React from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { updateNewMeetingDate, updateNewMeetingTime, updateNewMeetingDuration,
   updateTimeModifierRadio, updateDurationModifierRadio,
   updateMeetingCreatorTitle, updateMeetingCreatorDescription, updateMeetingCreatorTitlePlaceholder } from '../../../actions';
 import MeetingCreator from './MeetingCreator';
+
 import Config from '../../../constants/Config';
 
+const getDefaultTitle = (time, canteenName) => {
+  const getMealName = (hour) => {
+    switch (true) {
+      case (hour < 9):
+        return 'Breakfast';
+      case (hour < 15):
+        return 'Lunch';
+      case (hour < 20):
+        return 'Dinner';
+      default:
+        return 'Supper';
+    }
+  };
+  return `${getMealName(time.hour())} at ${canteenName}`;
+};
+
 class MeetingCreatorContainer extends React.Component {
+  componentWillMount() {
+    const interval = Config.TIME_PICKER_MINUTE_INTERVAL;
+    const now = moment();
+    now.add(interval - (now.minute() % interval), 'minutes');
+
+    this.props.onDateUpdate(now);
+    const title = getDefaultTitle(now, this.props.canteenName);
+    this.props.updateMeetingCreatorTitle(title);
+    this.props.updateMeetingCreatorTitlePlaceholder(title);
+
+    const recentMeetings = Object.values(this.props.meetings)
+      .sort((a, b) => b.createdAt.diff(a.createdAt));
+
+    const pickerCount = 1;
+    // can not set default in reducer as duplicates must be filtered
+    const timeFormat = 'HH:mm';
+    const defaultTimes = ['12:00', '13:00'];
+    [...new Set([now].concat(recentMeetings.map(meeting => meeting.startTime))
+      .map(meeting => meeting.format(timeFormat)).concat(defaultTimes))]
+      .slice(0, pickerCount).map(time => moment(time, timeFormat))
+      .forEach((time, index) => this.props.onTimeUpdate(time, index));
+
+    const defaultDurations = [30, 60, 120];
+    [...new Set(recentMeetings.map(meeting => meeting.duration.asMinutes()).concat(defaultDurations))]
+      .slice(0, pickerCount).map(min => moment.duration(min, 'm'))
+      .forEach((duration, index) => this.props.onDurationUpdate(duration, index));
+  }
 
   render() {
     return (
@@ -16,7 +61,7 @@ class MeetingCreatorContainer extends React.Component {
           ...mod,
           onTimeUpdate: (newTime) => {
             mod.onTimeUpdate(newTime);
-            const title = Config.getDefaultTitle(newTime, this.props.canteenName);
+            const title = getDefaultTitle(newTime, this.props.canteenName);
             this.props.updateMeetingCreatorTitlePlaceholder(title);
             if (!this.userEditedTitle) {
               this.props.updateMeetingCreatorTitle(title);

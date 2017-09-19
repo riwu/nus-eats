@@ -8,50 +8,45 @@ import getMergedDate from '../../../util/getMergedDate';
 
 const Meeting = ({ openFeed, toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
    newMeetingDate, newMeetingTime, newMeetingDuration, title, description, titlePlaceholder,
-   isLoggedIn, login, userId }) => {
-  const ModalGen = () => (
-    <Modal
-      visible={isOpen}
-      title={canteenName}
-      closable
-      cancelText="Cancel"
-      onCancel={toggleMeetingWindow}
-      okText={isLoggedIn ? 'Create' : 'Login and create'}
-      onOk={() => {
-        const invokeCreateMeeting = () => {
-          createMeeting({
-            canteenId,
-            startTime: getMergedDate(newMeetingDate, newMeetingTime),
-            duration: newMeetingDuration,
-            title: title.trim() || titlePlaceholder,
-            description,
-            userId,
-          });
-          toggleMeetingWindow();
-          openFeed();
-        };
-        if (!isLoggedIn) {
-          login().then(() => {
-            invokeCreateMeeting();
-          });
-        } else {
-          invokeCreateMeeting();
-        }
-      }}
-    >
-      <MeetingCreator canteenName={canteenName} />
-    </Modal>
-  );
-  return (
-    <div>
-      <Button
-        onClick={toggleMeetingWindow}
-      >
+   isLoggedIn, login, userId }) => (
+     <div>
+       <Button
+         onClick={toggleMeetingWindow}
+       >
         + Meeting
       </Button>
-      <ModalGen />
-    </div>
+       <Modal
+         visible={isOpen}
+         title={canteenName}
+         closable
+         cancelText="Cancel"
+         onCancel={toggleMeetingWindow}
+         okText={isLoggedIn ? 'Create' : 'Login and create'}
+         onOk={() => {
+           const invokeCreateMeeting = () => {
+             createMeeting({
+               canteenId,
+               startTime: getMergedDate(newMeetingDate, newMeetingTime),
+               duration: newMeetingDuration,
+               title: title.trim() || titlePlaceholder,
+               description,
+               userId,
+             });
+             toggleMeetingWindow();
+             openFeed();
+           };
+           if (!isLoggedIn) {
+             login().then(() => {
+               invokeCreateMeeting();
+             });
+           } else {
+             invokeCreateMeeting();
+           }
+         }}
+       >
+         <MeetingCreator canteenName={canteenName} />
+       </Modal>
+     </div>
   );
-};
 
 export default Meeting;
