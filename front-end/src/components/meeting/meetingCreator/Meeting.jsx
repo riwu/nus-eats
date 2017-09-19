@@ -1,10 +1,7 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Modal } from 'antd';
-
+import { Button, Modal } from 'react-bootstrap';
 import MeetingCreator from './MeetingCreatorContainer';
 import getMergedDate from '../../../util/getMergedDate';
-
 
 const Meeting = ({ openFeed, toggleMeetingWindow, canteenName, canteenId, isOpen, createMeeting,
    newMeetingDate, newMeetingTime, newMeetingDuration, title, description, titlePlaceholder,
@@ -16,35 +13,45 @@ const Meeting = ({ openFeed, toggleMeetingWindow, canteenName, canteenId, isOpen
         + Meeting
       </Button>
        <Modal
-         visible={isOpen}
-         title={canteenName}
-         closable
-         cancelText="Cancel"
-         onCancel={toggleMeetingWindow}
-         okText={isLoggedIn ? 'Create' : 'Login and create'}
-         onOk={() => {
-           const invokeCreateMeeting = () => {
-             createMeeting({
-               canteenId,
-               startTime: getMergedDate(newMeetingDate, newMeetingTime),
-               duration: newMeetingDuration,
-               title: title.trim() || titlePlaceholder,
-               description,
-               userId,
-             });
-             toggleMeetingWindow();
-             openFeed();
-           };
-           if (!isLoggedIn) {
-             login().then(() => {
-               invokeCreateMeeting();
-             });
-           } else {
-             invokeCreateMeeting();
-           }
-         }}
+         show={isOpen}
+         onHide={toggleMeetingWindow}
+         animation={false}
        >
-         <MeetingCreator canteenName={canteenName} />
+         <Modal.Header closeButton>
+           <Modal.Title>{canteenName}</Modal.Title>
+         </Modal.Header>
+         <Modal.Body>
+           <MeetingCreator canteenName={canteenName} />
+         </Modal.Body>
+         <Modal.Footer>
+           <Button
+             bsStyle="primary"
+             onClick={() => {
+               const invokeCreateMeeting = () => {
+                 createMeeting({
+                   canteenId,
+                   startTime: getMergedDate(newMeetingDate, newMeetingTime),
+                   duration: newMeetingDuration,
+                   title: title.trim() || titlePlaceholder,
+                   description,
+                   userId,
+                 });
+                 toggleMeetingWindow();
+                 openFeed();
+               };
+               if (!isLoggedIn) {
+                 login().then(() => {
+                   invokeCreateMeeting();
+                 });
+               } else {
+                 invokeCreateMeeting();
+               }
+             }}
+           >
+             {isLoggedIn ? 'Create' : 'Login and create'}
+           </Button>
+           <Button onClick={toggleMeetingWindow}>Close</Button>
+         </Modal.Footer>
        </Modal>
      </div>
   );

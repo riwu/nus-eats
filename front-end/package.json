@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^2.13.0",
     "bootstrap": "^3.3.7",
     "history": "^4.7.2",
     "jwt-decode": "^2.2.0",
