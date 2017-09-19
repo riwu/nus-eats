@@ -14,7 +14,7 @@ const getStyle = (value) => {
 };
 
 const Crowdedness = ({ value }) => {
-  const now = Math.round(value * 100 || 0);
+  const now = Math.min(100, Math.round(value * 140) || 0);
   return (
     <div>
       <img
