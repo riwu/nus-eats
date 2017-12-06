@@ -2,6 +2,8 @@ import moment from 'moment';
 import { LOGOUT } from '../constants/ActionTypes';
 import * as time from '../util/time';
 
+const baseUrl = 'https://wangriwu.com:3003/';
+
 let store;
 
 const makeHeaders = (headers = {}) => {
@@ -51,26 +53,17 @@ const processResponse = (response) => {
       }));
 };
 
-const get = (path, headers) => {
-  const baseUrl = process.env.REACT_APP_API_BASE_URL;
-  return fetch(`${baseUrl}${path}`, {
-    headers: makeHeaders(headers),
-  }).then(processResponse);
-};
+const get = (path, headers) => fetch(`${baseUrl}${path}`, {
+  headers: makeHeaders(headers),
+}).then(processResponse);
 
-const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map((method) => {
-  const baseUrl = process.env.REACT_APP_API_BASE_URL;
-
-  return (path, payload, headers) => fetch(`${baseUrl}${path}`, {
-    method,
-    headers: makeHeaders(headers),
-    body: JSON.stringify(payload),
-  }).then(processResponse);
-});
+const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map(method => (path, payload, headers) => fetch(`${baseUrl}${path}`, {
+  method,
+  headers: makeHeaders(headers),
+  body: JSON.stringify(payload),
+}).then(processResponse));
 
 const postWithFile = (path, payload, headers) => {
-  const baseUrl = process.env.REACT_APP_API_BASE_URL;
-
   const requestHeaders = makeHeaders(headers);
   const requestBody = Object.entries(payload).reduce((form, [key, value]) => {
     form.append(key, value);
