@@ -7,14 +7,21 @@ export const setNotFirstTimeVisit = () => ({
   type: types.SET_NOT_FIRST_TIME_VISIT,
 });
 
-export const getAllCanteens = getCrowd => (dispatch) => {
+const getCanteens = (getCrowd, dispatch) =>
   api.getAllCanteens(getCrowd).then((canteens) => {
     dispatch({
       type: types.RECEIVE_CANTEENS,
       canteens,
     });
   });
+
+export const getAllCanteens = () => (dispatch) => {
+  // ensure that canteen is still retrieved when crowd API is not working
+  getCanteens(false, dispatch).then(() => {
+    getCanteens(true, dispatch);
+  });
 };
+
 
 export const getAllStalls = (dispatch) => {
   api.getAllStalls().then((stalls) => {

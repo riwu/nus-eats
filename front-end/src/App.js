@@ -22,10 +22,9 @@ import FB from './fb';
 
 import './App.css';
 
-store.dispatch(getAllCanteens(false));
+store.dispatch(getAllCanteens());
 store.dispatch(getAllStalls);
 store.dispatch(setCurrentTime(moment()));
-store.dispatch(getAllCanteens(true));
 
 setInterval(() => store.dispatch(setCurrentTime(moment())), 1 * 60 * 1000);
 if ((store.getState().accessTokens || {}).api) store.dispatch(getRatings);
