@@ -6,7 +6,7 @@ const router = express.Router();
 
 module.exports = (db, s3) => {
   router.get('/', asyncMiddleware(async (req, res, next) => {
-    const crowd = await getCrowdValue();
+    const crowd = req.query.getCrowd ? await getCrowdValue() : { Cameras: [] };
     const canteens = await db['canteen'].findAll({
       order: [
         ['name', 'ASC']
@@ -32,6 +32,7 @@ module.exports = (db, s3) => {
 
     res.json({canteens});
   }));
+
 
   return router;
 }

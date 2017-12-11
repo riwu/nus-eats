@@ -7,8 +7,8 @@ export const setNotFirstTimeVisit = () => ({
   type: types.SET_NOT_FIRST_TIME_VISIT,
 });
 
-export const getAllCanteens = (dispatch) => {
-  api.getAllCanteens().then((canteens) => {
+export const getAllCanteens = getCrowd => (dispatch) => {
+  api.getAllCanteens(getCrowd).then((canteens) => {
     dispatch({
       type: types.RECEIVE_CANTEENS,
       canteens,

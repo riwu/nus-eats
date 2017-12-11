@@ -38,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 injectJwtStrategy(passport);
 app.use(passport.initialize());
 
+app.get('/', (req, res) => {
+  res.send('NUSEATS API');
+});
+
 app.use('/authentication', authentication);
 app.use('/canteens', canteens);
 app.use('/stalls', stalls);
