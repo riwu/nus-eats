@@ -1,6 +1,10 @@
-# NUS Eats - README
+# NUS Eats
 
 The app is accessible at https://www.nuseats.club
+
+## Deployment
+`psql postgres < database/nuseatsdb.sql`
+Upload content database/S3Bucket to AWS S3 with Public access 
 
 ## Group members
 
@@ -35,10 +39,9 @@ Back-end developer
 
 UI/UX Designer & Business & Data Collector
 
-- Jovin Liew 
+- Jovin Liew
 
     - Designed App Icon
     - Created design mockups
     - Obtained feedbacks from peers to improve app design and functionality
     - Helped to populate database with names & photos of stalls and canteens
-
