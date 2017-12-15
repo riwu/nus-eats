@@ -2,7 +2,7 @@ import moment from 'moment';
 import { LOGOUT } from '../constants/ActionTypes';
 import * as time from '../util/time';
 
-const baseUrl = 'https://wangriwu.com:3003';
+const baseUrl = `${process.env.REACT_APP_NUSEATS_URL}/`;
 
 let store;
 
