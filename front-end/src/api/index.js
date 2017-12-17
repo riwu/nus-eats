@@ -2,7 +2,7 @@ import moment from 'moment';
 import { LOGOUT } from '../constants/ActionTypes';
 import * as time from '../util/time';
 
-const baseUrl = `${process.env.REACT_APP_NUSEATS_URL}/`;
+const baseUrl = process.env.REACT_APP_NUSEATS_URL;
 
 let store;
 
@@ -46,22 +46,27 @@ const processResponse = (response) => {
     });
   }
 
-  return parseResponseBody(response)
-      .then(body => Promise.reject({
-        body,
-        status: response.status,
-      }));
+  return parseResponseBody(response).then(body =>
+    Promise.reject({
+      body,
+      status: response.status,
+    }),
+  );
 };
 
-const get = (path, headers) => fetch(`${baseUrl}${path}`, {
-  headers: makeHeaders(headers),
-}).then(processResponse);
+const get = (path, headers) =>
+  fetch(`${baseUrl}${path}`, {
+    headers: makeHeaders(headers),
+  }).then(processResponse);
 
-const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map(method => (path, payload, headers) => fetch(`${baseUrl}${path}`, {
-  method,
-  headers: makeHeaders(headers),
-  body: JSON.stringify(payload),
-}).then(processResponse));
+const [post, destroy, patch, put] = ['POST', 'DELETE', 'PATCH', 'PUT'].map(
+  method => (path, payload, headers) =>
+    fetch(`${baseUrl}${path}`, {
+      method,
+      headers: makeHeaders(headers),
+      body: JSON.stringify(payload),
+    }).then(processResponse),
+);
 
 const postWithFile = (path, payload, headers) => {
   const requestHeaders = makeHeaders(headers);
@@ -82,29 +87,48 @@ const postWithFile = (path, payload, headers) => {
 const getEndTime = (startTime, duration) => time.format(moment(startTime).add(duration));
 
 export default {
-  setStore: (s) => { store = s; },
-  getAllCanteens: getCrowd => get(`/canteens${getCrowd ? '?getCrowd=true' : ''}`).then(({ canteens }) => canteens),
-  getAllStalls: () => get('/stalls').then(({ stalls }) => stalls.reduce((dict, stall) => ({
-    ...dict,
-    [stall.id]: {
-      ...stall,
-      averageRating: Number(stall.averageRating),
-    },
-  }), {})),
-  getAllPhotos: stallId => get(`/stalls/${stallId}/photos`)
-    .then(({ photos }) => photos.sort((photo1, photo2) => moment(photo1.createdAt) - moment(photo2.createdAt)).reduce((obj, photo) => ({
-      ...obj,
-      [photo.stallId]: [photo].concat(obj[photo.stallId] || []),
-    }), {})),
-  uploadFiles: (files, stallId) => Promise.all([...files].map(file => postWithFile('/photos', {
-    photo: file,
-    stallId,
-  }).catch(e => console.log(e)))),
+  setStore: (s) => {
+    store = s;
+  },
+  getAllCanteens: getCrowd =>
+    get(`/canteens${getCrowd ? '?getCrowd=true' : ''}`).then(({ canteens }) => canteens),
+  getAllStalls: () =>
+    get('/stalls').then(({ stalls }) =>
+      stalls.reduce(
+        (dict, stall) => ({
+          ...dict,
+          [stall.id]: {
+            ...stall,
+            averageRating: Number(stall.averageRating),
+          },
+        }),
+        {},
+      ),
+    ),
+  getAllPhotos: stallId =>
+    get(`/stalls/${stallId}/photos`).then(({ photos }) =>
+      photos.sort((photo1, photo2) => moment(photo1.createdAt) - moment(photo2.createdAt)).reduce(
+        (obj, photo) => ({
+          ...obj,
+          [photo.stallId]: [photo].concat(obj[photo.stallId] || []),
+        }),
+        {},
+      ),
+    ),
+  uploadFiles: (files, stallId) =>
+    Promise.all(
+      [...files].map(file =>
+        postWithFile('/photos', {
+          photo: file,
+          stallId,
+        }).catch(e => console.log(e)),
+      ),
+    ),
   login: accessToken => post('/authentication/login', { accessToken }),
 
   getMeetings() {
-    return get('/users/friends/appointments/initiated/combined')
-      .then(({ appointments }) => appointments.reduce((obj, appointment) => {
+    return get('/users/friends/appointments/initiated/combined').then(({ appointments }) =>
+      appointments.reduce((obj, appointment) => {
         const startTime = time.parse(appointment.startTime);
         const endTime = time.parse(appointment.endTime);
         return {
@@ -117,18 +141,20 @@ export default {
             createdAt: time.parse(appointment.createdAt),
           },
         };
-      }, {}));
+      }, {}),
+    );
   },
 
-  createMeeting: ({ canteenId, startTime, duration, title, description }) => post('/appointments', {
-    appointment: {
-      canteenId,
-      startTime: time.format(startTime),
-      endTime: getEndTime(startTime, duration),
-      title,
-      description,
-    },
-  }),
+  createMeeting: ({ canteenId, startTime, duration, title, description }) =>
+    post('/appointments', {
+      appointment: {
+        canteenId,
+        startTime: time.format(startTime),
+        endTime: getEndTime(startTime, duration),
+        title,
+        description,
+      },
+    }),
   updateMeeting: (id, { canteenId, startTime, duration, title, description }) =>
     patch(`/appointments/${id}`, {
       appointment: {
@@ -143,21 +169,23 @@ export default {
   joinMeeting: id => post(`/appointments/${id}/join`),
   unjoinMeeting: id => post(`/appointments/${id}/unjoin`),
   getRatings: () => get('/users/ratings').then(ratings => ratings.ratings),
-  updateRating: (id, rating) => put(`/stalls/${id}/ratings`, {
-    rating: {
-      value: rating,
-    },
-  }),
-  getMeeting: id => get(`/appointments/${id}`).then(({ appointment }) => {
-    const startTime = time.parse(appointment.startTime);
-    const endTime = time.parse(appointment.endTime);
-    const duration = moment.duration(endTime.diff(startTime));
+  updateRating: (id, rating) =>
+    put(`/stalls/${id}/ratings`, {
+      rating: {
+        value: rating,
+      },
+    }),
+  getMeeting: id =>
+    get(`/appointments/${id}`).then(({ appointment }) => {
+      const startTime = time.parse(appointment.startTime);
+      const endTime = time.parse(appointment.endTime);
+      const duration = moment.duration(endTime.diff(startTime));
 
-    return {
-      ...appointment,
-      startTime,
-      endTime,
-      duration,
-    };
-  }),
+      return {
+        ...appointment,
+        startTime,
+        endTime,
+        duration,
+      };
+    }),
 };
