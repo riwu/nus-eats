@@ -1,6 +1,4 @@
-const babel = require('babel-polyfill');
 const express = require('express');
-const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -8,7 +6,6 @@ const passport = require('passport');
 const cors = require('cors');
 const db = require('./database/db');
 const Boom = require('boom');
-const Sequelize = require('sequelize');
 const AWS = require('aws-sdk');
 
 const s3 = new AWS.S3({
