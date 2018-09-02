@@ -1,7 +1,5 @@
 # NUS Eats
 
-The app is accessible at https://www.nuseats.club
-
 ## Deployment
 `psql postgres < database/nuseatsdb.sql`  
 Upload content of database/S3Bucket to AWS S3 with Public access
