@@ -7,7 +7,7 @@ export const setNotFirstTimeVisit = () => ({
   type: types.SET_NOT_FIRST_TIME_VISIT,
 });
 
-const getCanteens = (getCrowd, dispatch) =>
+const getCanteens = getCrowd => dispatch =>
   api.getAllCanteens(getCrowd).then((canteens) => {
     dispatch({
       type: types.RECEIVE_CANTEENS,
@@ -17,11 +17,10 @@ const getCanteens = (getCrowd, dispatch) =>
 
 export const getAllCanteens = () => (dispatch) => {
   // ensure that canteen is still retrieved when crowd API is not working
-  getCanteens(false, dispatch).then(() => {
-    getCanteens(true, dispatch);
+  dispatch(getCanteens(false)).then(() => {
+    dispatch(getCanteens(true));
   });
 };
-
 
 export const getAllStalls = (dispatch) => {
   api.getAllStalls().then((stalls) => {
@@ -76,49 +75,53 @@ export const getRatings = (dispatch) => {
   });
 };
 
-export const login = () => dispatch => new Promise((resolve, reject) => {
-  dispatch({
-    type: types.BEGIN_LOGIN,
-  });
+export const login = () => dispatch =>
+  new Promise((resolve, reject) => {
+    dispatch({
+      type: types.BEGIN_LOGIN,
+    });
 
-  window.FB.login((response) => {
-    if (response.status === 'connected') {
-      const accessToken = window.FB.getAccessToken();
-      api.login(accessToken).then(({ token, facebookToken }) => {
-        dispatch({
-          apiToken: token,
-          facebookToken,
-          type: types.RECEIVE_ACCESS_TOKENS,
-        });
-
-        dispatch(getRatings);
-
-        fb.api('me/permissions')
-          .then((response) => {
-            const permissions = response.data.filter(({ status }) => status === 'granted')
-                                             .map(({ permission }) => permission);
-
+    window.FB.login(
+      (response) => {
+        if (response.status === 'connected') {
+          const accessToken = window.FB.getAccessToken();
+          api.login(accessToken).then(({ token, facebookToken }) => {
             dispatch({
-              type: types.SET_GRANTED_PERMISSIONS,
-              permissions: new Set(permissions),
+              apiToken: token,
+              facebookToken,
+              type: types.RECEIVE_ACCESS_TOKENS,
             });
 
-            dispatch({
-              type: types.DONE_LOGIN,
-            });
+            dispatch(getRatings);
 
-            resolve();
+            fb.api('me/permissions').then((response) => {
+              const permissions = response.data
+                .filter(({ status }) => status === 'granted')
+                .map(({ permission }) => permission);
+
+              dispatch({
+                type: types.SET_GRANTED_PERMISSIONS,
+                permissions: new Set(permissions),
+              });
+
+              dispatch({
+                type: types.DONE_LOGIN,
+              });
+
+              resolve();
+            });
           });
-      });
-    } else {
-      dispatch({
-        type: types.DONE_LOGIN,
-      });
+        } else {
+          dispatch({
+            type: types.DONE_LOGIN,
+          });
 
-      reject();
-    }
-  }, { scope: 'public_profile,user_friends' });
-}).catch(() => {}); // ignore if user refuse to login
+          reject();
+        }
+      },
+      { scope: 'public_profile,user_friends' },
+    );
+  }).catch(() => {}); // ignore if user refuse to login
 
 export const logout = () => ({
   type: types.LOGOUT,
@@ -146,13 +149,16 @@ export const toggleCanteenPanel = canteenId => ({
 
 export const createMeeting = meeting => (dispatch) => {
   const tempId = moment().valueOf();
-  api.createMeeting(meeting).then((result) => {
-    dispatch({
-      type: types.SET_MEETING_ID,
-      id: result.appointment.id,
-      tempId,
-    });
-  }).catch(error => console.log(error));
+  api
+    .createMeeting(meeting)
+    .then((result) => {
+      dispatch({
+        type: types.SET_MEETING_ID,
+        id: result.appointment.id,
+        tempId,
+      });
+    })
+    .catch(error => console.log(error));
   dispatch({
     type: types.CREATE_MEETING,
     ...meeting,
@@ -162,10 +168,15 @@ export const createMeeting = meeting => (dispatch) => {
 };
 
 export const cancelMeeting = id => (dispatch) => {
-  api.cancelMeeting(id).then(() => dispatch({
-    type: types.CANCEL_MEETING,
-    id,
-  })).catch(error => alert(JSON.stringify(error)));
+  api
+    .cancelMeeting(id)
+    .then(() =>
+      dispatch({
+        type: types.CANCEL_MEETING,
+        id,
+      }),
+    )
+    .catch(error => alert(JSON.stringify(error)));
 };
 
 export const updateMeeting = (id, meeting) => (dispatch) => {
@@ -220,13 +231,12 @@ export const updateDurationModifierRadio = index => ({
 });
 
 export const getFacebookUser = userId => (dispatch) => {
-  fb.api(userId)
-    .then((user) => {
-      dispatch({
-        type: types.RECEIVE_FACEBOOK_USER,
-        user,
-      });
+  fb.api(userId).then((user) => {
+    dispatch({
+      type: types.RECEIVE_FACEBOOK_USER,
+      user,
     });
+  });
 };
 
 export const joinMeeting = (id, userId) => (dispatch) => {
@@ -236,16 +246,14 @@ export const joinMeeting = (id, userId) => (dispatch) => {
     userId,
   });
 
-  api
-    .joinMeeting(id)
-    .catch((error) => {
-      console.log('Cannot join meeting', error);
-      dispatch({
-        type: types.UNJOIN_MEETING,
-        id,
-        userId,
-      });
+  api.joinMeeting(id).catch((error) => {
+    console.log('Cannot join meeting', error);
+    dispatch({
+      type: types.UNJOIN_MEETING,
+      id,
+      userId,
     });
+  });
 };
 
 export const unjoinMeeting = (id, userId) => (dispatch) => {
@@ -255,16 +263,14 @@ export const unjoinMeeting = (id, userId) => (dispatch) => {
     userId,
   });
 
-  api
-    .unjoinMeeting(id)
-    .catch((error) => {
-      console.log('Cannot unjoin meeting', error);
-      dispatch({
-        type: types.JOIN_MEETING,
-        id,
-        userId,
-      });
+  api.unjoinMeeting(id).catch((error) => {
+    console.log('Cannot unjoin meeting', error);
+    dispatch({
+      type: types.JOIN_MEETING,
+      id,
+      userId,
     });
+  });
 };
 
 export const toggleFeed = () => ({
@@ -274,11 +280,13 @@ export const toggleFeed = () => ({
 export const shareMeeting = (meeting) => {
   window.FB.ui({
     method: 'share',
-    href: `https://fb.nuseats.club/meetings/${meeting.id}`,
+    href: `${window.location.origin}/meetings/${meeting.id}`,
   });
 };
 
-export const getMeeting = id => dispatch => api.getMeeting(id)
+export const getMeeting = id => dispatch =>
+  api
+    .getMeeting(id)
     .then((meeting) => {
       dispatch({
         type: types.RECEIVE_MEETING,
@@ -300,24 +308,27 @@ export const initializeGeolocation = () => (dispatch) => {
   });
 
   const permissionsUpdated = false;
-  navigator.geolocation.watchPosition((position) => {
-    if (!permissionsUpdated) {
+  navigator.geolocation.watchPosition(
+    (position) => {
+      if (!permissionsUpdated) {
+        dispatch({
+          type: types.SET_GEOLOCATION_PERMISSION,
+          permission: 'granted',
+        });
+      }
+
+      dispatch({
+        type: types.SET_LOCATION,
+        coordinates: position.coords,
+      });
+    },
+    (error) => {
       dispatch({
         type: types.SET_GEOLOCATION_PERMISSION,
-        permission: 'granted',
+        permission: 'denied',
       });
-    }
-
-    dispatch({
-      type: types.SET_LOCATION,
-      coordinates: position.coords,
-    });
-  }, (error) => {
-    dispatch({
-      type: types.SET_GEOLOCATION_PERMISSION,
-      permission: 'denied',
-    });
-  });
+    },
+  );
 };
 
 export const setCurrentTime = currentTime => ({
