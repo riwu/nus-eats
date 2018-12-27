@@ -34,9 +34,17 @@
     "prop-types": "^15.5.10"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3000",
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
   }
 }

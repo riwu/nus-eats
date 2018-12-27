@@ -2,7 +2,7 @@ import moment from 'moment';
 import { LOGOUT } from '../constants/ActionTypes';
 import * as time from '../util/time';
 
-const baseUrl = process.env.REACT_APP_NUSEATS_URL;
+const baseUrl = '/api';
 
 let store;
 

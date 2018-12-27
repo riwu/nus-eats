@@ -3,7 +3,6 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const cors = require('cors');
 const db = require('./database/db');
 const Boom = require('boom');
 const AWS = require('aws-sdk');
@@ -17,14 +16,14 @@ const { injectJwtStrategy, authenticateJwt } = require('./security/jwt');
 
 const app = express();
 
+app.disable('x-powered-by');
+
 const authentication = require('./routes/authentication')(db, s3);
 const canteens = require('./routes/canteens')(db, s3);
 const stalls = require('./routes/stalls')(db, s3);
 const users = require('./routes/users')(db, s3);
 const appointments = require('./routes/appointments')(db);
 const photos = require('./routes/photos')(db, s3);
-
-app.use(cors());
 
 app.get('/', (req, res) => {
   res.end();
